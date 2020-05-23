@@ -176,6 +176,10 @@
 
   
   
+  <div class="valine-container">
+    <div id="valine_thread" class="valine-thread"></div>
+  </div>
+  
 
   
   
@@ -213,6 +217,23 @@
 
   
   
+<!-- valine 评论 start -->
+<script type="text/javascript" src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script type="text/javascript" src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script type="text/javascript">
+  new Valine({
+    el: "#valine_thread",
+    appId: "aVb6e4DSYSKJHfahiM7a4GmP-9Nh9j0Va",
+    appKey: "rsaaCrg7UanGDmawCEoTJx7b",
+    avatar: "mm",
+    placeholder: "随便说点什么叭～",
+    notify: false,
+    visitor: false,
+    pageSize: 10,
+  });
+</script>
+<!-- valine 评论 end -->
+
 
 
   <!-- aplayer 音频 start -->
