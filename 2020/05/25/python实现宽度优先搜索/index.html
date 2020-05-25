@@ -16,10 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Hello World - 东风未起，念你成疾</title>
+    <title>python实现宽度优先搜索 - 东风未起，念你成疾</title>
+  
+    <meta name="keywords" content="python">
   
   
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in trouble...">
+    <meta name="description" content="python实现宽度优先搜索">
   
 
   <!-- feed -->
@@ -318,8 +320,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/05/22/hello-world/">
-      Hello World
+    <a href="/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">
+      python实现宽度优先搜索
     </a>
   </h1>
 
@@ -349,7 +351,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 22, 2020</p>
+    <p>发布于：May 25, 2020</p>
   </a>
 </div>
 
@@ -372,23 +374,17 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+          <p>python实现宽度优先搜索</p>
  <a id="more"></a>
 
 
 
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+<p>宽度优先搜索算法(又称广度优先搜索)是最简便的图的搜索算法之一,这一算法也是很多重要的图的算法的原型。</p>
+<p>其基本思想是:<br>(1)把起始节点放到 OPEN 表中(如果该起始节点为一目标节点,则求得一个解答)。<br>(2)如果 OPEN 是个空表,则没有解,失败退出;否则继续。<br>(3)把第一个节点(节点 n)从 OPEN 表移出,并把它放入 CLOSED 扩展节点表中。<br>(4)扩展节点 n。如果没有后继节点,则转向上述第(2)步。<br>(5)把 n 的所有后继节点放到 OPEN 表的末端,并提供从这些后继节点回到 n<br>的指针。<br>如果 n 的任一个后继节点是个目标节点,则找到一个解答,成功退出;否则转向第(2)步。</p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200525150910125.png" alt=""></p>
+<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200525151000675.png" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque  <span class="comment"># 线性表的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 首先定义一个创建图的类，使用邻接矩阵</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graph</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        self.order = []  <span class="comment"># visited order</span></span><br><span class="line">        self.neighbor = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_node</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        key, val = node</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(val, list):</span><br><span class="line">        print(<span class="string">'节点输入时应该为一个线性表'</span>)  <span class="comment"># 避免不正确的输入</span></span><br><span class="line">        self.neighbor[key] = val</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 宽度优先算法的实现</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">BFS</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="comment"># 首先判断根节点是否为空节点</span></span><br><span class="line">        <span class="keyword">if</span> root != <span class="literal">None</span>:</span><br><span class="line">            search_queue = deque()</span><br><span class="line">            search_queue.append(root)</span><br><span class="line">            visited = []</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'root is None'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> search_queue:</span><br><span class="line">            person = search_queue.popleft()</span><br><span class="line">            self.order.append(person)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">not</span> person <span class="keyword">in</span> visited) <span class="keyword">and</span> (person <span class="keyword">in</span> self.neighbor.keys()):</span><br><span class="line">                search_queue += self.neighbor[person]</span><br><span class="line">                visited.append(person)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clear</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.order = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">node_print</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> self.order:</span><br><span class="line">            print(index, end=<span class="string">'  '</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># 创建一个二叉树图</span></span><br><span class="line">    g = Graph()</span><br><span class="line">    g.add_node((<span class="string">'S'</span>, [<span class="string">'A'</span>, <span class="string">'B'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'A'</span>, [<span class="string">'C'</span>, <span class="string">'D'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'B'</span>, [<span class="string">'E'</span>, <span class="string">'F'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'C'</span>, [<span class="string">'G'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'G'</span>, [<span class="string">'J'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'E'</span>, [<span class="string">'H'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'F'</span>, [<span class="string">'I'</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行宽度优先搜索</span></span><br><span class="line">  g.BFS(<span class="string">'S'</span>)</span><br><span class="line">    print(<span class="string">'宽度优先搜索:'</span>)</span><br><span class="line">    print(<span class="string">'  '</span>, end=<span class="string">'  '</span>)</span><br><span class="line">    g.node_print()</span><br><span class="line">    g.clear()</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
           
             <div class='article_footer'>
@@ -425,7 +421,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://yoursite.com/2020/05/22/hello-world/>http://yoursite.com/2020/05/22/hello-world/</a></p>
+            <p>本文永久链接是：<a href=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/>http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</a></p>
           
         
       </blockquote>
@@ -462,10 +458,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-24T19:53:11+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-25T15:11:07+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 24, 2020</p>
+    <p>更新于：May 25, 2020</p>
   </a>
 </div>
 
@@ -473,6 +469,9 @@
       
         
           
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/python/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>python</p></a></div>
+
 
         
       
@@ -489,7 +488,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/22/hello-world/&title=Hello World - 东风未起，念你成疾&summary=Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub."
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/&title=python实现宽度优先搜索 - 东风未起，念你成疾&summary=python实现宽度优先搜索"
           
           >
           
@@ -501,7 +500,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/22/hello-world/&title=Hello World - 东风未起，念你成疾&summary=Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub."
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/&title=python实现宽度优先搜索 - 东风未起，念你成疾&summary=python实现宽度优先搜索"
           
           >
           
@@ -513,7 +512,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/22/hello-world/&title=Hello World - 东风未起，念你成疾&summary=Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub."
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/&title=python实现宽度优先搜索 - 东风未起，念你成疾&summary=python实现宽度优先搜索"
           
           >
           
@@ -537,25 +536,10 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>python实现宽度优先搜索</p>
-                <p class='content'>python实现宽度优先搜索
- 
-
-
-
-宽度优先搜索算法(又称广度优先搜索)是最简便的图的搜索算法之一,这一算法也是很多重要的图的算法的原型。
-其基本思想是:(1)把起始节点放到 OPEN 表中...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/05/22/hexo-github%E6%9C%AC%E5%9C%B0%E9%A2%84%E8%A7%88%E6%AD%A3%E5%B8%B8%E4%BD%86%E6%98%AF%E9%83%A8%E7%BD%B2%E5%88%B0github%E5%90%8E%E6%97%A0%E6%B3%95%E6%AD%A3%E5%B8%B8%E8%AE%BF%E9%97%AE%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/'>
-                <p class='title'>hexo+github本地预览正常但是部署到github后无法正常访问解决办法<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>HEXO+GITHUB本地预览正常但是部署到GITHUB后无法正常访问解决办法从注册Github讲起
- 
-
-
-HEXO+GITHUB本地预览正常但是部署到GITHUB后无法正常访问解决办法从注册...</p>
+              <a class='next' href='/2020/05/22/hello-world/'>
+                <p class='title'>Hello World<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ...</p>
               </a>
             
           </div>
@@ -600,7 +584,7 @@ HEXO+GITHUB本地预览正常但是部署到GITHUB后无法正常访问解决办
 
   <script>
     window.subData = {
-      title: 'Hello World',
+      title: 'python实现宽度优先搜索',
       tools: true
     }
   </script>
@@ -615,20 +599,6 @@ HEXO+GITHUB本地预览正常但是部署到GITHUB后无法正常访问解决办
     
     
 
-
-  <section class="widget toc-wrapper shadow desktop mobile">
-    
-  <header>
-    
-      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
-    
-  </header>
-
-
-    <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
-    </div>
-  </section>
 
 
   
