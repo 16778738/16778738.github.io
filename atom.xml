@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2020-06-09T07:15:15.048Z</updated>
+  <updated>2020-06-09T07:43:36.470Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>软件需求工程---数据流图</title>
+    <link href="http://yoursite.com/2020/06/09/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE/"/>
+    <id>http://yoursite.com/2020/06/09/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE/</id>
+    <published>2020-06-09T07:28:28.000Z</published>
+    <updated>2020-06-09T07:43:36.470Z</updated>
+    
+    <content type="html"><![CDATA[<p>软件需求工程—数据流图</p><a id="more"></a><h1 id="软件需求工程—数据流图"><a href="#软件需求工程—数据流图" class="headerlink" title="软件需求工程—数据流图"></a><strong>软件需求工程—数据流图</strong></h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">数据流图<span class="strong">**是过程建模所使用的主要建模技术，它在建模时所使用的基本模型元素有4种：**</span>外部实体、过程、数据流和数据存储**。</span><br><span class="line"></span><br><span class="line">最终建立的数据流图会以图形的方式表现出来，它的表示法有两种：<span class="strong">**DeMarco-Yourdon**</span>表示法和<span class="strong">**Gane-Sarson**</span>表示</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">在DeMarco-Yourdon表示法，外部实体使用<span class="strong">**矩形**</span>来加以描述，</span><br><span class="line"></span><br><span class="line">在Gane-Sarson表示法中，外部实体使用<span class="strong">**双矩形**</span>或矩形来加以描述。</span><br><span class="line"></span><br><span class="line"><span class="strong">**过程**</span>是指施加与数据的动作或行为，它们使数据发生变化，包括被转换、被存储或被分布。数据流是数据的运动，它是系统与其环境之间或者系统内两个过程之间的通信形式。</span><br><span class="line"></span><br><span class="line"><span class="strong">**外部实体**</span>是指处于待构建系统之外的人、组织、设备或其他软件系统，他们不受系统的控制，开发者不能以任何方式操纵人们。在数据流图中需要进行建模的外部实体是那些和待构建的软件系统之间存在着数据交互的外部实体，它们从待构建软件系统中获取数据或者为待构建软件系统提供数据，即它们是待构建系统的数据源或数据目的地。所有的外部实体联合起来构成了软件系统的外部上下文环境，它们与软件系统的交互流就是软件系统与其外部环境的接口，这些接口联合起来定义了软件系统的系统边界。对软件系统功能分析就是从系统的边界出发逐步深入的。</span><br><span class="line"></span><br><span class="line"><span class="strong">**数据流**</span>是数据的运动，它是系统与其环境之间或者系统内两个过程之间的通信形式。数据流图的数据流是必须和过程产生关联的，它要么是过程的数据输入，要么是过程的数据输出。</span><br><span class="line"></span><br><span class="line"><span class="strong">**数据存储**</span>是软件系统需要在内部收集、保存，以供日后使用的数据集合。如果说数据流描述的是运动的数据，那么数据存储描述的就是静止的数据。数据流图使用外部实体、过程、数据流和数据存储这4个元素来构建系统的过程模型，描述系统的功能、行为和数据。</span><br></pre></td></tr></table></figure><p>过程是对数据的处理，必须是有输入，也必须有输出；</p><p>数据流是必须和过程产生关联的，它要么是过程的数据输入，要么是过程的数据输出。</p><p>数据流图中所有的对象都应该有一个可以唯一标示自己的名称。</p><p>在分层结构中定义了3个层次的数据流图：<strong><em>上下文图、0层图和N层图</em></strong>。数据流图层次结构的建立主要包括以下几个步骤：1创建上下文图2发现并建立DFC片段3根据数据流图片段组合产生0层图4对0层图的过程进行功能分解，产生N层图。以上步骤往往需要不断的反复。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;软件需求工程—数据流图&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="需求工程" scheme="http://yoursite.com/tags/%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/"/>
+    
+  </entry>
   
   <entry>
     <title>爬虫学习笔记</title>
