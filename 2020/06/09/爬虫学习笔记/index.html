@@ -16,12 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>python 实现冒泡排序和选择排序 - 东风未起，念你成疾</title>
+    <title>爬虫学习笔记 - 东风未起，念你成疾</title>
   
     <meta name="keywords" content="python">
   
   
-    <meta name="description" content="python 实现冒泡排序和选择排序">
+    <meta name="description" content="爬虫学习笔记请求与响应">
   
 
   <!-- feed -->
@@ -320,8 +320,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/">
-      python 实现冒泡排序和选择排序
+    <a href="/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+      爬虫学习笔记
     </a>
   </h1>
 
@@ -351,7 +351,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 8, 2020</p>
+    <p>发布于：Jun 9, 2020</p>
   </a>
 </div>
 
@@ -374,21 +374,60 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>python 实现冒泡排序和选择排序</p>
- <a id="more"></a>
+          <h1 id="爬虫学习笔记"><a href="#爬虫学习笔记" class="headerlink" title="爬虫学习笔记"></a>爬虫学习笔记</h1><h2 id="请求与响应"><a href="#请求与响应" class="headerlink" title="请求与响应"></a>请求与响应</h2> <a id="more"></a>
 
 
 
-<h1 id="python-实现冒泡排序和选择排序"><a href="#python-实现冒泡排序和选择排序" class="headerlink" title="python 实现冒泡排序和选择排序"></a>python 实现冒泡排序和选择排序</h1><h2 id="冒泡排序算法的原理如下："><a href="#冒泡排序算法的原理如下：" class="headerlink" title="冒泡排序算法的原理如下："></a>冒泡排序算法的原理如下：</h2><ol>
-<li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
-<li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
-<li>针对所有的元素重复以上的步骤，除了最后一个。</li>
-<li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
+<h1 id="爬虫学习笔记-1"><a href="#爬虫学习笔记-1" class="headerlink" title="爬虫学习笔记"></a>爬虫学习笔记</h1><h2 id="请求与响应-1"><a href="#请求与响应-1" class="headerlink" title="请求与响应"></a>请求与响应</h2><p>爬虫：crawler、网络机器人、网络蚂蚁、网络蜘蛛、spider</p>
+<ol>
+<li><pre><code class="markdown"><span class="bullet">1. </span>通用爬虫
+   主要用于搜索引擎，谷歌、百度、360、搜狗、必应等等.....
+   目的在于尽可能多的搜集互联网上的高质量数据
+   优点：数量大且全
+   缺点：有价值的数据比较少，硬件成本太高。pagerank
+<span class="bullet">2. </span>聚焦爬虫：
+   也成为主题爬虫（最常用的爬虫）
+   要按照预先设定好的主题，有选择性的进行网页爬取。
+   主要用于特定信息的获取。
+   优点：节省资源，数据价值较高。
+<span class="bullet">3. </span>增量式爬虫
+   是一种特殊的聚焦爬虫，只采集更新后的数据
+   每次爬取只爬取更新后的页面（一天、一周、一月）
+<span class="xml"><span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">	</span><br><span class="line">2. ## 协定约束</span><br><span class="line"></span><br><span class="line">   在首页&#x2F;IP后面加上&#x2F;robots.txt可以看到君子协定。</span><br><span class="line"></span><br><span class="line">3. ## 库</span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;markdown</span><br><span class="line">   1. urllib 最基础的，python自带的一个http请求库</span><br><span class="line">   2. requests 基于urllib进行了封装，是一个第三方库   pip install requests</span><br><span class="line">   3. scrapy 协程级的异步框架4. scrapy-redis 基于scrapy和redis出现的分布式爬虫框架</span><br><span class="line">   5. aiohttp......</span><br></pre></td></tr></table></figure></span></span>
+
+
+</code></pre>
+</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 冒泡</span></span><br><span class="line"> list=[<span class="number">12</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">maoPao</span><span class="params">(list)</span>:</span></span><br><span class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(len(list)<span class="number">-1</span>): <span class="comment">#列表的长度</span></span><br><span class="line">         <span class="keyword">if</span> list[i]&gt;list[i+<span class="number">1</span>]:</span><br><span class="line">             list[i],list[i+<span class="number">1</span>]=list[i+<span class="number">1</span>],list[i]</span><br><span class="line">     print(list)</span><br><span class="line"> maoPao(list)</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li><p>HTTP的主要请求      </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.  </span>GET请求：向服务器请求资源</span><br><span class="line">   	 get请求可以携带参数，参数携带方式以在url后面以问号拼接的形式携带</span><br><span class="line"><span class="bullet">2. </span>POST请求：向服务器请求资源</span><br><span class="line"><span class="bullet">      1. </span>post请求可以携带参数，通过表单提交，post的请求的参数一般是加密的。</span><br><span class="line"><span class="bullet">3. </span>PUT请求：请求服务器存储一个资源</span><br><span class="line"><span class="bullet">4. </span>DELETE请求：请求服务器删除一个资源。</span><br></pre></td></tr></table></figure>
+</li>
+<li><h2 id="爬虫程序思路"><a href="#爬虫程序思路" class="headerlink" title="爬虫程序思路"></a>爬虫程序思路</h2><ol>
+<li><p>```markdown</p>
+<ol>
+<li><p>发送get请求<br>res = requests.get()<br>res.text<br>如果出现乱码，查找网页中的网页编码方式，进行解码在编码<br>res.content.decode()</p>
+</li>
+<li><p>如何解析响应</p>
+<ol>
+<li><p>正则</p>
+</li>
+<li><p>BS</p>
+</li>
+<li><p>lxml<br>第三方类库，效率快，可以解析html和xml<br>pip install lxml<br>pip install -i <a href="https://pypi.tuna.tsinghua.edu.cn/simple" target="_blank" rel="noopener">https://pypi.tuna.tsinghua.edu.cn/simple</a> lxml<br>如何更新pip<br>pip install –upgrade pip<br>可以使用xpath语法来获取数据</p>
+<ol>
+<li>基本语法：<br>//:从根目录开始获取<br>@属性名：获取属性值<br>/表示从当前对象开始获取<br>[]：筛选元素</li>
+<li>内置函数<br>text()<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">### 案例</span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;python</span><br><span class="line">import requests</span><br><span class="line">from lxml import etree</span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;www.xbiquge.la&#x2F;xiaoshuodaquan&#x2F;&#39;</span><br><span class="line">res &#x3D; requests.get(url&#x3D;url)</span><br><span class="line">ele &#x3D; etree.HTML(res.text)</span><br><span class="line">bookurl &#x3D; ele.xpath(&quot;&#x2F;&#x2F;div[@class&#x3D;&#39;novellist&#39;]&#x2F;ul&#x2F;li&#x2F;a&#x2F;@href&quot;)</span><br><span class="line">for url in bookurl:</span><br><span class="line">    res &#x3D; requests.get(url&#x3D;url)</span><br><span class="line">    txt &#x3D; res.content.decode(&#39;utf-8&#39;)</span><br><span class="line">    ele &#x3D; etree.HTML(txt)</span><br><span class="line">    content_url &#x3D; ele.xpath(&quot;&#x2F;&#x2F;div[@id&#x3D;&#39;list&#39;]&#x2F;dl&#x2F;dd&#x2F;a&#x2F;@href&quot;)</span><br><span class="line">    for u in content_url:</span><br><span class="line">        res &#x3D; requests.get(url &#x3D; &#39;http:&#x2F;&#x2F;www.xbiquge.la&#39;+u)</span><br><span class="line">        # pycharm的输出有长度限制，实际上正文已经获取到了，但是pycharm不显示</span><br><span class="line">        content &#x3D; res.content.decode(&#39;utf-8&#39;)</span><br><span class="line">        ele &#x3D; etree.HTML(content)</span><br><span class="line">        c &#x3D; ele.xpath(&quot;&#x2F;&#x2F;div[@id&#x3D;&#39;content&#39;]&#x2F;text()&quot;)</span><br><span class="line">        print(c)</span><br><span class="line">        s &#x3D; &#39;&#39;</span><br><span class="line">        for cc in c:</span><br><span class="line">            s+&#x3D; cc</span><br><span class="line">        s &#x3D; s.strip()</span><br><span class="line">        with open(&#39;牧神记.txt&#39;,&#39;a+&#39;,encoding&#x3D;&#39;utf-8&#39;) as w:</span><br><span class="line">            w.write(s+&#39;\n&#39;+&#39;\n&#39;+&#39;\n&#39;)</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
 
-<h2 id="选择排序："><a href="#选择排序：" class="headerlink" title="选择排序："></a>选择排序：</h2><p>对比数组中前一个元素跟后一个元素的大小，如果后面的元素比前面的元素小则用一个变量k来记住他的位置，接着第二次比较，前面“后一个元素”现变成了“前一个元素”，继续跟他的“后一个元素”进行比较如果后面的元素比他要小则用变量k记住它在数组中的位置(下标)，等到循环结束的时候，我们应该找到了最小的那个数的下标了，然后进行判断，如果这个元素的下标不是第一个元素的下标，就让第一个元素跟他交换一下值，这样就找到整个数组中最小的数了。然后找到数组中第二小的数，让他跟数组中第二个元素交换一下值，以此类推。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">list=[<span class="number">12</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span><span class="params">(list)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(list)<span class="number">-1</span>):</span><br><span class="line">        x=i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,len(list)):</span><br><span class="line">            <span class="keyword">if</span> list[x]&gt;list[j]:</span><br><span class="line">                list[x],list[j]=list[j],list[x]</span><br><span class="line">        print(list)</span><br><span class="line">selectSort(list)</span><br></pre></td></tr></table></figure>
           
             <div class='article_footer'>
               
@@ -424,7 +463,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/>http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/</a></p>
+            <p>本文永久链接是：<a href=http://yoursite.com/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/>http://yoursite.com/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a></p>
           
         
       </blockquote>
@@ -461,10 +500,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-08T17:39:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-09T15:15:15+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jun 8, 2020</p>
+    <p>更新于：Jun 9, 2020</p>
   </a>
 </div>
 
@@ -491,7 +530,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序和选择排序"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=爬虫学习笔记 - 东风未起，念你成疾&summary=爬虫学习笔记请求与响应"
           
           >
           
@@ -503,7 +542,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序和选择排序"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=爬虫学习笔记 - 东风未起，念你成疾&summary=爬虫学习笔记请求与响应"
           
           >
           
@@ -515,7 +554,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序和选择排序"
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/&title=爬虫学习笔记 - 东风未起，念你成疾&summary=爬虫学习笔记请求与响应"
           
           >
           
@@ -539,28 +578,17 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/06/09/%E7%88%AC%E8%99%AB%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>爬虫学习笔记</p>
-                <p class='content'>爬虫学习笔记请求与响应 
-
-
-
-爬虫学习笔记请求与响应爬虫：crawler、网络机器人、网络蚂蚁、网络蜘蛛、spider
-
-1. 通用爬虫
-   主要用于搜索引擎，谷歌、百度、360、搜狗、必应...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/'>
-                <p class='title'>python实现宽度优先搜索<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>python实现宽度优先搜索
+              <a class='next' href='/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/'>
+                <p class='title'>python 实现冒泡排序和选择排序<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>python 实现冒泡排序和选择排序
  
 
 
 
-宽度优先搜索算法(又称广度优先搜索)是最简便的图的搜索算法之一,这一算法也是很多重要的图的算法的原型。
-其基本思想是:(1)把起始节点放到 OPEN 表中...</p>
+python 实现冒泡排序和选择排序冒泡排序算法的原理如下：
+比较相邻的元素。如果第一个比第二个大，就交换他们两个。
+对每一对相邻元素做同样的工作...</p>
               </a>
             
           </div>
@@ -605,7 +633,7 @@
 
   <script>
     window.subData = {
-      title: 'python 实现冒泡排序和选择排序',
+      title: '爬虫学习笔记',
       tools: true
     }
   </script>
@@ -631,7 +659,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序算法的原理如下："><span class="toc-text">冒泡排序算法的原理如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择排序："><span class="toc-text">选择排序：</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#请求与响应"><span class="toc-text">请求与响应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#请求与响应-1"><span class="toc-text">请求与响应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#爬虫程序思路"><span class="toc-text">爬虫程序思路</span></a></li></ol>
     </div>
   </section>
 
