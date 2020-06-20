@@ -16,12 +16,10 @@
 
   <!-- 页面元数据 -->
   
-    <title>Python字符串视频的生成笔记 - 东风未起，念你成疾</title>
+    <title>数据可视化分析笔记 - 东风未起，念你成疾</title>
   
     <meta name="keywords" content="python">
   
-  
-    <meta name="description" content="给一个完整的视频，对视频进行处理，达到：生成一个新的视频，用自己想要的字符串来代替视频中的原有元素。">
   
 
   <!-- feed -->
@@ -320,8 +318,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/06/11/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%86%E9%A2%91%E7%9A%84%E7%94%9F%E6%88%90/">
-      Python字符串视频的生成笔记
+    <a href="/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/">
+      数据可视化分析笔记
     </a>
   </h1>
 
@@ -351,7 +349,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 11, 2020</p>
+    <p>发布于：Jun 20, 2020</p>
   </a>
 </div>
 
@@ -374,18 +372,12 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>给一个完整的视频，对视频进行处理，达到：生成一个新的视频，用自己想要的字符串来代替视频中的原有元素。</p>
- <a id="more"></a>
+          <h3 id="数据可视化分析"><a href="#数据可视化分析" class="headerlink" title="数据可视化分析"></a>数据可视化分析</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">天气预报-根据拿到的每天的天气情况来绘制可视化图表。</span><br><span class="line">爬虫-拿天气数据-从哪儿拿？（哪个地方没有反爬我们就去哪儿拿）</span><br><span class="line"></span><br><span class="line">S</span><br><span class="line">获得到数据之后，使用正则表达式筛选数据</span><br></pre></td></tr></table></figure>
 
-<h3 id="字符串视频的生成"><a href="#字符串视频的生成" class="headerlink" title="字符串视频的生成"></a>字符串视频的生成</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">给一个完整的视频，对视频进行处理，达到：生成一个新的视频，用自己想要的字符串来代替视频中的原有元素。</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">数据可视化分析，是基于数据的值进行可视化分析的一种手段，我们可以根据可视化中展示的数据，得到一些结论，比如数据是否有明显的趋势、数据的分布是否符合高斯分布(数据的一个体现)</span><br><span class="line">数据的平稳性(数据分析首先对数据进行平稳性分析)</span><br><span class="line"><span class="code">	如果是平稳性数据需要分析的时候需要采用：</span></span><br><span class="line"><span class="code">		AR</span></span><br><span class="line"><span class="code">		MA</span></span><br><span class="line"><span class="code">		ARMA</span></span><br><span class="line"><span class="code">	如果是非平稳性数据分析需要采用：</span></span><br><span class="line"><span class="code">		ARIMA</span></span><br></pre></td></tr></table></figure>
 
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>open-cv视频处理库</span><br><span class="line"><span class="code">	pip install opencv-python</span></span><br><span class="line"><span class="bullet">2. </span>先把视频里面每一帧的图片都抽取出来</span><br><span class="line"><span class="bullet">3. </span>把每一帧的图片都给处理成字符串组成的新图片</span><br><span class="line"><span class="bullet">4. </span>新的图片给组合成一个新的视频。</span><br></pre></td></tr></table></figure>
-
-<h3 id="读取视频"><a href="#读取视频" class="headerlink" title="读取视频"></a>读取视频</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _*_coding:UTF-8 _*_</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"><span class="string">1. open-cv视频处理库</span></span><br><span class="line"><span class="string">	pip install opencv-python</span></span><br><span class="line"><span class="string">2. 先把视频里面每一帧的图片都抽取出来</span></span><br><span class="line"><span class="string">3. 把每一帧的图片都给处理成字符串组成的新图片</span></span><br><span class="line"><span class="string">4. 新的图片给组合成一个新的视频。</span></span><br><span class="line"><span class="string">'''</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># CV2不支持中文，任何中文路径都会报错</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 打开一个视频流,方法中需要传一个参数，默认无参，表示打开摄像头。</span></span><br><span class="line">vidcap = cv2.VideoCapture(<span class="string">r'G:\CV\video\video.avi'</span>)</span><br><span class="line"><span class="comment"># print(vidcap.read())    # .read()方法返回两个值：1.读取状态2. 视频里图片的元素   三通道图片RGB</span></span><br><span class="line"></span><br><span class="line">success = <span class="literal">True</span></span><br><span class="line"><span class="comment"># count为计数器，主要为了对图片进行排序</span></span><br><span class="line">count = <span class="number">0</span></span><br><span class="line"><span class="keyword">while</span> success:</span><br><span class="line">    <span class="comment"># 读取视频的内容，返回读取状态和当前帧内容（当前帧是一个三通道的图片）</span></span><br><span class="line">    success,image = vidcap.read()</span><br><span class="line">    <span class="comment"># print(success)  程序终止</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 把当前帧图片写入到文件夹中</span></span><br><span class="line">    cv2.imwrite(<span class="string">r'G:\CV\pic\%d.jpg'</span>%count,image)    <span class="comment">#记录顺序，并命名%d.jpg</span></span><br><span class="line">    count += <span class="number">1</span></span><br><span class="line"><span class="comment"># 一定会报错，会在最后一次，读取最后一帧，超过最后一帧的时候，会报错。</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="处理视频图片为字符串图片"><a href="#处理视频图片为字符串图片" class="headerlink" title="处理视频图片为字符串图片"></a>处理视频图片为字符串图片</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># _*_coding:UTF-8 _*_</span></span><br><span class="line">from PIL import Image,ImageDraw,ImageFont</span><br><span class="line">import os</span><br><span class="line">import cv2</span><br><span class="line">'''</span><br><span class="line">Cpython基于C编写，GIL锁，目的是为了防止脏读</span><br><span class="line">脏读：无效数据的读出，是指在数据库访问中，事务T1将某一值修改，</span><br><span class="line">然后事务T2读取该值，此后T1因为某种原因撤销对该值的修改，</span><br><span class="line">这就导致了T2所读取到的数据是无效的，值得注意的是，脏读一般是针对于update操作的。</span><br><span class="line">'''</span><br><span class="line">def draw(pic):</span><br><span class="line"><span class="code">    # 读取在上一个程序中保存下来的截图</span></span><br><span class="line"><span class="code">    # 有时候PIL和CV2他不支持反斜杠，需要将反斜杠换为斜杠</span></span><br><span class="line"><span class="code">    # 现在读出来的图片，虽然是三通道，但不是RGB，而是BGR</span></span><br><span class="line"><span class="code">    img = cv2.imread('G:\CV\strVideo\pic\%s'%pic)</span></span><br><span class="line"><span class="code">    # print(img)</span></span><br><span class="line"><span class="code">    # 把读出来的数据BGR换为RGB</span></span><br><span class="line"><span class="code">    # 读出来的每一张图片都是三维数据，[图片长，图片宽，通道值]</span></span><br><span class="line"><span class="code">    img = img[:,:,(2,1,0)]    #切第三维，原本为BGR（0，1，2），需改为RGB（2，1，0）</span></span><br><span class="line"><span class="code">    # print(img)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="code">    # 创建一个新的空白画布,如果最后color值不传或者为None则默认为黑色填充</span></span><br><span class="line"><span class="code">    blank = Image.new("RGB",[len(img[0]),len(img)],"white")</span></span><br><span class="line"><span class="code">    # 创建一个新画布，可以在给定图像上进行绘图,需要给定要在哪个图像上进行绘图</span></span><br><span class="line"><span class="code">    drawOBJ = ImageDraw.Draw(blank)</span></span><br><span class="line"><span class="code">    n = 10</span></span><br><span class="line"><span class="code">    # 规定要使用的字体,并且规范字号</span></span><br><span class="line"><span class="code">    font = ImageFont.truetype(r'C:\Windows\Fonts\Microsoft YaHei UI\msyhbd.ttc',size=n-1)</span></span><br><span class="line"><span class="code">    # 需要遍历新图像的每个像素点</span></span><br><span class="line"><span class="code">    for i in range(0,len(img),n):    #注意步长n</span></span><br><span class="line"><span class="code">        for j in range(0,len(img[i]),n):</span></span><br><span class="line"><span class="code">            text = '人智真棒'</span></span><br><span class="line"><span class="code">            #重新替换所有元素</span></span><br><span class="line"><span class="code">            drawOBJ.ink = img[i][j][0]+img[i][j][1] * 256 + img[i][j][2]*256*256</span></span><br><span class="line"><span class="code">            drawOBJ.text([j,i],text[int(j/n) % len(text)],font=font)</span></span><br><span class="line"><span class="code">        # 保存图片，第一个参数为路径，第二个参数为保存格式</span></span><br><span class="line"><span class="code">            print(i,j)</span></span><br><span class="line"><span class="code">    # 保存图片，第一个为路径，第二个为保存格式</span></span><br><span class="line"><span class="code">    blank.save('new/new_'+pic,'jpeg')</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="section"># 获取到传入路径下的所有文件名</span></span><br><span class="line">filelist = os.listdir(r'G:\CV\strVideo\pic')</span><br><span class="line">for file in filelist:</span><br><span class="line"><span class="code">    draw(file)</span></span><br><span class="line"><span class="section"># print(filelist)</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="将新图片组成新的视频"><a href="#将新图片组成新的视频" class="headerlink" title="将新图片组成新的视频"></a>将新图片组成新的视频</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># _*_coding:UTF-8 _*_</span></span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">import cv2</span><br><span class="line"></span><br><span class="line"><span class="section"># 排序</span></span><br><span class="line">def resort(list):</span><br><span class="line"><span class="code">    for i in range(len(list)-1):   #len(list)-1后面取不到</span></span><br><span class="line"><span class="code">        for j in range(len(list)-1):</span></span><br><span class="line"><span class="code">            # print(list[j+1].split('.')[0].split('_')[1]) 先用"."分，生成列表new_0，在用"_"分</span></span><br><span class="line"><span class="code">            # 冒泡排序  这里需要注意转成整型在比较，原来为字符串</span></span><br><span class="line"><span class="code">            # 字符串比较的时候是按位数比较</span></span><br><span class="line"><span class="code">            if int(list[j].split('.')[0].split('_')[1]) &gt; int(list[j+1].split('.')[0].split('_')[1]):</span></span><br><span class="line"><span class="code">                list[j],list[j+1] = list[j+1],list[j]</span></span><br><span class="line"><span class="code">    return list</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">filelist = os.listdir(r'G:\CV\strVideo\new')</span><br><span class="line">filelist = resort(filelist)</span><br><span class="line"><span class="section"># fps=频率，指的是每秒钟显示多少张照片</span></span><br><span class="line">fps = 24</span><br><span class="line"><span class="section"># 图片的分辨率  高 × 宽</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 规定导出的文件名</span></span><br><span class="line">file<span class="emphasis">_path = r'G:\CV\strVideo\video\new_</span>video.avi'</span><br><span class="line"><span class="section"># 规定导出的格式</span></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc('I','4','2','0')# 规定视频流编码</span><br><span class="line"><span class="section"># 不同视频编码对应不同视频格式（例：'I','4','2','0' 对应avi格式）</span></span><br><span class="line"><span class="section"># fourcc = cv2.VideoWriter_fourcc('D', 'I', 'V', 'X')  #mp4格式</span></span><br><span class="line"><span class="section"># 创建写入视频对象，需要规范输出文件路径、编码格式、fps以及图片分辨率</span></span><br><span class="line"><span class="section"># 相当于创建一个视频，但是该视频为空</span></span><br><span class="line"><span class="section"># video = cv2.VideoWriter(file_path,fourcc,fps,size)  size是相反的</span></span><br><span class="line">video = cv2.VideoWriter(file_path,fourcc,fps,(960,540))   #需要特别注意分辨率问题</span><br><span class="line"><span class="section"># 遍历图片往视频里面写</span></span><br><span class="line">for item in filelist:</span><br><span class="line"><span class="code">    item = os.path.join(r'G:\CV\strVideo\new', item)  #文件名和图片名拼接一起</span></span><br><span class="line"><span class="code">    # print(item)    显示拼接后的路径</span></span><br><span class="line"><span class="code">    # 读取图片内容</span></span><br><span class="line"><span class="code">    img = cv2.imread(item)</span></span><br><span class="line"><span class="code">    print(img)</span></span><br><span class="line"><span class="code">    # 相当于向视频中一帧一帧的添加图片</span></span><br><span class="line"><span class="code">    video.write(img)</span></span><br><span class="line"></span><br><span class="line">video.release()   #释放video资源</span><br></pre></td></tr></table></figure>
+<h3 id="项目要求"><a href="#项目要求" class="headerlink" title="项目要求"></a>项目要求</h3><p>采集数据，并且合理的将数据生成HTML进行数据可视化展示。<br>要求组内每个人都需要至少生成三张图表<br>不限制一定要天气数据。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _*_coding:UTF-8 _*_</span></span><br><span class="line"><span class="comment"># 推荐安装pyecharts1.6.0</span></span><br><span class="line"><span class="comment"># pip install pyecharts==1.6.0</span></span><br><span class="line"><span class="comment"># 如果使用pycharm安装，settings中project中 project interpreter点击，</span></span><br><span class="line"><span class="comment"># 点击右方加号，搜索pyecharts点击install即可。</span></span><br><span class="line"><span class="comment"># 如果要指定版本，勾选右下方specify version，选择1.6.0</span></span><br><span class="line"><span class="comment"># 然后在点击install package</span></span><br><span class="line"><span class="comment"># 如果安装成功后，发现版本不对，卸载重装</span></span><br><span class="line"><span class="comment"># 卸载:pip uninstall pyecharts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re   <span class="comment">#正则表达式</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Bar</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"></span><br><span class="line">url1 = <span class="string">'http://www.weather.com.cn/weather1d/101010100.shtml'</span><span class="comment"># 北京</span></span><br><span class="line">url2 = <span class="string">'http://www.weather.com.cn/weather1d/101020100.shtml'</span><span class="comment"># 上海</span></span><br><span class="line">url3 = <span class="string">'http://www.weather.com.cn/weather1d/101100101.shtml'</span><span class="comment"># 太原</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(url)</span>:</span></span><br><span class="line">    res = requests.get(url=url)</span><br><span class="line">    text = res.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="comment"># print(text)</span></span><br><span class="line">    r1 = re.findall(<span class="string">'hour3data=(.*?&#125;)'</span>, text)</span><br><span class="line">    r2 = r1[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 使用json把字符串转为字典</span></span><br><span class="line">    r3 = json.loads(r2)</span><br><span class="line">    today = r3[<span class="string">'7d'</span>][<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> today</span><br><span class="line"></span><br><span class="line">today1 = get_data(url1)<span class="comment"># 北京温度</span></span><br><span class="line">today2 = get_data(url2)<span class="comment"># 上海温度</span></span><br><span class="line">today3 = get_data(url3)<span class="comment"># 太原温度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print([i.split(',')[3] for i in today1])</span></span><br><span class="line">c = (Bar()</span><br><span class="line">     .add_xaxis([i.split(<span class="string">','</span>)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> today1])</span><br><span class="line">     .add_yaxis(<span class="string">'北京温度'</span>,[int(i.split(<span class="string">','</span>)[<span class="number">3</span>].strip(<span class="string">'℃'</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> today1])<span class="comment"># 北京</span></span><br><span class="line">     .add_yaxis(<span class="string">'上海温度'</span>,[int(i.split(<span class="string">','</span>)[<span class="number">3</span>].strip(<span class="string">'℃'</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> today2])<span class="comment"># 上海</span></span><br><span class="line">     .add_yaxis(<span class="string">'太原温度'</span>,[int(i.split(<span class="string">','</span>)[<span class="number">3</span>].strip(<span class="string">'℃'</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> today3])<span class="comment"># 太原</span></span><br><span class="line">     .set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">'各城市当天温度'</span>),</span><br><span class="line">                      toolbox_opts=opts.TitleOpts)</span><br><span class="line">     )</span><br><span class="line">c.render(<span class="string">'1.html'</span>)</span><br></pre></td></tr></table></figure>
 
 
           
@@ -423,7 +415,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://yoursite.com/2020/06/11/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%86%E9%A2%91%E7%9A%84%E7%94%9F%E6%88%90/>http://yoursite.com/2020/06/11/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%86%E9%A2%91%E7%9A%84%E7%94%9F%E6%88%90/</a></p>
+            <p>本文永久链接是：<a href=http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/>http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/</a></p>
           
         
       </blockquote>
@@ -460,10 +452,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-17T16:37:10+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-20T11:12:20+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jun 17, 2020</p>
+    <p>更新于：Jun 20, 2020</p>
   </a>
 </div>
 
@@ -490,7 +482,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/06/11/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%86%E9%A2%91%E7%9A%84%E7%94%9F%E6%88%90/&title=Python字符串视频的生成笔记 - 东风未起，念你成疾&summary=给一个完整的视频，对视频进行处理，达到：生成一个新的视频，用自己想要的字符串来代替视频中的原有元素。"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/&title=数据可视化分析笔记 - 东风未起，念你成疾&summary="
           
           >
           
@@ -502,7 +494,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/06/11/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%86%E9%A2%91%E7%9A%84%E7%94%9F%E6%88%90/&title=Python字符串视频的生成笔记 - 东风未起，念你成疾&summary=给一个完整的视频，对视频进行处理，达到：生成一个新的视频，用自己想要的字符串来代替视频中的原有元素。"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/&title=数据可视化分析笔记 - 东风未起，念你成疾&summary="
           
           >
           
@@ -514,7 +506,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/06/11/Python%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%A7%86%E9%A2%91%E7%9A%84%E7%94%9F%E6%88%90/&title=Python字符串视频的生成笔记 - 东风未起，念你成疾&summary=给一个完整的视频，对视频进行处理，达到：生成一个新的视频，用自己想要的字符串来代替视频中的原有元素。"
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/&title=数据可视化分析笔记 - 东风未起，念你成疾&summary="
           
           >
           
@@ -538,23 +530,24 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/06/16/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%92%8C%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>线性回归和逻辑回归学习笔记</p>
+              <a class='prev' href='/2020/06/20/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E7%8C%AB%E7%8B%97%E8%AF%86%E5%88%AB/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>神经网络实现猫狗识别笔记</p>
+                <p class='content'>神经网络实现猫狗识别
+卷积神经网络
+卷积
+
+12341. 就是一种运算，是一种矩阵降维的运算2. 为了解决卷积运算中，中心元素的运算比重远大于边缘元素的情况，补白	补白可以降低中间元素参与运算的...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/06/16/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92%E5%92%8C%E9%80%BB%E8%BE%91%E5%9B%9E%E5%BD%92%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/'>
+                <p class='title'>线性回归和逻辑回归学习笔记<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
                 <p class='content'>python 机器学习
 
 
 12机器学习利用大量的数据样本，使得计算机通过不断的学习获得一个模型，用来对新的未知数据做预测
 
 机器学习有监督学习（分类、回归）同时将数据样本和标签输入给模型，模型...</p>
-              </a>
-            
-            
-              <a class='next' href='/2020/06/09/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE/'>
-                <p class='title'>软件需求工程---数据流图<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>软件需求工程—数据流图
-
-
-软件需求工程—数据流图1234567891011121314151617数据流图**是过程建模所使用的主要建模技术，它在建模时所使用的基本模型元素有4种：**外部实体...</p>
               </a>
             
           </div>
@@ -599,7 +592,7 @@
 
   <script>
     window.subData = {
-      title: 'Python字符串视频的生成笔记',
+      title: '数据可视化分析笔记',
       tools: true
     }
   </script>
@@ -625,7 +618,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#字符串视频的生成"><span class="toc-text">字符串视频的生成</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#思路"><span class="toc-text">思路</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#读取视频"><span class="toc-text">读取视频</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#处理视频图片为字符串图片"><span class="toc-text">处理视频图片为字符串图片</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#将新图片组成新的视频"><span class="toc-text">将新图片组成新的视频</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#数据可视化分析"><span class="toc-text">数据可视化分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#项目要求"><span class="toc-text">项目要求</span></a></li></ol>
     </div>
   </section>
 
