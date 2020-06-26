@@ -323,139 +323,9 @@
         
           
         
-          
-        
       
     
     
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
-  
-
-
-  <section class='meta'>
-    
-      
-      
-      <div class="meta" id="header-meta">
-        
-          
-  <h2 class="title">
-    <a href="/2020/06/20/%E7%96%AB%E6%83%85%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%B1%95%E7%A4%BA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
-      疫情数据分析展示学习笔记
-    </a>
-  </h2>
-
-
-        
-        <div class='new-meta-box'>
-          
-            
-          
-            
-              
-<div class='new-meta-item author'>
-  <a href="https://zfyvip.xyz" target="_blank" rel="nofollow noopener">
-    <img src="https://t1.picb.cc/uploads/2020/05/24/tyaD1j.jpg">
-    <p>ZFY</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-
-            
-          
-            
-              <div class="new-meta-item date">
-  <a class='notlink'>
-    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 20, 2020</p>
-  </a>
-</div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>247 words</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>1 min</p>
-    </a>
-  </div>
-
-
-            
-          
-            
-              
-
-            
-          
-        </div>
-        
-          <hr>
-        
-      </div>
-    
-  </section>
-
-
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="疫情数据分析展示"><a href="#疫情数据分析展示" class="headerlink" title="疫情数据分析展示"></a>疫情数据分析展示</h3><p>url = ‘<a href="https://news.qq.com/zt2020/page/feiyan.htm#/global&#39;" target="_blank" rel="noopener">https://news.qq.com/zt2020/page/feiyan.htm#/global&#39;</a></p>
-<h4 id="爬虫的开发流程"><a href="#爬虫的开发流程" class="headerlink" title="爬虫的开发流程"></a>爬虫的开发流程</h4><ul>
-<li>分析网页</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>观察当前页面是否存在要爬取的数据</span><br><span class="line"><span class="bullet">2. </span>按F12，使用开发者工具，查找数据所在的请求是哪个</span><br><span class="line"><span class="code">	XHR:异步请求</span></span><br><span class="line"><span class="code">	JS:服务器响应回来的JS文件</span></span><br><span class="line"><span class="code">	CSS:服务器响应回来的样式文件</span></span><br><span class="line"><span class="code">	IMG:图片文件</span></span><br><span class="line"><span class="code">	MEDIA：媒体文件（多指流媒体：音频、视频......）</span></span><br><span class="line"><span class="code">	FONT：字体</span></span><br><span class="line"><span class="code">	DOC：文档内容，大多数网站的数据都在doc里面</span></span><br><span class="line"><span class="bullet">3. </span>一个一个请求去找，需要的 内容在哪里</span><br><span class="line"><span class="code">	文本：优先doc---然后XHR---JS---放弃</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>请求以及解析</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>观察该请求是post还是get？</span><br><span class="line"><span class="bullet">2. </span>观察数据是什么格式的</span><br><span class="line"><span class="bullet">	1. </span>HTML可以使用bs4，xpath、RE</span><br><span class="line"><span class="bullet">	2. </span>类字典结构：Json</span><br><span class="line"><span class="bullet">	3. </span>无规则字符串：RE</span><br><span class="line"><span class="code">	注：无论是使用urllib/requests/scrapy/.....，最终得到的数据一定是字符串。</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>图表库</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://gallery.pyecharts.org/#/Map3D/map3d<span class="emphasis">_china_</span>base</span><br></pre></td></tr></table></figure>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      
-    </div>
-    
-      
-    
-  </section>
-</article>
-
-          </div>
-        
       
         
           <div class='post-wrapper'>
@@ -543,7 +413,11 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="神经网络实现猫狗识别"><a href="#神经网络实现猫狗识别" class="headerlink" title="神经网络实现猫狗识别"></a>神经网络实现猫狗识别</h3><ul>
+         <a id="more"></a>
+
+
+
+<h3 id="神经网络实现猫狗识别"><a href="#神经网络实现猫狗识别" class="headerlink" title="神经网络实现猫狗识别"></a>神经网络实现猫狗识别</h3><ul>
 <li>卷积神经网络</li>
 <li>卷积</li>
 </ul>
@@ -680,7 +554,13 @@
   <section class="article typo">
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="数据可视化分析"><a href="#数据可视化分析" class="headerlink" title="数据可视化分析"></a>数据可视化分析</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">天气预报-根据拿到的每天的天气情况来绘制可视化图表。</span><br><span class="line">爬虫-拿天气数据-从哪儿拿？（哪个地方没有反爬我们就去哪儿拿）</span><br><span class="line"></span><br><span class="line">S</span><br><span class="line">获得到数据之后，使用正则表达式筛选数据</span><br></pre></td></tr></table></figure>
+         <a id="more"></a>
+
+
+
+
+
+<h3 id="数据可视化分析"><a href="#数据可视化分析" class="headerlink" title="数据可视化分析"></a>数据可视化分析</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">天气预报-根据拿到的每天的天气情况来绘制可视化图表。</span><br><span class="line">爬虫-拿天气数据-从哪儿拿？（哪个地方没有反爬我们就去哪儿拿）</span><br><span class="line"></span><br><span class="line">S</span><br><span class="line">获得到数据之后，使用正则表达式筛选数据</span><br></pre></td></tr></table></figure>
 
 <figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">数据可视化分析，是基于数据的值进行可视化分析的一种手段，我们可以根据可视化中展示的数据，得到一些结论，比如数据是否有明显的趋势、数据的分布是否符合高斯分布(数据的一个体现)</span><br><span class="line">数据的平稳性(数据分析首先对数据进行平稳性分析)</span><br><span class="line"><span class="code">	如果是平稳性数据需要分析的时候需要采用：</span></span><br><span class="line"><span class="code">		AR</span></span><br><span class="line"><span class="code">		MA</span></span><br><span class="line"><span class="code">		ARMA</span></span><br><span class="line"><span class="code">	如果是非平稳性数据分析需要采用：</span></span><br><span class="line"><span class="code">		ARIMA</span></span><br></pre></td></tr></table></figure>
 
