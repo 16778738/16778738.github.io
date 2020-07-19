@@ -21,7 +21,7 @@
     <meta name="keywords" content="python">
   
   
-    <meta name="description" content="python 实现冒泡排序和选择排序">
+    <meta name="description" content="python 实现冒泡排序,选择排序,插入排序">
   
 
   <!-- feed -->
@@ -374,21 +374,34 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>python 实现冒泡排序和选择排序</p>
+          <p>python 实现冒泡排序,选择排序,插入排序</p>
  <a id="more"></a>
 
 
 
-<h1 id="python-实现冒泡排序和选择排序"><a href="#python-实现冒泡排序和选择排序" class="headerlink" title="python 实现冒泡排序和选择排序"></a>python 实现冒泡排序和选择排序</h1><h2 id="冒泡排序算法的原理如下："><a href="#冒泡排序算法的原理如下：" class="headerlink" title="冒泡排序算法的原理如下："></a>冒泡排序算法的原理如下：</h2><ol>
+<h1 id="python-实现冒泡排序和选择排序"><a href="#python-实现冒泡排序和选择排序" class="headerlink" title="python 实现冒泡排序和选择排序"></a>python 实现冒泡排序和选择排序</h1><h2 id="冒泡排序："><a href="#冒泡排序：" class="headerlink" title="冒泡排序："></a>冒泡排序：</h2><ol>
 <li>比较相邻的元素。如果第一个比第二个大，就交换他们两个。</li>
 <li>对每一对相邻元素做同样的工作，从开始第一对到结尾的最后一对。在这一点，最后的元素应该会是最大的数。</li>
 <li>针对所有的元素重复以上的步骤，除了最后一个。</li>
 <li>持续每次对越来越少的元素重复上面的步骤，直到没有任何一对数字需要比较。</li>
 </ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 冒泡</span></span><br><span class="line"> list=[<span class="number">12</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"> <span class="function"><span class="keyword">def</span> <span class="title">maoPao</span><span class="params">(list)</span>:</span></span><br><span class="line">     <span class="keyword">for</span> i <span class="keyword">in</span> range(len(list)<span class="number">-1</span>): <span class="comment">#列表的长度</span></span><br><span class="line">         <span class="keyword">if</span> list[i]&gt;list[i+<span class="number">1</span>]:</span><br><span class="line">             list[i],list[i+<span class="number">1</span>]=list[i+<span class="number">1</span>],list[i]</span><br><span class="line">     print(list)</span><br><span class="line"> maoPao(list)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    a.append(random.randint(<span class="number">0</span>, <span class="number">100</span>))</span><br><span class="line">print(<span class="string">'排序前：'</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 从小到大</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)<span class="number">-1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(a) - <span class="number">1</span> - i):</span><br><span class="line">        <span class="keyword">if</span> a[j] &gt; a[j + <span class="number">1</span>]:</span><br><span class="line">            a[j], a[j + <span class="number">1</span>] = a[j + <span class="number">1</span>], a[j]</span><br><span class="line"></span><br><span class="line">print(<span class="string">'排序后：'</span>, a)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 从大到小</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)<span class="number">-1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(len(a) - <span class="number">1</span> - i):</span><br><span class="line">        <span class="keyword">if</span> a[j] &lt; a[j + <span class="number">1</span>]:</span><br><span class="line">            a[j], a[j + <span class="number">1</span>] = a[j + <span class="number">1</span>], a[j]</span><br><span class="line"></span><br><span class="line">print(<span class="string">'排序后：'</span>, a)</span><br></pre></td></tr></table></figure>
 
 <h2 id="选择排序："><a href="#选择排序：" class="headerlink" title="选择排序："></a>选择排序：</h2><p>对比数组中前一个元素跟后一个元素的大小，如果后面的元素比前面的元素小则用一个变量k来记住他的位置，接着第二次比较，前面“后一个元素”现变成了“前一个元素”，继续跟他的“后一个元素”进行比较如果后面的元素比他要小则用变量k记住它在数组中的位置(下标)，等到循环结束的时候，我们应该找到了最小的那个数的下标了，然后进行判断，如果这个元素的下标不是第一个元素的下标，就让第一个元素跟他交换一下值，这样就找到整个数组中最小的数了。然后找到数组中第二小的数，让他跟数组中第二个元素交换一下值，以此类推。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">list=[<span class="number">12</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>, <span class="number">9</span>]</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">selectSort</span><span class="params">(list)</span>:</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(list)<span class="number">-1</span>):</span><br><span class="line">        x=i</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,len(list)):</span><br><span class="line">            <span class="keyword">if</span> list[x]&gt;list[j]:</span><br><span class="line">                list[x],list[j]=list[j],list[x]</span><br><span class="line">        print(list)</span><br><span class="line">selectSort(list)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    a.append(random.randint(<span class="number">0</span>, <span class="number">100</span>))</span><br><span class="line">print(<span class="string">'排序前：'</span>, a)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a)):</span><br><span class="line">    <span class="comment"># 找一个最小值的下标</span></span><br><span class="line">    min = i</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>,len(a)):</span><br><span class="line">        <span class="keyword">if</span> a[min] &gt; a[j]:</span><br><span class="line">            min = j</span><br><span class="line">    a[min], a[i] = a[i], a[min]</span><br><span class="line"></span><br><span class="line">print(<span class="string">'排序后：'</span>,a)</span><br></pre></td></tr></table></figure>
+
+<h2 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h2><ul>
+<li>思想：现在已经有一个有序的序列了，要求在这个已经的数据序列中，再插入一个数</li>
+<li>插入排序是将序列分为两部分，最开始的时候第一个数就是一个有序部分，剩下的部分为无序部分，每次取无序部分中的第一个数和无序部分进行比较，放入到有序部分中的合适的位置</li>
+<li>[65,27,59,64,58]<ul>
+<li><code>[65]   [27,59,64,58]</code></li>
+<li><code>[65]  [27,59,64,58]</code>  -&gt; <code>[27,65]   [59,64,58]</code> -&gt; <code>[27,65]   [64,58]</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">a = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    a.append(random.randint(<span class="number">0</span>, <span class="number">100</span>))</span><br><span class="line">print(<span class="string">'排序前：'</span>, a)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 取无序部分的第一个元素，和有序部分进行比较，放在合适的位置</span></span><br><span class="line"><span class="comment"># [65,27,59,64,58]</span></span><br><span class="line"><span class="comment"># [20,27,59,65,65,,20]</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(a) - <span class="number">1</span>):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(i + <span class="number">1</span>, <span class="number">0</span>, <span class="number">-1</span>):</span><br><span class="line">        <span class="keyword">if</span> a[j] &lt; a[j - <span class="number">1</span>]:</span><br><span class="line">            a[j], a[j - <span class="number">1</span>] = a[j - <span class="number">1</span>], a[j]</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">print(<span class="string">'排序后：'</span>, a)</span><br></pre></td></tr></table></figure>
+
+
           
             <div class='article_footer'>
               
@@ -461,10 +474,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-06-08T17:39:42+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-07-13T15:28:56+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Jun 8, 2020</p>
+    <p>更新于：Jul 13, 2020</p>
   </a>
 </div>
 
@@ -491,7 +504,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序和选择排序"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序,选择排序,插入排序"
           
           >
           
@@ -503,7 +516,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序和选择排序"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序,选择排序,插入排序"
           
           >
           
@@ -515,7 +528,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序和选择排序"
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/&title=python 实现冒泡排序和选择排序 - 东风未起，念你成疾&summary=python 实现冒泡排序,选择排序,插入排序"
           
           >
           
@@ -631,7 +644,7 @@
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序算法的原理如下："><span class="toc-text">冒泡排序算法的原理如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择排序："><span class="toc-text">选择排序：</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#冒泡排序："><span class="toc-text">冒泡排序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#选择排序："><span class="toc-text">选择排序：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#插入排序"><span class="toc-text">插入排序</span></a></li></ol>
     </div>
   </section>
 
