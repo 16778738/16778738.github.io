@@ -16,12 +16,10 @@
 
   <!-- 页面元数据 -->
   
-    <title>python实现宽度优先搜索 - 东风未起，念你成疾</title>
+    <title>Linux-Nginx环境部署 - 东风未起，念你成疾</title>
   
-    <meta name="keywords" content="python">
+    <meta name="keywords" content="Linux">
   
-  
-    <meta name="description" content="python实现宽度优先搜索">
   
 
   <!-- feed -->
@@ -320,8 +318,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/">
-      python实现宽度优先搜索
+    <a href="/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
+      Linux-Nginx环境部署
     </a>
   </h1>
 
@@ -351,7 +349,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：May 25, 2020</p>
+    <p>发布于：Sep 3, 2020</p>
   </a>
 </div>
 
@@ -374,17 +372,60 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>python实现宽度优先搜索</p>
- <a id="more"></a>
+          <h1 id="Nginx服务器"><a href="#Nginx服务器" class="headerlink" title="Nginx服务器"></a>Nginx服务器</h1><h3 id="一、Nginx概述"><a href="#一、Nginx概述" class="headerlink" title="一、Nginx概述"></a>一、Nginx概述</h3><h4 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h4><h5 id="1-1-什么nginx"><a href="#1-1-什么nginx" class="headerlink" title="1.1 什么nginx"></a>1.1 什么nginx</h5><p>Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。</p>
+<h5 id="2-2-nginx的作用"><a href="#2-2-nginx的作用" class="headerlink" title="2.2 nginx的作用"></a>2.2 nginx的作用</h5><ul>
+<li><p>静态HTTP服务器（ 处理静态资源 - 动静分离）： </p>
+<p>首先，Nginx是一个HTTP服务器，可以将服务器上的静态文件（图片、CSS、JS文件等）通过HTTP协议展现给客户端。   将静态资源的处理交给Nginx服务器</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一个项目中的资源可以为两大类：</span></span><br><span class="line"><span class="bullet">	1. </span>动态资源的请求 普通URL   -- uwsgi</span><br><span class="line"><span class="bullet">	2. </span>静态资源的请求 /static/  -- nginx</span><br></pre></td></tr></table></figure>
 
+<p>Nginx提供的动静分离是指把动态请求和静态请求分离开，合适的服务器处理合适的请求，使整个服务器系统的性能、效率更高。 </p>
+<p>uWSGI更适合做动态内容的执行，nginx更适合做静态内容的处理，客户端请求直接访问nginx服务器，留下静态部分处理，动态部分转发给uWSGI服务器，最终实现“动静分离”。</p>
+</li>
+</ul>
+<ul>
+<li><p>反向代理服务器：  </p>
+<p>反向代理是指以代理服务器nginx来接受internet上的请求，然后将请求转发给内部网络上的其它服务器uWSGI，并将从uWSGI服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。  </p>
+</li>
+</ul>
+<ul>
+<li><p>负载均衡 ：</p>
+<p>多在高并发情况下需要使用。其原理就是将数据流量分摊到多个服务器执行，减轻每台服务器的压力，多台服务器(集群)共同完成工作任务，从而提高了数据的吞吐量。 </p>
+</li>
+</ul>
+<h4 id="2、安装步骤"><a href="#2、安装步骤" class="headerlink" title="2、安装步骤"></a>2、安装步骤</h4><ul>
+<li><p>将tar包发送的linux</p>
+</li>
+<li><p>解压 <code>tar -zxvf nginx-1.11.1.tar.gz</code> </p>
+</li>
+<li><p>安装依赖 <code>yum install gcc zlib-devel pcre-devel</code>   </p>
+</li>
+<li><p>cd到解压目录：<code>./configure</code>    #配置检测</p>
+</li>
+<li><p>cd到解压目录：<code>make &amp;&amp; make install</code>  #编译并安装</p>
+</li>
+<li><p>安装完成，安装路径为<code>/usr/local/nginx</code>   ,日志路径为 <code>/usr/local/nginx/logs</code> ,</p>
+<p>可执行文件路径为 <code>/usr/local/nginx/sbin</code> ,配置文件路径为 <code>/usr/local/nginx/conf</code></p>
+<p>欢迎页面路径为 <code>/usr/local/nginx/html</code></p>
+</li>
+<li><p><code>ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx</code> 制作连接，便于执行<code>nginx</code>指令</p>
+</li>
+<li><p><code>nginx  #启动</code><br><code>nginx -s stop #关闭</code><br><code>nginx -s reload #重启</code></p>
+<p><code>http://ip:80即可访问nginx欢迎页面</code></p>
+</li>
+</ul>
+<h3 id="二、nginx与uWSGI"><a href="#二、nginx与uWSGI" class="headerlink" title="二、nginx与uWSGI"></a>二、nginx与uWSGI</h3><p>nginx配置–到配置路径中的<code>nginx.conf</code>      <code>/usr/local/nginx/conf/nginx.conf</code> </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> ems&#123;</span><br><span class="line">	<span class="attribute">server</span> <span class="number">192.168.157.141:9001</span>; <span class="comment"># uWSGI's socket = </span></span><br><span class="line">    <span class="comment">#server 192.168.157.142:9001; #192.168.x.x:9001</span></span><br><span class="line">	<span class="comment">#可以在添加其他的uWSGI的服务器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">	<span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">	<span class="attribute">server_name</span>  <span class="number">192.168.157.142</span>;   <span class="comment"># nginx服务器的ip</span></span><br><span class="line">	<span class="attribute">charset</span> utf-<span class="number">8</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="attribute">location</span> / &#123;</span><br><span class="line">		<span class="attribute">uwsgi_pass</span> ems; <span class="comment">#和上面的upstream转接  </span></span><br><span class="line">		<span class="attribute">include</span>  /usr/local/nginx/conf/uwsgi_params;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="attribute">location</span> /static &#123; </span><br><span class="line">		<span class="attribute">alias</span> /usr/local/static;</span><br><span class="line">	&#125;</span><br><span class="line"> ...</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
 
+<p>配置好后，重启nginx即可，可以使用Nginx服务器来访问项目</p>
+<p><strong>注意关闭防火墙！！</strong></p>
+<p>两台虚拟主机，一个运行nginx，其中保存project的静态资源；一个运行uwsgi，其中保存并部署project。</p>
+<h3 id="三、集群和负载均衡策略"><a href="#三、集群和负载均衡策略" class="headerlink" title="三、集群和负载均衡策略"></a>三、集群和负载均衡策略</h3><p>搭建uWSGI集群，只需要多做几份uWSGI的配置文件，文件中设置不同的ip:port，指向相同的project，然后启动多个uWSGI即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">*默认:轮询</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8989</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*iphash:基于ip的负载均衡.  </span><br><span class="line">		upstream django &#123;</span><br><span class="line">			ip_hash;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*权重轮询:</span><br><span class="line">        upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span> weight=<span class="number">1</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span> weight=<span class="number">2</span>;   </span><br><span class="line">		&#125;</span><br><span class="line">*最小连接数：</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			least_conn;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
 
-<p>宽度优先搜索算法(又称广度优先搜索)是最简便的图的搜索算法之一,这一算法也是很多重要的图的算法的原型。</p>
-<p>其基本思想是:<br>(1)把起始节点放到 OPEN 表中(如果该起始节点为一目标节点,则求得一个解答)。<br>(2)如果 OPEN 是个空表,则没有解,失败退出;否则继续。<br>(3)把第一个节点(节点 n)从 OPEN 表移出,并把它放入 CLOSED 扩展节点表中。<br>(4)扩展节点 n。如果没有后继节点,则转向上述第(2)步。<br>(5)把 n 的所有后继节点放到 OPEN 表的末端,并提供从这些后继节点回到 n<br>的指针。<br>如果 n 的任一个后继节点是个目标节点,则找到一个解答,成功退出;否则转向第(2)步。</p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200525150910125.png" alt=""></p>
-<p><img src="C:%5CUsers%5CAdministrator%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200525151000675.png" alt=""></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> collections <span class="keyword">import</span> deque  <span class="comment"># 线性表的模块</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 首先定义一个创建图的类，使用邻接矩阵</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Graph</span><span class="params">(object)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></span><br><span class="line">        self.order = []  <span class="comment"># visited order</span></span><br><span class="line">        self.neighbor = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_node</span><span class="params">(self, node)</span>:</span></span><br><span class="line">        key, val = node</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> isinstance(val, list):</span><br><span class="line">        print(<span class="string">'节点输入时应该为一个线性表'</span>)  <span class="comment"># 避免不正确的输入</span></span><br><span class="line">        self.neighbor[key] = val</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 宽度优先算法的实现</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">BFS</span><span class="params">(self, root)</span>:</span></span><br><span class="line">        <span class="comment"># 首先判断根节点是否为空节点</span></span><br><span class="line">        <span class="keyword">if</span> root != <span class="literal">None</span>:</span><br><span class="line">            search_queue = deque()</span><br><span class="line">            search_queue.append(root)</span><br><span class="line">            visited = []</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            print(<span class="string">'root is None'</span>)</span><br><span class="line">            <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span> search_queue:</span><br><span class="line">            person = search_queue.popleft()</span><br><span class="line">            self.order.append(person)</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">not</span> person <span class="keyword">in</span> visited) <span class="keyword">and</span> (person <span class="keyword">in</span> self.neighbor.keys()):</span><br><span class="line">                search_queue += self.neighbor[person]</span><br><span class="line">                visited.append(person)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">clear</span><span class="params">(self)</span>:</span></span><br><span class="line">        self.order = []</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">node_print</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="keyword">for</span> index <span class="keyword">in</span> self.order:</span><br><span class="line">            print(index, end=<span class="string">'  '</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    <span class="comment"># 创建一个二叉树图</span></span><br><span class="line">    g = Graph()</span><br><span class="line">    g.add_node((<span class="string">'S'</span>, [<span class="string">'A'</span>, <span class="string">'B'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'A'</span>, [<span class="string">'C'</span>, <span class="string">'D'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'B'</span>, [<span class="string">'E'</span>, <span class="string">'F'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'C'</span>, [<span class="string">'G'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'G'</span>, [<span class="string">'J'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'E'</span>, [<span class="string">'H'</span>]))</span><br><span class="line">    g.add_node((<span class="string">'F'</span>, [<span class="string">'I'</span>]))</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行宽度优先搜索</span></span><br><span class="line">  g.BFS(<span class="string">'S'</span>)</span><br><span class="line">    print(<span class="string">'宽度优先搜索:'</span>)</span><br><span class="line">    print(<span class="string">'  '</span>, end=<span class="string">'  '</span>)</span><br><span class="line">    g.node_print()</span><br><span class="line">    g.clear()</span><br></pre></td></tr></table></figure>
+<p>至此，一个uWSGI集群搭建完成，nginx作为反向代理服务器和web服务器接收请求，然后处理静态的部分，动态部分按照负载均衡策略转发给某一个uWSGI服务器。</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 集群解决了什么问题：</span></span><br><span class="line"><span class="bullet">	1. </span>高并发</span><br><span class="line"><span class="bullet">	2. </span>高完整性（高可用性）</span><br></pre></td></tr></table></figure>
 
+<p>至此python-web-project成功运行于 一个对高并发有更好支持，具有高可用性（high-available）的系统中</p>
 
           
             <div class='article_footer'>
@@ -421,7 +462,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/>http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/</a></p>
+            <p>本文永久链接是：<a href=http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/>http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</a></p>
           
         
       </blockquote>
@@ -458,10 +499,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-05-25T15:11:07+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T18:37:25+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：May 25, 2020</p>
+    <p>更新于：Sep 3, 2020</p>
   </a>
 </div>
 
@@ -470,7 +511,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/python/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>python</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Linux</p></a></div>
 
 
         
@@ -488,7 +529,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/&title=python实现宽度优先搜索 - 东风未起，念你成疾&summary=python实现宽度优先搜索"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/&title=Linux-Nginx环境部署 - 东风未起，念你成疾&summary="
           
           >
           
@@ -500,7 +541,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/&title=python实现宽度优先搜索 - 东风未起，念你成疾&summary=python实现宽度优先搜索"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/&title=Linux-Nginx环境部署 - 东风未起，念你成疾&summary="
           
           >
           
@@ -512,7 +553,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/05/25/python%E5%AE%9E%E7%8E%B0%E5%AE%BD%E5%BA%A6%E4%BC%98%E5%85%88%E6%90%9C%E7%B4%A2/&title=python实现宽度优先搜索 - 东风未起，念你成疾&summary=python实现宽度优先搜索"
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/&title=Linux-Nginx环境部署 - 东风未起，念你成疾&summary="
           
           >
           
@@ -536,22 +577,11 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/06/08/python%20%E5%AE%9E%E7%8E%B0%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F%E5%92%8C%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>python 实现冒泡排序和选择排序</p>
-                <p class='content'>python 实现冒泡排序,选择排序,插入排序
- 
-
-
-
-python 实现冒泡排序和选择排序冒泡排序：
-比较相邻的元素。如果第一个比第二个大，就交换他们两个。
-对每一对相邻元素做同样的工作，从...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/05/22/hello-world/'>
-                <p class='title'>Hello World<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any ...</p>
+              <a class='next' href='/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/'>
+                <p class='title'>Linux-环境部署收集<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>项目环境部署一、MySQL5.7安装1、安装方式1.1 方式一 yum安装（推荐使用该方式）在CentOS中默认安装有MariaDB，这个是MySQL的分支
+如果必须要安装MySQL，首先必须添...</p>
               </a>
             
           </div>
@@ -596,7 +626,7 @@ python 实现冒泡排序和选择排序冒泡排序：
 
   <script>
     window.subData = {
-      title: 'python实现宽度优先搜索',
+      title: 'Linux-Nginx环境部署',
       tools: true
     }
   </script>
@@ -611,6 +641,20 @@ python 实现冒泡排序和选择排序冒泡排序：
     
     
 
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Nginx概述"><span class="toc-text">一、Nginx概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、简介"><span class="toc-text">1、简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-什么nginx"><span class="toc-text">1.1 什么nginx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-nginx的作用"><span class="toc-text">2.2 nginx的作用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、安装步骤"><span class="toc-text">2、安装步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、nginx与uWSGI"><span class="toc-text">二、nginx与uWSGI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、集群和负载均衡策略"><span class="toc-text">三、集群和负载均衡策略</span></a></li></ol>
+    </div>
+  </section>
 
 
   
