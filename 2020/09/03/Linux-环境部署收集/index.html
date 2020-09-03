@@ -21,6 +21,8 @@
     <meta name="keywords" content="Linux">
   
   
+    <meta name="description" content="MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器">
+  
 
   <!-- feed -->
   
@@ -372,7 +374,10 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <h1 id="项目环境部署"><a href="#项目环境部署" class="headerlink" title="项目环境部署"></a>项目环境部署</h1><h3 id="一、MySQL5-7安装"><a href="#一、MySQL5-7安装" class="headerlink" title="一、MySQL5.7安装"></a>一、MySQL5.7安装</h3><h4 id="1、安装方式"><a href="#1、安装方式" class="headerlink" title="1、安装方式"></a>1、安装方式</h4><h5 id="1-1-方式一-yum安装（推荐使用该方式）"><a href="#1-1-方式一-yum安装（推荐使用该方式）" class="headerlink" title="1.1 方式一 yum安装（推荐使用该方式）"></a>1.1 方式一 yum安装（推荐使用该方式）</h5><p>在CentOS中默认安装有MariaDB，这个是MySQL的分支</p>
+          <p>MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器</p>
+<a id="more"></a>
+
+<h1 id="项目环境部署"><a href="#项目环境部署" class="headerlink" title="项目环境部署"></a>项目环境部署</h1><h3 id="一、MySQL5-7安装"><a href="#一、MySQL5-7安装" class="headerlink" title="一、MySQL5.7安装"></a>一、MySQL5.7安装</h3><h4 id="1、安装方式"><a href="#1、安装方式" class="headerlink" title="1、安装方式"></a>1、安装方式</h4><h5 id="1-1-方式一-yum安装（推荐使用该方式）"><a href="#1-1-方式一-yum安装（推荐使用该方式）" class="headerlink" title="1.1 方式一 yum安装（推荐使用该方式）"></a>1.1 方式一 yum安装（推荐使用该方式）</h5><p>在CentOS中默认安装有MariaDB，这个是MySQL的分支</p>
 <p>如果必须要安装MySQL，首先必须添加mysql社区repo通过输入命令：</p>
 <p><code>rpm -ivh http://dev.mysql.com/get/mysql57-community-release-el7-10.noarch.rpm</code></p>
 <p>然后再<code>yum install -y mysql-server</code>  # yum安装，需要外网环境     </p>
@@ -668,7 +673,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T18:37:49+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T19:13:07+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Sep 3, 2020</p>
@@ -698,7 +703,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/&title=Linux-环境部署收集 - 东风未起，念你成疾&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/&title=Linux-环境部署收集 - 东风未起，念你成疾&summary=MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器"
           
           >
           
@@ -710,7 +715,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/&title=Linux-环境部署收集 - 东风未起，念你成疾&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/&title=Linux-环境部署收集 - 东风未起，念你成疾&summary=MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器"
           
           >
           
@@ -722,7 +727,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/&title=Linux-环境部署收集 - 东风未起，念你成疾&summary="
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/&title=Linux-环境部署收集 - 东风未起，念你成疾&summary=MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器"
           
           >
           
@@ -748,15 +753,21 @@
             
               <a class='prev' href='/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/'>
                 <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Linux-Nginx环境部署</p>
-                <p class='content'>Nginx服务器一、Nginx概述1、简介1.1 什么nginxNginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。
-2.2 nginx的作用
-静态HTTP服...</p>
+                <p class='content'>Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。
+
+
+
+
+Nginx服务器一、Nginx概述1、简介1.1 什么nginxNginx是一款轻量级的Web服...</p>
               </a>
             
             
               <a class='next' href='/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/'>
                 <p class='title'>Linux-常用指令<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Linux常用指令1.基础命令123456789101112131415161718192021222324252627ls:显示当前目录清单cd: 切换目录​	cd ~ 或者 cd 切换到用户...</p>
+                <p class='content'>1.基础命令2.vi编辑模式3.网络4.压缩文件
+
+
+Linux常用指令1.基础命令123456789101112131415161718192021222324252627ls:显示当前目录清...</p>
               </a>
             
           </div>

@@ -21,6 +21,8 @@
     <meta name="keywords" content="Linux">
   
   
+    <meta name="description" content="1.基础命令2.vi编辑模式3.网络4.压缩文件">
+  
 
   <!-- feed -->
   
@@ -372,7 +374,10 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <h1 id="Linux常用指令"><a href="#Linux常用指令" class="headerlink" title="Linux常用指令"></a>Linux常用指令</h1><h2 id="1-基础命令"><a href="#1-基础命令" class="headerlink" title="1.基础命令"></a>1.基础命令</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ls:显示当前目录清单</span><br><span class="line"></span><br><span class="line">cd: 切换目录</span><br><span class="line"></span><br><span class="line">​	cd ~ 或者 cd 切换到用户主目录</span><br><span class="line"></span><br><span class="line">​	cd / 切换到根目录</span><br><span class="line"></span><br><span class="line">​	cd .. 上一级目录</span><br><span class="line"></span><br><span class="line">pwd: 显示当前工作目录</span><br><span class="line">man: 查看帮助</span><br><span class="line"></span><br><span class="line">mkdir 创建目录</span><br><span class="line">rmdir 删除目录</span><br><span class="line">touch 创建文件</span><br><span class="line"></span><br><span class="line">rm -rf 强制删除</span><br><span class="line">mv 移动文件或目录</span><br><span class="line">*匹配任意字符</span><br><span class="line">?匹配一个字符</span><br><span class="line"></span><br><span class="line">cat 显示文件内容</span><br><span class="line"></span><br><span class="line">ps -ef | grep 进程名  显示所有的进程</span><br><span class="line"></span><br><span class="line">kill -9 进程名 强制杀死</span><br></pre></td></tr></table></figure>
+          <p>1.基础命令2.vi编辑模式3.网络4.压缩文件</p>
+<a id="more"></a>
+
+<h1 id="Linux常用指令"><a href="#Linux常用指令" class="headerlink" title="Linux常用指令"></a>Linux常用指令</h1><h2 id="1-基础命令"><a href="#1-基础命令" class="headerlink" title="1.基础命令"></a>1.基础命令</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">ls:显示当前目录清单</span><br><span class="line"></span><br><span class="line">cd: 切换目录</span><br><span class="line"></span><br><span class="line">​	cd ~ 或者 cd 切换到用户主目录</span><br><span class="line"></span><br><span class="line">​	cd / 切换到根目录</span><br><span class="line"></span><br><span class="line">​	cd .. 上一级目录</span><br><span class="line"></span><br><span class="line">pwd: 显示当前工作目录</span><br><span class="line">man: 查看帮助</span><br><span class="line"></span><br><span class="line">mkdir 创建目录</span><br><span class="line">rmdir 删除目录</span><br><span class="line">touch 创建文件</span><br><span class="line"></span><br><span class="line">rm -rf 强制删除</span><br><span class="line">mv 移动文件或目录</span><br><span class="line">*匹配任意字符</span><br><span class="line">?匹配一个字符</span><br><span class="line"></span><br><span class="line">cat 显示文件内容</span><br><span class="line"></span><br><span class="line">ps -ef | grep 进程名  显示所有的进程</span><br><span class="line"></span><br><span class="line">kill -9 进程名 强制杀死</span><br></pre></td></tr></table></figure>
 
 <h2 id="2-vi编辑模式"><a href="#2-vi编辑模式" class="headerlink" title="2.vi编辑模式"></a>2.vi编辑模式</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>:w  保存文本</span><br><span class="line"><span class="bullet">- </span>:q   不保存文本并退出vi</span><br><span class="line"><span class="bullet">- </span>:q!  不保存文本并强制退出vi （常用）</span><br><span class="line"><span class="bullet">- </span>:wq 保存文本并退出vi （常用）</span><br></pre></td></tr></table></figure>
 
@@ -468,7 +473,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T18:38:03+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T19:13:51+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Sep 3, 2020</p>
@@ -498,7 +503,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/&title=Linux-常用指令 - 东风未起，念你成疾&summary="
+          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/&title=Linux-常用指令 - 东风未起，念你成疾&summary=1.基础命令2.vi编辑模式3.网络4.压缩文件"
           
           >
           
@@ -510,7 +515,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/&title=Linux-常用指令 - 东风未起，念你成疾&summary="
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/&title=Linux-常用指令 - 东风未起，念你成疾&summary=1.基础命令2.vi编辑模式3.网络4.压缩文件"
           
           >
           
@@ -522,7 +527,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/&title=Linux-常用指令 - 东风未起，念你成疾&summary="
+          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/&title=Linux-常用指令 - 东风未起，念你成疾&summary=1.基础命令2.vi编辑模式3.网络4.压缩文件"
           
           >
           
@@ -548,14 +553,17 @@
             
               <a class='prev' href='/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/'>
                 <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Linux-环境部署收集</p>
-                <p class='content'>项目环境部署一、MySQL5.7安装1、安装方式1.1 方式一 yum安装（推荐使用该方式）在CentOS中默认安装有MariaDB，这个是MySQL的分支
-如果必须要安装MySQL，首先必须添...</p>
+                <p class='content'>MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器
+
+
+项目环境部署一、MySQL5.7安装1、安装方式1.1 方式一 yum安装（推荐使用该方式）在CentOS中默认...</p>
               </a>
             
             
               <a class='next' href='/2020/09/03/Django-ems%E9%87%8D%E6%9E%84/'>
                 <p class='title'>Django-ems重构<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>Django—-ems项目重构views视图123456789101112131415161718192021222324252627282930313233343536373839404142...</p>
+                <p class='content'>Django实现用户登陆,注册,以及session会话强制登陆,以及对员工的信息的增加,删除,修改操作,中间件,上传头像,验证码 ,分页显示
+模糊查询, 登陆,注册使用   Jquery-Aja...</p>
               </a>
             
           </div>
