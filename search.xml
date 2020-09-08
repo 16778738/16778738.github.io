@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>Pycharm连接MySQL问腿</title>
+      <link href="/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/"/>
+      <url>/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/</url>
+      
+        <content type="html"><![CDATA[<p>Pycharm连接MySQL数据库问题报错08001</p><a id="more"></a><h2 id="Pycharm连接MySQL问题"><a href="#Pycharm连接MySQL问题" class="headerlink" title="Pycharm连接MySQL问题"></a>Pycharm连接MySQL问题</h2><h3 id="问题-错误编号08001"><a href="#问题-错误编号08001" class="headerlink" title="问题:错误编号08001"></a>问题:错误编号08001</h3><h3 id=""><a href="#" class="headerlink" title=""></a><img src="https://cdn.jsdelivr.net/gh/16778738/picture/img/1728961-20190927174139573-1258161996.png" alt=""></h3><h4 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法:"></a>解决办法:</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.在终端里先使用管理员登录mysql，也就是root</span><br><span class="line"><span class="code">    mysql   -uroot   -p123</span></span><br><span class="line"><span class="code">    输入命令</span></span><br><span class="line"><span class="code">    show variables like '%time_zone%'</span></span><br><span class="line">2.Mysql默认为美国时间，我国时区要晚8小时，因此修改时间即可</span><br><span class="line">　　set global time_zone = '+8:00' ;  </span><br><span class="line">3.设置完以后，退出mysql,重新登录，检查时间是否被修改</span><br></pre></td></tr></table></figure><p><img src="https://cdn.jsdelivr.net/gh/16778738/picture/img/QQ%E6%88%AA%E5%9B%BE20200904073654.png" alt=""></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Pycharm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Linux-Nginx环境部署</title>
       <link href="/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
       <url>/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</url>
