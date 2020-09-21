@@ -387,6 +387,8 @@
 
 <h3 id="比较常用的正则校验"><a href="#比较常用的正则校验" class="headerlink" title="比较常用的正则校验"></a>比较常用的正则校验</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//校验普通电话、传真号码：可以“+”开头，除数字外，可含有“-” </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[+]&#123;0,1&#125;(d)&#123;1,4&#125;[ ]?([-]?((d)|[ ])&#123;1,12&#125;)+$/</span>;</span><br><span class="line"><span class="comment">//校验邮政编码 </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[a-zA-Z0-9 ]&#123;3,12&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验是否IP地址 </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[0-9.]&#123;1,20&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验密码强弱</span></span><br><span class="line"><span class="keyword">var</span> re_week = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d).*$|^.*(?=.&#123;6,&#125;)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line"><span class="keyword">var</span> re_medium = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line"><span class="keyword">var</span> re_strong = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&amp;*?]).*$/</span>;</span><br><span class="line"><span class="comment">//校验电话</span></span><br><span class="line"><span class="keyword">var</span> re_phone = <span class="regexp">/^1[34578]\d&#123;9&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验email</span></span><br><span class="line"><span class="keyword">var</span> re_email = <span class="regexp">/^[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+\.[A-Za-z]&#123;2,3&#125;/</span>;</span><br></pre></td></tr></table></figure>
 
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Email地址：^\w+([-+.]\w+)<span class="emphasis">*@\w+([-.]\w+)*</span>\.\w+([-.]\w+)*$</span><br><span class="line">域名：[<span class="string">a-zA-Z0-9</span>][<span class="symbol">-a-zA-Z0-9</span>]&#123;0,62&#125;(\.[<span class="string">a-zA-Z0-9</span>][<span class="symbol">-a-zA-Z0-9</span>]&#123;0,62&#125;)+\.?</span><br><span class="line">InternetURL：[a-zA-z]+://[^\s]<span class="emphasis">* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*</span>)?$</span><br><span class="line">手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$</span><br><span class="line">电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：^(\(\d&#123;3,4&#125;-)|\d&#123;3.4&#125;-)?\d&#123;7,8&#125;$</span><br><span class="line">国内电话号码(0511-4405222、021-87888822)：\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;</span><br><span class="line">电话号码正则表达式（支持手机号码，3-4位区号，7-8位直播号码，1－4位分机号）: ((\d&#123;11&#125;)|^((\d&#123;7,8&#125;)|(\d&#123;4&#125;|\d&#123;3&#125;)-(\d&#123;7,8&#125;)|(\d&#123;4&#125;|\d&#123;3&#125;)-(\d&#123;7,8&#125;)-(\d&#123;4&#125;|\d&#123;3&#125;|\d&#123;2&#125;|\d&#123;1&#125;)|(\d&#123;7,8&#125;)-(\d&#123;4&#125;|\d&#123;3&#125;|\d&#123;2&#125;|\d&#123;1&#125;))$)</span><br><span class="line">身份证号(15位、18位数字)，最后一位是校验位，可能为数字或字符X：(^\d&#123;15&#125;$)|(^\d&#123;18&#125;$)|(^\d&#123;17&#125;(\d|X|x)$)</span><br><span class="line">帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[<span class="string">a-zA-Z</span>][<span class="symbol">a-zA-Z0-9_</span>]&#123;4,15&#125;$</span><br><span class="line">密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w&#123;5,17&#125;$</span><br><span class="line">强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在 8-10 之间)：^(?=.<span class="emphasis">*\d)(?=.*</span>[a-z])(?=.*[A-Z])[a-zA-Z0-9]&#123;8,10&#125;$</span><br><span class="line">强密码(必须包含大小写字母和数字的组合，可以使用特殊字符，长度在8-10之间)：^(?=.<span class="emphasis">*\d)(?=.*</span>[a-z])(?=.*[A-Z]).&#123;8,10&#125;$</span><br><span class="line">日期格式：^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;</span><br><span class="line">一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$</span><br><span class="line">一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$</span><br></pre></td></tr></table></figure>
+
 
           
             <div class='article_footer'>
@@ -423,7 +425,7 @@
           
         
           
-            <p>本文永久链接是：<a href=http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/>http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/</a></p>
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/>https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/</a></p>
           
         
       </blockquote>
@@ -460,10 +462,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-14T18:27:40+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-16T20:45:26+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Sep 14, 2020</p>
+    <p>更新于：Sep 16, 2020</p>
   </a>
 </div>
 
@@ -490,7 +492,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/&title=jQuery-前端正则化校验 - 东风未起，念你成疾&summary=邮箱,手机号,密码强度 正则校验
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/&title=jQuery-前端正则化校验 - 东风未起，念你成疾&summary=邮箱,手机号,密码强度 正则校验
 比较常用的正则校验"
           
           >
@@ -503,7 +505,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/&title=jQuery-前端正则化校验 - 东风未起，念你成疾&summary=邮箱,手机号,密码强度 正则校验
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/&title=jQuery-前端正则化校验 - 东风未起，念你成疾&summary=邮箱,手机号,密码强度 正则校验
 比较常用的正则校验"
           
           >
@@ -516,7 +518,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/&title=jQuery-前端正则化校验 - 东风未起，念你成疾&summary=邮箱,手机号,密码强度 正则校验
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/&title=jQuery-前端正则化校验 - 东风未起，念你成疾&summary=邮箱,手机号,密码强度 正则校验
 比较常用的正则校验"
           
           >
@@ -540,6 +542,15 @@
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2020/09/17/jQuery-%E9%85%8D%E9%80%81%E5%9C%B0%E5%9D%80%E4%B8%8B%E6%8B%89%E6%A1%86/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>jQuery-配送地址下拉框</p>
+                <p class='content'>jQuery-配送地址下拉框
+使用jQuery-配送地址下拉框
+
+
+jQuery-配送地址下拉框1234567891011121314151617&#123;# 选择配送地址 #&#125;$(...</p>
+              </a>
             
             
               <a class='next' href='/2020/09/14/Jquery-%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E8%B7%B3%E8%BD%AC/'>
@@ -616,6 +627,20 @@ Jquery-实现倒计时跳转jquery实现
       <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
 
 
     <div class='content'>
@@ -673,7 +698,7 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
-<img src="https://static.dy208.cn/o_1dfilp8ruo521thr1hvf18ji17soa.png">
+<img src="https://cdn.jsdelivr.net/gh/16778738/picture/img/gongan.png">
 <a href=""  style="color:#f72b07" target="_blank">晋ICP备20005168号</a>
 
 <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>

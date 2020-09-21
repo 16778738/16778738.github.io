@@ -5,9 +5,9 @@
   
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2020-09-14T10:27:40.247Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://www.zfyvip.xyz/"/>
+  <updated>2020-09-17T12:20:28.354Z</updated>
+  <id>https://www.zfyvip.xyz/</id>
   
   <author>
     <name>ZFY</name>
@@ -17,13 +17,35 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>jQuery-前端正则化校验</title>
-    <link href="http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/"/>
-    <id>http://yoursite.com/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/</id>
-    <published>2020-09-14T09:29:50.000Z</published>
-    <updated>2020-09-14T10:27:40.247Z</updated>
+    <title>jQuery-配送地址下拉框</title>
+    <link href="https://www.zfyvip.xyz/2020/09/17/jQuery-%E9%85%8D%E9%80%81%E5%9C%B0%E5%9D%80%E4%B8%8B%E6%8B%89%E6%A1%86/"/>
+    <id>https://www.zfyvip.xyz/2020/09/17/jQuery-%E9%85%8D%E9%80%81%E5%9C%B0%E5%9D%80%E4%B8%8B%E6%8B%89%E6%A1%86/</id>
+    <published>2020-09-17T12:14:59.000Z</published>
+    <updated>2020-09-17T12:20:28.354Z</updated>
     
-    <content type="html"><![CDATA[<p>邮箱,手机号,密码强度 <strong>正则校验</strong></p><p>比较常用的正则校验</p><a id="more"></a><h2 id="jQuery-前端正则化校验"><a href="#jQuery-前端正则化校验" class="headerlink" title="jQuery-前端正则化校验"></a>jQuery-前端正则化校验</h2><h3 id="失焦校验验证用户名是否为邮箱或手机号"><a href="#失焦校验验证用户名是否为邮箱或手机号" class="headerlink" title="失焦校验验证用户名是否为邮箱或手机号"></a>失焦校验验证用户名是否为邮箱或手机号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;&#x2F;static&#x2F;js&#x2F;jquery.1.4.2-min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;#table下的所有的收入框失焦验证信息#&#125;</span><br><span class="line">$(<span class="string">'#txt_username'</span>).blur(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> re_phone = <span class="regexp">/^1[34578]\d&#123;9&#125;$/</span>;</span><br><span class="line">    <span class="keyword">var</span> re_email = <span class="regexp">/^[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+\.[A-Za-z]&#123;2,3&#125;/</span>;</span><br><span class="line">    <span class="comment">//根据判断结果相应改变效果</span></span><br><span class="line">    <span class="keyword">if</span> (re_phone.test($(<span class="string">"#txt_username"</span>).val()) || re_email.test($(<span class="string">"#txt_username"</span>).val())) &#123;</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_yes'</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).html(<span class="string">''</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123; </span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">''</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).html(<span class="string">'请检查手机号或邮箱的格式！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h3 id="失焦校验密码强弱程度"><a href="#失焦校验密码强弱程度" class="headerlink" title="失焦校验密码强弱程度"></a>失焦校验密码强弱程度</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 密码强弱 #&#125;</span><br><span class="line">        $(<span class="string">'#txt_password'</span>).blur(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> re_week = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d).*$|^.*(?=.&#123;6,&#125;)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line">            <span class="keyword">var</span> re_medium = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line">            <span class="keyword">var</span> re_strong = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&amp;*?]).*$/</span>;</span><br><span class="line">            <span class="keyword">var</span> pwd = $(<span class="string">"#txt_password"</span>).val();</span><br><span class="line">            <span class="keyword">if</span> (pwd.length &lt; <span class="number">6</span>)&#123;</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_wrong'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">"密码长度小于6位"</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (re_strong.test(pwd)) &#123;</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>, <span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">''</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>, <span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>, <span class="string">'icon_yes'</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (re_medium.test(pwd)) &#123;</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">''</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_yes'</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (re_week.test(pwd))&#123;</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">''</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_yes'</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure><h3 id="比较常用的正则校验"><a href="#比较常用的正则校验" class="headerlink" title="比较常用的正则校验"></a>比较常用的正则校验</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//校验普通电话、传真号码：可以“+”开头，除数字外，可含有“-” </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[+]&#123;0,1&#125;(d)&#123;1,4&#125;[ ]?([-]?((d)|[ ])&#123;1,12&#125;)+$/</span>;</span><br><span class="line"><span class="comment">//校验邮政编码 </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[a-zA-Z0-9 ]&#123;3,12&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验是否IP地址 </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[0-9.]&#123;1,20&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验密码强弱</span></span><br><span class="line"><span class="keyword">var</span> re_week = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d).*$|^.*(?=.&#123;6,&#125;)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line"><span class="keyword">var</span> re_medium = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line"><span class="keyword">var</span> re_strong = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&amp;*?]).*$/</span>;</span><br><span class="line"><span class="comment">//校验电话</span></span><br><span class="line"><span class="keyword">var</span> re_phone = <span class="regexp">/^1[34578]\d&#123;9&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验email</span></span><br><span class="line"><span class="keyword">var</span> re_email = <span class="regexp">/^[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+\.[A-Za-z]&#123;2,3&#125;/</span>;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<p>jQuery-配送地址下拉框</p><p>使用jQuery-配送地址下拉框</p><a id="more"></a><h3 id="jQuery-配送地址下拉框"><a href="#jQuery-配送地址下拉框" class="headerlink" title="jQuery-配送地址下拉框"></a>jQuery-配送地址下拉框</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 选择配送地址 #&#125;</span><br><span class="line">$(<span class="string">'#select'</span>).change(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = $(<span class="string">'#select option:selected'</span>);</span><br><span class="line">    <span class="keyword">if</span> (a.val() !== <span class="string">""</span>) &#123;</span><br><span class="line">        $(<span class="string">'input[type="text"]'</span>).attr(<span class="string">'readonly'</span>,<span class="string">'readonly'</span>);</span><br><span class="line">        $($(<span class="string">'input[type="text"]'</span>)[<span class="number">0</span>]).val(a.attr(<span class="string">'name'</span>));</span><br><span class="line">        $($(<span class="string">'input[type="text"]'</span>)[<span class="number">1</span>]).val(a.attr(<span class="string">'address'</span>));</span><br><span class="line">        $($(<span class="string">'input[type="text"]'</span>)[<span class="number">2</span>]).val(a.attr(<span class="string">'post_code'</span>));</span><br><span class="line">        $($(<span class="string">'input[type="text"]'</span>)[<span class="number">3</span>]).val(a.attr(<span class="string">'addr_mobile'</span>));</span><br><span class="line">        $($(<span class="string">'input[type="text"]'</span>)[<span class="number">4</span>]).val(a.attr(<span class="string">'cell_phone'</span>));</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">        $(<span class="string">'input[type="text"]'</span>).attr(<span class="string">'readonly'</span>,<span class="string">''</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i=<span class="number">0</span>; i &lt; $(<span class="string">'input[type="text"]'</span>).size();i++) &#123;</span><br><span class="line">            $($(<span class="string">'input[type="text"]'</span>)[i]).val(<span class="string">""</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure><h3 id="html样式"><a href="#html样式" class="headerlink" title="html样式"></a>html样式</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"address"</span> <span class="attr">id</span>=<span class="string">"dp_adress"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"icon_adr"</span>&gt;</span><span class="symbol">&amp;nbsp;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span>配送地址：</span><br><span class="line">    &#123;% if address %&#125;</span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"select_add"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"select"</span> <span class="attr">class</span>=<span class="string">"text fn-select-address"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">""</span> <span class="attr">class</span>=<span class="string">"select_add1"</span>&gt;</span>请选择收货地址<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            &#123;% for address1 in address %&#125;</span><br><span class="line">            <span class="tag">&lt;<span class="name">option</span> <span class="attr">class</span>=<span class="string">"select_add1"</span> <span class="attr">value</span>=<span class="string">"&#123;&#123; address1.id &#125;&#125;"</span> <span class="attr">name</span>=<span class="string">"&#123;&#123; address1.name &#125;&#125;"</span> <span class="attr">address</span>=<span class="string">"&#123;&#123; address1.address &#125;&#125;"</span> <span class="attr">post_code</span>=<span class="string">"&#123;&#123; address1.post_code &#125;&#125;"</span> <span class="attr">cellphone</span>=<span class="string">"&#123;&#123; address1.cellphone &#125;&#125;"</span> <span class="attr">addr_mobile</span>=<span class="string">"&#123;&#123; address1.addr_mobile &#125;&#125;"</span> <span class="attr">class</span>=<span class="string">"address_select"</span>&gt;</span>&#123;&#123; address1.address &#125;&#125;<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            &#123;% endfor %&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">        &#123;% else %&#125;</span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"select_add"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">select</span> <span class="attr">name</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"select_add"</span> <span class="attr">class</span>=<span class="string">"text fn-select-address"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">"请选择收货地址"</span>&gt;</span>您还没有添加收货地址<span class="tag">&lt;/<span class="name">option</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    &#123;% endif %&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!--&lt;a href="#" class="tip"&gt;&lt;/a&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"tip_c"</span> <span class="attr">style</span>=<span class="string">"display:none;"</span>&gt;</span>针对不同配送地址，您的货物可能出现缺货或无货状态，敬请谅解。<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;jQuery-配送地址下拉框&lt;/p&gt;
+&lt;p&gt;使用jQuery-配送地址下拉框&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="jQuery" scheme="https://www.zfyvip.xyz/tags/jQuery/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>jQuery-前端正则化校验</title>
+    <link href="https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/"/>
+    <id>https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%89%8D%E7%AB%AF%E6%AD%A3%E5%88%99%E5%8C%96%E6%A0%A1%E9%AA%8C/</id>
+    <published>2020-09-14T09:29:50.000Z</published>
+    <updated>2020-09-16T12:45:26.219Z</updated>
+    
+    <content type="html"><![CDATA[<p>邮箱,手机号,密码强度 <strong>正则校验</strong></p><p>比较常用的正则校验</p><a id="more"></a><h2 id="jQuery-前端正则化校验"><a href="#jQuery-前端正则化校验" class="headerlink" title="jQuery-前端正则化校验"></a>jQuery-前端正则化校验</h2><h3 id="失焦校验验证用户名是否为邮箱或手机号"><a href="#失焦校验验证用户名是否为邮箱或手机号" class="headerlink" title="失焦校验验证用户名是否为邮箱或手机号"></a>失焦校验验证用户名是否为邮箱或手机号</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src&#x3D;&quot;&#x2F;static&#x2F;js&#x2F;jquery.1.4.2-min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&#123;#table下的所有的收入框失焦验证信息#&#125;</span><br><span class="line">$(<span class="string">'#txt_username'</span>).blur(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> re_phone = <span class="regexp">/^1[34578]\d&#123;9&#125;$/</span>;</span><br><span class="line">    <span class="keyword">var</span> re_email = <span class="regexp">/^[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+\.[A-Za-z]&#123;2,3&#125;/</span>;</span><br><span class="line">    <span class="comment">//根据判断结果相应改变效果</span></span><br><span class="line">    <span class="keyword">if</span> (re_phone.test($(<span class="string">"#txt_username"</span>).val()) || re_email.test($(<span class="string">"#txt_username"</span>).val())) &#123;</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_yes'</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).html(<span class="string">''</span>);</span><br><span class="line">    &#125;<span class="keyword">else</span> &#123; </span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">''</span>);</span><br><span class="line">        $(<span class="string">"#spn_username_ok"</span>).html(<span class="string">'请检查手机号或邮箱的格式！'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure><h3 id="失焦校验密码强弱程度"><a href="#失焦校验密码强弱程度" class="headerlink" title="失焦校验密码强弱程度"></a>失焦校验密码强弱程度</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&#123;# 密码强弱 #&#125;</span><br><span class="line">        $(<span class="string">'#txt_password'</span>).blur(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">var</span> re_week = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d).*$|^.*(?=.&#123;6,&#125;)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line">            <span class="keyword">var</span> re_medium = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line">            <span class="keyword">var</span> re_strong = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&amp;*?]).*$/</span>;</span><br><span class="line">            <span class="keyword">var</span> pwd = $(<span class="string">"#txt_password"</span>).val();</span><br><span class="line">            <span class="keyword">if</span> (pwd.length &lt; <span class="number">6</span>)&#123;</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_wrong'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">"密码长度小于6位"</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span></span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (re_strong.test(pwd)) &#123;</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>, <span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">''</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>, <span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>, <span class="string">'icon_yes'</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (re_medium.test(pwd)) &#123;</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">''</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_yes'</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">if</span> (re_week.test(pwd))&#123;</span><br><span class="line">                $(<span class="string">"#spnPwdStrong1"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong2"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#spnPwdStrong3"</span>).css(<span class="string">'display'</span>,<span class="string">'none'</span>);</span><br><span class="line">                $(<span class="string">"#J_tipPassword"</span>).html(<span class="string">''</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).css(<span class="string">'display'</span>,<span class="string">'inline-block'</span>);</span><br><span class="line">                $(<span class="string">"#spn_epassword_ok"</span>).attr(<span class="string">'class'</span>,<span class="string">'icon_yes'</span>);</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure><h3 id="比较常用的正则校验"><a href="#比较常用的正则校验" class="headerlink" title="比较常用的正则校验"></a>比较常用的正则校验</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//校验普通电话、传真号码：可以“+”开头，除数字外，可含有“-” </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[+]&#123;0,1&#125;(d)&#123;1,4&#125;[ ]?([-]?((d)|[ ])&#123;1,12&#125;)+$/</span>;</span><br><span class="line"><span class="comment">//校验邮政编码 </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[a-zA-Z0-9 ]&#123;3,12&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验是否IP地址 </span></span><br><span class="line"><span class="keyword">var</span> patrn = <span class="regexp">/^[0-9.]&#123;1,20&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验密码强弱</span></span><br><span class="line"><span class="keyword">var</span> re_week = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d).*$|^.*(?=.&#123;6,&#125;)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line"><span class="keyword">var</span> re_medium = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z]).*$/</span>;</span><br><span class="line"><span class="keyword">var</span> re_strong = <span class="regexp">/^.*(?=.&#123;6,&#125;)(?=.*\d)(?=.*[A-Za-z])(?=.*[!@#$%^&amp;*?]).*$/</span>;</span><br><span class="line"><span class="comment">//校验电话</span></span><br><span class="line"><span class="keyword">var</span> re_phone = <span class="regexp">/^1[34578]\d&#123;9&#125;$/</span>;</span><br><span class="line"><span class="comment">//校验email</span></span><br><span class="line"><span class="keyword">var</span> re_email = <span class="regexp">/^[a-zA-Z0-9_-]+@([a-zA-Z0-9_-])+\.[A-Za-z]&#123;2,3&#125;/</span>;</span><br></pre></td></tr></table></figure><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Email地址：^\w+([-+.]\w+)<span class="emphasis">*@\w+([-.]\w+)*</span>\.\w+([-.]\w+)*$</span><br><span class="line">域名：[<span class="string">a-zA-Z0-9</span>][<span class="symbol">-a-zA-Z0-9</span>]&#123;0,62&#125;(\.[<span class="string">a-zA-Z0-9</span>][<span class="symbol">-a-zA-Z0-9</span>]&#123;0,62&#125;)+\.?</span><br><span class="line">InternetURL：[a-zA-z]+://[^\s]<span class="emphasis">* 或 ^http://([\w-]+\.)+[\w-]+(/[\w-./?%&amp;=]*</span>)?$</span><br><span class="line">手机号码：^(13[0-9]|14[5|7]|15[0|1|2|3|4|5|6|7|8|9]|18[0|1|2|3|5|6|7|8|9])\d&#123;8&#125;$</span><br><span class="line">电话号码("XXX-XXXXXXX"、"XXXX-XXXXXXXX"、"XXX-XXXXXXX"、"XXX-XXXXXXXX"、"XXXXXXX"和"XXXXXXXX)：^(\(\d&#123;3,4&#125;-)|\d&#123;3.4&#125;-)?\d&#123;7,8&#125;$</span><br><span class="line">国内电话号码(0511-4405222、021-87888822)：\d&#123;3&#125;-\d&#123;8&#125;|\d&#123;4&#125;-\d&#123;7&#125;</span><br><span class="line">电话号码正则表达式（支持手机号码，3-4位区号，7-8位直播号码，1－4位分机号）: ((\d&#123;11&#125;)|^((\d&#123;7,8&#125;)|(\d&#123;4&#125;|\d&#123;3&#125;)-(\d&#123;7,8&#125;)|(\d&#123;4&#125;|\d&#123;3&#125;)-(\d&#123;7,8&#125;)-(\d&#123;4&#125;|\d&#123;3&#125;|\d&#123;2&#125;|\d&#123;1&#125;)|(\d&#123;7,8&#125;)-(\d&#123;4&#125;|\d&#123;3&#125;|\d&#123;2&#125;|\d&#123;1&#125;))$)</span><br><span class="line">身份证号(15位、18位数字)，最后一位是校验位，可能为数字或字符X：(^\d&#123;15&#125;$)|(^\d&#123;18&#125;$)|(^\d&#123;17&#125;(\d|X|x)$)</span><br><span class="line">帐号是否合法(字母开头，允许5-16字节，允许字母数字下划线)：^[<span class="string">a-zA-Z</span>][<span class="symbol">a-zA-Z0-9_</span>]&#123;4,15&#125;$</span><br><span class="line">密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)：^[a-zA-Z]\w&#123;5,17&#125;$</span><br><span class="line">强密码(必须包含大小写字母和数字的组合，不能使用特殊字符，长度在 8-10 之间)：^(?=.<span class="emphasis">*\d)(?=.*</span>[a-z])(?=.*[A-Z])[a-zA-Z0-9]&#123;8,10&#125;$</span><br><span class="line">强密码(必须包含大小写字母和数字的组合，可以使用特殊字符，长度在8-10之间)：^(?=.<span class="emphasis">*\d)(?=.*</span>[a-z])(?=.*[A-Z]).&#123;8,10&#125;$</span><br><span class="line">日期格式：^\d&#123;4&#125;-\d&#123;1,2&#125;-\d&#123;1,2&#125;</span><br><span class="line">一年的12个月(01～09和1～12)：^(0?[1-9]|1[0-2])$</span><br><span class="line">一个月的31天(01～09和1～31)：^((0?[1-9])|((1|2)[0-9])|30|31)$</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -34,14 +56,14 @@
     
     
     
-      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
+      <category term="jQuery" scheme="https://www.zfyvip.xyz/tags/jQuery/"/>
     
   </entry>
   
   <entry>
     <title>Jquery-实现倒计时跳转</title>
-    <link href="http://yoursite.com/2020/09/14/Jquery-%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E8%B7%B3%E8%BD%AC/"/>
-    <id>http://yoursite.com/2020/09/14/Jquery-%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E8%B7%B3%E8%BD%AC/</id>
+    <link href="https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E8%B7%B3%E8%BD%AC/"/>
+    <id>https://www.zfyvip.xyz/2020/09/14/Jquery-%E5%AE%9E%E7%8E%B0%E5%80%92%E8%AE%A1%E6%97%B6%E8%B7%B3%E8%BD%AC/</id>
     <published>2020-09-14T08:07:55.000Z</published>
     <updated>2020-09-14T09:26:51.180Z</updated>
     
@@ -55,14 +77,14 @@
     
     
     
-      <category term="Jquery" scheme="http://yoursite.com/tags/Jquery/"/>
+      <category term="Jquery" scheme="https://www.zfyvip.xyz/tags/Jquery/"/>
     
   </entry>
   
   <entry>
     <title>Pycharm连接MySQL问腿</title>
-    <link href="http://yoursite.com/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/"/>
-    <id>http://yoursite.com/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/</id>
+    <link href="https://www.zfyvip.xyz/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/"/>
+    <id>https://www.zfyvip.xyz/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/</id>
     <published>2020-09-03T23:32:18.000Z</published>
     <updated>2020-09-03T23:41:28.015Z</updated>
     
@@ -76,14 +98,14 @@
     
     
     
-      <category term="Pycharm" scheme="http://yoursite.com/tags/Pycharm/"/>
+      <category term="Pycharm" scheme="https://www.zfyvip.xyz/tags/Pycharm/"/>
     
   </entry>
   
   <entry>
     <title>Linux-Nginx环境部署</title>
-    <link href="http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
-    <id>http://yoursite.com/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</id>
+    <link href="https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/"/>
+    <id>https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</id>
     <published>2020-09-03T09:50:14.000Z</published>
     <updated>2020-09-03T11:11:27.211Z</updated>
     
@@ -97,14 +119,14 @@
     
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://www.zfyvip.xyz/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Linux-环境部署收集</title>
-    <link href="http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/"/>
-    <id>http://yoursite.com/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/</id>
+    <link href="https://www.zfyvip.xyz/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/"/>
+    <id>https://www.zfyvip.xyz/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/</id>
     <published>2020-09-03T09:47:36.000Z</published>
     <updated>2020-09-03T11:13:07.146Z</updated>
     
@@ -118,14 +140,14 @@
     
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://www.zfyvip.xyz/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Linux-常用指令</title>
-    <link href="http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"/>
-    <id>http://yoursite.com/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</id>
+    <link href="https://www.zfyvip.xyz/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/"/>
+    <id>https://www.zfyvip.xyz/2020/09/03/Linux-%E5%B8%B8%E7%94%A8%E6%8C%87%E4%BB%A4/</id>
     <published>2020-09-03T09:24:44.000Z</published>
     <updated>2020-09-03T11:13:51.929Z</updated>
     
@@ -139,14 +161,14 @@
     
     
     
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+      <category term="Linux" scheme="https://www.zfyvip.xyz/tags/Linux/"/>
     
   </entry>
   
   <entry>
     <title>Django-ems重构</title>
-    <link href="http://yoursite.com/2020/09/03/Django-ems%E9%87%8D%E6%9E%84/"/>
-    <id>http://yoursite.com/2020/09/03/Django-ems%E9%87%8D%E6%9E%84/</id>
+    <link href="https://www.zfyvip.xyz/2020/09/03/Django-ems%E9%87%8D%E6%9E%84/"/>
+    <id>https://www.zfyvip.xyz/2020/09/03/Django-ems%E9%87%8D%E6%9E%84/</id>
     <published>2020-09-03T08:36:15.000Z</published>
     <updated>2020-09-03T11:15:06.556Z</updated>
     
@@ -161,14 +183,14 @@
     
     
     
-      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+      <category term="Django" scheme="https://www.zfyvip.xyz/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>Django-员工操作</title>
-    <link href="http://yoursite.com/2020/08/28/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C-1/"/>
-    <id>http://yoursite.com/2020/08/28/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C-1/</id>
+    <link href="https://www.zfyvip.xyz/2020/08/28/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C-1/"/>
+    <id>https://www.zfyvip.xyz/2020/08/28/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C-1/</id>
     <published>2020-08-28T00:05:03.000Z</published>
     <updated>2020-08-28T00:16:00.436Z</updated>
     
@@ -184,14 +206,14 @@
     
     
     
-      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+      <category term="Django" scheme="https://www.zfyvip.xyz/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>Django-员工操作</title>
-    <link href="http://yoursite.com/2020/08/25/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2020/08/25/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/</id>
+    <link href="https://www.zfyvip.xyz/2020/08/25/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/"/>
+    <id>https://www.zfyvip.xyz/2020/08/25/Django-%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/</id>
     <published>2020-08-25T02:33:37.000Z</published>
     <updated>2020-08-28T00:03:50.963Z</updated>
     
@@ -206,14 +228,14 @@
     
     
     
-      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+      <category term="Django" scheme="https://www.zfyvip.xyz/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>Django-实现简易员工操作</title>
-    <link href="http://yoursite.com/2020/08/23/Django-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/"/>
-    <id>http://yoursite.com/2020/08/23/Django-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/</id>
+    <link href="https://www.zfyvip.xyz/2020/08/23/Django-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/"/>
+    <id>https://www.zfyvip.xyz/2020/08/23/Django-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E5%91%98%E5%B7%A5%E6%93%8D%E4%BD%9C/</id>
     <published>2020-08-23T10:27:24.000Z</published>
     <updated>2020-08-24T00:36:36.110Z</updated>
     
@@ -227,14 +249,14 @@
     
     
     
-      <category term="Django" scheme="http://yoursite.com/tags/Django/"/>
+      <category term="Django" scheme="https://www.zfyvip.xyz/tags/Django/"/>
     
   </entry>
   
   <entry>
     <title>jQuery-实现简易购物车</title>
-    <link href="http://yoursite.com/2020/08/16/jQuery-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/"/>
-    <id>http://yoursite.com/2020/08/16/jQuery-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/</id>
+    <link href="https://www.zfyvip.xyz/2020/08/16/jQuery-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/"/>
+    <id>https://www.zfyvip.xyz/2020/08/16/jQuery-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/</id>
     <published>2020-08-16T00:43:02.000Z</published>
     <updated>2020-08-16T03:43:24.976Z</updated>
     
@@ -248,14 +270,14 @@
     
     
     
-      <category term="jQuery" scheme="http://yoursite.com/tags/jQuery/"/>
+      <category term="jQuery" scheme="https://www.zfyvip.xyz/tags/jQuery/"/>
     
   </entry>
   
   <entry>
     <title>JavaScript-实现简易购物车</title>
-    <link href="http://yoursite.com/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/"/>
-    <id>http://yoursite.com/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/</id>
+    <link href="https://www.zfyvip.xyz/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/"/>
+    <id>https://www.zfyvip.xyz/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/</id>
     <published>2020-08-16T00:41:59.000Z</published>
     <updated>2020-08-16T03:42:18.466Z</updated>
     
@@ -269,14 +291,14 @@
     
     
     
-      <category term="JavaScript" scheme="http://yoursite.com/tags/JavaScript/"/>
+      <category term="JavaScript" scheme="https://www.zfyvip.xyz/tags/JavaScript/"/>
     
   </entry>
   
   <entry>
     <title>Python面试题</title>
-    <link href="http://yoursite.com/2020/07/27/Python--%E6%8A%95%E7%A5%A8%E7%B3%BB%E7%BB%9F/"/>
-    <id>http://yoursite.com/2020/07/27/Python--%E6%8A%95%E7%A5%A8%E7%B3%BB%E7%BB%9F/</id>
+    <link href="https://www.zfyvip.xyz/2020/07/27/Python--%E6%8A%95%E7%A5%A8%E7%B3%BB%E7%BB%9F/"/>
+    <id>https://www.zfyvip.xyz/2020/07/27/Python--%E6%8A%95%E7%A5%A8%E7%B3%BB%E7%BB%9F/</id>
     <published>2020-07-27T13:22:37.000Z</published>
     <updated>2020-07-27T13:23:03.583Z</updated>
     
@@ -295,14 +317,14 @@
     
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+      <category term="Python" scheme="https://www.zfyvip.xyz/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Python--字符串练习题</title>
-    <link href="http://yoursite.com/2020/07/17/Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2020/07/17/Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%83%E4%B9%A0%E9%A2%98/</id>
+    <link href="https://www.zfyvip.xyz/2020/07/17/Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
+    <id>https://www.zfyvip.xyz/2020/07/17/Python-%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%BB%83%E4%B9%A0%E9%A2%98/</id>
     <published>2020-07-17T02:42:08.000Z</published>
     <updated>2020-07-17T02:46:42.802Z</updated>
     
@@ -320,14 +342,14 @@
     
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+      <category term="Python" scheme="https://www.zfyvip.xyz/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Python--函数练习题</title>
-    <link href="http://yoursite.com/2020/07/17/Python-%E5%87%BD%E6%95%B0%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2020/07/17/Python-%E5%87%BD%E6%95%B0%E7%BB%83%E4%B9%A0%E9%A2%98/</id>
+    <link href="https://www.zfyvip.xyz/2020/07/17/Python-%E5%87%BD%E6%95%B0%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
+    <id>https://www.zfyvip.xyz/2020/07/17/Python-%E5%87%BD%E6%95%B0%E7%BB%83%E4%B9%A0%E9%A2%98/</id>
     <published>2020-07-17T02:33:05.000Z</published>
     <updated>2020-07-17T02:41:01.479Z</updated>
     
@@ -346,14 +368,14 @@
     
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+      <category term="Python" scheme="https://www.zfyvip.xyz/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Python--列表练习题</title>
-    <link href="http://yoursite.com/2020/07/12/Python-%E5%88%97%E8%A1%A8%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
-    <id>http://yoursite.com/2020/07/12/Python-%E5%88%97%E8%A1%A8%E7%BB%83%E4%B9%A0%E9%A2%98/</id>
+    <link href="https://www.zfyvip.xyz/2020/07/12/Python-%E5%88%97%E8%A1%A8%E7%BB%83%E4%B9%A0%E9%A2%98/"/>
+    <id>https://www.zfyvip.xyz/2020/07/12/Python-%E5%88%97%E8%A1%A8%E7%BB%83%E4%B9%A0%E9%A2%98/</id>
     <published>2020-07-12T07:20:17.000Z</published>
     <updated>2020-07-14T03:20:30.761Z</updated>
     
@@ -376,14 +398,14 @@
     
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+      <category term="Python" scheme="https://www.zfyvip.xyz/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Python面试题</title>
-    <link href="http://yoursite.com/2020/07/10/Python%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
-    <id>http://yoursite.com/2020/07/10/Python%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
+    <link href="https://www.zfyvip.xyz/2020/07/10/Python%E9%9D%A2%E8%AF%95%E9%A2%98/"/>
+    <id>https://www.zfyvip.xyz/2020/07/10/Python%E9%9D%A2%E8%AF%95%E9%A2%98/</id>
     <published>2020-07-10T06:40:37.000Z</published>
     <updated>2020-07-20T00:25:33.798Z</updated>
     
@@ -398,14 +420,14 @@
     
     
     
-      <category term="Python" scheme="http://yoursite.com/tags/Python/"/>
+      <category term="Python" scheme="https://www.zfyvip.xyz/tags/Python/"/>
     
   </entry>
   
   <entry>
     <title>Python练习</title>
-    <link href="http://yoursite.com/2020/07/08/Python%E7%BB%83%E4%B9%A0/"/>
-    <id>http://yoursite.com/2020/07/08/Python%E7%BB%83%E4%B9%A0/</id>
+    <link href="https://www.zfyvip.xyz/2020/07/08/Python%E7%BB%83%E4%B9%A0/"/>
+    <id>https://www.zfyvip.xyz/2020/07/08/Python%E7%BB%83%E4%B9%A0/</id>
     <published>2020-07-08T01:22:15.000Z</published>
     <updated>2020-07-09T12:55:27.517Z</updated>
     
@@ -419,14 +441,14 @@
     
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://www.zfyvip.xyz/tags/python/"/>
     
   </entry>
   
   <entry>
     <title>神经网络实现猫狗识别笔记</title>
-    <link href="http://yoursite.com/2020/06/20/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E7%8C%AB%E7%8B%97%E8%AF%86%E5%88%AB/"/>
-    <id>http://yoursite.com/2020/06/20/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E7%8C%AB%E7%8B%97%E8%AF%86%E5%88%AB/</id>
+    <link href="https://www.zfyvip.xyz/2020/06/20/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E7%8C%AB%E7%8B%97%E8%AF%86%E5%88%AB/"/>
+    <id>https://www.zfyvip.xyz/2020/06/20/%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%AE%9E%E7%8E%B0%E7%8C%AB%E7%8B%97%E8%AF%86%E5%88%AB/</id>
     <published>2020-06-20T03:13:28.000Z</published>
     <updated>2020-06-26T11:30:17.449Z</updated>
     
@@ -440,37 +462,7 @@
     
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据可视化分析笔记</title>
-    <link href="http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/"/>
-    <id>http://yoursite.com/2020/06/20/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96%E5%88%86%E6%9E%90/</id>
-    <published>2020-06-20T03:08:50.000Z</published>
-    <updated>2020-06-26T11:26:24.404Z</updated>
-    
-    <content type="html"><![CDATA[ <a id="more"></a><h3 id="数据可视化分析"><a href="#数据可视化分析" class="headerlink" title="数据可视化分析"></a>数据可视化分析</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">天气预报-根据拿到的每天的天气情况来绘制可视化图表。</span><br><span class="line">爬虫-拿天气数据-从哪儿拿？（哪个地方没有反爬我们就去哪儿拿）</span><br><span class="line"></span><br><span class="line">S</span><br><span class="line">获得到数据之后，使用正则表达式筛选数据</span><br></pre></td></tr></table></figure><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">数据可视化分析，是基于数据的值进行可视化分析的一种手段，我们可以根据可视化中展示的数据，得到一些结论，比如数据是否有明显的趋势、数据的分布是否符合高斯分布(数据的一个体现)</span><br><span class="line">数据的平稳性(数据分析首先对数据进行平稳性分析)</span><br><span class="line"><span class="code">如果是平稳性数据需要分析的时候需要采用：</span></span><br><span class="line"><span class="code">AR</span></span><br><span class="line"><span class="code">MA</span></span><br><span class="line"><span class="code">ARMA</span></span><br><span class="line"><span class="code">如果是非平稳性数据分析需要采用：</span></span><br><span class="line"><span class="code">ARIMA</span></span><br></pre></td></tr></table></figure><h3 id="项目要求"><a href="#项目要求" class="headerlink" title="项目要求"></a>项目要求</h3><p>采集数据，并且合理的将数据生成HTML进行数据可视化展示。<br>要求组内每个人都需要至少生成三张图表<br>不限制一定要天气数据。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># _*_coding:UTF-8 _*_</span></span><br><span class="line"><span class="comment"># 推荐安装pyecharts1.6.0</span></span><br><span class="line"><span class="comment"># pip install pyecharts==1.6.0</span></span><br><span class="line"><span class="comment"># 如果使用pycharm安装，settings中project中 project interpreter点击，</span></span><br><span class="line"><span class="comment"># 点击右方加号，搜索pyecharts点击install即可。</span></span><br><span class="line"><span class="comment"># 如果要指定版本，勾选右下方specify version，选择1.6.0</span></span><br><span class="line"><span class="comment"># 然后在点击install package</span></span><br><span class="line"><span class="comment"># 如果安装成功后，发现版本不对，卸载重装</span></span><br><span class="line"><span class="comment"># 卸载:pip uninstall pyecharts</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> re   <span class="comment">#正则表达式</span></span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> pyecharts.charts <span class="keyword">import</span> Bar</span><br><span class="line"><span class="keyword">from</span> pyecharts <span class="keyword">import</span> options <span class="keyword">as</span> opts</span><br><span class="line"></span><br><span class="line">url1 = <span class="string">'http://www.weather.com.cn/weather1d/101010100.shtml'</span><span class="comment"># 北京</span></span><br><span class="line">url2 = <span class="string">'http://www.weather.com.cn/weather1d/101020100.shtml'</span><span class="comment"># 上海</span></span><br><span class="line">url3 = <span class="string">'http://www.weather.com.cn/weather1d/101100101.shtml'</span><span class="comment"># 太原</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_data</span><span class="params">(url)</span>:</span></span><br><span class="line">    res = requests.get(url=url)</span><br><span class="line">    text = res.content.decode(<span class="string">'utf-8'</span>)</span><br><span class="line">    <span class="comment"># print(text)</span></span><br><span class="line">    r1 = re.findall(<span class="string">'hour3data=(.*?&#125;)'</span>, text)</span><br><span class="line">    r2 = r1[<span class="number">0</span>]</span><br><span class="line">    <span class="comment"># 使用json把字符串转为字典</span></span><br><span class="line">    r3 = json.loads(r2)</span><br><span class="line">    today = r3[<span class="string">'7d'</span>][<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">return</span> today</span><br><span class="line"></span><br><span class="line">today1 = get_data(url1)<span class="comment"># 北京温度</span></span><br><span class="line">today2 = get_data(url2)<span class="comment"># 上海温度</span></span><br><span class="line">today3 = get_data(url3)<span class="comment"># 太原温度</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># print([i.split(',')[3] for i in today1])</span></span><br><span class="line">c = (Bar()</span><br><span class="line">     .add_xaxis([i.split(<span class="string">','</span>)[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> today1])</span><br><span class="line">     .add_yaxis(<span class="string">'北京温度'</span>,[int(i.split(<span class="string">','</span>)[<span class="number">3</span>].strip(<span class="string">'℃'</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> today1])<span class="comment"># 北京</span></span><br><span class="line">     .add_yaxis(<span class="string">'上海温度'</span>,[int(i.split(<span class="string">','</span>)[<span class="number">3</span>].strip(<span class="string">'℃'</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> today2])<span class="comment"># 上海</span></span><br><span class="line">     .add_yaxis(<span class="string">'太原温度'</span>,[int(i.split(<span class="string">','</span>)[<span class="number">3</span>].strip(<span class="string">'℃'</span>)) <span class="keyword">for</span> i <span class="keyword">in</span> today3])<span class="comment"># 太原</span></span><br><span class="line">     .set_global_opts(title_opts=opts.TitleOpts(title=<span class="string">'各城市当天温度'</span>),</span><br><span class="line">                      toolbox_opts=opts.TitleOpts)</span><br><span class="line">     )</span><br><span class="line">c.render(<span class="string">'1.html'</span>)</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-         &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
-
-
-
-
-
-&lt;h3 id=&quot;数据可视化分析&quot;&gt;&lt;a href=&quot;#数据可视化分析&quot; class=&quot;headerlink&quot; title=&quot;数据可视化分析&quot;&gt;&lt;/a&gt;数据可视化分析&lt;/h3&gt;&lt;figure class=&quot;highlight mark
-      
-    
-    </summary>
-    
-    
-    
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="python" scheme="https://www.zfyvip.xyz/tags/python/"/>
     
   </entry>
   
