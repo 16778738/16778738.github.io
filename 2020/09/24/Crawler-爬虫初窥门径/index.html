@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Tag: 需求工程 - 东风未起，念你成疾</title>
+    <title>Crawler --爬虫初窥门径 - 东风未起，念你成疾</title>
   
+    <meta name="keywords" content="爬虫">
+  
+  
+    <meta name="description" content="crawler 简单的爬取百度图片,并保存图片">
   
 
   <!-- feed -->
@@ -270,25 +272,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -298,11 +287,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/06/09/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE/">
-      软件需求工程---数据流图
+  <h1 class="title">
+    <a href="/2020/09/24/Crawler-%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/">
+      Crawler --爬虫初窥门径
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -330,27 +319,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Jun 9, 2020</p>
+    <p>发布于：Sep 24, 2020</p>
   </a>
 </div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>834 words</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>2 min</p>
-    </a>
-  </div>
-
 
             
           
@@ -368,94 +339,54 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>软件需求工程—数据流图</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/06/09/%E8%BD%AF%E4%BB%B6%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9B%BE/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>crawler 简单的爬取百度图片,并保存图片</p>
+<a id="more"></a>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
+<h1 id="Crawler-爬虫——爬取百度图片"><a href="#Crawler-爬虫——爬取百度图片" class="headerlink" title="Crawler 爬虫——爬取百度图片"></a>Crawler 爬虫——爬取百度图片</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> urllib</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request, parse</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line"><span class="comment"># keyword = "阿狸"</span></span><br><span class="line"><span class="comment"># keyword = urllib.parse.quote(keyword)</span></span><br><span class="line"><span class="comment"># print(keyword)    #%E9%98%BF%E7%8B%B8</span></span><br><span class="line"></span><br><span class="line">url = <span class="string">"https://image.baidu.com/search/index?tn=baiduimage&amp;ipn=r&amp;ct=201326592&amp;cl=2&amp;lm=-1&amp;st=-1&amp;fm=result&amp;fr=&amp;sf=1&amp;fmq=1600852001400_R&amp;pv=&amp;ic=0&amp;nc=1&amp;z=&amp;hd=&amp;latest=&amp;copyright=&amp;se=1&amp;showtab=0&amp;fb=0&amp;width=&amp;height=&amp;face=0&amp;istype=2&amp;ie=utf-8&amp;sid=&amp;word=%E9%98%BF%E7%8B%B8"</span></span><br><span class="line">result = request.urlopen(url=url).read().decode(<span class="string">'utf-8'</span>)</span><br><span class="line"><span class="comment"># print(result)</span></span><br><span class="line"><span class="comment"># 写入html</span></span><br><span class="line"><span class="comment"># with open("picture.html", 'w', encoding='utf-8') as w:</span></span><br><span class="line"><span class="comment">#     w.write(result)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#正则匹配规则,列表存储符合的图片链接</span></span><br><span class="line">rule = <span class="string">'"thumbURL":"(.*?)"'</span></span><br><span class="line">pic_list = re.findall(rule, result)</span><br><span class="line"></span><br><span class="line"><span class="comment">#遍历列表,然后保存图片</span></span><br><span class="line">a = <span class="number">1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> pic_list:</span><br><span class="line">    print(i)</span><br><span class="line">    res = request.urlopen(i).read()</span><br><span class="line">    string = str(a) + <span class="string">'.jpg'</span></span><br><span class="line">    a = int(a)+<span class="number">1</span></span><br><span class="line">    <span class="keyword">with</span> open(string, <span class="string">'wb'</span>) <span class="keyword">as</span> w:</span><br><span class="line">        w.write(res)</span><br></pre></td></tr></table></figure>
 
 
-    
-  
-</div>
-<aside class='l_side'>
-  
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/16778738/picture/img/QQ%E6%88%AA%E5%9B%BE20200816125411.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">东风未起，念你成疾</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="https://github.com/16778738"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/09/24/Crawler-%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/>https://www.zfyvip.xyz/2020/09/24/Crawler-%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/</a></p>
           
         
-          
-            <a href="https://music.163.com/#/user/home?id=1444537739"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -466,18 +397,179 @@
     
     
 
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-24T09:25:55+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 24, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%88%AC%E8%99%AB/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>爬虫</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/09/24/Crawler-%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/&title=Crawler --爬虫初窥门径 - 东风未起，念你成疾&summary=crawler 简单的爬取百度图片,并保存图片"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/09/24/Crawler-%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/&title=Crawler --爬虫初窥门径 - 东风未起，念你成疾&summary=crawler 简单的爬取百度图片,并保存图片"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/09/24/Crawler-%E7%88%AC%E8%99%AB%E5%88%9D%E7%AA%A5%E9%97%A8%E5%BE%84/&title=Crawler --爬虫初窥门径 - 东风未起，念你成疾&summary=crawler 简单的爬取百度图片,并保存图片"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/09/22/Pycharm-%E5%BD%93%E5%BD%93%E7%BD%91%E9%A1%B9%E7%9B%AE/'>
+                <p class='title'>Pycharm--当当网项目<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>PyCharm–当当网项目的实现,实现注册登陆,图书分类,详情展示,购物车,订单等功能
+
+
+PyCharm–当当网项目的实现一.项目的开发流程(1) 需求分析1明确项目需要实现的功能,不用关心具...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Crawler --爬虫初窥门径',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
   
 
   
     
     
-  
 
-  <section class="widget tagcloud shadow desktop mobile">
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 <script>
@@ -497,12 +589,10 @@
 
 
     <div class='content'>
-      <a href="/tags/Django/" style="font-size: 19px; color: #777">Django</a> <a href="/tags/JavaScript/" style="font-size: 14px; color: #999">JavaScript</a> <a href="/tags/Jquery/" style="font-size: 14px; color: #999">Jquery</a> <a href="/tags/Linux/" style="font-size: 16.5px; color: #888">Linux</a> <a href="/tags/Pycharm/" style="font-size: 14px; color: #999">Pycharm</a> <a href="/tags/Python/" style="font-size: 21.5px; color: #666">Python</a> <a href="/tags/SSM/" style="font-size: 14px; color: #999">SSM</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/jQuery/" style="font-size: 16.5px; color: #888">jQuery</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 14px; color: #999">机器学习</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 14px; color: #999">爬虫</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/" style="font-size: 14px; color: #999">需求工程</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 14px; color: #999">项目</a>
+      
     </div>
   </section>
 
-
-  
 
   
 
@@ -700,6 +790,60 @@ setInterval("createtime()",250);
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "dogUA2FSKGTo029M1SEwGROT-MdYXbMMI",
+    appKey: "u0NdtQ8nvHoMdJPSYqm1LRxE",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
