@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>Clawer-51job爬取</title>
+      <link href="/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/"/>
+      <url>/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/</url>
+      
+        <content type="html"><![CDATA[<p>简单的51job爬取五万条职位信息</p><a id="more"></a><h2 id="Clawer-51job爬取"><a href="#Clawer-51job爬取" class="headerlink" title="Clawer-51job爬取"></a>Clawer-51job爬取</h2><p>简单的51job爬取五万条职位信息</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip,re</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> pn <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">1462</span>):</span><br><span class="line">    url = <span class="string">"https://search.51job.com/list/000000,000000,0000,00,9,99,java,2,&#123;&#125;.html"</span>.format(pn)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'user-agent'</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20101101 Firefox/6.0"</span>,</span><br><span class="line">        <span class="string">'referer'</span>: <span class="string">'url'</span>&#125;</span><br><span class="line">    <span class="comment"># 'user-agent': "baiduSpider"&#125;</span></span><br><span class="line">    req = request.Request(url)</span><br><span class="line">    res = request.urlopen(req).read()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = gzip.decompress(res).decode(<span class="string">'gbk'</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        res = res.decode(<span class="string">'gbk'</span>)</span><br><span class="line">    jpb_name_rule = <span class="string">'"job_title":"(.*?)"'</span></span><br><span class="line">    jpb_conmoany_rule = <span class="string">'"company_name":"(.*?)"'</span></span><br><span class="line">    jpb_salary_rule = <span class="string">'"providesalary_text":"(.*?)"'</span></span><br><span class="line">    jpb_place_rule = <span class="string">'"workarea_text":"(.*?)"'</span></span><br><span class="line"></span><br><span class="line">    job_names = re.findall(jpb_name_rule,res)</span><br><span class="line">    job_company = re.findall(jpb_conmoany_rule,res)</span><br><span class="line">    job_salary = re.findall(jpb_salary_rule,res)</span><br><span class="line">    job_place = re.findall(jpb_place_rule,res)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'51job.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> w:</span><br><span class="line">        <span class="keyword">for</span> job_name <span class="keyword">in</span> job_names:</span><br><span class="line">            index = job_name.index(job_name)</span><br><span class="line">            w.write(job_name + <span class="string">" "</span> + job_company[index] + <span class="string">" "</span> + job_salary[index]+ <span class="string">" "</span> + job_place[index] + <span class="string">" "</span> + <span class="string">"\n"</span>)</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">50000</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            print(num)</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 爬虫 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>User-Agent常见</title>
+      <link href="/2020/09/26/User-Agent%E5%B8%B8%E8%A7%81/"/>
+      <url>/2020/09/26/User-Agent%E5%B8%B8%E8%A7%81/</url>
+      
+        <content type="html"><![CDATA[<p>User-Agent常见 </p><p>1) Chrome(谷歌) 2) Firefox(火狐) 3) Safari </p><a id="more"></a><h2 id="User-Agent常见"><a href="#User-Agent常见" class="headerlink" title="User-Agent常见"></a>User-Agent常见</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1) Chrome(谷歌)</span><br><span class="line">Win7:</span><br><span class="line">Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1</span><br><span class="line">Win10:</span><br><span class="line">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36</span><br><span class="line">Chrome 17.0 – MAC</span><br><span class="line">Mozilla/5.0 (Macintosh; Intel Mac OS X 10<span class="emphasis">_7_</span>0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11 </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">2) Firefox(火狐)</span><br><span class="line">Win7:</span><br><span class="line">Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0</span><br><span class="line">Firefox 4.0.1 – MAC</span><br><span class="line">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">3) Safari(Safari是苹果计算机的操作系统Mac OS中的浏览器)</span><br><span class="line">safari 5.1 – MAC</span><br><span class="line">Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10<span class="emphasis">_6_</span>8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 爬虫 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Crawler --爬取笔趣阁小说</title>
       <link href="/2020/09/24/Crawler-%E7%88%AC%E5%8F%96%E7%AC%94%E8%B6%A3%E9%98%81%E5%B0%8F%E8%AF%B4/"/>
       <url>/2020/09/24/Crawler-%E7%88%AC%E5%8F%96%E7%AC%94%E8%B6%A3%E9%98%81%E5%B0%8F%E8%AF%B4/</url>

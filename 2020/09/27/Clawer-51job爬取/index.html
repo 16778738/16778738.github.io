@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Tag: JavaScript - 东风未起，念你成疾</title>
+    <title>Clawer-51job爬取 - 东风未起，念你成疾</title>
   
+    <meta name="keywords" content="爬虫">
+  
+  
+    <meta name="description" content="简单的51job爬取五万条职位信息">
   
 
   <!-- feed -->
@@ -270,25 +272,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -298,11 +287,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/">
-      JavaScript-实现简易购物车
+  <h1 class="title">
+    <a href="/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/">
+      Clawer-51job爬取
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -330,27 +319,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 16, 2020</p>
+    <p>发布于：Sep 27, 2020</p>
   </a>
 </div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>1.5k words</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>8 min</p>
-    </a>
-  </div>
-
 
             
           
@@ -368,94 +339,55 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实现简易购物车,删除,全选,合计</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>简单的51job爬取五万条职位信息</p>
+<a id="more"></a>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
-
-  
+<h2 id="Clawer-51job爬取"><a href="#Clawer-51job爬取" class="headerlink" title="Clawer-51job爬取"></a>Clawer-51job爬取</h2><p>简单的51job爬取五万条职位信息</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip,re</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> pn <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">1462</span>):</span><br><span class="line">    url = <span class="string">"https://search.51job.com/list/000000,000000,0000,00,9,99,java,2,&#123;&#125;.html"</span>.format(pn)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'user-agent'</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20101101 Firefox/6.0"</span>,</span><br><span class="line">        <span class="string">'referer'</span>: <span class="string">'url'</span>&#125;</span><br><span class="line">    <span class="comment"># 'user-agent': "baiduSpider"&#125;</span></span><br><span class="line">    req = request.Request(url)</span><br><span class="line">    res = request.urlopen(req).read()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = gzip.decompress(res).decode(<span class="string">'gbk'</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        res = res.decode(<span class="string">'gbk'</span>)</span><br><span class="line">    jpb_name_rule = <span class="string">'"job_title":"(.*?)"'</span></span><br><span class="line">    jpb_conmoany_rule = <span class="string">'"company_name":"(.*?)"'</span></span><br><span class="line">    jpb_salary_rule = <span class="string">'"providesalary_text":"(.*?)"'</span></span><br><span class="line">    jpb_place_rule = <span class="string">'"workarea_text":"(.*?)"'</span></span><br><span class="line"></span><br><span class="line">    job_names = re.findall(jpb_name_rule,res)</span><br><span class="line">    job_company = re.findall(jpb_conmoany_rule,res)</span><br><span class="line">    job_salary = re.findall(jpb_salary_rule,res)</span><br><span class="line">    job_place = re.findall(jpb_place_rule,res)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'51job.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> w:</span><br><span class="line">        <span class="keyword">for</span> job_name <span class="keyword">in</span> job_names:</span><br><span class="line">            index = job_name.index(job_name)</span><br><span class="line">            w.write(job_name + <span class="string">" "</span> + job_company[index] + <span class="string">" "</span> + job_salary[index]+ <span class="string">" "</span> + job_place[index] + <span class="string">" "</span> + <span class="string">"\n"</span>)</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">50000</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            print(num)</span><br></pre></td></tr></table></figure>
 
 
-    
-  
-</div>
-<aside class='l_side'>
-  
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/16778738/picture/img/QQ%E6%88%AA%E5%9B%BE20200816125411.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">东风未起，念你成疾</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="https://github.com/16778738"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/>https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/</a></p>
           
         
-          
-            <a href="https://music.163.com/#/user/home?id=1444537739"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -466,18 +398,180 @@
     
     
 
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-27T10:57:38+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Sep 27, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E7%88%AC%E8%99%AB/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>爬虫</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/09/26/User-Agent%E5%B8%B8%E8%A7%81/'>
+                <p class='title'>User-Agent常见<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>User-Agent常见 
+1) Chrome(谷歌) 2) Firefox(火狐) 3) Safari 
+
+
+User-Agent常见12345678910111213141516171819...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Clawer-51job爬取',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
   
 
   
     
     
-  
 
-  <section class="widget tagcloud shadow desktop mobile">
+
+  <section class="widget toc-wrapper shadow desktop mobile">
     
   <header>
     
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
     
   </header>
 <script>
@@ -497,12 +591,10 @@
 
 
     <div class='content'>
-      <a href="/tags/Django/" style="font-size: 19px; color: #777">Django</a> <a href="/tags/JavaScript/" style="font-size: 14px; color: #999">JavaScript</a> <a href="/tags/Jquery/" style="font-size: 14px; color: #999">Jquery</a> <a href="/tags/Linux/" style="font-size: 16.5px; color: #888">Linux</a> <a href="/tags/Pycharm/" style="font-size: 14px; color: #999">Pycharm</a> <a href="/tags/Python/" style="font-size: 21.5px; color: #666">Python</a> <a href="/tags/SSM/" style="font-size: 14px; color: #999">SSM</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/jQuery/" style="font-size: 16.5px; color: #888">jQuery</a> <a href="/tags/python/" style="font-size: 24px; color: #555">python</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 14px; color: #999">机器学习</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 19px; color: #777">爬虫</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/" style="font-size: 14px; color: #999">需求工程</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 14px; color: #999">项目</a>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clawer-51job爬取"><span class="toc-text">Clawer-51job爬取</span></a></li></ol>
     </div>
   </section>
 
-
-  
 
   
 
@@ -700,6 +792,60 @@ setInterval("createtime()",250);
 
 
 
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "dogUA2FSKGTo029M1SEwGROT-MdYXbMMI",
+    appKey: "u0NdtQ8nvHoMdJPSYqm1LRxE",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
 
 
 
