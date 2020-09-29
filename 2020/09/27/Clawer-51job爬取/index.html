@@ -21,7 +21,7 @@
     <meta name="keywords" content="爬虫">
   
   
-    <meta name="description" content="简单的51job爬取五万条职位信息">
+    <meta name="description" content="简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据">
   
 
   <!-- feed -->
@@ -342,11 +342,14 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>简单的51job爬取五万条职位信息</p>
+          <p>简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据</p>
 <a id="more"></a>
 
 <h2 id="Clawer-51job爬取"><a href="#Clawer-51job爬取" class="headerlink" title="Clawer-51job爬取"></a>Clawer-51job爬取</h2><p>简单的51job爬取五万条职位信息</p>
+<p>正则匹配数据</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip,re</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> pn <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">1462</span>):</span><br><span class="line">    url = <span class="string">"https://search.51job.com/list/000000,000000,0000,00,9,99,java,2,&#123;&#125;.html"</span>.format(pn)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'user-agent'</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20101101 Firefox/6.0"</span>,</span><br><span class="line">        <span class="string">'referer'</span>: <span class="string">'url'</span>&#125;</span><br><span class="line">    <span class="comment"># 'user-agent': "baiduSpider"&#125;</span></span><br><span class="line">    req = request.Request(url)</span><br><span class="line">    res = request.urlopen(req).read()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = gzip.decompress(res).decode(<span class="string">'gbk'</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        res = res.decode(<span class="string">'gbk'</span>)</span><br><span class="line">    jpb_name_rule = <span class="string">'"job_title":"(.*?)"'</span></span><br><span class="line">    jpb_conmoany_rule = <span class="string">'"company_name":"(.*?)"'</span></span><br><span class="line">    jpb_salary_rule = <span class="string">'"providesalary_text":"(.*?)"'</span></span><br><span class="line">    jpb_place_rule = <span class="string">'"workarea_text":"(.*?)"'</span></span><br><span class="line"></span><br><span class="line">    job_names = re.findall(jpb_name_rule,res)</span><br><span class="line">    job_company = re.findall(jpb_conmoany_rule,res)</span><br><span class="line">    job_salary = re.findall(jpb_salary_rule,res)</span><br><span class="line">    job_place = re.findall(jpb_place_rule,res)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'51job.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> w:</span><br><span class="line">        <span class="keyword">for</span> job_name <span class="keyword">in</span> job_names:</span><br><span class="line">            index = job_name.index(job_name)</span><br><span class="line">            w.write(job_name + <span class="string">" "</span> + job_company[index] + <span class="string">" "</span> + job_salary[index]+ <span class="string">" "</span> + job_place[index] + <span class="string">" "</span> + <span class="string">"\n"</span>)</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">50000</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            print(num)</span><br></pre></td></tr></table></figure>
+
+<h3 id="json处理数据"><a href="#json处理数据" class="headerlink" title="json处理数据"></a>json处理数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    url = <span class="string">"https://search.51job.com/list/010000,000000,0000,00,9,99,%25E9%2594%2580%25E5%2594%25AE,2,&#123;&#125;.html?lang=c&amp;postchannel=0000&amp;workyear=99&amp;cotype=99&amp;degreefrom=99&amp;jobterm=99&amp;companysize=99&amp;ord_field=0&amp;dibiaoid=0&amp;line=&amp;welfare="</span>.format(</span><br><span class="line">        i)</span><br><span class="line">    res = request.urlopen(url).read().decode(<span class="string">'gbk'</span>)</span><br><span class="line">    <span class="comment"># 因为数据存放在script中,json数据 使用json.loads解序列化;json.dumps序列化</span></span><br><span class="line">    rule = <span class="string">'__SEARCH_RESULT__ = (.*?)&lt;/script&gt;'</span></span><br><span class="line">    job_dict = json.loads(re.findall(rule, res)[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> job <span class="keyword">in</span> job_dict[<span class="string">'engine_search_result'</span>]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> job[<span class="string">'providesalary_text'</span>]:</span><br><span class="line">            job[<span class="string">'providesalary_text'</span>] = <span class="string">"面议"</span></span><br><span class="line">        print(job[<span class="string">'job_name'</span>], job[<span class="string">'providesalary_text'</span>])</span><br></pre></td></tr></table></figure>
 
 
           
@@ -421,7 +424,7 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-27T10:57:38+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-27T20:52:24+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
     <p>更新于：Sep 27, 2020</p>
@@ -451,7 +454,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据"
           
           >
           
@@ -463,7 +466,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据"
           
           >
           
@@ -475,7 +478,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息"
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/&title=Clawer-51job爬取 - 东风未起，念你成疾&summary=简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据"
           
           >
           
@@ -498,6 +501,14 @@
         
         
           <div class="prev-next">
+            
+              <a class='prev' href='/2020/09/28/Clawer-%E9%87%87%E9%9B%86%E5%85%8D%E8%B4%B9%E7%9A%84%E4%BB%A3%E7%90%86/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Clawer-爬虫采集免费的代理</p>
+                <p class='content'>Clawer-爬虫采集免费的代理,并测试代理是否可用
+
+
+Clawer-爬虫采集免费的代理1234567891011121314151617181920212223242526272829303...</p>
+              </a>
             
             
               <a class='next' href='/2020/09/26/User-Agent%E5%B8%B8%E8%A7%81/'>
@@ -591,7 +602,7 @@ User-Agent常见12345678910111213141516171819...</p>
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clawer-51job爬取"><span class="toc-text">Clawer-51job爬取</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Clawer-51job爬取"><span class="toc-text">Clawer-51job爬取</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#json处理数据"><span class="toc-text">json处理数据</span></a></li></ol></li></ol>
     </div>
   </section>
 
