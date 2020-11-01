@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#0.0.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>Nginx服务器 - 东风未起，念你成疾</title>
+  
+    <meta name="keywords" content="Nginx">
+  
+  
+    <meta name="description" content="Nginx服务器,nginx与uWSGI,集群和负载均衡策略,uWSGI服务器">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="东风未起，念你成疾">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            东风 <b><sup style='color:#3AA757'>0.0.1</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/10/29/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/">
+      Nginx服务器
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://zfyvip.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://t1.picb.cc/uploads/2020/05/24/tyaD1j.jpg">
+    <p>ZFY</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 29, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>Nginx服务器,nginx与uWSGI,集群和负载均衡策略,uWSGI服务器</p>
+<a id="more"></a>
+
+<h1 id="Nginx服务器"><a href="#Nginx服务器" class="headerlink" title="Nginx服务器"></a>Nginx服务器</h1><h2 id="一、Nginx概述"><a href="#一、Nginx概述" class="headerlink" title="一、Nginx概述"></a>一、Nginx概述</h2><h3 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h3><p>Nginx是一款轻量级的web服务器/反向代理服务器,占内存小,并发能力强.</p>
+<h4 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">静态http服务器(处理静态资源-动静分离):</span><br><span class="line">首先,Nginx是http服务器,可以上传静态资源(图片,css,js文件)通过http协议展示给客户端.</span><br><span class="line">将静态资源交给nginx服务器</span><br></pre></td></tr></table></figure>
+
+<p>Nginx提供动静分离是指动态的请求和静态的请求分离开,合适的服务器处理合适的请求,使整个服务系统的性能,效率更高</p>
+<p>uWSGI更适合做动态内容的执行,nginx更适合做静态内容的处理,客户端请求直接访问nginx服务器,留下静态部分处理,动态部分转发给uWSGI服务器,实现”动静分离”</p>
+<h4 id="反向代理服务器"><a href="#反向代理服务器" class="headerlink" title="反向代理服务器"></a>反向代理服务器</h4><p>反向代理是指代理服务器nginx来接受internet上的请求,然后将请求转发给内部网络上的其他服务器uWSGI,并将uWSGI服务器上的得到的结果返回给Internet上请求的客户端,此时代理服务器对外表现为反向代理服务器.</p>
+<h4 id="代理均衡"><a href="#代理均衡" class="headerlink" title="代理均衡"></a>代理均衡</h4><p>多在高并发情况下需要使用,原理时将数据流量分摊成多个服务器执行,减轻每台服务器的压力,多服务器(集群)共同完成工作任务,从而提高数据的吞吐量.</p>
+<h3 id="2、安装步骤"><a href="#2、安装步骤" class="headerlink" title="2、安装步骤"></a>2、安装步骤</h3><ul>
+<li><p>将tar包发送的linux</p>
+</li>
+<li><p>解压 <code>tar -zxvf nginx-1.11.1.tar.gz</code> </p>
+</li>
+<li><p>安装依赖 <code>yum install gcc zlib-devel pcre-devel</code>   </p>
+</li>
+<li><p>cd到解压目录：<code>./configure</code>    #配置检测</p>
+</li>
+<li><p>cd到解压目录：<code>make &amp;&amp; make install</code>  #编译并安装</p>
+</li>
+<li><p>安装完成，安装路径为<code>/usr/local/nginx</code>   ,日志路径为 <code>/usr/local/nginx/logs</code> ,</p>
+<p>可执行文件路径为 <code>/usr/local/nginx/sbin</code> ,配置文件路径为 <code>/usr/local/nginx/conf</code></p>
+<p>欢迎页面路径为 <code>/usr/local/nginx/html</code></p>
+</li>
+<li><p><code>ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx</code> 制作连接，便于执行<code>nginx</code>指令</p>
+</li>
+<li><p><code>nginx  #启动</code><br><code>nginx -s stop #关闭</code><br><code>nginx -s reload #重启</code></p>
+<p><code>http://ip:80即可访问nginx欢迎页面</code></p>
+</li>
+</ul>
+<h2 id="二、nginx与uWSGI"><a href="#二、nginx与uWSGI" class="headerlink" title="二、nginx与uWSGI"></a>二、nginx与uWSGI</h2><p>nginx配置–到配置路径中的<code>nginx.conf</code>      <code>/usr/local/nginx/conf/nginx.conf</code> </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> ems&#123;</span><br><span class="line">	<span class="attribute">server</span> <span class="number">192.168.157.141:9001</span>; <span class="comment"># uWSGI's socket = </span></span><br><span class="line">    <span class="comment">#server 192.168.157.142:9001; #192.168.x.x:9001</span></span><br><span class="line">	<span class="comment">#可以在添加其他的uWSGI的服务器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">	<span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">	<span class="attribute">server_name</span>  <span class="number">192.168.157.142</span>;   <span class="comment"># nginx服务器的ip</span></span><br><span class="line">	<span class="attribute">charset</span> utf-<span class="number">8</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="attribute">location</span> / &#123;</span><br><span class="line">		<span class="attribute">uwsgi_pass</span> ems; <span class="comment">#和上面的upstream转接  </span></span><br><span class="line">		<span class="attribute">include</span>  /usr/local/nginx/conf/uwsgi_params; <span class="comment"># the uwsgi_params file you installed</span></span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="attribute">location</span> /static &#123; <span class="comment">#http://ip:80/static/a/b/c/d.png  ==&gt; /usr/local/static/a/b/c/d.png	</span></span><br><span class="line">		<span class="attribute">alias</span> /usr/local/static; <span class="comment"># your Django project's static files - amend as required</span></span><br><span class="line">	&#125;</span><br><span class="line"> ...</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+
+<p>配置好后，重启nginx即可，可以使用Nginx服务器来访问项目</p>
+<p><strong>注意关闭防火墙！！</strong></p>
+<p>两台虚拟主机，一个运行nginx，其中保存project的静态资源；一个运行uwsgi，其中保存并部署project。</p>
+<h2 id="三、集群和负载均衡策略"><a href="#三、集群和负载均衡策略" class="headerlink" title="三、集群和负载均衡策略"></a>三、集群和负载均衡策略</h2><p>搭建uWSGI集群，只需要多做几份uWSGI的配置文件，文件中设置不同的ip:port，指向相同的project，然后启动多个uWSGI即可。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">*默认:轮询</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8989</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*iphash:基于ip的负载均衡.  </span><br><span class="line">		upstream django &#123;</span><br><span class="line">			ip_hash;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*权重轮询:</span><br><span class="line">        upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span> weight=<span class="number">1</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span> weight=<span class="number">2</span>;   </span><br><span class="line">		&#125;</span><br><span class="line">*最小连接数：</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			least_conn;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;*默认:轮询</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8989</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*iphash:基于ip的负载均衡.  </span><br><span class="line">		upstream django &#123;</span><br><span class="line">			ip_hash;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*权重轮询:</span><br><span class="line">        upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span> weight=<span class="number">1</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span> weight=<span class="number">2</span>;   </span><br><span class="line">		&#125;</span><br><span class="line">*最小连接数：</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			least_conn;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+
+<p>至此，一个uWSGI集群搭建完成，nginx作为反向代理服务器和web服务器接收请求，然后处理静态的部分，动态部分按照负载均衡策略转发给某一个uWSGI服务器。</p>
+<h2 id="四、uWSGI服务器"><a href="#四、uWSGI服务器" class="headerlink" title="四、uWSGI服务器"></a>四、uWSGI服务器</h2><h4 id="1、WSGI协议"><a href="#1、WSGI协议" class="headerlink" title="1、WSGI协议"></a>1、WSGI协议</h4><ul>
+<li><p>使用Django或Flask框架编写的Web应用程序，在<code>python manage.py runserver</code>  时都启动的是框架内置的服务器来运行Web应用程序，而内置的服务器遵循了WSGI协议（WSGI Server）。</p>
+</li>
+<li><p>WSGI：全称是<code>Web Server Gateway Interface</code>，WSGI不是服务器，python模块，框架，API或者任何软件，只是一种规范，描述web server如何与web application通信的规范。</p>
+<ul>
+<li><p><code>WSGI server</code>负责从客户端接收请求，将<code>request</code>转发给<code>application</code>，将<code>application</code>返回的<code>response</code>返回给客户端；</p>
+</li>
+<li><p><code>WSGI application</code>接收由<code>server</code>转发的<code>request</code>，处理请求，并将处理结果返回给<code>server</code>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>要实现WSGI协议，必须同时实现web server和web application，当前运行在<code>WSGI</code>协议之上的<code>web</code>框架有<code>Bottle</code>, <code>Flask</code>, <code>Django</code>。 </li>
+</ul>
+<p><strong>总结：</strong>WSGI是Web 服务器(uWSGI)与 Web 应用程序或应用框架(Django)之间的一种低级别的接口。 </p>
+<h4 id="2、uWSGI服务器安装"><a href="#2、uWSGI服务器安装" class="headerlink" title="2、uWSGI服务器安装"></a>2、uWSGI服务器安装</h4><p>WSGI协议下web服务器很多：django内置，uWSGI，gunicorn。</p>
+<h5 id="2-1-服务器安装"><a href="#2-1-服务器安装" class="headerlink" title="2.1 服务器安装"></a>2.1 服务器安装</h5><ul>
+<li><p>将uWSGI的tar包发送linux</p>
+</li>
+<li><p>解压tar：<code>tar -zxvf  uwsgi-2.0.17.tar.gz</code></p>
+</li>
+<li><p>cd到解压目录下，编译：<code>make</code></p>
+</li>
+<li><p>为了可以更方便的执行  uwsgi   启动uWSGI服务器，定制链接：</p>
+<p><code>ln -s /usr/local/uwsgi-2.0.17/uwsgi /usr/bin/uwsgi</code></p>
+<p>则可以在任意目录下执行 <code>uwsgi</code> 去启动uWSGI服务器</p>
+</li>
+</ul>
+<ul>
+<li><p>测试使用python的wsgi服务器-uWSGI</p>
+<ul>
+<li><p>在任意的一个目录中定义一个python脚本：hello.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span><span class="params">(env, start_response)</span>:</span></span><br><span class="line">    start_response(<span class="string">'200 OK'</span>, [(<span class="string">'Content-Type'</span>,<span class="string">'text/html;charset=utf-8'</span>)])</span><br><span class="line">    <span class="keyword">return</span> [bytes(<span class="string">'你好啊！！'</span>,<span class="string">'utf-8'</span>),<span class="string">b'Mr_lee'</span>]    <span class="comment"># 基于wsgi协议规范实现的代码</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>启动uWSGI服务器，并部署hello.py程序</p>
+<p><code>uwsgi --http 192.168.248.128:8001 --wsgi-file hello.py</code>   <strong>#注意hilo.py可以写成绝对路径</strong></p>
+</li>
+<li><p>浏览器访问：<code>192.168.248.128:8001</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、-uWSGI部署django项目"><a href="#3、-uWSGI部署django项目" class="headerlink" title="3、 uWSGI部署django项目"></a>3、 uWSGI部署django项目</h4><ul>
+<li><p><strong>在数据库中建好项目需要的database：“ems”</strong></p>
+<ul>
+<li>使用Navicat创建即可,注意字符集为 utf8</li>
+</ul>
+</li>
+<li><p><strong>在Django项目的settings.py中修改配置</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">DEBUG = <span class="literal">False</span>  <span class="comment">#去掉开发模式          </span></span><br><span class="line">ALLOWED_HOSTS = [<span class="string">"*"</span>] <span class="comment">#开放访问host</span></span><br><span class="line">DATABASES = &#123; <span class="comment">#合适数据库参数</span></span><br><span class="line">    <span class="string">'default'</span>: &#123;</span><br><span class="line">        <span class="string">'ENGINE'</span>: <span class="string">'django.db.backends.mysql'</span>,</span><br><span class="line">        <span class="string">'NAME'</span>: <span class="string">'ems'</span>,</span><br><span class="line">        <span class="string">'USER'</span>: <span class="string">'root'</span>,</span><br><span class="line">        <span class="string">'HOST'</span>: <span class="string">'localhost'</span>,</span><br><span class="line">        <span class="string">'PORT'</span>: <span class="string">'3306'</span>,</span><br><span class="line">        <span class="string">'PASSWORD'</span>: <span class="string">'123456'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>发送项目到linux并做移植</strong></p>
+<p><code>python manage.py makemigrations</code></p>
+<p><code>python manage.py migrate</code></p>
+</li>
+<li><p><strong>编写uWSGI的配置文件</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#随意找一个目录，创建一个文件：config.ini -- 建议放在项目的根目录下</span></span><br><span class="line">[uwsgi]</span><br><span class="line">http = <span class="number">192.168</span><span class="number">.134</span><span class="number">.128</span>:<span class="number">9000</span> <span class="comment"># uWSGI服务器访问地址</span></span><br><span class="line"><span class="comment">#uWSGI和nginx通信的port</span></span><br><span class="line">socket = <span class="number">192.168</span><span class="number">.134</span><span class="number">.128</span>:<span class="number">9001</span></span><br><span class="line"><span class="comment"># the base directory (full path)</span></span><br><span class="line">chdir = /usr/local/django_projects/ems <span class="comment">#项目所在目录</span></span><br><span class="line"><span class="comment"># Django's wsgi file</span></span><br><span class="line">wsgi-file = ems/wsgi.py <span class="comment">#基于项目目录的相对路径</span></span><br><span class="line"><span class="comment"># maximum number of worker processes</span></span><br><span class="line">processes = <span class="number">4</span></span><br><span class="line"><span class="comment">#thread numbers startched in each worker process</span></span><br><span class="line">threads = <span class="number">2</span></span><br><span class="line"><span class="comment">#monitor uwsgi status 通过该端口可以监控 uwsgi 的负载情况</span></span><br><span class="line">stats = <span class="number">192.168</span><span class="number">.134</span><span class="number">.128</span>:<span class="number">9002</span></span><br><span class="line"><span class="comment"># clear environment on exit</span></span><br><span class="line">vacuum = true</span><br><span class="line">pidfile = /usr/local/django_projects/ems/uwsgi.pid <span class="comment">#进程ID存放于此文件，位置可以自定义</span></span><br><span class="line"><span class="comment">#daemonize-run ,file-to-record-log</span></span><br><span class="line">daemonize = /usr/local/django_projects/ems/uwsgi.log <span class="comment">#后台启动模式，日志文件记录位置自定义</span></span><br><span class="line"><span class="comment">#http://ip:port/static/...请求会进入该目录找资源，此处可以指向某个app下的static目录</span></span><br><span class="line"><span class="comment">#或是将所有静态文件汇总到项目的某一个目录下，然后配置在此是更好的选择</span></span><br><span class="line"><span class="comment">#汇集所有已安装app的静态资源到一个目录下，请参见后续内容</span></span><br><span class="line"><span class="comment">#http://ip:port/static/a/b/c/d.png   ==&gt;  /usr/local/xxxx/static/a/b/c/d.png</span></span><br><span class="line">static-map =/static=/usr/local/xxx/static  <span class="comment"># 只在你写的static-map中找静态资源</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>根据如上配置启动uWSGI服务器</strong></p>
+<p><code>uwsgi --ini config.ini</code>  <strong>#注意：config.ini是一个相对路径</strong></p>
+</li>
+<li><p><strong>关闭服务器</strong></p>
+<p><code>uwsgi --stop uwsgi.pid</code> <strong>#通过进程id文件</strong></p>
+</li>
+</ul>
+<ul>
+<li>使用uwsgi服务器运行项目后，出现静态资源无法加载的问题</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 分析原因： </span></span><br><span class="line"><span class="code">	 1.在django内置的服务器中，调试模式，django查找静态资源默认在每个app的static目录</span></span><br><span class="line"><span class="bullet">	2. </span>或者可以在setting.py文件中 </span><br><span class="line"><span class="code">	STATICFILES_DIRS = [os.path.join(BASE_DIR,'static')] 将项目根目录下的static目录作为静态资源的查找路径</span></span><br><span class="line"><span class="code">	</span></span><br><span class="line"><span class="section"># 但是uwsgi服务器有自己的静态资源的处理方式，也就是它不会在上述的两个地方查找静态资源</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>uwsgi如何处理静态资源</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 在config.ini配置文件的最后面来告诉uwsgi服务器要在哪里去找静态资源</span></span><br><span class="line">[uwsig]</span><br><span class="line">http = xxx:9000</span><br><span class="line">socket = xxx:9001</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line">...</span><br><span class="line"><span class="section"># 写你的静态资源的绝对路径，如果在项目根目录下，直接写项目根目录/static即可</span></span><br><span class="line"><span class="section"># 如果是每个app自己管理，把所有的app的static目录添加进来，有几个app加几个static-map</span></span><br><span class="line">static-map=/static=/usr/local/xxx/static  </span><br><span class="line"></span><br><span class="line">url可以分为两大类：</span><br><span class="line"><span class="bullet">1. </span>普通url-动态资源url  会在urls.py文件中匹配访问路径 最终找到视图函数</span><br><span class="line"><span class="bullet">2. </span>静态资源url-- /static/ 告诉django当url中有/static/时django会在静态资源的目录下去查找资源</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>如果你的app过多，每个app自己管理静态资源，此时需要添加的static-map太多</strong></li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 只需要做两步操作就可以把所有app下的静态资源static目录的文件收集到某一个目录下</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">1. </span>在项目的setting.py文件中添加 STATIC<span class="emphasis">_ROOT=os.path.join(BASE_</span>DIR,'static')</span><br><span class="line"><span class="code">	用于告诉django，将来收集到的静态资源往哪里放</span></span><br><span class="line"><span class="code">	</span></span><br><span class="line"><span class="bullet">2. </span>执行收集的指令   python manage.py collectstatic</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>STATIC_URL = ‘/static/‘              # 每个静态资源URL的访问前缀</p>
+<p>STATICFIELS_DIRS = [os.path.join(BASE_DIR,’static’)]  # 添加django内置服务器查找静态资源的路径</p>
+<p>STATIC_ROOT = os.path.join(BASE_DIR,’static’) # 收集静态资源时的路径</p>
+<p>static-map=/static=xxxx   # 告诉uwsgi服务器到哪里去找静态资源 </p>
+</blockquote>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/10/29/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/>https://www.zfyvip.xyz/2020/10/29/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-29T14:53:44+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Oct 29, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Nginx/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Nginx</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/10/29/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/&title=Nginx服务器 - 东风未起，念你成疾&summary=Nginx服务器,nginx与uWSGI,集群和负载均衡策略,uWSGI服务器"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/10/29/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/&title=Nginx服务器 - 东风未起，念你成疾&summary=Nginx服务器,nginx与uWSGI,集群和负载均衡策略,uWSGI服务器"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/10/29/Nginx%E6%9C%8D%E5%8A%A1%E5%99%A8/&title=Nginx服务器 - 东风未起，念你成疾&summary=Nginx服务器,nginx与uWSGI,集群和负载均衡策略,uWSGI服务器"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/11/01/js%E5%8A%A0%E5%AF%86%E7%A0%B4%E8%A7%A3/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>js加密破解</p>
+                <p class='content'>1.前端加密  2.后端加密  3.加密算法
+
+
+js加密破解分类1234561.前端加密	加密逻辑在前端2.后端加密	加密逻辑在后台,一般直接使用加密算法经行加密操作3.加密算法	Base64...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/10/29/eval-%E5%87%BD%E6%95%B0/'>
+                <p class='title'>eval()函数<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>1.eval()函数
+
+
+python中eval()函数用来执行一个字符串的表达式,并返回表达式的值
+123456789eval(expression[,globals[,locals]])ex...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+        <section id="comments">
+          <div id="minivaline_container">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'Nginx服务器',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#一、Nginx概述"><span class="toc-text">一、Nginx概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1、简介"><span class="toc-text">1、简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#作用"><span class="toc-text">作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#反向代理服务器"><span class="toc-text">反向代理服务器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#代理均衡"><span class="toc-text">代理均衡</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2、安装步骤"><span class="toc-text">2、安装步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#二、nginx与uWSGI"><span class="toc-text">二、nginx与uWSGI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#三、集群和负载均衡策略"><span class="toc-text">三、集群和负载均衡策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#四、uWSGI服务器"><span class="toc-text">四、uWSGI服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、WSGI协议"><span class="toc-text">1、WSGI协议</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、uWSGI服务器安装"><span class="toc-text">2、uWSGI服务器安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-服务器安装"><span class="toc-text">2.1 服务器安装</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、-uWSGI部署django项目"><span class="toc-text">3、 uWSGI部署django项目</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        
+      
+    
+      
+        <br>
+        
+     
+      
+    
+      
+        
+      
+    
+      
+        Use
+        <a href="https://zfyvip.xyz/" target="_blank" class="codename">东风</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://zfyvip.xyz" target="_blank" rel="noopener">Copyright © 2020-2030 Z.FY</a></p>
+
+        </div>
+      
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c1bb23d0929b7cf93fb38bd6b8603046";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+Copyright 2018-2020 ZFY'S BLOG 
+<img src="https://cdn.jsdelivr.net/gh/16778738/picture/img/gongan.png">
+<a href="https://beian.miit.gov.cn"  style="color:#f72b07" target="_blank">晋ICP备20005168号</a>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("05/22/2020 08:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="/js/FunnyTitle.js"></script>
+
+<!-- 数字雨 -->
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>
+
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz",
+    appKey: "xpNIURUvFCvRDjcPDGabmVbb",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/minivaline@2/dist/MiniValine.min.js"></script>
+
+  
+  
+  
+  
+  
+  <script>
+  new MiniValine({
+	el: '#minivaline_container',
+	appId: 'b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz# your appId',
+	appKey: 'xpNIURUvFCvRDjcPDGabmVbb# your appKey',
+	mode: 'xCss',
+	placeholder: "快来评论吧~",
+	
+	  pathname: location.pathname,
+	
+	lang: '',
+	adminEmailMd5: 'de8a7aa53d07e6b6bceb45c64027763d',
+	tagMeta: ["管理员", "小伙伴", "访客"],
+	master: ["de8a7aa53d07e6b6bceb45c64027763d"],
+	friends: ["b5bd5d836c7a0091aa8473e79ed4c25e", "adb7d1cd192658a55c0ad22a3309cecf", "3ce1e6c77b4910f1871106cb30dc62b0", "cfce8dc43725cc14ffcd9fb4892d5bfc"],
+	math: true,  /*布尔值 字符串无效 下同*/
+	md: true,
+	enableQQ: false,
+	NoRecordIP: false,
+	visitor: true,
+	maxNest: 6,
+	pageSize: 6,
+	emoticonUrl: ["https://cdn.jsdelivr.net/npm/alus@latest", "https://cdn.jsdelivr.net/gh/MiniValine/qq@latest", "https://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest", "https://cdn.jsdelivr.net/gh/MiniValine/tieba@latest", "https://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest", "https://cdn.jsdelivr.net/gh/MiniValine/weibo@latest"]
+  });
+  </script>
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>

