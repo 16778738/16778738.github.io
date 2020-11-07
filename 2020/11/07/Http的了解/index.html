@@ -16,12 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Linux-Nginx环境部署 - 东风未起，念你成疾</title>
+    <title>HTTP - 东风未起，念你成疾</title>
   
-    <meta name="keywords" content="Linux">
+    <meta name="keywords" content="Http">
   
   
-    <meta name="description" content="Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。">
+    <meta name="description" content="http工作原理,TCP 的三次握手客户端,四次挥手….">
   
 
   <!-- feed -->
@@ -288,8 +288,8 @@
         
           
   <h1 class="title">
-    <a href="/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/">
-      Linux-Nginx环境部署
+    <a href="/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/">
+      HTTP
     </a>
   </h1>
 
@@ -319,7 +319,7 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Sep 3, 2020</p>
+    <p>发布于：Nov 7, 2020</p>
   </a>
 </div>
 
@@ -342,65 +342,23 @@
       <section class="article typo">
         <div class="article-entry" itemprop="articleBody">
           
-          <p>Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。</p>
+          <p>http工作原理,TCP 的三次握手客户端,四次挥手….</p>
 <a id="more"></a>
 
+<h3 id="http工作原理"><a href="#http工作原理" class="headerlink" title="http工作原理"></a>http工作原理</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.地址进行dns解析,将url解析出对应的内容</span><br><span class="line">2.封装http请求数据包</span><br><span class="line">3.封装成tcp包,建立tcp连接(tcp的三次握手)</span><br><span class="line">4.客户端发送请求</span><br><span class="line">5.服务器接收请求,发送响应</span><br><span class="line">6.客户端接收响应,进行页面渲染</span><br><span class="line">7.服务器关闭TCP连接(TCP的四次挥手)</span><br></pre></td></tr></table></figure>
 
+<h3 id="TCP-的三次握手客户端"><a href="#TCP-的三次握手客户端" class="headerlink" title="TCP 的三次握手客户端"></a>TCP 的三次握手客户端</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1. </span>第一次握手:建立连接时,客户端发送syn包到服务器,并进入syn_sent状态,等待服务器确认;</span><br><span class="line">syn:同步序列编号</span><br><span class="line"><span class="bullet">2. </span>第二次握手: 服务器收到syn包,必须确认客户的syn(ack=j+1),同时自己发送一个syn包(seq=k),即syn+ack包每次是服务器进入syn_recv状态</span><br><span class="line"><span class="bullet">3. </span>第三次握手:客户端收到服务器的syn+ack包,向服务器发送确认包ack(ack=k+1),此包发送完毕,客户端和服务端进入连接成功状态</span><br></pre></td></tr></table></figure>
 
-<h1 id="Nginx服务器"><a href="#Nginx服务器" class="headerlink" title="Nginx服务器"></a>Nginx服务器</h1><h3 id="一、Nginx概述"><a href="#一、Nginx概述" class="headerlink" title="一、Nginx概述"></a>一、Nginx概述</h3><h4 id="1、简介"><a href="#1、简介" class="headerlink" title="1、简介"></a>1、简介</h4><h5 id="1-1-什么nginx"><a href="#1-1-什么nginx" class="headerlink" title="1.1 什么nginx"></a>1.1 什么nginx</h5><p>Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。</p>
-<h5 id="2-2-nginx的作用"><a href="#2-2-nginx的作用" class="headerlink" title="2.2 nginx的作用"></a>2.2 nginx的作用</h5><ul>
-<li><p>静态HTTP服务器（ 处理静态资源 - 动静分离）： </p>
-<p>首先，Nginx是一个HTTP服务器，可以将服务器上的静态文件（图片、CSS、JS文件等）通过HTTP协议展现给客户端。   将静态资源的处理交给Nginx服务器</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 一个项目中的资源可以为两大类：</span></span><br><span class="line"><span class="bullet">	1. </span>动态资源的请求 普通URL   -- uwsgi</span><br><span class="line"><span class="bullet">	2. </span>静态资源的请求 /static/  -- nginx</span><br></pre></td></tr></table></figure>
+<h3 id="三次握手缺点"><a href="#三次握手缺点" class="headerlink" title="三次握手缺点"></a>三次握手缺点</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">syn-flood攻击是最常见的DDoS攻击,也是最经典的拒绝服务攻击.</span><br><span class="line"><span class="code">	利用TCP协议实现的一个缺陷,通过像网络服务所在端口发送大量伪造源地址的攻击报文,就可能造成目标服务器中的半开连接队被沾满,从而阻止其他合法用户进行访问.</span></span><br><span class="line"><span class="code">	数据包特征: 源发送了大量的syn包,并缺少了三次握手的最后一步握手ack回复</span></span><br></pre></td></tr></table></figure>
 
-<p>Nginx提供的动静分离是指把动态请求和静态请求分离开，合适的服务器处理合适的请求，使整个服务器系统的性能、效率更高。 </p>
-<p>uWSGI更适合做动态内容的执行，nginx更适合做静态内容的处理，客户端请求直接访问nginx服务器，留下静态部分处理，动态部分转发给uWSGI服务器，最终实现“动静分离”。</p>
-</li>
-</ul>
-<ul>
-<li><p>反向代理服务器：  </p>
-<p>反向代理是指以代理服务器nginx来接受internet上的请求，然后将请求转发给内部网络上的其它服务器uWSGI，并将从uWSGI服务器上得到的结果返回给internet上请求连接的客户端，此时代理服务器对外就表现为一个反向代理服务器。  </p>
-</li>
-</ul>
-<ul>
-<li><p>负载均衡 ：</p>
-<p>多在高并发情况下需要使用。其原理就是将数据流量分摊到多个服务器执行，减轻每台服务器的压力，多台服务器(集群)共同完成工作任务，从而提高了数据的吞吐量。 </p>
-</li>
-</ul>
-<h4 id="2、安装步骤"><a href="#2、安装步骤" class="headerlink" title="2、安装步骤"></a>2、安装步骤</h4><ul>
-<li><p>将tar包发送的linux</p>
-</li>
-<li><p>解压 <code>tar -zxvf nginx-1.11.1.tar.gz</code> </p>
-</li>
-<li><p>安装依赖 <code>yum install gcc zlib-devel pcre-devel</code>   </p>
-</li>
-<li><p>cd到解压目录：<code>./configure</code>    #配置检测</p>
-</li>
-<li><p>cd到解压目录：<code>make &amp;&amp; make install</code>  #编译并安装</p>
-</li>
-<li><p>安装完成，安装路径为<code>/usr/local/nginx</code>   ,日志路径为 <code>/usr/local/nginx/logs</code> ,</p>
-<p>可执行文件路径为 <code>/usr/local/nginx/sbin</code> ,配置文件路径为 <code>/usr/local/nginx/conf</code></p>
-<p>欢迎页面路径为 <code>/usr/local/nginx/html</code></p>
-</li>
-<li><p><code>ln -s /usr/local/nginx/sbin/nginx /usr/bin/nginx</code> 制作连接，便于执行<code>nginx</code>指令</p>
-</li>
-<li><p><code>nginx  #启动</code><br><code>nginx -s stop #关闭</code><br><code>nginx -s reload #重启</code></p>
-<p><code>http://ip:80即可访问nginx欢迎页面</code></p>
-</li>
-</ul>
-<h3 id="二、nginx与uWSGI"><a href="#二、nginx与uWSGI" class="headerlink" title="二、nginx与uWSGI"></a>二、nginx与uWSGI</h3><p>nginx配置–到配置路径中的<code>nginx.conf</code>      <code>/usr/local/nginx/conf/nginx.conf</code> </p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">upstream</span> ems&#123;</span><br><span class="line">	<span class="attribute">server</span> <span class="number">192.168.157.141:9001</span>; <span class="comment"># uWSGI's socket = </span></span><br><span class="line">    <span class="comment">#server 192.168.157.142:9001; #192.168.x.x:9001</span></span><br><span class="line">	<span class="comment">#可以在添加其他的uWSGI的服务器</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">	<span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">	<span class="attribute">server_name</span>  <span class="number">192.168.157.142</span>;   <span class="comment"># nginx服务器的ip</span></span><br><span class="line">	<span class="attribute">charset</span> utf-<span class="number">8</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="attribute">location</span> / &#123;</span><br><span class="line">		<span class="attribute">uwsgi_pass</span> ems; <span class="comment">#和上面的upstream转接  </span></span><br><span class="line">		<span class="attribute">include</span>  /usr/local/nginx/conf/uwsgi_params;</span><br><span class="line">	&#125;	</span><br><span class="line">	<span class="attribute">location</span> /static &#123; </span><br><span class="line">		<span class="attribute">alias</span> /usr/local/static;</span><br><span class="line">	&#125;</span><br><span class="line"> ...</span><br><span class="line">｝</span><br></pre></td></tr></table></figure>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">原理：攻击者首先伪造地址对 服务器发起SYN请求，服务器回应(SYN+ACK)包，而真实的IP会认为，我没有发送请求，不作回应。服务器没有收到回应，这样的话，服务器不知道(SYN+ACK)是否发送成功，默认情况下会重试5次（tcp<span class="emphasis">_syn_</span>retries)</span><br><span class="line">这样的话，对于服务器的内存，带宽都有很大的消耗。攻击者如果处于公网，可以伪造IP的话，对于服务器就很难根据IP来判断攻击者，给防护带来很大的困难。</span><br><span class="line"><span class="code">	解决办法:</span></span><br><span class="line"><span class="code">	1． 无效连接监视释放</span></span><br><span class="line"><span class="code">	这种方法不停的监视系统中半开连接和不活动连接，当达到一定阈值时拆除这些连接，释放系统资源。</span></span><br><span class="line"><span class="code">	2． 延缓TCB分配方法</span></span><br><span class="line"><span class="code">	SYN Flood关键是利用了，SYN数据报文一到，系统立即分配TCB资源，从而占用了系统资源，因此有俩种技术来解决这一问题</span></span><br><span class="line"><span class="code">	Syn Cache技术</span></span><br><span class="line"><span class="code">	这种技术在收到SYN时不急着去分配TCB，而是先回应一个ACK报文，并在一个专用的HASH表中（Cache）中保存这种半开连接，直到收到正确的ACK报文再去分配TCB</span></span><br><span class="line"><span class="code">	Syn Cookie技术</span></span><br><span class="line"><span class="code">    Syn Cookie技术则完全不使用任何存储资源，它使用一种特殊的算法生成Sequence Number，这种算法考虑到了对方的IP、端口、己方IP、端口的固定信息，以及对方无法知道而己方比较固定的一些信息，如MSS、时间等，在收到对方 的ACK报文后，重新计算一遍，看其是否与对方回应报文中的（Sequence Number-1）相同，从而决定是否分配TCB资源。</span></span><br><span class="line"><span class="code">	3.使用SYN Proxy防火墙</span></span><br><span class="line"><span class="code">	原理：对试图穿越的SYN请求进行验证之后才放行</span></span><br></pre></td></tr></table></figure>
 
-<p>配置好后，重启nginx即可，可以使用Nginx服务器来访问项目</p>
-<p><strong>注意关闭防火墙！！</strong></p>
-<p>两台虚拟主机，一个运行nginx，其中保存project的静态资源；一个运行uwsgi，其中保存并部署project。</p>
-<h3 id="三、集群和负载均衡策略"><a href="#三、集群和负载均衡策略" class="headerlink" title="三、集群和负载均衡策略"></a>三、集群和负载均衡策略</h3><p>搭建uWSGI集群，只需要多做几份uWSGI的配置文件，文件中设置不同的ip:port，指向相同的project，然后启动多个uWSGI即可。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">*默认:轮询</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8989</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*iphash:基于ip的负载均衡.  </span><br><span class="line">		upstream django &#123;</span><br><span class="line">			ip_hash;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br><span class="line">*权重轮询:</span><br><span class="line">        upstream django &#123;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span> weight=<span class="number">1</span>;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span> weight=<span class="number">2</span>;   </span><br><span class="line">		&#125;</span><br><span class="line">*最小连接数：</span><br><span class="line">		upstream django &#123;</span><br><span class="line">			least_conn;   </span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.103</span>:<span class="number">8989</span>;</span><br><span class="line">			server <span class="number">192.168</span><span class="number">.0</span><span class="number">.104</span>:<span class="number">8990</span>;</span><br><span class="line">		&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="四次挥手"><a href="#四次挥手" class="headerlink" title="四次挥手"></a>四次挥手</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">第一步，当主机A的应用程序通知TCP数据已经发送完毕时，TCP向主机B发送一个带有FIN附加标记的报文段（FIN表示英文finish）</span><br><span class="line">第二步，主机B收到这个FIN报文段之后，并不立即用FIN报文段回复主机A，而是先向主机A发送一个确认序号ACK，同时通知自己相应的应用程序：对方要求关闭连接（先发送ACK的目的是为了防止在这段时间内，对方重传FIN报文段）</span><br><span class="line">第三步，主机B的应用程序告诉TCP：我要彻底的关闭连接，TCP向主机A送一个FIN报文段</span><br><span class="line">第四步，主机A收到这个FIN报文段后，向主机B发送一个ACK表示连接彻底释放</span><br></pre></td></tr></table></figure>
 
-<p>至此，一个uWSGI集群搭建完成，nginx作为反向代理服务器和web服务器接收请求，然后处理静态的部分，动态部分按照负载均衡策略转发给某一个uWSGI服务器。</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 集群解决了什么问题：</span></span><br><span class="line"><span class="bullet">	1. </span>高并发</span><br><span class="line"><span class="bullet">	2. </span>高完整性（高可用性）</span><br></pre></td></tr></table></figure>
+<h3 id="Http协议和Https协议的区别"><a href="#Http协议和Https协议的区别" class="headerlink" title="Http协议和Https协议的区别"></a>Http协议和Https协议的区别</h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">HTTP协议是使用明文数据传输的网络协议，明文传输会让用户存在一个非常大的安全隐患。端口80</span><br><span class="line"></span><br><span class="line">HTTPS协议可以理解为HTTP协议的安全升级版，就是在HTTP的基础上增加了数据加密。端口443</span><br><span class="line"></span><br><span class="line">HTTPS协议是由 SSL+HTTP 协议构建的可进行加密传输、身份认证的网络协议要比HTTP协议安全。</span><br></pre></td></tr></table></figure>
 
-<p>至此python-web-project成功运行于 一个对高并发有更好支持，具有高可用性（high-available）的系统中</p>
+<h3 id="HTTP协议特点"><a href="#HTTP协议特点" class="headerlink" title="HTTP协议特点"></a><strong>HTTP协议特点</strong></h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">- </span>HTTP协议是超文本传输协议；</span><br><span class="line"><span class="bullet">- </span>HTTP协议是一个应用层协议；</span><br><span class="line"><span class="bullet">- </span>无连接：每次请求都是独立的；</span><br><span class="line"><span class="bullet">- </span>无状态，表示客户端每次请求都不能记录请求状态，就是两条请求直接不可通信。</span><br></pre></td></tr></table></figure>
+
 
           
             <div class='article_footer'>
@@ -437,7 +395,7 @@
           
         
           
-            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/>https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/</a></p>
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/>https://www.zfyvip.xyz/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/</a></p>
           
         
       </blockquote>
@@ -474,10 +432,10 @@
     <div class='new-meta-box'>
       
         
-          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-09-03T19:11:27+08:00">
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-07T16:54:18+08:00">
   <a class='notlink'>
     <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
-    <p>更新于：Sep 3, 2020</p>
+    <p>更新于：Nov 7, 2020</p>
   </a>
 </div>
 
@@ -486,7 +444,7 @@
         
           
   
-  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Linux/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Linux</p></a></div>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Http/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Http</p></a></div>
 
 
         
@@ -504,7 +462,7 @@
       
         <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/&title=Linux-Nginx环境部署 - 东风未起，念你成疾&summary=Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。"
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/&title=HTTP - 东风未起，念你成疾&summary=http工作原理,TCP 的三次握手客户端,四次挥手…."
           
           >
           
@@ -516,7 +474,7 @@
       
         <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
           
-          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/&title=Linux-Nginx环境部署 - 东风未起，念你成疾&summary=Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。"
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/&title=HTTP - 东风未起，念你成疾&summary=http工作原理,TCP 的三次握手客户端,四次挥手…."
           
           >
           
@@ -528,7 +486,7 @@
       
         <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
           
-          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/09/03/Linux-Nginx%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2/&title=Linux-Nginx环境部署 - 东风未起，念你成疾&summary=Nginx是一款轻量级的Web服务器/反向代理服务器 ，其特点是占有内存少，并发能力强。"
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/&title=HTTP - 东风未起，念你成疾&summary=http工作原理,TCP 的三次握手客户端,四次挥手…."
           
           >
           
@@ -552,21 +510,13 @@
         
           <div class="prev-next">
             
-              <a class='prev' href='/2020/09/04/Pycharm%E8%BF%9E%E6%8E%A5MySQL%E9%97%AE%E8%85%BF/'>
-                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>Pycharm连接MySQL问腿</p>
-                <p class='content'>Pycharm连接MySQL数据库问题报错08001
-
-
-Pycharm连接MySQL问题问题:错误编号08001解决办法:123456781.在终端里先使用管理员登录mysql，也就是root...</p>
-              </a>
             
-            
-              <a class='next' href='/2020/09/03/Linux-%E7%8E%AF%E5%A2%83%E9%83%A8%E7%BD%B2%E6%94%B6%E9%9B%86/'>
-                <p class='title'>Linux-环境部署收集<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
-                <p class='content'>MySQL5.7安装 ,Python安装,Django安装,uWSGI服务器
+              <a class='next' href='/2020/11/01/js%E5%8A%A0%E5%AF%86%E7%A0%B4%E8%A7%A3/'>
+                <p class='title'>js加密破解<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>1.前端加密  2.后端加密  3.加密算法
 
 
-项目环境部署一、MySQL5.7安装1、安装方式1.1 方式一 yum安装（推荐使用该方式）在CentOS中默认...</p>
+js加密破解分类1234561.前端加密	加密逻辑在前端2.后端加密	加密逻辑在后台,一般直接使用加密算法经行加密操作3.加密算法	Base64...</p>
               </a>
             
           </div>
@@ -617,7 +567,7 @@ Pycharm连接MySQL问题问题:错误编号08001解决办法:123456781.在终端
 
   <script>
     window.subData = {
-      title: 'Linux-Nginx环境部署',
+      title: 'HTTP',
       tools: true
     }
   </script>
@@ -657,7 +607,7 @@ Pycharm连接MySQL问题问题:错误编号08001解决办法:123456781.在终端
 
 
     <div class='content'>
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、Nginx概述"><span class="toc-text">一、Nginx概述</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、简介"><span class="toc-text">1、简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-1-什么nginx"><span class="toc-text">1.1 什么nginx</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-nginx的作用"><span class="toc-text">2.2 nginx的作用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、安装步骤"><span class="toc-text">2、安装步骤</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、nginx与uWSGI"><span class="toc-text">二、nginx与uWSGI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、集群和负载均衡策略"><span class="toc-text">三、集群和负载均衡策略</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#http工作原理"><span class="toc-text">http工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#TCP-的三次握手客户端"><span class="toc-text">TCP 的三次握手客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三次握手缺点"><span class="toc-text">三次握手缺点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#四次挥手"><span class="toc-text">四次挥手</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Http协议和Https协议的区别"><span class="toc-text">Http协议和Https协议的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#HTTP协议特点"><span class="toc-text">HTTP协议特点</span></a></li></ol>
     </div>
   </section>
 
