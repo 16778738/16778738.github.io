@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://www.zfyvip.xyz/"/>
-  <updated>2020-11-07T08:54:18.428Z</updated>
+  <updated>2020-11-09T01:25:37.405Z</updated>
   <id>https://www.zfyvip.xyz/</id>
   
   <author>
@@ -15,6 +15,52 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>使用pycharm导出虚拟环境依赖包</title>
+    <link href="https://www.zfyvip.xyz/2020/11/09/%E4%BD%BF%E7%94%A8pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96%E5%8C%85/"/>
+    <id>https://www.zfyvip.xyz/2020/11/09/%E4%BD%BF%E7%94%A8pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96%E5%8C%85/</id>
+    <published>2020-11-09T01:20:57.000Z</published>
+    <updated>2020-11-09T01:25:37.405Z</updated>
+    
+    <content type="html"><![CDATA[<p>导出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure><p>安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;导出&lt;/p&gt;
+&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre
+      
+    
+    </summary>
+    
+    
+    
+      <category term="Pycharm" scheme="https://www.zfyvip.xyz/tags/Pycharm/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>短信验证码常见漏洞</title>
+    <link href="https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/"/>
+    <id>https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/</id>
+    <published>2020-11-09T00:59:33.000Z</published>
+    <updated>2020-11-09T01:00:57.640Z</updated>
+    
+    <content type="html"><![CDATA[<p>短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过</p><a id="more"></a><p><strong>一：短信轰炸漏洞</strong></p><p>发送短信接口是最容易被盗刷的接口，不法分子利用接口的漏洞，任意的发送短信，给企业造成直接的经济损失。因此这个要特别注意，主要防御手段有四：</p><p>（一）同一个手机号限制每日发送短信条数；</p><p>（二）限制发送短信间隔，通常限制是 60秒，在客户端设置60秒倒计时没什么用，在服务端也要做；</p><p>（三）给接口加签名验证增加破解接口的难度。</p><p>（四）限制ip日发送短信条数</p><p><strong>二：验证码未与手机号绑定</strong></p><p>验证码未与手机号绑定的话，就会发生这样的情况，A的验证码B可以用，这样是非常不安全的</p><p>（一）任意用户注册漏洞</p><p>可以使用任意手机号进行注册，操作步骤如下：1.在注册界面，输入自己的手机号；2.发送验证码，拿到验证码，然后退出登录界面；3.重新进入注册界面，输入任意人的手机号，输入刚才拿到的自己的验证码，注册成功。</p><p>（二）任意用户密码重置漏洞</p><p>可以任意修改任何账号的密码，操作步骤如下：1.在忘记密码界面，输入自己的手机号；2.发送验证码，拿到验证码，然后退出忘记密码界面；3.输入其他人的手机号，输入自己的验证码，验证成功，修改别人的密码成功。</p><p>解决之道，唯有在服务端校将验证码与手机号绑定。</p><p><strong>三：验证码暴力破解漏洞</strong></p><p>验证码一般由4位或6位数字组成，4位的话，最多尝试1万次就能破解验证码，所以应对验证次数进行限制，同时应该设置验证码的过期时间（5分钟或15分钟失效），防止暴力破解验证码。</p><p><strong>四：客户端验证绕过</strong></p><p>在客户端校验验证码是不安全的，必须在服务端进行验证，否则容易造成任意用户注册、任意修改密码、任意登陆等一系列问题。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过&lt;/p&gt;
+    
+    </summary>
+    
+    
+    
+      <category term="漏洞" scheme="https://www.zfyvip.xyz/tags/%E6%BC%8F%E6%B4%9E/"/>
+    
+  </entry>
   
   <entry>
     <title>HTTP</title>
@@ -394,49 +440,6 @@
     <summary type="html">
     
       &lt;p&gt;Clawer-爬虫采集免费的代理,并测试代理是否可用&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="爬虫" scheme="https://www.zfyvip.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Clawer-51job爬取</title>
-    <link href="https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/"/>
-    <id>https://www.zfyvip.xyz/2020/09/27/Clawer-51job%E7%88%AC%E5%8F%96/</id>
-    <published>2020-09-27T02:55:14.000Z</published>
-    <updated>2020-09-27T12:52:24.295Z</updated>
-    
-    <content type="html"><![CDATA[<p>简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据</p><a id="more"></a><h2 id="Clawer-51job爬取"><a href="#Clawer-51job爬取" class="headerlink" title="Clawer-51job爬取"></a>Clawer-51job爬取</h2><p>简单的51job爬取五万条职位信息</p><p>正则匹配数据</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> gzip,re</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line">num = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> pn <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">1462</span>):</span><br><span class="line">    url = <span class="string">"https://search.51job.com/list/000000,000000,0000,00,9,99,java,2,&#123;&#125;.html"</span>.format(pn)</span><br><span class="line">    headers = &#123;</span><br><span class="line">        <span class="string">'user-agent'</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20101101 Firefox/6.0"</span>,</span><br><span class="line">        <span class="string">'referer'</span>: <span class="string">'url'</span>&#125;</span><br><span class="line">    <span class="comment"># 'user-agent': "baiduSpider"&#125;</span></span><br><span class="line">    req = request.Request(url)</span><br><span class="line">    res = request.urlopen(req).read()</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        res = gzip.decompress(res).decode(<span class="string">'gbk'</span>)</span><br><span class="line">    <span class="keyword">except</span>:</span><br><span class="line">        res = res.decode(<span class="string">'gbk'</span>)</span><br><span class="line">    jpb_name_rule = <span class="string">'"job_title":"(.*?)"'</span></span><br><span class="line">    jpb_conmoany_rule = <span class="string">'"company_name":"(.*?)"'</span></span><br><span class="line">    jpb_salary_rule = <span class="string">'"providesalary_text":"(.*?)"'</span></span><br><span class="line">    jpb_place_rule = <span class="string">'"workarea_text":"(.*?)"'</span></span><br><span class="line"></span><br><span class="line">    job_names = re.findall(jpb_name_rule,res)</span><br><span class="line">    job_company = re.findall(jpb_conmoany_rule,res)</span><br><span class="line">    job_salary = re.findall(jpb_salary_rule,res)</span><br><span class="line">    job_place = re.findall(jpb_place_rule,res)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">with</span> open(<span class="string">'51job.txt'</span>, <span class="string">'a'</span>, encoding=<span class="string">'utf-8'</span>) <span class="keyword">as</span> w:</span><br><span class="line">        <span class="keyword">for</span> job_name <span class="keyword">in</span> job_names:</span><br><span class="line">            index = job_name.index(job_name)</span><br><span class="line">            w.write(job_name + <span class="string">" "</span> + job_company[index] + <span class="string">" "</span> + job_salary[index]+ <span class="string">" "</span> + job_place[index] + <span class="string">" "</span> + <span class="string">"\n"</span>)</span><br><span class="line">            num += <span class="number">1</span></span><br><span class="line">            <span class="keyword">if</span> num == <span class="number">50000</span>:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line">            print(num)</span><br></pre></td></tr></table></figure><h3 id="json处理数据"><a href="#json处理数据" class="headerlink" title="json处理数据"></a>json处理数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">from</span> urllib <span class="keyword">import</span> request</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>, <span class="number">6</span>):</span><br><span class="line">    url = <span class="string">"https://search.51job.com/list/010000,000000,0000,00,9,99,%25E9%2594%2580%25E5%2594%25AE,2,&#123;&#125;.html?lang=c&amp;postchannel=0000&amp;workyear=99&amp;cotype=99&amp;degreefrom=99&amp;jobterm=99&amp;companysize=99&amp;ord_field=0&amp;dibiaoid=0&amp;line=&amp;welfare="</span>.format(</span><br><span class="line">        i)</span><br><span class="line">    res = request.urlopen(url).read().decode(<span class="string">'gbk'</span>)</span><br><span class="line">    <span class="comment"># 因为数据存放在script中,json数据 使用json.loads解序列化;json.dumps序列化</span></span><br><span class="line">    rule = <span class="string">'__SEARCH_RESULT__ = (.*?)&lt;/script&gt;'</span></span><br><span class="line">    job_dict = json.loads(re.findall(rule, res)[<span class="number">0</span>])</span><br><span class="line">    <span class="keyword">for</span> job <span class="keyword">in</span> job_dict[<span class="string">'engine_search_result'</span>]:</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> job[<span class="string">'providesalary_text'</span>]:</span><br><span class="line">            job[<span class="string">'providesalary_text'</span>] = <span class="string">"面议"</span></span><br><span class="line">        print(job[<span class="string">'job_name'</span>], job[<span class="string">'providesalary_text'</span>])</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;简单的51job爬取五万条职位信息,正则匹配数据,以及json处理数据&lt;/p&gt;
-    
-    </summary>
-    
-    
-    
-      <category term="爬虫" scheme="https://www.zfyvip.xyz/tags/%E7%88%AC%E8%99%AB/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>User-Agent常见</title>
-    <link href="https://www.zfyvip.xyz/2020/09/26/User-Agent%E5%B8%B8%E8%A7%81/"/>
-    <id>https://www.zfyvip.xyz/2020/09/26/User-Agent%E5%B8%B8%E8%A7%81/</id>
-    <published>2020-09-26T07:47:35.000Z</published>
-    <updated>2020-09-27T02:58:49.818Z</updated>
-    
-    <content type="html"><![CDATA[<p>User-Agent常见 </p><p>1) Chrome(谷歌) 2) Firefox(火狐) 3) Safari </p><a id="more"></a><h2 id="User-Agent常见"><a href="#User-Agent常见" class="headerlink" title="User-Agent常见"></a>User-Agent常见</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">1) Chrome(谷歌)</span><br><span class="line">Win7:</span><br><span class="line">Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.1 (KHTML, like Gecko) Chrome/14.0.835.163 Safari/535.1</span><br><span class="line">Win10:</span><br><span class="line">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36</span><br><span class="line">Chrome 17.0 – MAC</span><br><span class="line">Mozilla/5.0 (Macintosh; Intel Mac OS X 10<span class="emphasis">_7_</span>0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11 </span><br><span class="line"> </span><br><span class="line"></span><br><span class="line">2) Firefox(火狐)</span><br><span class="line">Win7:</span><br><span class="line">Mozilla/5.0 (Windows NT 6.1; WOW64; rv:6.0) Gecko/20100101 Firefox/6.0</span><br><span class="line">Firefox 4.0.1 – MAC</span><br><span class="line">Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">3) Safari(Safari是苹果计算机的操作系统Mac OS中的浏览器)</span><br><span class="line">safari 5.1 – MAC</span><br><span class="line">Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10<span class="emphasis">_6_</span>8; en-us) AppleWebKit/534.50 (KHTML, like Gecko) Version/5.1 Safari/534.50</span><br></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;User-Agent常见 &lt;/p&gt;
-&lt;p&gt;1) Chrome(谷歌) 2) Firefox(火狐) 3) Safari &lt;/p&gt;
     
     </summary>
     

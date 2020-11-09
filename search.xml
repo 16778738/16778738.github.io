@@ -4,6 +4,44 @@
   
     
     <entry>
+      <title>使用pycharm导出虚拟环境依赖包</title>
+      <link href="/2020/11/09/%E4%BD%BF%E7%94%A8pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96%E5%8C%85/"/>
+      <url>/2020/11/09/%E4%BD%BF%E7%94%A8pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96%E5%8C%85/</url>
+      
+        <content type="html"><![CDATA[<p>导出</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip freeze &gt; requirements.txt</span><br></pre></td></tr></table></figure><p>安装</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Pycharm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>短信验证码常见漏洞</title>
+      <link href="/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/"/>
+      <url>/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/</url>
+      
+        <content type="html"><![CDATA[<p>短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过</p><a id="more"></a><p><strong>一：短信轰炸漏洞</strong></p><p>发送短信接口是最容易被盗刷的接口，不法分子利用接口的漏洞，任意的发送短信，给企业造成直接的经济损失。因此这个要特别注意，主要防御手段有四：</p><p>（一）同一个手机号限制每日发送短信条数；</p><p>（二）限制发送短信间隔，通常限制是 60秒，在客户端设置60秒倒计时没什么用，在服务端也要做；</p><p>（三）给接口加签名验证增加破解接口的难度。</p><p>（四）限制ip日发送短信条数</p><p><strong>二：验证码未与手机号绑定</strong></p><p>验证码未与手机号绑定的话，就会发生这样的情况，A的验证码B可以用，这样是非常不安全的</p><p>（一）任意用户注册漏洞</p><p>可以使用任意手机号进行注册，操作步骤如下：1.在注册界面，输入自己的手机号；2.发送验证码，拿到验证码，然后退出登录界面；3.重新进入注册界面，输入任意人的手机号，输入刚才拿到的自己的验证码，注册成功。</p><p>（二）任意用户密码重置漏洞</p><p>可以任意修改任何账号的密码，操作步骤如下：1.在忘记密码界面，输入自己的手机号；2.发送验证码，拿到验证码，然后退出忘记密码界面；3.输入其他人的手机号，输入自己的验证码，验证成功，修改别人的密码成功。</p><p>解决之道，唯有在服务端校将验证码与手机号绑定。</p><p><strong>三：验证码暴力破解漏洞</strong></p><p>验证码一般由4位或6位数字组成，4位的话，最多尝试1万次就能破解验证码，所以应对验证次数进行限制，同时应该设置验证码的过期时间（5分钟或15分钟失效），防止暴力破解验证码。</p><p><strong>四：客户端验证绕过</strong></p><p>在客户端校验验证码是不安全的，必须在服务端进行验证，否则容易造成任意用户注册、任意修改密码、任意登陆等一系列问题。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 漏洞 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>HTTP</title>
       <link href="/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/"/>
       <url>/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/</url>

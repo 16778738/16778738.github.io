@@ -5,8 +5,6 @@
   <!-- SEO相关 -->
   
     
-      <meta name="robots" content="noindex,follow">
-    
   
   <!-- 渲染优化 -->
   <meta name="renderer" content="webkit">
@@ -18,8 +16,12 @@
 
   <!-- 页面元数据 -->
   
-    <title>Tag: JavaScript - 东风未起，念你成疾</title>
+    <title>短信验证码常见漏洞 - 东风未起，念你成疾</title>
   
+    <meta name="keywords" content="漏洞">
+  
+  
+    <meta name="description" content="短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过">
   
 
   <!-- feed -->
@@ -270,25 +272,12 @@
     <div class='body-wrapper'>
       
 
-
 <div class='l_main'>
   
-    
-      
-  <section class="post-list ">
-    
-      
-        
-          
-        
-      
-    
-    
-      
-        
-          <div class='post-wrapper'>
-            <article class="post white-box shadow reveal ">
+
   
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
 
 
   <section class='meta'>
@@ -298,11 +287,11 @@
       <div class="meta" id="header-meta">
         
           
-  <h2 class="title">
-    <a href="/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/">
-      JavaScript-实现简易购物车
+  <h1 class="title">
+    <a href="/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/">
+      短信验证码常见漏洞
     </a>
-  </h2>
+  </h1>
 
 
         
@@ -330,27 +319,9 @@
               <div class="new-meta-item date">
   <a class='notlink'>
     <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
-    <p>发布于：Aug 16, 2020</p>
+    <p>发布于：Nov 9, 2020</p>
   </a>
 </div>
-
-            
-          
-            
-              
-  <div class="new-meta-item wordcount">
-    <a class='notlink'>
-      <i class="fas fa-keyboard fa-fw" aria-hidden="true"></i>
-      <p>1.5k words</p>
-    </a>
-  </div>
-  <div class="new-meta-item readtime">
-    <a class='notlink'>
-      <i class="fas fa-hourglass-half fa-fw" aria-hidden="true"></i>
-      <p>8 min</p>
-    </a>
-  </div>
-
 
             
           
@@ -368,94 +339,69 @@
   </section>
 
 
-  <section class="article typo">
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>实现简易购物车,删除,全选,合计</p>
-      
-    </div>
-    
-      
-        <div class="button readmore">
-          <a href="/2020/08/16/JavaScript-%E5%AE%9E%E7%8E%B0%E7%AE%80%E6%98%93%E8%B4%AD%E7%89%A9%E8%BD%A6/">
-            阅读全文 <i class="fas fa-chevron-right"></i>
-          </a>
-        </div>
-      
-    
-  </section>
-</article>
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过</p>
+<a id="more"></a>
 
-          </div>
-        
-      
-    
-  </section>
-  
-    
-    <!-- 根据主题中的设置决定是否在archive中针对摘要部分的MathJax公式加载mathjax.js文件 -->
-    
-    
+<p><strong>一：短信轰炸漏洞</strong></p>
+<p>发送短信接口是最容易被盗刷的接口，不法分子利用接口的漏洞，任意的发送短信，给企业造成直接的经济损失。因此这个要特别注意，主要防御手段有四：</p>
+<p>（一）同一个手机号限制每日发送短信条数；</p>
+<p>（二）限制发送短信间隔，通常限制是 60秒，在客户端设置60秒倒计时没什么用，在服务端也要做；</p>
+<p>（三）给接口加签名验证增加破解接口的难度。</p>
+<p>（四）限制ip日发送短信条数</p>
+<p><strong>二：验证码未与手机号绑定</strong></p>
+<p>验证码未与手机号绑定的话，就会发生这样的情况，A的验证码B可以用，这样是非常不安全的</p>
+<p>（一）任意用户注册漏洞</p>
+<p>可以使用任意手机号进行注册，操作步骤如下：1.在注册界面，输入自己的手机号；2.发送验证码，拿到验证码，然后退出登录界面；3.重新进入注册界面，输入任意人的手机号，输入刚才拿到的自己的验证码，注册成功。</p>
+<p>（二）任意用户密码重置漏洞</p>
+<p>可以任意修改任何账号的密码，操作步骤如下：1.在忘记密码界面，输入自己的手机号；2.发送验证码，拿到验证码，然后退出忘记密码界面；3.输入其他人的手机号，输入自己的验证码，验证成功，修改别人的密码成功。</p>
+<p>解决之道，唯有在服务端校将验证码与手机号绑定。</p>
+<p><strong>三：验证码暴力破解漏洞</strong></p>
+<p>验证码一般由4位或6位数字组成，4位的话，最多尝试1万次就能破解验证码，所以应对验证次数进行限制，同时应该设置验证码的过期时间（5分钟或15分钟失效），防止暴力破解验证码。</p>
+<p><strong>四：客户端验证绕过</strong></p>
+<p>在客户端校验验证码是不安全的，必须在服务端进行验证，否则容易造成任意用户注册、任意修改密码、任意登陆等一系列问题。</p>
 
-  
-
-
-    
-  
-</div>
-<aside class='l_side'>
-  
+          
+            <div class='article_footer'>
+              
+                
   
     
     
 
-<section class="widget blogger shadow desktop mobile">
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
   <div class='content'>
     
-      
-        <a class='avatar flat-box' href='/about/'>
-          <img no-lazy src='https://cdn.jsdelivr.net/gh/16778738/picture/img/QQ%E6%88%AA%E5%9B%BE20200816125411.png'/>
-        </a>
-      
-    
-    
-      <div class='text'>
-        
-        
-        
-          <p><span id="jinrishici-sentence">东风未起，念你成疾</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
-      </div>
-    
-    
-      <div class="social-wrapper">
+      <blockquote>
         
           
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
           
         
           
-            <a href="https://github.com/16778738"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/>https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/</a></p>
           
         
-          
-            <a href="https://music.163.com/#/user/home?id=1444537739"
-              class="social fas fa-headphones-alt flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-            </a>
-          
-        
-      </div>
+      </blockquote>
     
   </div>
 </section>
@@ -466,43 +412,191 @@
     
     
 
+<section class="widget qrcode  desktop mobile">
   
 
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
   
-    
-    
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-09T09:00:57+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Nov 9, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
   
-
-  <section class="widget tagcloud shadow desktop mobile">
-    
-  <header>
-    
-      <a href='/blog/tags/'><i class="fas fa-tags fa-fw" aria-hidden="true"></i><span class='name'>热门标签</span></a>
-    
-  </header>
-<script>
-(function(){
-    var bp = document.createElement('script');
-    var curProtocol = window.location.protocol.split(':')[0];
-    if (curProtocol === 'https') {
-        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
-    }
-    else {
-        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
-    }
-    var s = document.getElementsByTagName("script")[0];
-    s.parentNode.insertBefore(bp, s);
-})();
-</script>
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/%E6%BC%8F%E6%B4%9E/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>漏洞</p></a></div>
 
 
-    <div class='content'>
-      <a href="/tags/Django/" style="font-size: 19px; color: #777">Django</a> <a href="/tags/Http/" style="font-size: 14px; color: #999">Http</a> <a href="/tags/JavaScript/" style="font-size: 14px; color: #999">JavaScript</a> <a href="/tags/Jquery/" style="font-size: 14px; color: #999">Jquery</a> <a href="/tags/Js%E5%8A%A0%E5%AF%86%E7%A0%B4%E8%A7%A3/" style="font-size: 14px; color: #999">Js加密破解</a> <a href="/tags/Linux/" style="font-size: 17.33px; color: #828282">Linux</a> <a href="/tags/Mysql/" style="font-size: 14px; color: #999">Mysql</a> <a href="/tags/Nginx/" style="font-size: 14px; color: #999">Nginx</a> <a href="/tags/Pycharm/" style="font-size: 15.67px; color: #8e8e8e">Pycharm</a> <a href="/tags/Python/" style="font-size: 20.67px; color: #6c6c6c">Python</a> <a href="/tags/SSM/" style="font-size: 14px; color: #999">SSM</a> <a href="/tags/eval/" style="font-size: 14px; color: #999">eval</a> <a href="/tags/hexo/" style="font-size: 14px; color: #999">hexo</a> <a href="/tags/jQuery/" style="font-size: 17.33px; color: #828282">jQuery</a> <a href="/tags/python/" style="font-size: 22.33px; color: #606060">python</a> <a href="/tags/requests/" style="font-size: 14px; color: #999">requests</a> <a href="/tags/web%E5%AE%89%E5%85%A8/" style="font-size: 14px; color: #999">web安全</a> <a href="/tags/win10/" style="font-size: 14px; color: #999">win10</a> <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" style="font-size: 14px; color: #999">机器学习</a> <a href="/tags/%E6%BC%8F%E6%B4%9E/" style="font-size: 14px; color: #999">漏洞</a> <a href="/tags/%E7%88%AC%E8%99%AB/" style="font-size: 24px; color: #555">爬虫</a> <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 14px; color: #999">计算机网络</a> <a href="/tags/%E9%9C%80%E6%B1%82%E5%B7%A5%E7%A8%8B/" style="font-size: 14px; color: #999">需求工程</a> <a href="/tags/%E9%A1%B9%E7%9B%AE/" style="font-size: 14px; color: #999">项目</a>
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/&title=短信验证码常见漏洞 - 东风未起，念你成疾&summary=短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/&title=短信验证码常见漏洞 - 东风未起，念你成疾&summary=短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/11/09/%E7%9F%AD%E4%BF%A1%E9%AA%8C%E8%AF%81%E7%A0%81%E5%B8%B8%E8%A7%81%E6%BC%8F%E6%B4%9E/&title=短信验证码常见漏洞 - 东风未起，念你成疾&summary=短信轰炸漏洞,验证码未与手机号绑定,验证码暴力破解漏洞,客户端验证绕过"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
     </div>
   </section>
 
 
+        
+        
+          <div class="prev-next">
+            
+              <a class='prev' href='/2020/11/09/%E4%BD%BF%E7%94%A8pycharm%E5%AF%BC%E5%87%BA%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83%E4%BE%9D%E8%B5%96%E5%8C%85/'>
+                <p class='title'><i class="fas fa-chevron-left" aria-hidden="true"></i>使用pycharm导出虚拟环境依赖包</p>
+                <p class='content'>导出
+1pip freeze &gt; requirements.txt
+
+安装
+1pip install -r requirements.txt
+
+</p>
+              </a>
+            
+            
+              <a class='next' href='/2020/11/07/Http%E7%9A%84%E4%BA%86%E8%A7%A3/'>
+                <p class='title'>HTTP<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>http工作原理,TCP 的三次握手客户端,四次挥手….
+
+
+http工作原理12345671.地址进行dns解析,将url解析出对应的内容2.封装http请求数据包3.封装成tcp包,建立tc...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
   
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+        <section id="comments">
+          <div id="minivaline_container">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: '短信验证码常见漏洞',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
 
   
 
@@ -700,7 +794,96 @@ setInterval("createtime()",250);
 
 
 
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
 
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz",
+    appKey: "xpNIURUvFCvRDjcPDGabmVbb",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/minivaline@2/dist/MiniValine.min.js"></script>
+
+  
+  
+  
+  
+  
+  <script>
+  new MiniValine({
+	el: '#minivaline_container',
+	appId: 'b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz# your appId',
+	appKey: 'xpNIURUvFCvRDjcPDGabmVbb# your appKey',
+	mode: 'xCss',
+	placeholder: "快来评论吧~",
+	
+	  pathname: location.pathname,
+	
+	lang: '',
+	adminEmailMd5: 'de8a7aa53d07e6b6bceb45c64027763d',
+	tagMeta: ["管理员", "小伙伴", "访客"],
+	master: ["de8a7aa53d07e6b6bceb45c64027763d"],
+	friends: ["b5bd5d836c7a0091aa8473e79ed4c25e", "adb7d1cd192658a55c0ad22a3309cecf", "3ce1e6c77b4910f1871106cb30dc62b0", "cfce8dc43725cc14ffcd9fb4892d5bfc"],
+	math: true,  /*布尔值 字符串无效 下同*/
+	md: true,
+	enableQQ: false,
+	NoRecordIP: false,
+	visitor: true,
+	maxNest: 6,
+	pageSize: 6,
+	emoticonUrl: ["https://cdn.jsdelivr.net/npm/alus@latest", "https://cdn.jsdelivr.net/gh/MiniValine/qq@latest", "https://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest", "https://cdn.jsdelivr.net/gh/MiniValine/tieba@latest", "https://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest", "https://cdn.jsdelivr.net/gh/MiniValine/weibo@latest"]
+  });
+  </script>
 
 
 
