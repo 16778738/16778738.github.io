@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html>
+<head hexo-theme='https://volantis.js.org/#0.0.1'>
+  <meta charset="utf-8">
+  <!-- SEO相关 -->
+  
+    
+  
+  <!-- 渲染优化 -->
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- 页面元数据 -->
+  
+    <title>redis学习笔记1 - 东风未起，念你成疾</title>
+  
+    <meta name="keywords" content="Redis">
+  
+  
+    <meta name="description" content="Redis数据库的学习笔记">
+  
+
+  <!-- feed -->
+  
+    <link rel="alternate" href="/atom.xml" title="东风未起，念你成疾">
+  
+
+  <!-- import meta -->
+  
+
+  <!-- link -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13/css/all.min.css">
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css">
+
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.css">
+
+  
+
+  
+  <link rel="shortcut icon" type='image/x-icon' href="https://cdn.jsdelivr.net/gh/xaoxuu/assets@master/favicon/favicon.ico">
+  
+
+  
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.css">
+  
+
+  
+
+  <!-- import link -->
+  
+
+  
+  
+    
+<link rel="stylesheet" href="/css/style.css">
+
+  
+
+  <script>
+    function setLoadingBarProgress(num) {
+      document.getElementById('loading-bar').style.width=num+"%";
+    }
+  </script>
+
+  
+  
+</head>
+
+<body>
+  
+  <div id="loading-bar-wrapper">
+  <div id="loading-bar"></div>
+</div>
+<header class="l_header shadow blur">
+  <div class='container'>
+  <div class='wrapper'>
+    <div class='nav-sub'>
+      <p class="title"></p>
+      <ul class='switcher nav-list-h'>
+        <li><a class="s-comment fas fa-comments fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+          <li><a class="s-toc fas fa-list fa-fw" target="_self" href='javascript:void(0)'></a></li>
+        
+      </ul>
+    </div>
+		<div class="nav-main">
+      
+        
+        <a class="title flat-box" target="_self" href='/'>
+          
+          
+          
+          
+            东风 <b><sup style='color:#3AA757'>0.0.1</sup></b>
+          
+        </a>
+      
+
+			<div class='menu navigation'>
+				<ul class='nav-list-h'>
+          
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+          
+            
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+          
+				</ul>
+			</div>
+
+      <div class="m_search">
+        <form name="searchform" class="form u-search-form">
+          <i class="icon fas fa-search fa-fw"></i>
+          <input type="text" class="input u-search-input" placeholder="Search..." />
+        </form>
+      </div>
+
+			<ul class='switcher nav-list-h'>
+				
+					<li><a class="s-search fas fa-search fa-fw" target="_self" href='javascript:void(0)'></a></li>
+				
+				<li>
+          <a class="s-menu fas fa-bars fa-fw" target="_self" href='javascript:void(0)'></a>
+          <ul class="menu-phone list-v navigation white-box">
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/
+                  
+                  
+                  
+                    id="home"
+                  >
+                  <i class='fas fa-rss fa-fw'></i>博客
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/tags/
+                  
+                  
+                  
+                    id="tags"
+                  >
+                  <i class='fas fa-tags fa-fw'></i>标签
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/archives/
+                  
+                  
+                  
+                    id="archives"
+                  >
+                  <i class='fas fa-archive fa-fw'></i>归档
+                </a>
+                
+              </li>
+            
+          
+            
+              
+            
+              <li>
+                <a class="flat-box" href=/about/
+                  
+                  
+                  
+                    id="about"
+                  >
+                  <i class='fas fa-info-circle fa-fw'></i>关于
+                </a>
+                
+              </li>
+            
+          
+            
+          </ul>
+        </li>
+			</ul>
+		</div>
+	</div>
+  </div>
+
+</header>
+
+<script>setLoadingBarProgress(40);</script>
+
+
+
+  <div class="l_body nocover">
+    <div class='body-wrapper'>
+      
+
+<div class='l_main'>
+  
+
+  
+    <article id="post" class="post white-box reveal shadow article-type-post" itemscope itemprop="blogPost">
+      
+
+
+  <section class='meta'>
+    
+      
+      
+      <div class="meta" id="header-meta">
+        
+          
+  <h1 class="title">
+    <a href="/2020/11/20/Redis_01/">
+      redis学习笔记1
+    </a>
+  </h1>
+
+
+        
+        <div class='new-meta-box'>
+          
+            
+          
+            
+              
+<div class='new-meta-item author'>
+  <a href="https://zfyvip.xyz" target="_blank" rel="nofollow noopener">
+    <img src="https://t1.picb.cc/uploads/2020/05/24/tyaD1j.jpg">
+    <p>ZFY</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+            
+              <div class="new-meta-item date">
+  <a class='notlink'>
+    <i class="fas fa-calendar-alt fa-fw" aria-hidden="true"></i>
+    <p>发布于：Nov 20, 2020</p>
+  </a>
+</div>
+
+            
+          
+            
+              
+
+            
+          
+        </div>
+        
+          <hr>
+        
+      </div>
+    
+  </section>
+
+
+      <section class="article typo">
+        <div class="article-entry" itemprop="articleBody">
+          
+          <p>Redis数据库的学习笔记</p>
+<a id="more"></a>
+
+<h1 id="Redis数据库"><a href="#Redis数据库" class="headerlink" title="Redis数据库"></a>Redis数据库</h1><h3 id="一、NoSQL简介"><a href="#一、NoSQL简介" class="headerlink" title="一、NoSQL简介"></a>一、NoSQL简介</h3><p>NoSQL，泛指非关系型的数据库，有时也称作Not Only SQL的缩写，是对不同于传统的关系型数据库的的统称。    </p>
+<ul>
+<li>SQL (Structured Query Language) 数据库，指关系型数据库。主要代表：SQL Server，Oracle，MySQL，PostgreSQL。存储数据时，需要预先定义表，字段–关系表</li>
+<li>NoSQL（Not Only SQL）泛指非关系型数据库。主要代表：MongoDB，Redis，CouchDB。无表无关联</li>
+</ul>
+<p><strong>SQL和NoSQL对比：</strong></p>
+<ul>
+<li>SQL通常以数据库表形式存储数据。举个栗子，存个学生借书数据： </li>
+</ul>
+<p><img src="Redis_01.assets/1744544-a9b6a180eb06a2ba.jpg" alt="img"> </p>
+<ul>
+<li><p>而NoSQL存储方式比较灵活，比如使用类JSON文件存储上表中熊大的借阅数据：</p>
+<p><img src="Redis_01.assets/1744544-e7d6976369ed43e6.png" alt="img"> </p>
+</li>
+</ul>
+<p><strong>关系型数据库瓶颈</strong></p>
+<ul>
+<li><p>高并发读写需求</p>
+<p>针对网站类用户的并发性访问非常高，而一台数据库的最大连接数有限，且硬盘I/O有限，其不能满足很多人同时连接</p>
+</li>
+<li><p>海量数据的高效率读写</p>
+<p>网站每天产生的数据量是巨大的，对于关系型数据库来说，在一张包含海量数据的表中查询，效率是非常低的</p>
+</li>
+</ul>
+<p><strong>查</strong>：关系性数据库和非关系性数据库的区别</p>
+<p><strong>查</strong>：MySQL 与Redis的区别 </p>
+<h3 id="二、Redis简介"><a href="#二、Redis简介" class="headerlink" title="二、Redis简介"></a>二、Redis简介</h3><h4 id="1、Redis是什么？"><a href="#1、Redis是什么？" class="headerlink" title="1、Redis是什么？"></a>1、Redis是什么？</h4><p>  速度非常快的Nosql数据库，基于key-value的内存存储，同时支持数据持久化到硬盘。</p>
+<h4 id="2、Redis的特点"><a href="#2、Redis的特点" class="headerlink" title="2、Redis的特点"></a>2、Redis的特点</h4><ul>
+<li>高性能</li>
+<li>数据类型丰富 </li>
+<li>基于内存存储，又支持持久化（将内存中的数据保存到硬盘中）       </li>
+</ul>
+<h3 id="三、Redis安装"><a href="#三、Redis安装" class="headerlink" title="三、Redis安装"></a>三、Redis安装</h3><h4 id="1、解压"><a href="#1、解压" class="headerlink" title="1、解压"></a>1、解压</h4><p>将redis的tar包发送到Linux中，并解压： <code>tar -zxvf redis-3.0.7.tar.gz</code></p>
+<h4 id="2、make指令"><a href="#2、make指令" class="headerlink" title="2、make指令"></a>2、make指令</h4><p><code>cd</code>指令切换到解压目录中，然后执行指令:<code>make</code></p>
+<ul>
+<li><p>执行make的时候，如出现异常：</p>
+<ul>
+<li><p>异常一：</p>
+<p><code>make[2]: cc: Command not found</code></p>
+<p>异常原因：没有安装gcc</p>
+<p>解决方案：yum install gcc</p>
+</li>
+<li><p>异常二：</p>
+<p><code>zmalloc.h:51:31: error: jemalloc/jemalloc.h: No such file or directory</code></p>
+<p>异常原因：一些编译依赖或原来编译遗留出现的问题</p>
+<p>解决方案：make distclean。清理一下，然后再make。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、make-test-直接跳过"><a href="#3、make-test-直接跳过" class="headerlink" title="3、make test (直接跳过)"></a>3、make test (直接跳过)</h4><p>在make成功以后，执行指令：<code>make test</code></p>
+<ul>
+<li><p>在make test时出现异常：</p>
+<ul>
+<li><p>异常一：</p>
+<p><code>couldn&#39;t execute &quot;tclsh8.5&quot;: no such file or directory</code></p>
+<p>异常原因：没有安装tcl</p>
+<p>解决方案：yum install -y tcl。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、make-install"><a href="#4、make-install" class="headerlink" title="4、make install"></a>4、make install</h4><p>安装，执行指令：<code>make install</code></p>
+<h4 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h4><ul>
+<li><p>第一种：前台模式，默认配置启动(默认端口6379) </p>
+<p><code>直接执行指令：redis-server</code></p>
+</li>
+<li><p>第二种：守护进程(后台)模式,指定配置文件启动 </p>
+<ul>
+<li><p>在redis解压根目录中找到配置文件模板(redis.conf)，复制到如下位置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp redis.conf /usr/local/redis_conf/redis.conf</span><br><span class="line"><span class="meta">#</span><span class="bash"> 1. 上述的指令是在redis的解压目录下执行的</span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 2. redis_conf目录是自己创建的 名字是自定义的</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过vi命令修改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes   #守护进程模式启动 -- 后台</span><br><span class="line"></span><br><span class="line">port 7000       #端口  也可以不改</span><br><span class="line"></span><br><span class="line">pidfile .&#x2F;redis.pid  #进程id存储位置</span><br><span class="line"></span><br><span class="line">logfile .&#x2F;redis.log   #日志文件存储位置</span><br><span class="line"></span><br><span class="line">dir &#x2F;usr&#x2F;local&#x2F;redis_conf&#x2F;                 #工作目录 rdb、aof文件存储位置</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后执行<code>redis-server redis.conf</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6、连接Redis"><a href="#6、连接Redis" class="headerlink" title="6、连接Redis"></a>6、连接Redis</h4><p>执行指令：</p>
+<ul>
+<li><p><code>redis-cli</code> 连接端口为6379 Host为127.0.0.1的redis服务器</p>
+</li>
+<li><p><code>redis-cli -p 7000 -h 192.168.1.103</code> 连接端口为7000 Host为192.168.1.103的redis服务器</p>
+</li>
+</ul>
+<h4 id="7、关闭服务"><a href="#7、关闭服务" class="headerlink" title="7、关闭服务"></a>7、关闭服务</h4><p>redis-cli连接了redis服务器后，可以通过<code>shutdown</code>  指令关闭连接，并关闭服务</p>
+<p>或在命令行中执行 <code>redis-cli -p 7000 shutdown</code></p>
+<p>如果只想关闭连接（客户端），在redis命令中，按<code>Ctrl+c</code> 即可，此时服务不会被关闭</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 关闭连接： 在交互界面，ctrl + c即可，退出交互式界面</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 关闭服务：</span></span><br><span class="line"><span class="bullet">	1. </span>在交互式界面，输入shutdown指令</span><br><span class="line"><span class="bullet">	2. </span>在命令行界面，输入连接的指令+shutdown   </span><br><span class="line"><span class="code">		redis-cli -p 7000 shutdown</span></span><br><span class="line"><span class="bullet">	3. </span>通过进程号杀掉进程</span><br><span class="line"><span class="code">    	ps -ef | grep redis</span></span><br><span class="line"><span class="code">    	kill -9 进程号</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="四、Redis数据类型"><a href="#四、Redis数据类型" class="headerlink" title="四、Redis数据类型"></a>四、Redis数据类型</h3><p>Redis支持五种数据类型：string（字符串），list（列表），set（集合）及zset(sorted set：有序集合)，hash（哈希）。 </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># redis数据可以看作是一个大的字典，所有的数据都是以键值对的形式的存在的</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    键1：值1，</span></span><br><span class="line"><span class="code">    键2：值2</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="section"># 键一般为字符串类型,值的类型可以是以上5种数据类型</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1、String字符串"><a href="#1、String字符串" class="headerlink" title="1、String字符串"></a>1、String字符串</h4><p>用于存单值，常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set</td>
+<td>设置一个key/value</td>
+<td>set name Mr_lee</td>
+</tr>
+<tr>
+<td>get</td>
+<td>根据key获得对应的value</td>
+<td>get name       (keys *  / keys n*)</td>
+</tr>
+<tr>
+<td>mset</td>
+<td>一次设置多个key value</td>
+<td>mset age 18 salary 3000</td>
+</tr>
+<tr>
+<td>mget</td>
+<td>一次获得多个key的value</td>
+<td>mget name age</td>
+</tr>
+<tr>
+<td>getset</td>
+<td>获得原始key的值，同时设置新值</td>
+<td>getset age 20</td>
+</tr>
+<tr>
+<td>del</td>
+<td>删除key-value</td>
+<td>del name</td>
+</tr>
+<tr>
+<td>strlen</td>
+<td>获得对应key存储value的长度</td>
+<td>strlen name</td>
+</tr>
+<tr>
+<td>append</td>
+<td>为对应key的value追加内容</td>
+<td>appdend name 123</td>
+</tr>
+<tr>
+<td>getrange</td>
+<td>截取value的内容,对原始的值没有影响</td>
+<td>getrange name  0 2</td>
+</tr>
+<tr>
+<td>setex</td>
+<td>设置一个key存活的有效期（秒）</td>
+<td>setex name 10 tom</td>
+</tr>
+<tr>
+<td>psetex</td>
+<td>设置一个key存活的有效期（毫秒）</td>
+<td>psetex course10000 redis</td>
+</tr>
+<tr>
+<td>setnx</td>
+<td>只有当这个key不存在时等效set操作 not exist</td>
+<td>sexnx birth 2020-2-2</td>
+</tr>
+<tr>
+<td>msetnx</td>
+<td>可以同时设置多个key，在key不存在时有效</td>
+<td>msetnx  course mysql duration 4</td>
+</tr>
+<tr>
+<td>decr</td>
+<td>进行数值类型的-1操作</td>
+<td>decr age</td>
+</tr>
+<tr>
+<td>decrby</td>
+<td>根据提供的数据进行减法操作</td>
+<td>decrby age 3</td>
+</tr>
+<tr>
+<td>incr</td>
+<td>进行数值类型的+1操作</td>
+<td>incr age</td>
+</tr>
+<tr>
+<td>incrby</td>
+<td>根据提供的数据进行加法操作</td>
+<td>incrby age 3</td>
+</tr>
+<tr>
+<td>incrbyfloat</td>
+<td>根据提供的数据加入浮点数</td>
+<td>incrbyfloat age 3.5</td>
+</tr>
+</tbody></table>
+<h4 id="2、List列表"><a href="#2、List列表" class="headerlink" title="2、List列表"></a>2、List列表</h4><p>存储多值，常用指令： </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># python</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    'hobby':['吃饭','睡觉','打豆豆']</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lpush</td>
+<td>将某个值加入到一个key列表头部</td>
+<td>lpush users tom</td>
+</tr>
+<tr>
+<td>lpushx</td>
+<td>同lpush,但是必须要保证这个key存在</td>
+<td>lpushx users jack</td>
+</tr>
+<tr>
+<td>rpush</td>
+<td>将某个值加入到一个key列表末尾</td>
+<td>rpush users linda</td>
+</tr>
+<tr>
+<td>rpushx</td>
+<td>同rpush,但是必须要保证这个key存在</td>
+<td>rpushx users james</td>
+</tr>
+<tr>
+<td>lpop</td>
+<td>返回和移除列表的第一个元素</td>
+<td>lpop users</td>
+</tr>
+<tr>
+<td>rpop</td>
+<td>返回和移除列表的最后一个元素</td>
+<td>rpop users</td>
+</tr>
+<tr>
+<td>lrange</td>
+<td>获取某一个下标区间内的元素</td>
+<td>lrange users 0 3   / lrange users 0 -1</td>
+</tr>
+<tr>
+<td>llen</td>
+<td>获取列表元素个数</td>
+<td>llen users</td>
+</tr>
+<tr>
+<td>lset</td>
+<td>设置某一个位置的元素(替换已有的某个值)</td>
+<td>lset users 2 andy</td>
+</tr>
+<tr>
+<td>lindex</td>
+<td>获取某一个位置的元素</td>
+<td>lindex users 2</td>
+</tr>
+<tr>
+<td>lrem</td>
+<td>从列表头起，删除对应个数的指定元素</td>
+<td>lrem users 2 james</td>
+</tr>
+<tr>
+<td>ltrim</td>
+<td>保留列表中特定区间内的元素,将其它的元素删除 – 切片</td>
+<td>ltrim users 1 3</td>
+</tr>
+<tr>
+<td>linsert</td>
+<td>在某一个元素之前，之后插入新元素</td>
+<td>linsert users before/after jack Macle</td>
+</tr>
+</tbody></table>
+<h4 id="3、Set集合"><a href="#3、Set集合" class="headerlink" title="3、Set集合"></a>3、Set集合</h4><p>set是无序集合，并且不允许有相同的元素</p>
+<p>常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sadd</td>
+<td>为集合添加元素</td>
+<td>sadd st tom</td>
+</tr>
+<tr>
+<td>smembers</td>
+<td>显示集合中所有元素   无序</td>
+<td>smembers st</td>
+</tr>
+<tr>
+<td>scard</td>
+<td>返回集合中元素的个数</td>
+<td>scard st</td>
+</tr>
+<tr>
+<td>spop</td>
+<td>随机返回并移除一个元素</td>
+<td>spop st</td>
+</tr>
+<tr>
+<td>smove</td>
+<td>从一个集合中向另一个集合移动元素</td>
+<td>smove st1 st2 tom</td>
+</tr>
+<tr>
+<td>srem</td>
+<td>从集合中删除一个元素</td>
+<td>srem st tom</td>
+</tr>
+<tr>
+<td>sismember</td>
+<td>判断一个集合中是否含有这个元素</td>
+<td>sismember st tom</td>
+</tr>
+<tr>
+<td>srandmember</td>
+<td>随机返回元素，对原始数据没有影响</td>
+<td>srandmember st</td>
+</tr>
+<tr>
+<td>sdiff</td>
+<td>减去两个集合中共有的元素   求差集</td>
+<td>sdiff st1 st2</td>
+</tr>
+<tr>
+<td>sinter</td>
+<td>求交集</td>
+<td>sinter st1 st2</td>
+</tr>
+<tr>
+<td>sunion</td>
+<td>求并集</td>
+<td>sunion st1 st2</td>
+</tr>
+</tbody></table>
+<h4 id="4、Zset有序集合"><a href="#4、Zset有序集合" class="headerlink" title="4、Zset有序集合"></a>4、Zset有序集合</h4><p>常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zadd</td>
+<td>添加一个有序集合元素，根据元素的score排序</td>
+<td>zadd salary 3000 tom 2000 jack</td>
+</tr>
+<tr>
+<td>zcard</td>
+<td>返回集合的元素个数</td>
+<td>zcard salary</td>
+</tr>
+<tr>
+<td>zrange</td>
+<td>返回一个范围内的元素</td>
+<td>zrange salary  1 2 withscores</td>
+</tr>
+<tr>
+<td>zrangebyscore</td>
+<td>按照分数查找一个范围内的元素</td>
+<td>zrangebyscore salary 1000 2000</td>
+</tr>
+<tr>
+<td>zrank</td>
+<td>返回对应元素的排名</td>
+<td>zrank salary tom</td>
+</tr>
+<tr>
+<td>zrevrank</td>
+<td>返回对应元素倒序排名</td>
+<td>zrevrank salary tom</td>
+</tr>
+<tr>
+<td>zscore</td>
+<td>显示某一个元素的分数</td>
+<td>zscore salary tom</td>
+</tr>
+<tr>
+<td>zrem</td>
+<td>移除某一个元素</td>
+<td>zrem salary tom</td>
+</tr>
+<tr>
+<td>zincrby</td>
+<td>给某个特定元素加分</td>
+<td>zincrby salary  100 tom</td>
+</tr>
+</tbody></table>
+<h4 id="5、Hash哈希"><a href="#5、Hash哈希" class="headerlink" title="5、Hash哈希"></a>5、Hash哈希</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># redis是一个大字典，里面存储的是各种类型的键值对</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    '键'：字符串，</span></span><br><span class="line"><span class="code">    '键'：列表 []，</span></span><br><span class="line"><span class="code">    '键'：集合&#123;&#125;，</span></span><br><span class="line"><span class="code">    '键'：有序集合&#123;0,1,2&#125;，</span></span><br><span class="line"><span class="code">    '键'：hash&#123;键：值&#125;，</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">    "user":&#123;"name":"Tom","age":18&#125;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hset</td>
+<td>设置一个key/value对</td>
+<td>hset user name tom</td>
+</tr>
+<tr>
+<td>hget</td>
+<td>获得一个key对应的value</td>
+<td>hget user name</td>
+</tr>
+<tr>
+<td>hgetall</td>
+<td>获得所有的key/value对</td>
+<td>hgetall user</td>
+</tr>
+<tr>
+<td>hdel</td>
+<td>删除某一个key/value对</td>
+<td>hdel user name</td>
+</tr>
+<tr>
+<td>hexists</td>
+<td>判断一个key是否存在</td>
+<td>hexists user name</td>
+</tr>
+<tr>
+<td>hkeys</td>
+<td>获得所有的key</td>
+<td>hkeys user</td>
+</tr>
+<tr>
+<td>hvals</td>
+<td>获得所有的value</td>
+<td>hvals user</td>
+</tr>
+<tr>
+<td>hmset</td>
+<td>设置多个key/value</td>
+<td>hmset  user name tom gender true</td>
+</tr>
+<tr>
+<td>hmget</td>
+<td>获得多个key的value</td>
+<td>hmget user name age</td>
+</tr>
+<tr>
+<td>hsetnx</td>
+<td>设置一个不存在的key的值</td>
+<td>hsetnx user salary 4000</td>
+</tr>
+<tr>
+<td>hincrby</td>
+<td>为value进行加法运算</td>
+<td>hincrby user age 3</td>
+</tr>
+<tr>
+<td>hincrbyfloat</td>
+<td>为value加入浮点值</td>
+<td>hincrbyfloat user age 3.5</td>
+</tr>
+</tbody></table>
+<h3 id="五、Redis持久化"><a href="#五、Redis持久化" class="headerlink" title="五、Redis持久化"></a>五、Redis持久化</h3><h4 id="1、什么是持久化？"><a href="#1、什么是持久化？" class="headerlink" title="1、什么是持久化？"></a>1、什么是持久化？</h4><p>持久化的含义就是把内存中的数据保存到可永久存储的设备中（磁盘中），以便数据可以重用。   Redis</p>
+<ul>
+<li><p>存：读内存中Redis数据 -&gt; 通过持某种久化的方式 -&gt; 存储到磁盘的文件中     </p>
+<p> <code>内存-&gt;文件</code></p>
+</li>
+<li><p>取：读磁盘文件中的数据 -&gt; 内存中                                                                     </p>
+<p>  <code>文件-&gt;内存</code></p>
+</li>
+</ul>
+<p>众所周知，redis是内存数据库，它把数据存储在内存中，这样在加快读取速度的同时也对数据安全性产生了新的问题，即当redis所在服务器发生宕机后（或服务器进程退出 ），redis数据库里的所有数据将会全部丢失。</p>
+<p>为了解决这个问题，redis提供了持久化功能：</p>
+<ul>
+<li><strong>RDB持久化</strong>（snapshotting快照 - 原理是在某个时刻将Redis在内存中的数据库记录dump到磁盘上的RDB文件中实现持久化） </li>
+<li><strong>AOF持久化</strong>（append only file - 原理是将Redis的操作日志以追加的方式写入文件）。 </li>
+</ul>
+<p>通俗的讲就是将内存中的数据写入硬盘中，当redis重启后，可以从磁盘中恢复数据。    </p>
+<h4 id="2、RDB持久化"><a href="#2、RDB持久化" class="headerlink" title="2、RDB持久化"></a>2、RDB持久化</h4><h5 id="2-1-RDB开发步骤"><a href="#2-1-RDB开发步骤" class="headerlink" title="2.1 RDB开发步骤"></a>2.1 RDB开发步骤</h5><p>编辑redis.conf文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">save   900   1           #900秒内超过1个key被修改 </span><br><span class="line">save   300   10          #300秒内超过10个key被修改</span><br><span class="line">save   60    10000</span><br><span class="line">dbfilename dump.rdb      #快照文件名</span><br><span class="line">stop-writes-on-bgsave-error yes   #快照失败后是否继续写操作</span><br><span class="line">rdbcompression yes                #是否压缩快照文件</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-2-RDB运行原理"><a href="#2-2-RDB运行原理" class="headerlink" title="2.2 RDB运行原理"></a>2.2 RDB运行原理</h5><ul>
+<li>在某些时刻（满足rdb持久化的时刻），Redis通过fork产生子进程，一个父进程的快照(副本)， 其中有和父进程当前时刻相同的数据</li>
+<li>父进程继续处理client请求，子进程负责将快照(数据副本)写入临时文件(默认文件名为dump.rdb)</li>
+<li>子进程写完后，用临时文件替换原来的快照文件，然后子进程退出。        </li>
+</ul>
+<p><img src="Redis-pic%5C388326-20170726161552843-904424952.png" alt="img"> </p>
+<h5 id="2-3-RDB触发方式"><a href="#2-3-RDB触发方式" class="headerlink" title="2.3 RDB触发方式"></a>2.3 RDB触发方式</h5><ul>
+<li><p>根据配置  save 900 1 等，在满足条件时自动触发</p>
+</li>
+<li><p>手动执行  bgsave 指令触发 在后台保存</p>
+</li>
+<li><p>手动执行 save指令触发，但会造成持久化过程中的主进程阻塞。在主进程阻塞期间，服务器不能处理客户端的任何请求。 （不常用）</p>
+<p>如果数据量很大时可以考虑使用，因为不用创建子进程，也就没有子进程抢资源，所以save在生成快照时可以更快(夜深人静时手动触发)   </p>
+</li>
+<li><p>当通过 shutdown 关闭redis时，会自动触发</p>
+</li>
+</ul>
+<h5 id="2-4-RDB注意事项"><a href="#2-4-RDB注意事项" class="headerlink" title="2.4 RDB注意事项"></a>2.4 RDB注意事项</h5><ul>
+<li>如果发生系统崩溃，则会丢失最近一次rdb之后的数据，所以如果项目不能接受这样的数据损失，则不建议使用rdb</li>
+<li>如果数据量巨大，则创建子进程的时间长，导致redis卡顿，要谨慎设置save参数时间间隔大一些；或如果软件允许，可以每天在闲时手动同步</li>
+<li>将生成的快照文件，留在原地，则可以在重启redis后，恢复数据状态</li>
+<li>将生成的快照文件，复制到其它redis服务中，可以方便的将数据移植过去</li>
+</ul>
+<h4 id="3、AOF持久化"><a href="#3、AOF持久化" class="headerlink" title="3、AOF持久化"></a>3、AOF持久化</h4><p>Append-Only File（AOF）：与RDB的保存整个redis数据库状态不同，AOF是通过保存对redis服务端的写命令（如set、sadd、rpush）来记录数据库状态的，即保存你对redis数据库的写操作记录。  </p>
+<h5 id="3-1-AOF运行机制"><a href="#3-1-AOF运行机制" class="headerlink" title="3.1 AOF运行机制"></a>3.1 AOF运行机制</h5><p>Redis将每一个写操作(执行成功)，写入aof文件，即记录所有的数据改动行为，Redis重启时只要从头到尾执行一次aof文件中的命令，即可恢复数据，也可以将aof文件复制到别的服务器，做数据移植。</p>
+<p><strong>注意：</strong>在重启时，要恢复数据，如果rdb文件和aof文件同时存在，以AOF为准。</p>
+<h5 id="3-2-AOF配置"><a href="#3-2-AOF配置" class="headerlink" title="3.2 AOF配置"></a>3.2 AOF配置</h5><p>编辑redis.conf文件：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">appendonly  yes           #启动AOF机制</span><br><span class="line"></span><br><span class="line"># appendfsync always       #每次收到写命令就立即强制写入磁盘，保证完全的持久化，但产生极大的IO开销(不推荐使用)</span><br><span class="line"></span><br><span class="line">appendfsync everysec     #每秒钟强制写入磁盘一次，在性能和持久化方面做了很好的折中(推荐使用）</span><br><span class="line"></span><br><span class="line"># appendfsync no            #完全依赖os，虽然基本不对redis性能产生影响，但操作系统的缓存区满时，会阻塞redis(不推荐使用)</span><br><span class="line"></span><br><span class="line">appendfilename &quot;appendonly.aof&quot;    # 设置aof文件名</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-3-AOF细节"><a href="#3-3-AOF细节" class="headerlink" title="3.3 AOF细节"></a>3.3 AOF细节</h5><ul>
+<li>AOF文件会不断增长(可能比快照文件大几倍)，在极端情况下，可能会对硬盘空间造成压力</li>
+<li>Redis重启时，需要重新执行一个可能非常大的AOF，时间会很长</li>
+<li>AOF同步时间间隔小，数据更安全，理论上至多丢失1秒的数据</li>
+</ul>
+<h4 id="4、RDB与AOF对比"><a href="#4、RDB与AOF对比" class="headerlink" title="4、RDB与AOF对比"></a>4、RDB与AOF对比</h4><ul>
+<li>RDB体量更小，AOF文件体量更大</li>
+<li>RDB的同步时间间隔大，AOF同步时间间隔小，所以AOF更能保证数据的安全 </li>
+<li>RDB有更快的恢复速度，可以用来做数据版本控制。RDB每次进行快照方式会重新记录整个数据集的所有信息。RDB在恢复数据时更快，可以最大化redis性能。</li>
+<li>通过使用RDB和AOF，用户可以在重启或系统崩溃后保留数据，但随着负载量变大和数据安全越来越重要，可以使用redis的复制特性做更好的数据安全保障  </li>
+</ul>
+<p>RDB可以做数据备份，并且要求数据恢复快，对数据一致性要求不高时</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">区别：</span><br><span class="line"><span class="bullet">1. </span>RDB保存的是二进制数据，而AOF保存的是写操作的记录</span><br><span class="line"><span class="bullet">2. </span>RDB是每次保存整个的数据集，而AOF是追加操作</span><br><span class="line"><span class="bullet">3. </span>RDB体量小，AOF体量大</span><br><span class="line"><span class="bullet">4. </span>RDB恢复速度快，而AOF恢复速度慢</span><br><span class="line"><span class="bullet">5. </span>RDB的同步时间间隔大，而AOF同步时间间隔小</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5、AOF重写"><a href="#5、AOF重写" class="headerlink" title="5、AOF重写"></a>5、AOF重写</h4><h5 id="5-1-重写设置"><a href="#5-1-重写设置" class="headerlink" title="5.1 重写设置"></a>5.1 重写设置</h5><p>AOF采用文件追加的方式持久化数据，所以文件会越来越大，为了避免这种情况发生，增加了重写机制。</p>
+<ul>
+<li>为了减小aof文件的体量，可以手动发送 bgrewriteaof 命令，则会创建子进程，通过移除aof文件中的冗余命令来重写aof文件，生成更小体量的aof，然后替换掉旧的、大体量的aof文件</li>
+<li>也可以设置：<code>auto-aof-rewrite-percentage 100</code></li>
+</ul>
+<p>​                               <code>auto-aof-rewrite-min-size 64mb</code>  </p>
+<p>   在体量超过64mb，且比上次重写后的体量增加了100%时自动触发重写</p>
+<h5 id="5-2-重写原理"><a href="#5-2-重写原理" class="headerlink" title="5.2 重写原理"></a>5.2 重写原理</h5><p>Redis将AOF重写程序放到子进程（后台）里执行。这样处理的最大好处是： </p>
+<ul>
+<li>子进程进行AOF重写期间，主进程可以继续处理命令请求；</li>
+<li><strong>子进程带有主进程的数据副本</strong>，使用子进程而不是线程，<strong>保证数据的安全性</strong>。</li>
+</ul>
+<p>子进程进行AOF重写的问题：</p>
+<ul>
+<li>子进程在进行AOF重写期间，服务器主进程还要继续处理命令请求，而新的命令可能对现有的数据进行修改，这会让当前数据库的数据和`。</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>为了解决这种数据不一致的问题，Redis增加了一个AOF重写缓存，这个缓存在fork出子进程之后开始启用，Redis服务器主进程在执行完写命令之后，会同时将这个写命令追加到AOF文件和AOF重写缓冲区</li>
+</ul>
+<p>即子进程在执行AOF重写时，主进程需要执行以下三个工作： </p>
+<ul>
+<li>执行client发来的命令请求；</li>
+<li>将写命令追加到现有的AOF文件中；</li>
+<li>将写命令追加到AOF重写缓存中。</li>
+</ul>
+<h3 id="六、Redis主从"><a href="#六、Redis主从" class="headerlink" title="六、Redis主从"></a>六、Redis主从</h3><h4 id="1、-简介"><a href="#1、-简介" class="headerlink" title="1、 简介"></a>1、 简介</h4><p>在高负载和对数据要求高完整性时，数据的复制是不可或缺的。一个Redis主服务器，并为其关联多个从服务器，主服务器会将自己的数据状态不断地同步给从服务器，即，从服务器中会持有主服务器最新的数据副本，则首先为数据完整性提供了进一步的保证，而且所有读取操作都可均衡的负载到多个从服务器中，主服务器主要负责写操作。则主从多个服务器实现读写分离，提供更好的数据完整性，和更强的负载能力。 </p>
+<h4 id="2、主从配置"><a href="#2、主从配置" class="headerlink" title="2、主从配置"></a>2、主从配置</h4><p>开启两个redis服务器，一个做主服务器，另一个做从服务器。主从两台服务器的配置没有额外的改变，只是<strong>在从服务器的配置中添加一句配置</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">replicaof  host  port  比如：replicaof <span class="number">192.168</span><span class="number">.1</span><span class="number">.103</span> <span class="number">7000</span></span><br><span class="line"></span><br><span class="line">则如上配置将当前的redis服务器设置为(<span class="number">192.168</span><span class="number">.1</span><span class="number">.103</span>:<span class="number">7000</span>)的从服务器</span><br><span class="line"><span class="comment"># 注意：需要开放主服务器的ip</span></span><br><span class="line"><span class="comment"># 在主服务器的 redis.conf文件中 修改bind 0.0.0.0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如此，则主服务器的所有数据会在初始接收到从服务器的连接时全部发送到从服务器。之后每次主服务器执行完一个写操作，都会发送到从服务器。如上则是主从的运行模式。</li>
+<li>可以向如上设置多台从服务器，则以后的所有读取操作由从服务器完成，主服务器只负责写操作。</li>
+</ul>
+
+          
+            <div class='article_footer'>
+              
+                
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+
+
+  
+
+  
+    
+    
+
+<section class="widget copyright  desktop mobile">
+  <div class='content'>
+    
+      <blockquote>
+        
+          
+            <p>博客内容遵循 署名-非商业性使用-相同方式共享 4.0 国际 (CC BY-NC-SA 4.0) 协议</p>
+
+          
+        
+          
+            <p>本文永久链接是：<a href=https://www.zfyvip.xyz/2020/11/20/Redis_01/>https://www.zfyvip.xyz/2020/11/20/Redis_01/</a></p>
+          
+        
+      </blockquote>
+    
+  </div>
+</section>
+
+  
+
+  
+    
+    
+
+<section class="widget qrcode  desktop mobile">
+  
+
+  <div class='content article-entry'>
+    
+  </div>
+</section>
+
+  
+
+
+              
+            </div>
+          
+        </div>
+        
+          
+
+
+  <section class='meta' id="footer-meta">
+    <div class='new-meta-box'>
+      
+        
+          <div class="new-meta-item date" itemprop="dateUpdated" datetime="2020-11-20T10:00:19+08:00">
+  <a class='notlink'>
+    <i class="fas fa-edit fa-fw" aria-hidden="true"></i>
+    <p>更新于：Nov 20, 2020</p>
+  </a>
+</div>
+
+        
+      
+        
+          
+  
+  <div class="new-meta-item meta-tags"><a class="tag" href="/tags/Redis/" rel="nofollow"><i class="fas fa-hashtag fa-fw" aria-hidden="true"></i><p>Redis</p></a></div>
+
+
+        
+      
+        
+          
+
+        
+      
+        
+          
+  <div class="new-meta-item share -mob-share-list">
+  <div class="-mob-share-list share-body">
+    
+      
+        <a class="-mob-share-qq" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://connect.qq.com/widget/shareqq/index.html?url=https://www.zfyvip.xyz/2020/11/20/Redis_01/&title=redis学习笔记1 - 东风未起，念你成疾&summary=Redis数据库的学习笔记"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qq.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-qzone" title="" rel="external nofollow noopener noreferrer"
+          
+          href="https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=https://www.zfyvip.xyz/2020/11/20/Redis_01/&title=redis学习笔记1 - 东风未起，念你成疾&summary=Redis数据库的学习笔记"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/qzone.png">
+          
+        </a>
+      
+    
+      
+        <a class="-mob-share-weibo" title="" rel="external nofollow noopener noreferrer"
+          
+          href="http://service.weibo.com/share/share.php?url=https://www.zfyvip.xyz/2020/11/20/Redis_01/&title=redis学习笔记1 - 东风未起，念你成疾&summary=Redis数据库的学习笔记"
+          
+          >
+          
+            <img src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/logo/128/weibo.png">
+          
+        </a>
+      
+    
+  </div>
+</div>
+
+
+
+        
+      
+    </div>
+  </section>
+
+
+        
+        
+          <div class="prev-next">
+            
+            
+              <a class='next' href='/2020/11/20/Redis_02/'>
+                <p class='title'>redis学习笔记2<i class="fas fa-chevron-right" aria-hidden="true"></i></p>
+                <p class='content'>Redis数据库的集群学习笔记
+
+
+Redis-集群一、简介Redis 在3.0版本前只支持单实例模式，虽然支持主从模式部署来解决单点故障，但是现在互联网企业动辄大几百G的数据，完全无法满足业务...</p>
+              </a>
+            
+          </div>
+        
+      </section>
+    </article>
+  
+
+  
+    <!-- 显示推荐文章和评论 -->
+
+
+
+  <article class="post white-box reveal comments shadow">
+    <section class="article typo">
+      <p ct><i class='fas fa-comments'></i> 评论</p>
+      
+      
+      
+      
+      
+      
+        <section id="comments">
+          <div id="valine_container" class="valine_thread">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+      
+        <section id="comments">
+          <div id="minivaline_container">
+            <i class="fas fa-cog fa-spin fa-fw fa-2x"></i>
+          </div>
+        </section>
+      
+    </section>
+  </article>
+
+
+  
+
+
+
+
+<!-- 根据页面mathjax变量决定是否加载MathJax数学公式js -->
+
+
+
+  <script>
+    window.subData = {
+      title: 'redis学习笔记1',
+      tools: true
+    }
+  </script>
+
+
+</div>
+<aside class='l_side'>
+  
+  
+
+  
+    
+    
+
+
+  <section class="widget toc-wrapper shadow desktop mobile">
+    
+  <header>
+    
+      <i class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name'>本文目录</span>
+    
+  </header>
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+    <div class='content'>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、NoSQL简介"><span class="toc-text">一、NoSQL简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Redis简介"><span class="toc-text">二、Redis简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、Redis是什么？"><span class="toc-text">1、Redis是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、Redis的特点"><span class="toc-text">2、Redis的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#三、Redis安装"><span class="toc-text">三、Redis安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、解压"><span class="toc-text">1、解压</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、make指令"><span class="toc-text">2、make指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、make-test-直接跳过"><span class="toc-text">3、make test (直接跳过)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、make-install"><span class="toc-text">4、make install</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、启动服务"><span class="toc-text">5、启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6、连接Redis"><span class="toc-text">6、连接Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7、关闭服务"><span class="toc-text">7、关闭服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#四、Redis数据类型"><span class="toc-text">四、Redis数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、String字符串"><span class="toc-text">1、String字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、List列表"><span class="toc-text">2、List列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、Set集合"><span class="toc-text">3、Set集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、Zset有序集合"><span class="toc-text">4、Zset有序集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、Hash哈希"><span class="toc-text">5、Hash哈希</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#五、Redis持久化"><span class="toc-text">五、Redis持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、什么是持久化？"><span class="toc-text">1、什么是持久化？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、RDB持久化"><span class="toc-text">2、RDB持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-RDB开发步骤"><span class="toc-text">2.1 RDB开发步骤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-RDB运行原理"><span class="toc-text">2.2 RDB运行原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-RDB触发方式"><span class="toc-text">2.3 RDB触发方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-RDB注意事项"><span class="toc-text">2.4 RDB注意事项</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3、AOF持久化"><span class="toc-text">3、AOF持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-AOF运行机制"><span class="toc-text">3.1 AOF运行机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-AOF配置"><span class="toc-text">3.2 AOF配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-AOF细节"><span class="toc-text">3.3 AOF细节</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4、RDB与AOF对比"><span class="toc-text">4、RDB与AOF对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5、AOF重写"><span class="toc-text">5、AOF重写</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-重写设置"><span class="toc-text">5.1 重写设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-重写原理"><span class="toc-text">5.2 重写原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#六、Redis主从"><span class="toc-text">六、Redis主从</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1、-简介"><span class="toc-text">1、 简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2、主从配置"><span class="toc-text">2、主从配置</span></a></li></ol></li></ol>
+    </div>
+  </section>
+
+
+  
+
+
+</aside>
+
+
+  
+  <footer class="clearfix">
+    <br><br>
+    
+      
+        
+      
+    
+      
+        <br>
+        
+     
+      
+    
+      
+        
+      
+    
+      
+        Use
+        <a href="https://zfyvip.xyz/" target="_blank" class="codename">东风</a>
+        as theme, total visits
+          <span id="busuanzi_value_site_pv"><i class="fas fa-circle-notch fa-spin fa-fw" aria-hidden="true"></i></span>
+          times
+        
+      
+    
+      
+        <div class='copyright'>
+        <p><a href="https://zfyvip.xyz" target="_blank" rel="noopener">Copyright © 2020-2030 Z.FY</a></p>
+
+        </div>
+      
+    
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?c1bb23d0929b7cf93fb38bd6b8603046";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+Copyright 2018-2020 ZFY'S BLOG 
+<img src="https://cdn.jsdelivr.net/gh/16778738/picture/img/gongan.png">
+<a href="https://beian.miit.gov.cn"  style="color:#f72b07" target="_blank">晋ICP备20005168号</a>
+
+
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date(); 
+    function createtime() { 
+        var grt= new Date("05/22/2020 08:00:00");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+        now.setTime(now.getTime()+250); 
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days); 
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours); 
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;} 
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 "; 
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+    } 
+setInterval("createtime()",250);
+</script>
+  </footer>
+
+<script>setLoadingBarProgress(80);</script>
+
+
+      <script>setLoadingBarProgress(60);</script>
+<!--浏览器搞笑标题-->
+<script type="text/javascript" src="/js/FunnyTitle.js"></script>
+
+<!-- 数字雨 -->
+<canvas id="canvas" width="1440" height="900" ></canvas>
+<script type="text/javascript" src="/js/DigitalRain.js"></script>
+
+    </div>
+    <a class="s-top fas fa-arrow-up fa-fw" href='javascript:void(0)'></a>
+  </div>
+  
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4/dist/jquery.min.js"></script>
+
+
+  <script>
+    
+    var SEARCH_SERVICE = "hexo" || "hexo";
+    var ROOT = "/" || "/";
+    if (!ROOT.endsWith('/')) ROOT += '/';
+  </script>
+
+
+  <script async src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/instant_page.js" type="module" defer integrity="sha384-OeDn4XE77tdHo8pGtE1apMPmAipjoxUQ++eeJa6EtJCfHlvijigWiJpD7VDPWXV1"></script>
+
+
+  <script src="https://cdn.jsdelivr.net/npm/scrollreveal@4.0.6/dist/scrollreveal.min.js"></script>
+  <script type="text/javascript">
+    $(function() {
+      ScrollReveal().reveal('.l_main .reveal', {
+        distance: '8px',
+        duration: '800',
+        interval: '100',
+        scale: '1'
+      });
+    });
+  </script>
+
+
+  
+<script src="https://cdn.jsdelivr.net/npm/node-waves@0.7.6/dist/waves.min.js"></script>
+
+  <script type="text/javascript">
+    $(function() {
+      Waves.attach('.flat-btn', ['waves-button']);
+      Waves.attach('.float-btn', ['waves-button', 'waves-float']);
+      Waves.attach('.float-btn-light', ['waves-button', 'waves-float', 'waves-light']);
+      Waves.attach('.flat-box', ['waves-block']);
+      Waves.attach('.float-box', ['waves-block', 'waves-float']);
+      Waves.attach('.waves-image');
+      Waves.init();
+    });
+  </script>
+
+
+  <script defer src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-busuanzi@2.3/js/busuanzi.pure.mini.js"></script>
+
+
+
+  
+  
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/jquery-backstretch@2.1.18/jquery.backstretch.min.js"></script>
+
+    <script type="text/javascript">
+      $(function(){
+        var imgs=["https://cdn.jsdelivr.net/gh/xaoxuu/cdn-wallpaper/abstract/B18FCBB3-67FD-48CC-B4F3-457BA145F17A.jpeg"];
+        if ('true' == 'true') {
+          function shuffle(arr){
+            /*From countercurrent-time*/
+            var n = arr.length;
+            while(n--) {
+              var index = Math.floor(Math.random() * n);
+              var temp = arr[index];
+              arr[index] = arr[n];
+              arr[n] = temp;
+            }
+          }
+          shuffle(imgs);
+        }
+        if ('') {
+          $('').backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        } else {
+          $.backstretch(
+            imgs,
+          {
+            duration: "20000",
+            fade: "1500"
+          });
+        }
+      });
+    </script>
+  
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/aplayer@1.10/dist/APlayer.min.js"></script>
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/meting@2.0/dist/Meting.min.js"></script>
+
+  
+
+
+
+
+
+
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4/dist/Valine.min.js"></script>
+
+  
+  <script>
+  var GUEST_INFO = ['nick','mail','link'];
+  var meta = 'nick,mail,link'.split(',').filter(function(item){
+    return GUEST_INFO.indexOf(item) > -1
+  });
+  var REQUIRED_FIELDS = ['nick','mail','link'];
+  var requiredFields = 'nick,mail'.split(',').filter(function(item){
+    return REQUIRED_FIELDS.indexOf(item) > -1
+  });
+  var valine = new Valine();
+  function emoji(path, idx, ext) {
+      return path + "/" + path + "-" + idx + "." + ext;
+  }
+  var emojiMaps = {};
+  for (var i = 1; i <= 54; i++) {
+    emojiMaps['tieba-' + i] = emoji('tieba', i, 'png');
+  }
+  for (var i = 1; i <= 101; i++) {
+    emojiMaps['qq-' + i] = emoji('qq', i, 'gif');
+  }
+  for (var i = 1; i <= 116; i++) {
+    emojiMaps['aru-' + i] = emoji('aru', i, 'gif');
+  }
+  for (var i = 1; i <= 125; i++) {
+    emojiMaps['twemoji-' + i] = emoji('twemoji', i, 'png');
+  }
+  for (var i = 1; i <= 4; i++) {
+    emojiMaps['weibo-' + i] = emoji('weibo', i, 'png');
+  }
+  valine.init({
+    el: '#valine_container',
+    meta: meta,
+    
+    appId: "b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz",
+    appKey: "xpNIURUvFCvRDjcPDGabmVbb",
+    placeholder: "快来评论吧~",
+    pageSize:'10',
+    avatar:'robohash',
+    lang:'zh-cn',
+    visitor: 'true',
+    highlight: 'true',
+    mathJax: 'false',
+    enableQQ: 'true',
+    requiredFields: requiredFields,
+    emojiCDN: 'https://cdn.jsdelivr.net/gh/xaoxuu/cdn-assets/emoji/valine/',
+    emojiMaps: emojiMaps
+  })
+  </script>
+
+
+
+  
+    
+<script src="https://cdn.jsdelivr.net/npm/minivaline@2/dist/MiniValine.min.js"></script>
+
+  
+  
+  
+  
+  
+  <script>
+  new MiniValine({
+	el: '#minivaline_container',
+	appId: 'b14KRSU59Jf9p49rwED1CHQN-gzGzoHsz# your appId',
+	appKey: 'xpNIURUvFCvRDjcPDGabmVbb# your appKey',
+	mode: 'xCss',
+	placeholder: "快来评论吧~",
+	
+	  pathname: location.pathname,
+	
+	lang: '',
+	adminEmailMd5: 'de8a7aa53d07e6b6bceb45c64027763d',
+	tagMeta: ["管理员", "小伙伴", "访客"],
+	master: ["de8a7aa53d07e6b6bceb45c64027763d"],
+	friends: ["b5bd5d836c7a0091aa8473e79ed4c25e", "adb7d1cd192658a55c0ad22a3309cecf", "3ce1e6c77b4910f1871106cb30dc62b0", "cfce8dc43725cc14ffcd9fb4892d5bfc"],
+	math: true,  /*布尔值 字符串无效 下同*/
+	md: true,
+	enableQQ: false,
+	NoRecordIP: false,
+	visitor: true,
+	maxNest: 6,
+	pageSize: 6,
+	emoticonUrl: ["https://cdn.jsdelivr.net/npm/alus@latest", "https://cdn.jsdelivr.net/gh/MiniValine/qq@latest", "https://cdn.jsdelivr.net/gh/MiniValine/Bilibilis@latest", "https://cdn.jsdelivr.net/gh/MiniValine/tieba@latest", "https://cdn.jsdelivr.net/gh/MiniValine/twemoji@latest", "https://cdn.jsdelivr.net/gh/MiniValine/weibo@latest"]
+  });
+  </script>
+
+
+
+  
+<script src="/js/app.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2.6.5/js/search.js"></script>
+
+
+
+  
+<script src="https://cdn.jsdelivr.net/gh/xaoxuu/cdn-volantis@2/js/comment_typing.js"></script>
+
+
+
+
+
+
+<!-- 复制 -->
+
+  <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="fas fa-copy"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-check-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-check-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('fa-copy');
+        $icon.addClass('fa-times-circle');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('fa-times-circle');
+          $icon.addClass('fa-copy');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+
+
+<!-- fancybox -->
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+<script>
+  function pjax_fancybox() {
+    $(".article-entry").find("img").not('.inline').not('a img').each(function () { //渲染 fancybox
+      var element = document.createElement("a"); // a 标签
+      $(element).attr("pjax-fancybox", "");  // 过滤 pjax
+      $(element).attr("href", $(this).attr("src"));
+      if ($(this).attr("data-original")) {
+        $(element).attr("href", $(this).attr("data-original"));
+      }
+      $(element).attr("data-fancybox", "images");
+      var caption = "";   // 描述信息
+      if ($(this).attr('alt')) {  // 标准 markdown 描述信息
+        $(element).attr('data-caption', $(this).attr('alt'));
+        caption = $(this).attr('alt');
+      }
+      var div = document.createElement("div");
+      $(div).addClass("fancybox");
+      $(this).wrap(div); // 最外层套 div ，其实主要作用还是 class 样式
+      var span = document.createElement("span");
+      $(span).addClass("image-caption");
+      $(span).text(caption); // 加描述
+      $(this).after(span);  // 再套一层描述
+      $(this).wrap(element);  // 最后套 a 标签
+    })
+    $(".article-entry").find("img").fancybox({
+      selector: '[data-fancybox="images"]',
+      hash: false,
+      loop: false,
+      closeClick: true,
+      helpers: {
+        overlay: {closeClick: true}
+      },
+      buttons: [
+        "zoom",
+        "close"
+      ]
+    });
+  };
+  $(function () {
+    pjax_fancybox();
+  });
+</script>
+
+
+
+
+  <script>setLoadingBarProgress(100);</script>
+</body>
+</html>
