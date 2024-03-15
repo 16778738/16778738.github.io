@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>redis数据库 | Hexo</title>
+
+  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+  
+  <!-- 预加载动画 -->
+  
+  
+  <div class="preloader_6" id="loader">
+  <div class="loader"></div>
+</div>
+  <script>
+    var endLoading = function () {
+      document.body.style.overflow = 'auto';
+      document.getElementById('loader').classList.add("loaded");
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+  </script>
+
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script defer>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">Hexo</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/16778738">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/medias/logo.png" class="lazyload placeholder" data-srcset="/medias/logo.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">Hexo</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">Search</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="Please enter keywords"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/16778738" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+</header>
+        <!-- 内容区域 -->
+        
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        redis数据库
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> Published in：2020-11-20 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> category：
+          
+            <a href="/categories/redis/" class="post-detail-header_category">
+              redis
+            </a>
+          
+        </span>
+      
+
+      
+    
+  </div>
+  
+  
+    <script defer src="/js/bubble/bubble.js"></script>
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <p>Redis数据库的学习笔记</p>
+<span id="more"></span>
+
+<h1 id="Redis数据库"><a href="#Redis数据库" class="headerlink" title="Redis数据库"></a>Redis数据库</h1><h3 id="一、NoSQL简介"><a href="#一、NoSQL简介" class="headerlink" title="一、NoSQL简介"></a>一、NoSQL简介</h3><p>NoSQL，泛指非关系型的数据库，有时也称作Not Only SQL的缩写，是对不同于传统的关系型数据库的的统称。    </p>
+<ul>
+<li>SQL (Structured Query Language) 数据库，指关系型数据库。主要代表：SQL Server，Oracle，MySQL，PostgreSQL。存储数据时，需要预先定义表，字段–关系表</li>
+<li>NoSQL（Not Only SQL）泛指非关系型数据库。主要代表：MongoDB，Redis，CouchDB。无表无关联</li>
+</ul>
+<p><strong>SQL和NoSQL对比：</strong></p>
+<ul>
+<li>SQL通常以数据库表形式存储数据。举个栗子，存个学生借书数据：</li>
+</ul>
+<p><img src="/Redis_01.assets/1744544-a9b6a180eb06a2ba.jpg" class="lazyload placeholder" data-srcset="/Redis_01.assets/1744544-a9b6a180eb06a2ba.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"> </p>
+<ul>
+<li>而NoSQL存储方式比较灵活，比如使用类JSON文件存储上表中熊大的借阅数据：</li>
+</ul>
+<p> <img src="/Redis_01.assets/1744544-e7d6976369ed43e6.png" class="lazyload placeholder" data-srcset="/Redis_01.assets/1744544-e7d6976369ed43e6.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"> </p>
+<p><strong>关系型数据库瓶颈</strong></p>
+<ul>
+<li><p>高并发读写需求</p>
+<p>针对网站类用户的并发性访问非常高，而一台数据库的最大连接数有限，且硬盘I&#x2F;O有限，其不能满足很多人同时连接</p>
+</li>
+<li><p>海量数据的高效率读写</p>
+<p>网站每天产生的数据量是巨大的，对于关系型数据库来说，在一张包含海量数据的表中查询，效率是非常低的</p>
+</li>
+</ul>
+<p><strong>查</strong>：关系性数据库和非关系性数据库的区别</p>
+<p><strong>查</strong>：MySQL 与Redis的区别 </p>
+<h3 id="二、Redis简介"><a href="#二、Redis简介" class="headerlink" title="二、Redis简介"></a>二、Redis简介</h3><h4 id="1、Redis是什么？"><a href="#1、Redis是什么？" class="headerlink" title="1、Redis是什么？"></a>1、Redis是什么？</h4><p>  速度非常快的Nosql数据库，基于key-value的内存存储，同时支持数据持久化到硬盘。</p>
+<h4 id="2、Redis的特点"><a href="#2、Redis的特点" class="headerlink" title="2、Redis的特点"></a>2、Redis的特点</h4><ul>
+<li>高性能</li>
+<li>数据类型丰富 </li>
+<li>基于内存存储，又支持持久化（将内存中的数据保存到硬盘中）</li>
+</ul>
+<h3 id="三、Redis安装"><a href="#三、Redis安装" class="headerlink" title="三、Redis安装"></a>三、Redis安装</h3><h4 id="1、解压"><a href="#1、解压" class="headerlink" title="1、解压"></a>1、解压</h4><p>将redis的tar包发送到Linux中，并解压： <code>tar -zxvf redis-3.0.7.tar.gz </code></p>
+<h4 id="2、make指令"><a href="#2、make指令" class="headerlink" title="2、make指令"></a>2、make指令</h4><p><code>cd</code>指令切换到解压目录中，然后执行指令:<code> make</code></p>
+<ul>
+<li>执行make的时候，如出现异常：<ul>
+<li><p>异常一：</p>
+<p><code>make[2]: cc: Command not found</code></p>
+<p>异常原因：没有安装gcc</p>
+<p>解决方案：yum install gcc</p>
+</li>
+<li><p>异常二：</p>
+<p><code>zmalloc.h:51:31: error: jemalloc/jemalloc.h: No such file or directory</code></p>
+<p>异常原因：一些编译依赖或原来编译遗留出现的问题</p>
+<p>解决方案：make distclean。清理一下，然后再make。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3、make-test-直接跳过"><a href="#3、make-test-直接跳过" class="headerlink" title="3、make test (直接跳过)"></a>3、make test (直接跳过)</h4><p>在make成功以后，执行指令：<code>make test</code></p>
+<ul>
+<li>在make test时出现异常：<ul>
+<li><p>异常一：</p>
+<p><code>couldn&#39;t execute &quot;tclsh8.5&quot;: no such file or directory</code></p>
+<p>异常原因：没有安装tcl</p>
+<p>解决方案：yum install -y tcl。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="4、make-install"><a href="#4、make-install" class="headerlink" title="4、make install"></a>4、make install</h4><p>安装，执行指令：<code>make install</code></p>
+<h4 id="5、启动服务"><a href="#5、启动服务" class="headerlink" title="5、启动服务"></a>5、启动服务</h4><ul>
+<li><p>第一种：前台模式，默认配置启动(默认端口6379) </p>
+<p><code>直接执行指令：redis-server</code></p>
+</li>
+<li><p>第二种：守护进程(后台)模式,指定配置文件启动 </p>
+<ul>
+<li><p>在redis解压根目录中找到配置文件模板(redis.conf)，复制到如下位置：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cp redis.conf /usr/local/redis_conf/redis.conf</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">1. 上述的指令是在redis的解压目录下执行的</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">2. redis_conf目录是自己创建的 名字是自定义的</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过vi命令修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">daemonize yes   #守护进程模式启动 -- 后台</span><br><span class="line"></span><br><span class="line">port 7000       #端口  也可以不改</span><br><span class="line"></span><br><span class="line">pidfile ./redis.pid  #进程id存储位置</span><br><span class="line"></span><br><span class="line">logfile ./redis.log   #日志文件存储位置</span><br><span class="line"></span><br><span class="line">dir /usr/local/redis_conf/                 #工作目录 rdb、aof文件存储位置</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>然后执行<code> redis-server redis.conf</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6、连接Redis"><a href="#6、连接Redis" class="headerlink" title="6、连接Redis"></a>6、连接Redis</h4><p>执行指令：</p>
+<ul>
+<li><p><code>redis-cli </code> 连接端口为6379 Host为127.0.0.1的redis服务器</p>
+</li>
+<li><p><code>redis-cli -p 7000 -h 192.168.1.103</code> 连接端口为7000 Host为192.168.1.103的redis服务器</p>
+</li>
+</ul>
+<h4 id="7、关闭服务"><a href="#7、关闭服务" class="headerlink" title="7、关闭服务"></a>7、关闭服务</h4><p>redis-cli连接了redis服务器后，可以通过<code> shutdown </code>  指令关闭连接，并关闭服务</p>
+<p>或在命令行中执行 <code>redis-cli -p 7000 shutdown</code></p>
+<p>如果只想关闭连接（客户端），在redis命令中，按<code>Ctrl+c</code> 即可，此时服务不会被关闭</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># 关闭连接： 在交互界面，ctrl + c即可，退出交互式界面</span></span><br><span class="line"></span><br><span class="line"><span class="section"># 关闭服务：</span></span><br><span class="line"><span class="bullet">	1.</span> 在交互式界面，输入shutdown指令</span><br><span class="line"><span class="bullet">	2.</span> 在命令行界面，输入连接的指令+shutdown   </span><br><span class="line"><span class="code">		redis-cli -p 7000 shutdown</span></span><br><span class="line"><span class="code">	3. 通过进程号杀掉进程</span></span><br><span class="line"><span class="code">    	ps -ef | grep redis</span></span><br><span class="line"><span class="code">    	kill -9 进程号</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="四、Redis数据类型"><a href="#四、Redis数据类型" class="headerlink" title="四、Redis数据类型"></a>四、Redis数据类型</h3><p>Redis支持五种数据类型：string（字符串），list（列表），set（集合）及zset(sorted set：有序集合)，hash（哈希）。 </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># redis数据可以看作是一个大的字典，所有的数据都是以键值对的形式的存在的</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    键1：值1，</span></span><br><span class="line"><span class="code">    键2：值2</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"># 键一般为字符串类型,值的类型可以是以上5种数据类型</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="1、String字符串"><a href="#1、String字符串" class="headerlink" title="1、String字符串"></a>1、String字符串</h4><p>用于存单值，常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>set</td>
+<td>设置一个key&#x2F;value</td>
+<td>set name Mr_lee</td>
+</tr>
+<tr>
+<td>get</td>
+<td>根据key获得对应的value</td>
+<td>get name       (keys *  &#x2F; keys n*)</td>
+</tr>
+<tr>
+<td>mset</td>
+<td>一次设置多个key value</td>
+<td>mset age 18 salary 3000</td>
+</tr>
+<tr>
+<td>mget</td>
+<td>一次获得多个key的value</td>
+<td>mget name age</td>
+</tr>
+<tr>
+<td>getset</td>
+<td>获得原始key的值，同时设置新值</td>
+<td>getset age 20</td>
+</tr>
+<tr>
+<td>del</td>
+<td>删除key-value</td>
+<td>del name</td>
+</tr>
+<tr>
+<td>strlen</td>
+<td>获得对应key存储value的长度</td>
+<td>strlen name</td>
+</tr>
+<tr>
+<td>append</td>
+<td>为对应key的value追加内容</td>
+<td>appdend name 123</td>
+</tr>
+<tr>
+<td>getrange</td>
+<td>截取value的内容,对原始的值没有影响</td>
+<td>getrange name  0 2</td>
+</tr>
+<tr>
+<td>setex</td>
+<td>设置一个key存活的有效期（秒）</td>
+<td>setex name 10 tom</td>
+</tr>
+<tr>
+<td>psetex</td>
+<td>设置一个key存活的有效期（毫秒）</td>
+<td>psetex course10000 redis</td>
+</tr>
+<tr>
+<td>setnx</td>
+<td>只有当这个key不存在时等效set操作 not exist</td>
+<td>sexnx birth 2020-2-2</td>
+</tr>
+<tr>
+<td>msetnx</td>
+<td>可以同时设置多个key，在key不存在时有效</td>
+<td>msetnx  course mysql duration 4</td>
+</tr>
+<tr>
+<td>decr</td>
+<td>进行数值类型的-1操作</td>
+<td>decr age</td>
+</tr>
+<tr>
+<td>decrby</td>
+<td>根据提供的数据进行减法操作</td>
+<td>decrby age 3</td>
+</tr>
+<tr>
+<td>incr</td>
+<td>进行数值类型的+1操作</td>
+<td>incr age</td>
+</tr>
+<tr>
+<td>incrby</td>
+<td>根据提供的数据进行加法操作</td>
+<td>incrby age 3</td>
+</tr>
+<tr>
+<td>incrbyfloat</td>
+<td>根据提供的数据加入浮点数</td>
+<td>incrbyfloat age 3.5</td>
+</tr>
+</tbody></table>
+<h4 id="2、List列表"><a href="#2、List列表" class="headerlink" title="2、List列表"></a>2、List列表</h4><p>存储多值，常用指令： </p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># python</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    &#x27;hobby&#x27;:[&#x27;吃饭&#x27;,&#x27;睡觉&#x27;,&#x27;打豆豆&#x27;]</span></span><br><span class="line"><span class="code">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>lpush</td>
+<td>将某个值加入到一个key列表头部</td>
+<td>lpush users tom</td>
+</tr>
+<tr>
+<td>lpushx</td>
+<td>同lpush,但是必须要保证这个key存在</td>
+<td>lpushx users jack</td>
+</tr>
+<tr>
+<td>rpush</td>
+<td>将某个值加入到一个key列表末尾</td>
+<td>rpush users linda</td>
+</tr>
+<tr>
+<td>rpushx</td>
+<td>同rpush,但是必须要保证这个key存在</td>
+<td>rpushx users james</td>
+</tr>
+<tr>
+<td>lpop</td>
+<td>返回和移除列表的第一个元素</td>
+<td>lpop users</td>
+</tr>
+<tr>
+<td>rpop</td>
+<td>返回和移除列表的最后一个元素</td>
+<td>rpop users</td>
+</tr>
+<tr>
+<td>lrange</td>
+<td>获取某一个下标区间内的元素</td>
+<td>lrange users 0 3   &#x2F; lrange users 0 -1</td>
+</tr>
+<tr>
+<td>llen</td>
+<td>获取列表元素个数</td>
+<td>llen users</td>
+</tr>
+<tr>
+<td>lset</td>
+<td>设置某一个位置的元素(替换已有的某个值)</td>
+<td>lset users 2 andy</td>
+</tr>
+<tr>
+<td>lindex</td>
+<td>获取某一个位置的元素</td>
+<td>lindex users 2</td>
+</tr>
+<tr>
+<td>lrem</td>
+<td>从列表头起，删除对应个数的指定元素</td>
+<td>lrem users 2 james</td>
+</tr>
+<tr>
+<td>ltrim</td>
+<td>保留列表中特定区间内的元素,将其它的元素删除 – 切片</td>
+<td>ltrim users 1 3</td>
+</tr>
+<tr>
+<td>linsert</td>
+<td>在某一个元素之前，之后插入新元素</td>
+<td>linsert users before&#x2F;after jack Macle</td>
+</tr>
+</tbody></table>
+<h4 id="3、Set集合"><a href="#3、Set集合" class="headerlink" title="3、Set集合"></a>3、Set集合</h4><p>set是无序集合，并且不允许有相同的元素</p>
+<p>常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>sadd</td>
+<td>为集合添加元素</td>
+<td>sadd st tom</td>
+</tr>
+<tr>
+<td>smembers</td>
+<td>显示集合中所有元素   无序</td>
+<td>smembers st</td>
+</tr>
+<tr>
+<td>scard</td>
+<td>返回集合中元素的个数</td>
+<td>scard st</td>
+</tr>
+<tr>
+<td>spop</td>
+<td>随机返回并移除一个元素</td>
+<td>spop st</td>
+</tr>
+<tr>
+<td>smove</td>
+<td>从一个集合中向另一个集合移动元素</td>
+<td>smove st1 st2 tom</td>
+</tr>
+<tr>
+<td>srem</td>
+<td>从集合中删除一个元素</td>
+<td>srem st tom</td>
+</tr>
+<tr>
+<td>sismember</td>
+<td>判断一个集合中是否含有这个元素</td>
+<td>sismember st tom</td>
+</tr>
+<tr>
+<td>srandmember</td>
+<td>随机返回元素，对原始数据没有影响</td>
+<td>srandmember st</td>
+</tr>
+<tr>
+<td>sdiff</td>
+<td>减去两个集合中共有的元素   求差集</td>
+<td>sdiff st1 st2</td>
+</tr>
+<tr>
+<td>sinter</td>
+<td>求交集</td>
+<td>sinter st1 st2</td>
+</tr>
+<tr>
+<td>sunion</td>
+<td>求并集</td>
+<td>sunion st1 st2</td>
+</tr>
+</tbody></table>
+<h4 id="4、Zset有序集合"><a href="#4、Zset有序集合" class="headerlink" title="4、Zset有序集合"></a>4、Zset有序集合</h4><p>常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>zadd</td>
+<td>添加一个有序集合元素，根据元素的score排序</td>
+<td>zadd salary 3000 tom 2000 jack</td>
+</tr>
+<tr>
+<td>zcard</td>
+<td>返回集合的元素个数</td>
+<td>zcard salary</td>
+</tr>
+<tr>
+<td>zrange</td>
+<td>返回一个范围内的元素</td>
+<td>zrange salary  1 2 withscores</td>
+</tr>
+<tr>
+<td>zrangebyscore</td>
+<td>按照分数查找一个范围内的元素</td>
+<td>zrangebyscore salary 1000 2000</td>
+</tr>
+<tr>
+<td>zrank</td>
+<td>返回对应元素的排名</td>
+<td>zrank salary tom</td>
+</tr>
+<tr>
+<td>zrevrank</td>
+<td>返回对应元素倒序排名</td>
+<td>zrevrank salary tom</td>
+</tr>
+<tr>
+<td>zscore</td>
+<td>显示某一个元素的分数</td>
+<td>zscore salary tom</td>
+</tr>
+<tr>
+<td>zrem</td>
+<td>移除某一个元素</td>
+<td>zrem salary tom</td>
+</tr>
+<tr>
+<td>zincrby</td>
+<td>给某个特定元素加分</td>
+<td>zincrby salary  100 tom</td>
+</tr>
+</tbody></table>
+<h4 id="5、Hash哈希"><a href="#5、Hash哈希" class="headerlink" title="5、Hash哈希"></a>5、Hash哈希</h4><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="section"># redis是一个大字典，里面存储的是各种类型的键值对</span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    &#x27;键&#x27;：字符串，</span></span><br><span class="line"><span class="code">    &#x27;键&#x27;：列表 []，</span></span><br><span class="line"><span class="code">    &#x27;键&#x27;：集合&#123;&#125;，</span></span><br><span class="line"><span class="code">    &#x27;键&#x27;：有序集合&#123;0,1,2&#125;，</span></span><br><span class="line"><span class="code">    &#x27;键&#x27;：hash&#123;键：值&#125;，</span></span><br><span class="line"><span class="code">&#125;</span></span><br><span class="line"><span class="code"></span></span><br><span class="line">&#123;</span><br><span class="line"><span class="code">    </span></span><br><span class="line"><span class="code">    &quot;user&quot;:&#123;&quot;name&quot;:&quot;Tom&quot;,&quot;age&quot;:18&#125;</span></span><br><span class="line"><span class="code">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>常用指令：</p>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>说明</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hset</td>
+<td>设置一个key&#x2F;value对</td>
+<td>hset user name tom</td>
+</tr>
+<tr>
+<td>hget</td>
+<td>获得一个key对应的value</td>
+<td>hget user name</td>
+</tr>
+<tr>
+<td>hgetall</td>
+<td>获得所有的key&#x2F;value对</td>
+<td>hgetall user</td>
+</tr>
+<tr>
+<td>hdel</td>
+<td>删除某一个key&#x2F;value对</td>
+<td>hdel user name</td>
+</tr>
+<tr>
+<td>hexists</td>
+<td>判断一个key是否存在</td>
+<td>hexists user name</td>
+</tr>
+<tr>
+<td>hkeys</td>
+<td>获得所有的key</td>
+<td>hkeys user</td>
+</tr>
+<tr>
+<td>hvals</td>
+<td>获得所有的value</td>
+<td>hvals user</td>
+</tr>
+<tr>
+<td>hmset</td>
+<td>设置多个key&#x2F;value</td>
+<td>hmset  user name tom gender true</td>
+</tr>
+<tr>
+<td>hmget</td>
+<td>获得多个key的value</td>
+<td>hmget user name age</td>
+</tr>
+<tr>
+<td>hsetnx</td>
+<td>设置一个不存在的key的值</td>
+<td>hsetnx user salary 4000</td>
+</tr>
+<tr>
+<td>hincrby</td>
+<td>为value进行加法运算</td>
+<td>hincrby user age 3</td>
+</tr>
+<tr>
+<td>hincrbyfloat</td>
+<td>为value加入浮点值</td>
+<td>hincrbyfloat user age 3.5</td>
+</tr>
+</tbody></table>
+<h3 id="五、Redis持久化"><a href="#五、Redis持久化" class="headerlink" title="五、Redis持久化"></a>五、Redis持久化</h3><h4 id="1、什么是持久化？"><a href="#1、什么是持久化？" class="headerlink" title="1、什么是持久化？"></a>1、什么是持久化？</h4><p>持久化的含义就是把内存中的数据保存到可永久存储的设备中（磁盘中），以便数据可以重用。   Redis</p>
+<ul>
+<li><p>存：读内存中Redis数据 -&gt; 通过持某种久化的方式 -&gt; 存储到磁盘的文件中     </p>
+<p> <code>内存-&gt;文件</code></p>
+</li>
+<li><p>取：读磁盘文件中的数据 -&gt; 内存中                                                                     </p>
+<p>  <code>文件-&gt;内存</code></p>
+</li>
+</ul>
+<p>众所周知，redis是内存数据库，它把数据存储在内存中，这样在加快读取速度的同时也对数据安全性产生了新的问题，即当redis所在服务器发生宕机后（或服务器进程退出 ），redis数据库里的所有数据将会全部丢失。</p>
+<p>为了解决这个问题，redis提供了持久化功能：</p>
+<ul>
+<li><strong>RDB持久化</strong>（snapshotting快照 - 原理是在某个时刻将Redis在内存中的数据库记录dump到磁盘上的RDB文件中实现持久化） </li>
+<li><strong>AOF持久化</strong>（append only file - 原理是将Redis的操作日志以追加的方式写入文件）。</li>
+</ul>
+<p>通俗的讲就是将内存中的数据写入硬盘中，当redis重启后，可以从磁盘中恢复数据。    </p>
+<h4 id="2、RDB持久化"><a href="#2、RDB持久化" class="headerlink" title="2、RDB持久化"></a>2、RDB持久化</h4><h5 id="2-1-RDB开发步骤"><a href="#2-1-RDB开发步骤" class="headerlink" title="2.1 RDB开发步骤"></a>2.1 RDB开发步骤</h5><p>编辑redis.conf文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">save   900   1           #900秒内超过1个key被修改 </span><br><span class="line">save   300   10          #300秒内超过10个key被修改</span><br><span class="line">save   60    10000</span><br><span class="line">dbfilename dump.rdb      #快照文件名</span><br><span class="line">stop-writes-on-bgsave-error yes   #快照失败后是否继续写操作</span><br><span class="line">rdbcompression yes                #是否压缩快照文件   </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-2-RDB运行原理"><a href="#2-2-RDB运行原理" class="headerlink" title="2.2 RDB运行原理"></a>2.2 RDB运行原理</h5><ul>
+<li>在某些时刻（满足rdb持久化的时刻），Redis通过fork产生子进程，一个父进程的快照(副本)， 其中有和父进程当前时刻相同的数据</li>
+<li>父进程继续处理client请求，子进程负责将快照(数据副本)写入临时文件(默认文件名为dump.rdb)</li>
+<li>子进程写完后，用临时文件替换原来的快照文件，然后子进程退出。</li>
+</ul>
+<p><img src="/Redis-pic%5C388326-20170726161552843-904424952.png" class="lazyload placeholder" data-srcset="/Redis-pic%5C388326-20170726161552843-904424952.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="img"> </p>
+<h5 id="2-3-RDB触发方式"><a href="#2-3-RDB触发方式" class="headerlink" title="2.3 RDB触发方式"></a>2.3 RDB触发方式</h5><ul>
+<li><p>根据配置  save 900 1 等，在满足条件时自动触发</p>
+</li>
+<li><p>手动执行  bgsave 指令触发 在后台保存</p>
+</li>
+<li><p>手动执行 save指令触发，但会造成持久化过程中的主进程阻塞。在主进程阻塞期间，服务器不能处理客户端的任何请求。 （不常用）</p>
+<p>如果数据量很大时可以考虑使用，因为不用创建子进程，也就没有子进程抢资源，所以save在生成快照时可以更快(夜深人静时手动触发)   </p>
+</li>
+<li><p>当通过 shutdown 关闭redis时，会自动触发</p>
+</li>
+</ul>
+<h5 id="2-4-RDB注意事项"><a href="#2-4-RDB注意事项" class="headerlink" title="2.4 RDB注意事项"></a>2.4 RDB注意事项</h5><ul>
+<li>如果发生系统崩溃，则会丢失最近一次rdb之后的数据，所以如果项目不能接受这样的数据损失，则不建议使用rdb</li>
+<li>如果数据量巨大，则创建子进程的时间长，导致redis卡顿，要谨慎设置save参数时间间隔大一些；或如果软件允许，可以每天在闲时手动同步</li>
+<li>将生成的快照文件，留在原地，则可以在重启redis后，恢复数据状态</li>
+<li>将生成的快照文件，复制到其它redis服务中，可以方便的将数据移植过去</li>
+</ul>
+<h4 id="3、AOF持久化"><a href="#3、AOF持久化" class="headerlink" title="3、AOF持久化"></a>3、AOF持久化</h4><p>Append-Only File（AOF）：与RDB的保存整个redis数据库状态不同，AOF是通过保存对redis服务端的写命令（如set、sadd、rpush）来记录数据库状态的，即保存你对redis数据库的写操作记录。  </p>
+<h5 id="3-1-AOF运行机制"><a href="#3-1-AOF运行机制" class="headerlink" title="3.1 AOF运行机制"></a>3.1 AOF运行机制</h5><p>Redis将每一个写操作(执行成功)，写入aof文件，即记录所有的数据改动行为，Redis重启时只要从头到尾执行一次aof文件中的命令，即可恢复数据，也可以将aof文件复制到别的服务器，做数据移植。</p>
+<p><strong>注意：</strong>在重启时，要恢复数据，如果rdb文件和aof文件同时存在，以AOF为准。</p>
+<h5 id="3-2-AOF配置"><a href="#3-2-AOF配置" class="headerlink" title="3.2 AOF配置"></a>3.2 AOF配置</h5><p>编辑redis.conf文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">appendonly  yes           #启动AOF机制</span><br><span class="line"></span><br><span class="line"># appendfsync always       #每次收到写命令就立即强制写入磁盘，保证完全的持久化，但产生极大的IO开销(不推荐使用)</span><br><span class="line"></span><br><span class="line">appendfsync everysec     #每秒钟强制写入磁盘一次，在性能和持久化方面做了很好的折中(推荐使用）</span><br><span class="line"></span><br><span class="line"># appendfsync no            #完全依赖os，虽然基本不对redis性能产生影响，但操作系统的缓存区满时，会阻塞redis(不推荐使用)</span><br><span class="line"></span><br><span class="line">appendfilename &quot;appendonly.aof&quot;    # 设置aof文件名     </span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-3-AOF细节"><a href="#3-3-AOF细节" class="headerlink" title="3.3 AOF细节"></a>3.3 AOF细节</h5><ul>
+<li>AOF文件会不断增长(可能比快照文件大几倍)，在极端情况下，可能会对硬盘空间造成压力</li>
+<li>Redis重启时，需要重新执行一个可能非常大的AOF，时间会很长</li>
+<li>AOF同步时间间隔小，数据更安全，理论上至多丢失1秒的数据</li>
+</ul>
+<h4 id="4、RDB与AOF对比"><a href="#4、RDB与AOF对比" class="headerlink" title="4、RDB与AOF对比"></a>4、RDB与AOF对比</h4><ul>
+<li>RDB体量更小，AOF文件体量更大</li>
+<li>RDB的同步时间间隔大，AOF同步时间间隔小，所以AOF更能保证数据的安全 </li>
+<li>RDB有更快的恢复速度，可以用来做数据版本控制。RDB每次进行快照方式会重新记录整个数据集的所有信息。RDB在恢复数据时更快，可以最大化redis性能。</li>
+<li>通过使用RDB和AOF，用户可以在重启或系统崩溃后保留数据，但随着负载量变大和数据安全越来越重要，可以使用redis的复制特性做更好的数据安全保障</li>
+</ul>
+<p>RDB可以做数据备份，并且要求数据恢复快，对数据一致性要求不高时</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">区别：</span><br><span class="line"><span class="bullet">1.</span> RDB保存的是二进制数据，而AOF保存的是写操作的记录</span><br><span class="line"><span class="bullet">2.</span> RDB是每次保存整个的数据集，而AOF是追加操作</span><br><span class="line"><span class="bullet">3.</span> RDB体量小，AOF体量大</span><br><span class="line"><span class="bullet">4.</span> RDB恢复速度快，而AOF恢复速度慢</span><br><span class="line"><span class="bullet">5.</span> RDB的同步时间间隔大，而AOF同步时间间隔小</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="5、AOF重写"><a href="#5、AOF重写" class="headerlink" title="5、AOF重写"></a>5、AOF重写</h4><h5 id="5-1-重写设置"><a href="#5-1-重写设置" class="headerlink" title="5.1 重写设置"></a>5.1 重写设置</h5><p>AOF采用文件追加的方式持久化数据，所以文件会越来越大，为了避免这种情况发生，增加了重写机制。</p>
+<ul>
+<li>为了减小aof文件的体量，可以手动发送 bgrewriteaof 命令，则会创建子进程，通过移除aof文件中的冗余命令来重写aof文件，生成更小体量的aof，然后替换掉旧的、大体量的aof文件</li>
+<li>也可以设置：<code>auto-aof-rewrite-percentage 100</code></li>
+</ul>
+<p>​                               <code>auto-aof-rewrite-min-size 64mb</code>  </p>
+<p>   在体量超过64mb，且比上次重写后的体量增加了100%时自动触发重写</p>
+<h5 id="5-2-重写原理"><a href="#5-2-重写原理" class="headerlink" title="5.2 重写原理"></a>5.2 重写原理</h5><p>Redis将AOF重写程序放到子进程（后台）里执行。这样处理的最大好处是： </p>
+<ul>
+<li>子进程进行AOF重写期间，主进程可以继续处理命令请求；</li>
+<li><strong>子进程带有主进程的数据副本</strong>，使用子进程而不是线程，<strong>保证数据的安全性</strong>。</li>
+</ul>
+<p>子进程进行AOF重写的问题：</p>
+<ul>
+<li>子进程在进行AOF重写期间，服务器主进程还要继续处理命令请求，而新的命令可能对现有的数据进行修改，这会让当前数据库的数据和&#96;。</li>
+</ul>
+<p>解决方案：</p>
+<ul>
+<li>为了解决这种数据不一致的问题，Redis增加了一个AOF重写缓存，这个缓存在fork出子进程之后开始启用，Redis服务器主进程在执行完写命令之后，会同时将这个写命令追加到AOF文件和AOF重写缓冲区</li>
+</ul>
+<p>即子进程在执行AOF重写时，主进程需要执行以下三个工作： </p>
+<ul>
+<li>执行client发来的命令请求；</li>
+<li>将写命令追加到现有的AOF文件中；</li>
+<li>将写命令追加到AOF重写缓存中。</li>
+</ul>
+<h3 id="六、Redis主从"><a href="#六、Redis主从" class="headerlink" title="六、Redis主从"></a>六、Redis主从</h3><h4 id="1、-简介"><a href="#1、-简介" class="headerlink" title="1、 简介"></a>1、 简介</h4><p>在高负载和对数据要求高完整性时，数据的复制是不可或缺的。一个Redis主服务器，并为其关联多个从服务器，主服务器会将自己的数据状态不断地同步给从服务器，即，从服务器中会持有主服务器最新的数据副本，则首先为数据完整性提供了进一步的保证，而且所有读取操作都可均衡的负载到多个从服务器中，主服务器主要负责写操作。则主从多个服务器实现读写分离，提供更好的数据完整性，和更强的负载能力。 </p>
+<h4 id="2、主从配置"><a href="#2、主从配置" class="headerlink" title="2、主从配置"></a>2、主从配置</h4><p>开启两个redis服务器，一个做主服务器，另一个做从服务器。主从两台服务器的配置没有额外的改变，只是<strong>在从服务器的配置中添加一句配置</strong>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">replicaof  host  port  比如：replicaof <span class="number">192.168</span><span class="number">.1</span><span class="number">.103</span> <span class="number">7000</span></span><br><span class="line"></span><br><span class="line">则如上配置将当前的redis服务器设置为(<span class="number">192.168</span><span class="number">.1</span><span class="number">.103</span>:<span class="number">7000</span>)的从服务器</span><br><span class="line"><span class="comment"># 注意：需要开放主服务器的ip</span></span><br><span class="line"><span class="comment"># 在主服务器的 redis.conf文件中 修改bind 0.0.0.0</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>如此，则主服务器的所有数据会在初始接收到从服务器的连接时全部发送到从服务器。之后每次主服务器执行完一个写操作，都会发送到从服务器。如上则是主从的运行模式。</li>
+<li>可以向如上设置多台从服务器，则以后的所有读取操作由从服务器完成，主服务器只负责写操作。</li>
+</ul>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/redis/" class="">
+              redis
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>author:  </strong>John Doe</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>link:  </strong>
+    <a href="/2020/11/20/Redis_01/" target="_blank" title="redis数据库">http://example.com/2020/11/20/Redis_01/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>Copyright notice:   </strong>
+      All articles on this website, unless otherwise stated, adopt <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      reprint policy. If reproduced, please indicate source!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/2020/11/20/Redis_02/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> Prev:
+        <div class="title-text">redis集群</div>
+      </div>
+      
+      <!-- <div class="content">
+        Redis数据库的集群学习笔记
+
+
+Redis-集群一、简介Redis 在3.0版本前只支持单实例模式，虽然支持主从模式
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/2020/11/20/Redis_03/" class="post-nav-link">
+      <div class="title">
+        Next: <i class="fas fa-angle-right"></i>
+        <div class="title-text">redis和python</div>
+      </div>
+      <!-- <div class="content">
+        Redis数据库的学习笔记
+
+
+Python-Redis一、安装模块在虚拟环境中安装以下几个模块：
+
+pip insta
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+      <div id="appDonate" class="post-donate">
+  <div id="donate_board" class="donate_bar center" ref="donate">
+    <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏" @click="showDialogDrawer()"></a>
+  </div>
+  <transition name="fade">
+    <div 
+      class="donate-box-mask"
+      v-cloak 
+      v-show="visible"
+      @click="cancelDialogDrawer()"
+    >
+    </div>
+  </transition>
+  <transition name="bounce">
+    <div class="donate-box" v-cloak v-show="visible">
+      <div class="donate-box_close">
+        <i class="fas fa-times" aria-hidden="true" @click="cancelDialogDrawer" pointer></i>
+      </div>
+      <div class="donate-box_title">
+        <h4>
+          你的赏识是我前进的动力
+        </h4>
+      </div>
+      <div class="donate-box_tab">
+        <div class="Alipay" pointer :class="{'active': tabActive === 'Alipay'}" @click="changeTabActive('Alipay')">
+          支付宝
+        </div>
+        <div class="WeChatpay" pointer :class="{'active': tabActive === 'WeChatpay'}" @click="changeTabActive('WeChatpay')">
+          微信
+        </div>
+      </div>
+      <div class="donate-box_img">
+        <div class="AlipayImg" v-show="tabActive === 'Alipay'">
+          <img src="/" class="lazyload placeholder" data-srcset="/" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="支付宝打赏" />
+        </div> 
+        <div class="WeChatpayImg" v-show="tabActive === 'WeChatpay'">
+          <img src="/" class="lazyload placeholder" data-srcset="/" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="微信打赏" />
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDonate',
+    data: {
+      visible: false,
+      tabActive: 'Alipay',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        // function getScroll() {
+        //   return {
+        //     left: window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft || 0,
+        //     top: window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0
+        //   };
+        // }
+        this.top = $(document).scrollTop() // or getScroll().top
+        // console.log('aa', $('.main-content'));
+        body.style.cssText = 'overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+      changeTabActive(name) {
+        this.tabActive = name;
+      }
+    },
+    created() {}
+  })
+</script>
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <div id="gitment-container"></div>
+
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box rectangle' href='/about/'>
+          <img src='https://pic2.zhimg.com/80/v2-42b72d5ebee4b8d8aa70d9687effe87b_1440w.webp'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>等风也等你</h2>
+        
+        
+          <p>不碰南墙不回头</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">Hexo</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:me@xxx.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/16778738"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=16778738"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Redis%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="toc-text">Redis数据库</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81NoSQL%E7%AE%80%E4%BB%8B"><span class="toc-text">一、NoSQL简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Redis%E7%AE%80%E4%BB%8B"><span class="toc-text">二、Redis简介</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Redis%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-text">1、Redis是什么？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Redis%E7%9A%84%E7%89%B9%E7%82%B9"><span class="toc-text">2、Redis的特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81Redis%E5%AE%89%E8%A3%85"><span class="toc-text">三、Redis安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E8%A7%A3%E5%8E%8B"><span class="toc-text">1、解压</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81make%E6%8C%87%E4%BB%A4"><span class="toc-text">2、make指令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81make-test-%E7%9B%B4%E6%8E%A5%E8%B7%B3%E8%BF%87"><span class="toc-text">3、make test (直接跳过)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81make-install"><span class="toc-text">4、make install</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%90%AF%E5%8A%A8%E6%9C%8D%E5%8A%A1"><span class="toc-text">5、启动服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81%E8%BF%9E%E6%8E%A5Redis"><span class="toc-text">6、连接Redis</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E5%85%B3%E9%97%AD%E6%9C%8D%E5%8A%A1"><span class="toc-text">7、关闭服务</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Redis%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="toc-text">四、Redis数据类型</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81String%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="toc-text">1、String字符串</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81List%E5%88%97%E8%A1%A8"><span class="toc-text">2、List列表</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81Set%E9%9B%86%E5%90%88"><span class="toc-text">3、Set集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81Zset%E6%9C%89%E5%BA%8F%E9%9B%86%E5%90%88"><span class="toc-text">4、Zset有序集合</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81Hash%E5%93%88%E5%B8%8C"><span class="toc-text">5、Hash哈希</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81Redis%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">五、Redis持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E6%8C%81%E4%B9%85%E5%8C%96%EF%BC%9F"><span class="toc-text">1、什么是持久化？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81RDB%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">2、RDB持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#2-1-RDB%E5%BC%80%E5%8F%91%E6%AD%A5%E9%AA%A4"><span class="toc-text">2.1 RDB开发步骤</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-2-RDB%E8%BF%90%E8%A1%8C%E5%8E%9F%E7%90%86"><span class="toc-text">2.2 RDB运行原理</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-3-RDB%E8%A7%A6%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="toc-text">2.3 RDB触发方式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-4-RDB%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">2.4 RDB注意事项</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81AOF%E6%8C%81%E4%B9%85%E5%8C%96"><span class="toc-text">3、AOF持久化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-AOF%E8%BF%90%E8%A1%8C%E6%9C%BA%E5%88%B6"><span class="toc-text">3.1 AOF运行机制</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-2-AOF%E9%85%8D%E7%BD%AE"><span class="toc-text">3.2 AOF配置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-3-AOF%E7%BB%86%E8%8A%82"><span class="toc-text">3.3 AOF细节</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81RDB%E4%B8%8EAOF%E5%AF%B9%E6%AF%94"><span class="toc-text">4、RDB与AOF对比</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81AOF%E9%87%8D%E5%86%99"><span class="toc-text">5、AOF重写</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#5-1-%E9%87%8D%E5%86%99%E8%AE%BE%E7%BD%AE"><span class="toc-text">5.1 重写设置</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-2-%E9%87%8D%E5%86%99%E5%8E%9F%E7%90%86"><span class="toc-text">5.2 重写原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81Redis%E4%B8%BB%E4%BB%8E"><span class="toc-text">六、Redis主从</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81-%E7%AE%80%E4%BB%8B"><span class="toc-text">1、 简介</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E4%B8%BB%E4%BB%8E%E9%85%8D%E7%BD%AE"><span class="toc-text">2、主从配置</span></a></li></ol></li></ol></li></ol></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/masscan%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/masscan%E4%BD%BF%E7%94%A8%E5%8F%82%E6%95%B0%E8%AE%B0%E5%BD%95/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/docker%E9%83%A8%E7%BD%B2/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/docker%E9%83%A8%E7%BD%B2/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/nslookup%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/nslookup%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/03/15/shadow/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">03-15</span>
+                
+              </div>
+              <a class="post-title" href="/2024/03/15/shadow/">no title</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/02/26/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">02-26</span>
+                
+              </div>
+              <a class="post-title" href="/2024/02/26/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">no title</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script defer>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2022 - 2024 <a target="_blank" rel="noopener" href="https://github.com/16778738">16778738</a> | Powered by “&gt;</a> |  </p>
+
+          </div>
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark" onclick="toggleDarkMode()">
+  <div class="dark-content">
+    <i class="fas" id="darkIcon" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script defer>
+  $(function() {
+    // 初始化暗黑模式状态
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    updateDarkModeIcon(isDark);
+  });
+
+  function toggleDarkMode() {
+    const isDark = $(document.body).hasClass('darkModel');
+    $(document.body).toggleClass('darkModel');
+    localStorage.setItem('dark', !isDark);
+    updateDarkModeIcon(!isDark);
+  }
+
+  function updateDarkModeIcon(isDark) {
+    const iconElement = document.getElementById('darkIcon');
+    if (isDark) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-lightbulb');
+    } else {
+      iconElement.classList.remove('fa-lightbulb');
+      iconElement.classList.add('fa-moon');
+    }
+  }
+</script>
+
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script defer src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
+<style>
+.aplayer .aplayer-lrc p {
+  
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+  font-size: 15px;
+  color: #42b983;
+}
+
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0px !important;
+}
+
+
+</style>
+<meting-js  
+  class=""
+  server="tencent"
+  type="playlist"
+  id="8062553743"
+  fixed='true'
+  autoplay='false'
+  theme='#42b983'
+  loop='all'
+  order='random'
+  preload='auto'
+  volume='0.7'
+  list-folded='true'
+>
+</meting-js>
+
+<!-- <style>
+  #aplayer {
+    position: fixed;
+    left: 0;
+    bottom: 300px;
+  }
+</style> -->
+<script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script async>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = 'copy';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+        <script type="text/javascript">
+  var utteranceComment = {};
+
+  function check_utterance() {
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    if (isDark) {
+      utteranceComment.Theme = 'github-dark';
+    } else {
+      utteranceComment.Theme = 'github-light';
+    }
+
+    return document.getElementById("gitment-container");
+  }
+  comment_el = '#gitment-container';
+  load_utterance = function () {
+    if ($(comment_el).length) {
+      // 匿名函数，防止污染全局变量
+      const HEAD = check_utterance();
+
+      var utterances = document.createElement('script');
+      utterances.type = 'text/javascript';
+      utterances.async = true;
+      utterances.setAttribute('issue-term', 'pathname')
+      utterances.setAttribute('theme', utteranceComment.Theme)
+      utterances.setAttribute('repo', '16778738/16778738.github.io')
+      utterances.crossorigin = 'anonymous';
+      utterances.src = 'https://utteranc.es/client.js';
+      // content 是要插入评论的地方
+      document.getElementById('gitment-container').appendChild(utterances);
+
+    }
+  }
+
+  function dark_utterance() {
+    const HEAD = check_utterance();
+    if (!HEAD) return;
+    const message = {
+      type: 'set-theme',
+      theme: utteranceComment.Theme
+    };
+    const utteranceIframe = document.querySelector('iframe');
+    utteranceIframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+
+  $(document).ready(load_utterance);
+  document.addEventListener('pjax:complete', function () {
+    load_utterance();
+  });
+
+  $('.dark').click(function () {
+    setTimeout(() => {
+      dark_utterance();
+    });
+  })
+
+</script>
+
+<style>
+  .utterances {
+    max-width: inherit !important;
+  }
+</style>
+      
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <div class="pjax-animate">
+  
+    <div class="loading-circle"><div id="loader-circle"></div></div>
+    <script>
+      window.ShowLoading = function() {
+        $(".loading-circle").css("display", "block");
+      };
+      window.HideLoading = function() {
+        $(".loading-circle").css("display", "none");
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
