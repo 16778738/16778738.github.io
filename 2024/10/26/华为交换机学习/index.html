@@ -11,7 +11,7 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-  <title>Hexo</title>
+  <title>华为交换机学习 | Hexo</title>
 
   <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/favicon.ico">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -370,21 +370,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        
+        华为交换机学习
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> Published in：2024-10-24 |
+          <i class="fas fa-calendar"></i> Published in：2024-10-26 |
         </span>
       
 
@@ -408,32 +408,193 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="day1-版本控制工具"><a href="#day1-版本控制工具" class="headerlink" title="day1-版本控制工具"></a>day1-版本控制工具</h1><h2 id="个人简介"><a href="#个人简介" class="headerlink" title="个人简介"></a>个人简介</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 毛信宇  18500230996</span><br></pre></td></tr></table></figure>
+        <h1 id="华为交换机基础命令"><a href="#华为交换机基础命令" class="headerlink" title="华为交换机基础命令"></a>华为交换机基础命令</h1><p><strong>用户模式</strong></p>
+<p>登陆设备后，直接进入用户模式，<strong>尖括号</strong>表示用户模式，在这个模式下只能执行少量查看配置的命令；</p>
+<p><img src="/assets/efbbe5b106d8236e2b8fa476425b890b.png" class="lazyload placeholder" data-srcset="/assets/efbbe5b106d8236e2b8fa476425b890b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p><strong>视图模式</strong></p>
+<p>用户模式下，输入system-view或者sys进入视图模式，方括号表示视图模式，可执行设备全局配置的命令；</p>
+<p><img src="/assets/162758dd5c06c155324ca09805cf3680.png" class="lazyload placeholder" data-srcset="/assets/162758dd5c06c155324ca09805cf3680.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p><strong>进入接口</strong></p>
+<p><strong><img src="/assets/7f6376fa55ea71cc9f2d59b05b01585f.png" class="lazyload placeholder" data-srcset="/assets/7f6376fa55ea71cc9f2d59b05b01585f.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></strong></p>
+<p><strong>创建vlan并将端口加入vlan</strong></p>
+<p><strong>1、创建vlan</strong></p>
+<p>创建单个vlan</p>
+<p><img src="/assets/1d383263b16d94bb99fbb0ff2f5053b0.png" class="lazyload placeholder" data-srcset="/assets/1d383263b16d94bb99fbb0ff2f5053b0.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p>批量创建vlan</p>
+<p><img src="/assets/f27d770e1e6922e25fe04be7d327826b.png" class="lazyload placeholder" data-srcset="/assets/f27d770e1e6922e25fe04be7d327826b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p><strong>2、更改端口的链接类型</strong></p>
+<p>由于华为交换机的端口出厂时默认都是hybrid类型或auto类型的，所以无法立即加入vlan，需要更改端口的link-type后，才可以加入vlan。单个端口更改方式如下：</p>
+<p><img src="/assets/d5df73db952e252e1182b6b5b0e8ce61.png" class="lazyload placeholder" data-srcset="/assets/d5df73db952e252e1182b6b5b0e8ce61.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p><strong>为何要选择access类型？？</strong></p>
+<p>因为我们是终端PC与交换机相连，要求PC只能只能和上级交换机通信，所以必须只属于1个vlan</p>
+<blockquote>
+<p><strong>以太网端口的链路类型有三种：</strong></p>
+<p>Access 类型：端口只能属于1 个VLAN，一般用于交换机与终端用户之间的连接；</p>
+<p>Trunk 类型：端口可以属于多个VLAN，可以接收和发送多个VLAN 的报文，一般用于交换机 之间的连接；</p>
+<p>Hybrid 类型：端口可以属于多个VLAN，可以接收和发送多个VLAN 的报文，可以用于交换 机之间连接，也可以用于连接用户的计算机。Hybrid 端口可以允许多个VLAN 的报文发送时不携带标签，而Trunk 端口只允许缺省VLAN 的报文，发送时不携带标签。</p>
+</blockquote>
+<ul>
+<li>trunk端口用于交换机相连，pvid必须一致。</li>
+<li>access 类型只能属于1 个vlan</li>
+<li>规模较大的企业局域网，不建议使用vlan1，所以trunk端口不允许vlan1通过</li>
+</ul>
+<p><strong>3、端口加入vlan</strong></p>
+<p><strong><img src="/assets/74bc960bf93ca321855778e24c9c4dad.png" class="lazyload placeholder" data-srcset="/assets/74bc960bf93ca321855778e24c9c4dad.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></strong></p>
+<p><strong>端口的批量操作——端口组</strong></p>
+<p>原理就是创建一个端口组，把要更改的端口加入到端口组中，然后统一更改类型加入vlan。也可以理解为群组端口，统一配置类型加入vlan.</p>
+<p>批量更改，先更改端口类型，再统一加入某个vlan，如下：</p>
+<p><img src="/assets/57ca6dd1d39a8d8e2397cd0027056a6e.png" class="lazyload placeholder" data-srcset="/assets/57ca6dd1d39a8d8e2397cd0027056a6e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p><strong>5、vlan的查看</strong></p>
+<p>全局查看vlan信息</p>
+<p><img src="/assets/cd22a84efeb63df621153364b3bc2e2d.png" class="lazyload placeholder" data-srcset="/assets/cd22a84efeb63df621153364b3bc2e2d.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p>查看端口与vlan对应关系</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">display port vlan</span><br></pre></td></tr></table></figure>
 
-<h2 id="版本控制工具的介绍"><a href="#版本控制工具的介绍" class="headerlink" title="版本控制工具的介绍"></a>版本控制工具的介绍</h2><p>![2020-10-19_110709](E:\05 web进阶\day1\图片\2020-10-19_110709.png)</p>
-<h2 id="git-的入门"><a href="#git-的入门" class="headerlink" title="git 的入门"></a>git 的入门</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 自报家门</span><br><span class="line"><span class="code">		git config --global user.name &quot;maoxy-python&quot;</span></span><br><span class="line"><span class="code">		git config --global user.email &quot;maoxy@zparkhr.com.cn&quot;</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">2.</span> 创建版本库</span><br><span class="line"><span class="code">		git init</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">3. 添加文件到git的版本库</span></span><br><span class="line"><span class="code">		git add 文件名			将文件添加到版本库中  暂存区</span></span><br><span class="line"><span class="code">		git commit 文件名		确定添加到版本库(会弹出vi界面添加本次操作的版本说明)</span></span><br><span class="line"><span class="code">		git commit -m &quot;版本说明&quot;	确定添加到版本库,不会弹出vi界面 (推荐)</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">4. 仓库的状态</span></span><br><span class="line"><span class="code">		git status</span></span><br><span class="line"><span class="code">		红色: 文件发生了修改  但是未添加到版本库</span></span><br><span class="line"><span class="code">		绿色:	文件的修改已经添加到了版本库 但没有提交</span></span><br><span class="line"><span class="code">		nothing to commit, working tree clean:	当前仓库状态正常</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">5. 查看git的历史记录</span></span><br><span class="line"><span class="code">		git log  </span></span><br><span class="line"><span class="code">		git log --pretty=oneline	以更简洁的形式查看记录 (推荐)</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">6. 版本回退</span></span><br><span class="line"><span class="code">		git reset --hard 版本号</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">7.</span> 显示所有的历史操作</span><br><span class="line"><span class="code">		git reflog</span></span><br></pre></td></tr></table></figure>
+<p><img src="/assets/28e76b126d75df405bd4b406085cd764.png" class="lazyload placeholder" data-srcset="/assets/28e76b126d75df405bd4b406085cd764.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></p>
+<p><strong>6、允许所有vlan通过</strong></p>
+<p><strong><img src="/assets/569fff0077d4b5fd0f4c5402340daae2.png" class="lazyload placeholder" data-srcset="/assets/569fff0077d4b5fd0f4c5402340daae2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="图片"></strong></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/max-hou/p/16880547.html">https://www.cnblogs.com/max-hou/p/16880547.html</a></p>
+<h3 id="用户视图"><a href="#用户视图" class="headerlink" title="用户视图"></a>用户视图</h3><p>登陆设备后，直接进入用户模式，只能执行少量查看配置的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Info: The max number of VTY users is 10, and the number</span><br><span class="line">      of current VTY users on line is 1.</span><br><span class="line">      The current login time is 2020-04-10 12:15:00+00:00.</span><br><span class="line">&lt;HUAWEI&gt;</span><br></pre></td></tr></table></figure>
 
+<h3 id="系统视图"><a href="#系统视图" class="headerlink" title="系统视图"></a>系统视图</h3><p>用户模式下，输入system-view命令进入视图模式，可执行设备全局配置的命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;ZD_agg_5720&gt;system-view </span><br><span class="line">Enter system view, return user view with Ctrl+Z.</span><br><span class="line">[ZD_agg_5720]</span><br></pre></td></tr></table></figure>
 
+<h3 id="局部视图"><a href="#局部视图" class="headerlink" title="局部视图"></a>局部视图</h3><p>系统视图模式下，输入局部配置命令，进入局部对像的配置视图。如interface GE 1&#x2F;0&#x2F;0，进入GE1&#x2F;0&#x2F;0端口配置模式</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;ZD_agg_5720&gt;system-view </span><br><span class="line">Enter system view, return user view with Ctrl+Z.</span><br><span class="line">[ZD_agg_5720]interface GigabitEthernet 1/0/1</span><br><span class="line">[ZD_agg_5720-GigabitEthernet1/0/1]</span><br></pre></td></tr></table></figure>
 
-<h2 id="git的仓库说明"><a href="#git的仓库说明" class="headerlink" title="git的仓库说明"></a>git的仓库说明</h2><p>![2020-10-19_140909](E:\05 web进阶\day1\图片\2020-10-19_140909.png)</p>
-<h2 id="git的撤销修改"><a href="#git的撤销修改" class="headerlink" title="git的撤销修改"></a>git的撤销修改</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 工作区文件撤销</span><br><span class="line"><span class="code">	git checkout -- 文件名</span></span><br><span class="line"><span class="code">	</span></span><br><span class="line"><span class="code">2. 暂存区文件撤销</span></span><br><span class="line"><span class="code">	a. 先将暂存区的文件状态撤回到工作区</span></span><br><span class="line"><span class="code">		git reset head 文件名</span></span><br><span class="line"><span class="code">	b. 将工作区的文件状态撤销</span></span><br><span class="line"><span class="code">		git checkout -- 文件名</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">3. 文件状态一旦提交到master 无法彻底删除</span></span><br></pre></td></tr></table></figure>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><h3 id="命令简介"><a href="#命令简介" class="headerlink" title="命令简介"></a>命令简介</h3><table>
+<thead>
+<tr>
+<th><strong>命令</strong></th>
+<th><strong>缩写</strong></th>
+<th><strong>解释</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>display</td>
+<td>dis</td>
+<td>查看相应对象信息</td>
+</tr>
+<tr>
+<td>undo</td>
+<td></td>
+<td>撤消或反向操作对应命令</td>
+</tr>
+<tr>
+<td>system-view</td>
+<td>sy</td>
+<td>进入系统视图</td>
+</tr>
+<tr>
+<td>sysname</td>
+<td></td>
+<td>设置交换机名称</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>q</td>
+<td>退出当前视图</td>
+</tr>
+<tr>
+<td>reboot</td>
+<td></td>
+<td>交换机重启</td>
+</tr>
+<tr>
+<td>reset</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>restart</td>
+<td></td>
+<td>重新启动当前接口</td>
+</tr>
+<tr>
+<td>shutdown</td>
+<td></td>
+<td>关闭当前接口</td>
+</tr>
+</tbody></table>
+<h3 id="信息查看命令"><a href="#信息查看命令" class="headerlink" title="信息查看命令"></a>信息查看命令</h3><h3 id="交换机信息查看"><a href="#交换机信息查看" class="headerlink" title="交换机信息查看"></a>交换机信息查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display version  查看交换机软件版本</span><br><span class="line">display clock    查看交换机时钟</span><br></pre></td></tr></table></figure>
 
+<h3 id="交换机配置查看"><a href="#交换机配置查看" class="headerlink" title="交换机配置查看"></a>交换机配置查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">display saved-configuration    显示系统保存配置</span><br><span class="line">display current-configuration  显示系统当前配置</span><br></pre></td></tr></table></figure>
 
+<h3 id="当前对象信息查看"><a href="#当前对象信息查看" class="headerlink" title="当前对象信息查看"></a>当前对象信息查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display this                    显示当前信息。</span><br><span class="line">display this include-default    显示当前接口视图下的接口信息，包括默认值。</span><br><span class="line">display this interface          显示当前接口视图下的接口信息。</span><br></pre></td></tr></table></figure>
 
-<h2 id="git的删除"><a href="#git的删除" class="headerlink" title="git的删除"></a>git的删除</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 删除文件</span><br><span class="line"><span class="code">	rm 文件名|目录名  	此时会记录删除的动作</span></span><br><span class="line"><span class="code">	</span></span><br><span class="line"><span class="code">2. 确定删除</span></span><br><span class="line"><span class="code">	git rm 文件名</span></span><br><span class="line"><span class="code">	git commit -m &quot;版本说明&quot; 文件名</span></span><br><span class="line"><span class="code">3. 取消删除</span></span><br><span class="line"><span class="code">	git checkout -- 文件名</span></span><br><span class="line"><span class="code">	git reset head 文件名</span></span><br></pre></td></tr></table></figure>
+<h3 id="查看接口"><a href="#查看接口" class="headerlink" title="查看接口"></a>查看接口</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display interface               查看接口当前运行状态和接口统计信息</span><br><span class="line">display interface brief         查看接口状态和配置的简要信息。</span><br><span class="line">display interface description   查看指定接口的描述信息</span><br><span class="line">display interface vlanif        查看VLANIF接口的状态信息、配置信息和统计信息。</span><br></pre></td></tr></table></figure>
 
+<h3 id="查看IP相关"><a href="#查看IP相关" class="headerlink" title="查看IP相关"></a>查看IP相关</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">display ip interface             查看接口与IP相关的配置和统计信息，包括接口接收和发送的报文数、字节数和组播报文数，以及接口接收、发送、转发和丢弃的广播报文数。</span><br><span class="line">display ip interface brief       看接口与IP相关的简要信息，包括IP地址、子网掩码、物理链路和协议的Up/Down状态以及处于不同状态的接口数目。</span><br><span class="line">display ip interface description 查看接口与IP相关的简要信息，包括IP地址、子网掩码、物理层状态、链路层协议状态，及接口描述信息和处于不同状态的接口数目。</span><br><span class="line">display ip pool                                                          显示所有ip pool</span><br><span class="line">display ip pool name &#123;pool name&#125; &#123;all|conflict|expired|used&#125;             显示ip pool详细信息</span><br><span class="line">display ip host                查看静态DNS表项</span><br><span class="line">display ip socket              查看已创建的IPv4 Socket信息。</span><br><span class="line">display ip statistics          显示IP流量统计信息。</span><br></pre></td></tr></table></figure>
 
+<h3 id="查看路由"><a href="#查看路由" class="headerlink" title="查看路由"></a>查看路由</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">display ip routing-table        显示路由信息</span><br><span class="line">display ospf peer               查看ospf邻接等信息</span><br><span class="line">display ospf peer brief         查看ospf邻接等简要信息</span><br><span class="line">display rip                     查看rip路由信息</span><br></pre></td></tr></table></figure>
 
-<h2 id="分支的使用"><a href="#分支的使用" class="headerlink" title="分支的使用"></a>分支的使用</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 创建分支</span><br><span class="line"><span class="code">		git branch 分支名			只创建分支</span></span><br><span class="line"><span class="code">		git checkout -b 分支名		创建并切换到分支</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">2. 查看分支</span></span><br><span class="line"><span class="code">		git branch</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">3. 切换分支</span></span><br><span class="line"><span class="code">		git checkout 分支名</span></span><br><span class="line"><span class="code"></span></span><br><span class="line"><span class="bullet">4.</span> 合并分支</span><br><span class="line"><span class="code">		git merge 分支名</span></span><br><span class="line"><span class="code">		注意:  向谁合并需要先切换到谁</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">5. 删除分支</span></span><br><span class="line"><span class="code">		git branch -d 分支名</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">6. 分支相关命令	</span></span><br><span class="line"><span class="code">		git branch --help</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">7. 合并分支发生冲突</span></span><br><span class="line"><span class="code">	1. 编辑发生冲突的文件</span></span><br><span class="line"><span class="code">	2. git add</span></span><br><span class="line"><span class="code">	3. git commit</span></span><br></pre></td></tr></table></figure>
+<h3 id="网络及流量"><a href="#网络及流量" class="headerlink" title="网络及流量"></a>网络及流量</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display network status &#123; all|tcp|udp|port port-number &#125;   显示IP流量统计信息 </span><br><span class="line">display tcp statistics   查看TCP流量统计信息</span><br><span class="line">display udp statistics   查看UDP流量统计信息</span><br></pre></td></tr></table></figure>
 
-<h2 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 创建账号码云|GitHub</span><br><span class="line"></span><br><span class="line"><span class="bullet">2.</span> 创建仓库</span><br><span class="line"><span class="code">		https://github.com/maoxy-python/dangdang2006.git</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">3. 将本地版本库与远程仓库连接</span></span><br><span class="line"><span class="code">		git remote add origin 远程仓库地址</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">4. 查看绑定是否成功</span></span><br><span class="line"><span class="code">		git remote -v</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">5. 向远程仓库推送本地仓库</span></span><br><span class="line"><span class="code">		git push -u origin master  每次绑定地址后第一次推送</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">6. 克隆仓库</span></span><br><span class="line"><span class="code">		git clone 远程仓库地址</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">7. 删除绑定的远程仓库地址</span></span><br><span class="line"><span class="code">		git remote remove origin</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">8. 免密访问</span></span><br><span class="line"><span class="code">	a. 解除原有地址,切换成ssh地址</span></span><br><span class="line"><span class="code">	b. 生成ssh公私钥	</span></span><br><span class="line"><span class="code">		ssh-keygen -t rsa -C &quot;GitHub的邮箱名&quot;  连续四次enter即可</span></span><br><span class="line"><span class="code">		C:\Users\Administrator\.ssh\ 目录下找到公私钥 id_rsa私钥  id_rsa.pub公钥</span></span><br><span class="line"><span class="code">		打开公钥,将公钥的内容拷贝纸github</span></span><br><span class="line"><span class="code">		</span></span><br><span class="line"><span class="code">9. 推送自己的分支</span></span><br><span class="line"><span class="code">	git push origin 分支名 切换到该分支上执行</span></span><br><span class="line"><span class="code">	git push -d origin dev  删除远程分支</span></span><br><span class="line"><span class="code">	</span></span><br><span class="line"><span class="code">10. 推送远程仓库发生冲突</span></span><br><span class="line"><span class="code">	a.将冲突拉取至本地</span></span><br><span class="line"><span class="code">		git pull</span></span><br></pre></td></tr></table></figure>
+<h3 id="VLAN查看"><a href="#VLAN查看" class="headerlink" title="VLAN查看"></a>VLAN查看</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">display vlan                              显示VLAN信息</span><br><span class="line">display vlan &#123;pvid&#125; verbose               查看vlan的详细信息</span><br><span class="line">display port vlan                         查看VLAN中包含的接口信息</span><br><span class="line">display sub-vlan                          查看Sub-VLAN类型的VLAN表项信息</span><br><span class="line">display super-vlan                        查看Super-VLAN类型的VLAN表项信息</span><br><span class="line">display mac-vlan mac-address all          查看所有MAC地址划分VLAN的配置信息</span><br><span class="line">display mac-vlan vlan 2                   查看vlan 2 MAC地址划分VLAN的配置信息</span><br></pre></td></tr></table></figure>
 
-<h2 id="pycharm集成终端"><a href="#pycharm集成终端" class="headerlink" title="pycharm集成终端"></a>pycharm集成终端</h2><p>![集成git终端](E:\05 web进阶\day1\图片\集成git终端.png)</p>
-<h1 id="作业"><a href="#作业" class="headerlink" title="作业"></a>作业</h1><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">1.</span> 掌握git的命令使用</span><br></pre></td></tr></table></figure>
+<h3 id="查看ACL配置"><a href="#查看ACL配置" class="headerlink" title="查看ACL配置"></a>查看ACL配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">display acl &#123;all | name | ipv6&#125;                         查看ACL</span><br><span class="line">display traffic classifier user-defined                 查看用户定义的流分类</span><br><span class="line">display traffic behavior user-defined                   查看用户定义的流行为</span><br><span class="line">display traffic policy user-defined &#123;policy name&#125;       查看用户定义的流策略</span><br><span class="line">display traffic-applied &#123;inbound | outbound | interface | vlan&#125;  查看流策略应用情况</span><br><span class="line"></span><br><span class="line">display traffic policy &#123;global | interface | statistics | vlan &#125; &#123;inbound | outbound&#125;   查看更多流策略信息</span><br><span class="line">display traffic policy statistics &#123;global | interface | vlan&#125; &#123;inbound | outbound&#125;      查看流策略统计信息</span><br><span class="line"></span><br><span class="line">display traffic-filter applied-record                   查看acl应用的接口</span><br></pre></td></tr></table></figure>
+
+<h3 id="查看NAT配置"><a href="#查看NAT配置" class="headerlink" title="查看NAT配置"></a>查看NAT配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#路由器命令</span><br><span class="line">display nat static &#123;acl | global | inside | interface&#125;         查看静态NAT信息</span><br><span class="line">display nat session &#123;all | dest | number | protocol | source&#125;  查看动态NAT信息</span><br><span class="line">display nat server &#123;acl | global | inside | interface&#125;         查看NAT server信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="配置管理命令"><a href="#配置管理命令" class="headerlink" title="配置管理命令"></a>配置管理命令</h3><h3 id="端口管理"><a href="#端口管理" class="headerlink" title="端口管理"></a>端口管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">port                                               配置接口的缺省VLAN并加入该VLAN</span><br><span class="line">port description                                   配置接口的描述信息，描述与接口相连的设备类型。</span><br><span class="line">port gigabitethernet 0/0/1 to 0/0/4</span><br><span class="line">port default vlan                                  配置接口的缺省VLAN并同时加入这个VLAN。</span><br><span class="line">port link-type &#123;access | hybird | trunk&#125;           配置接口的链路类型</span><br><span class="line">port trunk allow-pass vlan &#123;vlanid&#125;                将trunk接口加入vlan</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口配置"><a href="#端口配置" class="headerlink" title="端口配置"></a>端口配置</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">speed  &#123;10|100|auto&#125;                             配置端口工作速率</span><br><span class="line">duplex &#123;half|full|auto&#125;                          配置端口工作状态</span><br></pre></td></tr></table></figure>
+
+<h3 id="端口组操作"><a href="#端口组操作" class="headerlink" title="端口组操作"></a>端口组操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">display port-group  &#123;all&#125;                                     查看端口组</span><br><span class="line">port-group &#123;id&#125;                                               创建端口组</span><br><span class="line">group-member gigabitethernet 0/0/2 to gigabitethernet 0/0/10  将2到10端口加入端口组</span><br></pre></td></tr></table></figure>
+
+<h3 id="VLAN管理"><a href="#VLAN管理" class="headerlink" title="VLAN管理"></a>VLAN管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">vlan &#123;id&#125;                      创建VLAN并进入VLAN视图，如果VLAN已存在，直接进入该VLAN的视图。</span><br><span class="line">vlan batch 10 to 20            批量创建VLAN</span><br><span class="line">vlan range 10 to 20            创建临时VLAN组，并进入VLAN-Range视图</span><br><span class="line">vlan statistics                配置VLAN的流量统计模式，即配置按包或按字节进行VLAN流量统计。</span><br><span class="line">vlan statistics interval       配置VLAN的流量统计的时间间隔</span><br><span class="line">ip address                     用来配置接口的IP地址。 </span><br></pre></td></tr></table></figure>
+
+<h3 id="接口管理"><a href="#接口管理" class="headerlink" title="接口管理"></a>接口管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">interface gigabitethernet 0/0/1     进入指定的接口或子接口视图，进入0/0/1的接口</span><br></pre></td></tr></table></figure>
+
+<h3 id="DNS管理"><a href="#DNS管理" class="headerlink" title="DNS管理"></a>DNS管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#查看</span><br><span class="line">display dns dynamic-host       查看动态DNS表项</span><br><span class="line">display dns domain             查看域名后缀的相关信息</span><br><span class="line">display dns server             查看DNS服务器的相关信息</span><br><span class="line">#设置</span><br><span class="line">dns domain domain-name    命令用来配置域名后缀，如 dns domain com.cn。</span><br><span class="line">dns resolve               命令用来使能动态域名解析功能</span><br><span class="line">dns server &#123;ip&#125;           命令用来配置DNS服务器的IP地址</span><br><span class="line">ip host &#123;domain&#125; &#123;ip&#125;     命令用来配置静态DNS表项 ip host www.huawei.com 10.10.10.4。</span><br></pre></td></tr></table></figure>
+
+<h3 id="DHCP管理"><a href="#DHCP管理" class="headerlink" title="DHCP管理"></a>DHCP管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">dhcp enable                          命令用来开启DHCP功能。 </span><br><span class="line">dhcp select global                   从全局配置中获取dhcp配置</span><br></pre></td></tr></table></figure>
+
+<h3 id="ACL管理"><a href="#ACL管理" class="headerlink" title="ACL管理"></a>ACL管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">acl &#123;name | number | ipv6&#125;                     创建acl</span><br><span class="line">rule [&#123;ruleid&#125;] permit ip source &#123;源ip&#125; &#123;反掩码&#125; [ destination &#123;源ip&#125; &#123;反掩码&#125; ]  创建允许规则</span><br><span class="line">rule [&#123;ruleid&#125;] deny ip source &#123;源ip&#125; &#123;反掩码&#125; [ destination &#123;源ip&#125; &#123;反掩码&#125;  ]   创建拒绝规则</span><br><span class="line"></span><br><span class="line">traffic-filter &#123;inbound | outbound&#125; acl &#123;acl number&#125;              在接口上应用acl规则</span><br><span class="line"></span><br><span class="line">#创建流分类</span><br><span class="line">traffic classifier &#123;classifier name&#125; operator &#123; and |or &#125;</span><br><span class="line">if-match acl &#123;acl number&#125;                     为流分类设置匹配规则</span><br><span class="line">#创建流行为</span><br><span class="line">traffic behavior &#123;behavior name&#125;                      </span><br><span class="line">permit | deny | redirect                      为流行为配置动作</span><br><span class="line">#创建流策略</span><br><span class="line">traffic policy &#123;policy name&#125;        </span><br><span class="line">classifier &#123;classifier name&#125; behavior &#123;behavior name&#125;             关联流分类与流行为</span><br><span class="line">#将流策略应用到接口</span><br><span class="line">interface g0/0/1</span><br><span class="line">traffic-policy &#123;policy name&#125;  &#123;inbound | outbound&#125;                 接口绑定流策略</span><br></pre></td></tr></table></figure>
+
+<h3 id="NAT管理"><a href="#NAT管理" class="headerlink" title="NAT管理"></a>NAT管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#边界路由器接口上配置静态NAT</span><br><span class="line">nat static global &#123;外部ip&#125; inside &#123;内部ip&#125;                 添加静态nat，内外部ip一对一</span><br><span class="line">#动态NAT，使用dis nat session查看</span><br><span class="line">nat address-group &#123;groupid&#125; &#123;ip开始&#125; &#123;ip结束&#125;                     添加外部可用地址池</span><br><span class="line">nat outbound &#123;acl id&#125; address-group &#123;address-group id&#125; no-pat    添加动态地址转换</span><br><span class="line">#NAPT，使用dis nat session查看</span><br><span class="line">nat outbound &#123;acl id&#125; [address-group &#123;address-group id&#125;]         添加动态端口地址转换</span><br><span class="line">#NAT server，使用dis nat server查看</span><br><span class="line">nat server protocol tcp global &#123;外部ip&#125; &#123;外部端口&#125; inside &#123;内部ip&#125; &#123;内部端口&#125;   添加nat server转换</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户管理"><a href="#用户管理" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">#查看本地用户</span><br><span class="line">display local-user</span><br><span class="line">#查看用户接口</span><br><span class="line">display user-interface</span><br><span class="line">#设置用户vty0为4个并发</span><br><span class="line">user-interface vty 0 4</span><br><span class="line">#进入用户console0接口</span><br><span class="line">user-interface console 0</span><br><span class="line">#用户管理</span><br><span class="line">local-user &#123;username&#125; password cipher &#123;password&#125;</span><br><span class="line">local-user &#123;username&#125; level 15</span><br><span class="line">local-user &#123;username&#125; service-type telnet terminal ssh</span><br></pre></td></tr></table></figure>
+
+<h3 id="绑定IP与MAC"><a href="#绑定IP与MAC" class="headerlink" title="绑定IP与MAC"></a>绑定IP与MAC</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">user-bind ip-address 10.0.0.2 mac-address 0001-0203-0405</span><br><span class="line">user privilege level 3</span><br></pre></td></tr></table></figure>
+
+<p>LEVEL 0(访问级)：可以执行用于网络诊断等功能的命令。包括ping、tracert、telnet等命令，执行该级别命令的结果不能被保存到配置文件中。<br>LEVEL 1(监控级)：可以执行用于系统维护、业务故障诊断等功能的命令。包括debugging、terminal等命令，执行该级别命令的结果不能被保存到配置文件中。<br>LEVEL 2(系统级)：可以执行用于业务配置的命令，主要包括路由等网络层次的命令，用于向用户提供网络服务。<br>LEVEL 3(管理级)：最高级，可以运行所有命令：关系到系统的基本运行、系统支撑模块功能的命令，这些命令对业务提供支撑作用。包括文件系统、FTP、TFTP、XModem下载、用户管理命令、级别设置命令等。</p>
+<h3 id="日志与统计"><a href="#日志与统计" class="headerlink" title="日志与统计"></a>日志与统计</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">#打开统计</span><br><span class="line">display counters               查看接口的流量统计计数</span><br><span class="line">statistic enable</span><br><span class="line">trace mac enable</span><br><span class="line">trace mac aa99-6600-5600 vlan 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="其它命令"><a href="#其它命令" class="headerlink" title="其它命令"></a>其它命令</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">display stp                   显示生成树信息</span><br><span class="line">display mac-address           显示MAC地址表</span><br><span class="line">display bridge mac-address    查看当前桥接设备mac地址</span><br><span class="line">display arp                   显示ARP信息表</span><br><span class="line">display voice-vlan oui                          查看Voice VLAN的OUI及其相关属性。</span><br><span class="line">display voice-vlan status                       查看当前Voice VLAN的相关信息</span><br><span class="line"></span><br><span class="line">mac-vlan mac-address</span><br></pre></td></tr></table></figure>
+
+<h3 id="操作实战"><a href="#操作实战" class="headerlink" title="操作实战"></a>操作实战</h3><h3 id="VLAN操作"><a href="#VLAN操作" class="headerlink" title="VLAN操作"></a>VLAN操作</h3><p>创建vlan，设置vlan的ip，并将端口加入vlan中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#进入全局配置视图</span><br><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#新建vlan2</span><br><span class="line">[Huawei] vlan 2</span><br><span class="line">#进入vlan2的接口视图</span><br><span class="line">[Huawei] interface vlan 2</span><br><span class="line">#设置vlan2的三层网关路由</span><br><span class="line">[Huawei-Vlanif2] ip address 10.0.0.1 255.255.255.0</span><br><span class="line">#进入0/0/1接口，配置为access接口并加入vlan2中</span><br><span class="line">[Huawei] interface GigabitEthernet 0/0/1</span><br><span class="line">[Huawei-GigabitEthernet0/0/1] port link-type access</span><br><span class="line">[Huawei-GigabitEthernet0/0/1] port default vlan 2</span><br><span class="line">#进入0/0/2接口，配置为trunk接口并加入vlan2中</span><br><span class="line">[Huawei] interface GigabitEthernet 0/0/2</span><br><span class="line">[Huawei-GigabitEthernet0/0/2] port link-type trunk</span><br><span class="line">[Huawei-GigabitEthernet0/0/2] port trunk allow-pass vlan 2</span><br><span class="line">#查看端口配置的信息</span><br><span class="line">[Huawei-GigabitEthernet0/0/2] dis this</span><br><span class="line">#进入vlan2，将0/0/2到0/0/5端口加入到vlan2中（port link-type需要是access类型）</span><br><span class="line">[Huawei] vlan 2</span><br><span class="line">[Huawei-vlan2] port GigabitEthernet 0/0/2 to 0/0/5 </span><br></pre></td></tr></table></figure>
+
+<h3 id="端口组操作-1"><a href="#端口组操作-1" class="headerlink" title="端口组操作"></a>端口组操作</h3><p>需要对多个端口进行相同操作时，可以创建端口组进行批量操作。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#创建端口组1，进行批量端口操作</span><br><span class="line">[Huawei] port-group 1</span><br><span class="line">#将6到10端口加入端口组</span><br><span class="line">[Huawei-port-group-1] group-member gigabitethernet 0/0/6 to gigabitethernet 0/0/10</span><br><span class="line">#批量将2~10端口修改为access模式</span><br><span class="line">[Huawei-port-group-1] port link-type access</span><br><span class="line">#批量将6~10端口加入到vlan 2中</span><br><span class="line">[Huawei-port-group-1] port default vlan 2</span><br></pre></td></tr></table></figure>
+
+<h3 id="IP-POOL操作"><a href="#IP-POOL操作" class="headerlink" title="IP POOL操作"></a>IP POOL操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#进入ip pool中</span><br><span class="line">[Huawei] ip pool vlan10</span><br><span class="line">#在ip pool中添加dns server</span><br><span class="line">[Huawei-ip-pool-vlan10] dns-list 8.8.8.8</span><br><span class="line">#设置网关</span><br><span class="line">[Huawei-ip-pool-vlan10] gateway-list 10.0.0.1</span><br><span class="line">#设置ip pool的ip段和池，需要与vlanif接口配置匹配，否则ip分配不了</span><br><span class="line">[Huawei-ip-pool-vlan10] network 10.0.0.0 mask 255.255.255.0</span><br><span class="line">#过期时间</span><br><span class="line">[Huawei-ip-pool-vlan10] lease day 10</span><br></pre></td></tr></table></figure>
+
+<h3 id="DHCP操作"><a href="#DHCP操作" class="headerlink" title="DHCP操作"></a>DHCP操作</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#全局打开DHCP服务</span><br><span class="line">[Huawei] dhcp enable</span><br><span class="line">#进入vlan的接口视图</span><br><span class="line">[Huawei] interface vlanif 2</span><br><span class="line">#设置vlan2的三层网关路由</span><br><span class="line">[Huawei-Vlanif2] ip address 10.0.0.1 255.255.255.0</span><br><span class="line">#从全局配置中获取dhcp配置</span><br><span class="line">[Huawei-Vlanif2] dhcp select global</span><br></pre></td></tr></table></figure>
+
+<h3 id="静态添加路由"><a href="#静态添加路由" class="headerlink" title="静态添加路由"></a>静态添加路由</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">&lt;Huawei&gt; display ip routing-table</span><br><span class="line">#ip route-static 目的ip  目标地址掩码  下一跳ip</span><br><span class="line">[Huawei] ip route-static 10.0.1.0 255.255.255.0 10.0.0.1</span><br><span class="line">#删除路由</span><br><span class="line">[Huawei] undo ip route-static 10.0.1.0 255.255.255.0 10.0.0.1</span><br></pre></td></tr></table></figure>
+
+<h3 id="RIP路由管理"><a href="#RIP路由管理" class="headerlink" title="RIP路由管理"></a>RIP路由管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#修改loopback0地址</span><br><span class="line">[Huawei] int LoopBack 0</span><br><span class="line">[Huawei-LoopBack0] ip address 1.1.1.1 0</span><br><span class="line">#创建rip进程</span><br><span class="line">[Huawei] rip 1</span><br><span class="line">#启动版本2</span><br><span class="line">[Huawei-rip-1] version 2</span><br><span class="line">#宣告网段</span><br><span class="line">[Huawei] network 10.0.0.0</span><br><span class="line">[Huawei] network 1.0.0.0</span><br></pre></td></tr></table></figure>
+
+<h3 id="OSPF路由管理"><a href="#OSPF路由管理" class="headerlink" title="OSPF路由管理"></a>OSPF路由管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#创建ospf</span><br><span class="line">[Huawei] ospf 1 router-id 1.1.1.1</span><br><span class="line">#创建area0区域</span><br><span class="line">[Huawei-ospf-1] area 0</span><br><span class="line">#加入192.168.0.0/24子网</span><br><span class="line">[Huawei-ospf-1-area-0.0.0.0] network 192.168.0.0 0.0.0.255</span><br><span class="line">[Huawei-ospf-1-area-0.0.0.0]dis this</span><br><span class="line">#</span><br><span class="line"> area 0.0.0.0</span><br><span class="line">  network 192.168.0.0 0.0.0.255</span><br><span class="line">#</span><br><span class="line">[Huawei-ospf-1-area-0.0.0.0]</span><br></pre></td></tr></table></figure>
+
+<h3 id="ACL管理-1"><a href="#ACL管理-1" class="headerlink" title="ACL管理"></a>ACL管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#配置acl</span><br><span class="line">[Huawei] acl 3000</span><br><span class="line">[Huawei-acl-adv-3000] rule permit ip source 192.168.1.0 0.0.0.255 destination 192.168.2.0 0.0.0.255</span><br><span class="line">[Huawei-acl-adv-3000] rule permit ip source 192.168.2.0 0.0.0.255</span><br><span class="line">[Huawei-acl-adv-3000] quit</span><br><span class="line">#配置流分类，匹配acl</span><br><span class="line">[Huawei] traffic classifier c0 operator or </span><br><span class="line">[Huawei-classifier-c0] if-match acl 3000</span><br><span class="line">[Huawei-classifier-c0] quit</span><br><span class="line">#配置流行为,设置动作</span><br><span class="line">[Huawei-behavior-b0] traffic behavior b0</span><br><span class="line">[Huawei-behavior-b0] permit</span><br><span class="line">[Huawei-behavior-b0] quit</span><br><span class="line">#配置流策略，关联流分类c0与流行为b0</span><br><span class="line">[Huawei] traffic policy p0</span><br><span class="line">[Huawei-trafficpolicy-p1] classifier c0 behavior b0</span><br><span class="line">[Huawei-trafficpolicy-p1] quit</span><br><span class="line">#配置流策略应用到接口</span><br><span class="line">[Huawei] interface  g0/0/1</span><br><span class="line">[Huawei-GigabitEthernet0/0/1] traffic-policy p0 inbound</span><br><span class="line">[Huawei-GigabitEthernet0/0/1] return</span><br></pre></td></tr></table></figure>
+
+<h3 id="用户管理-1"><a href="#用户管理-1" class="headerlink" title="用户管理"></a>用户管理</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#查看本地用户</span><br><span class="line">&lt;Huawei&gt; display local-user</span><br><span class="line">&lt;Huawei&gt; system-view</span><br><span class="line">#进入aaa配置模式</span><br><span class="line">[Huawei] aaa</span><br><span class="line">#配置本地用户账号密码</span><br><span class="line">[Huawei-aaa] loca-user user1 password cipher 123456</span><br><span class="line">#用户服务类型为telnet，使用telnet登陆</span><br><span class="line">[Huawei-aaa] local-user user1 service-type telnet</span><br><span class="line">#配置用户特权等级15</span><br><span class="line">[Huawei-aaa] local-user user1 privilege level 15</span><br></pre></td></tr></table></figure>
 
 
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA/" class="">
+              华为交换机
+            </a>
+          
+        </div>
         
       </div>
       
@@ -444,7 +605,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>link:  </strong>
-    <a href="/2024/10/24/day1/" target="_blank" title="">http://example.com/2024/10/24/day1/</a>
+    <a href="/2024/10/26/华为交换机学习/" target="_blank" title="华为交换机学习">http://example.com/2024/10/26/华为交换机学习/</a>
     </li>
     <li class="post-copyright-license">
       <strong>Copyright notice:   </strong>
@@ -462,44 +623,23 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/2024/10/24/day2/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> Prev:
-        <div class="title-text"></div>
-      </div>
-      
-      <!-- <div class="content">
-        vue-day11. vue简介官网: https://cn.vuejs.org/
-
-渐进式JavaScript框架
-
-
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/2024/10/24/CSS/" class="post-nav-link">
+    <a href="/2024/10/25/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%AD%A6%E4%B9%A0/" class="post-nav-link">
       <div class="title">
         Next: <i class="fas fa-angle-right"></i>
-        <div class="title-text"></div>
+        <div class="title-text">路由器与交换机学习</div>
       </div>
       <!-- <div class="content">
-        CSS样式表一、概述1、CSS是什么 ？层叠样式表，定制html元素的显示样式，美化页面，对于前端页面的搭建十分重要
-2
+        OSI模型
+物理层-&gt;数据链路层-&gt;网络层-&gt;传输层-&gt;会话层-&gt;表示层-&gt;应用层
+
       </div> -->
     </a>
   </div>
@@ -721,7 +861,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#day1-%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7"><span class="toc-text">day1-版本控制工具</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AA%E4%BA%BA%E7%AE%80%E4%BB%8B"><span class="toc-text">个人简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6%E5%B7%A5%E5%85%B7%E7%9A%84%E4%BB%8B%E7%BB%8D"><span class="toc-text">版本控制工具的介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git-%E7%9A%84%E5%85%A5%E9%97%A8"><span class="toc-text">git 的入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E7%9A%84%E4%BB%93%E5%BA%93%E8%AF%B4%E6%98%8E"><span class="toc-text">git的仓库说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E7%9A%84%E6%92%A4%E9%94%80%E4%BF%AE%E6%94%B9"><span class="toc-text">git的撤销修改</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#git%E7%9A%84%E5%88%A0%E9%99%A4"><span class="toc-text">git的删除</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E6%94%AF%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">分支的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93"><span class="toc-text">远程仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pycharm%E9%9B%86%E6%88%90%E7%BB%88%E7%AB%AF"><span class="toc-text">pycharm集成终端</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BD%9C%E4%B8%9A"><span class="toc-text">作业</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%9F%BA%E7%A1%80%E5%91%BD%E4%BB%A4"><span class="toc-text">华为交换机基础命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E8%A7%86%E5%9B%BE"><span class="toc-text">用户视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%A7%86%E5%9B%BE"><span class="toc-text">系统视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E8%A7%86%E5%9B%BE"><span class="toc-text">局部视图</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E4%BB%A4%E7%AE%80%E4%BB%8B"><span class="toc-text">命令简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B%E5%91%BD%E4%BB%A4"><span class="toc-text">信息查看命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B"><span class="toc-text">交换机信息查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%A4%E6%8D%A2%E6%9C%BA%E9%85%8D%E7%BD%AE%E6%9F%A5%E7%9C%8B"><span class="toc-text">交换机配置查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E5%AF%B9%E8%B1%A1%E4%BF%A1%E6%81%AF%E6%9F%A5%E7%9C%8B"><span class="toc-text">当前对象信息查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E6%8E%A5%E5%8F%A3"><span class="toc-text">查看接口</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BIP%E7%9B%B8%E5%85%B3"><span class="toc-text">查看IP相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%B7%AF%E7%94%B1"><span class="toc-text">查看路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%8F%8A%E6%B5%81%E9%87%8F"><span class="toc-text">网络及流量</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN%E6%9F%A5%E7%9C%8B"><span class="toc-text">VLAN查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BACL%E9%85%8D%E7%BD%AE"><span class="toc-text">查看ACL配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BNAT%E9%85%8D%E7%BD%AE"><span class="toc-text">查看NAT配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E7%AE%A1%E7%90%86%E5%91%BD%E4%BB%A4"><span class="toc-text">配置管理命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="toc-text">端口管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E9%85%8D%E7%BD%AE"><span class="toc-text">端口配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%BB%84%E6%93%8D%E4%BD%9C"><span class="toc-text">端口组操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN%E7%AE%A1%E7%90%86"><span class="toc-text">VLAN管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%A5%E5%8F%A3%E7%AE%A1%E7%90%86"><span class="toc-text">接口管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DNS%E7%AE%A1%E7%90%86"><span class="toc-text">DNS管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP%E7%AE%A1%E7%90%86"><span class="toc-text">DHCP管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL%E7%AE%A1%E7%90%86"><span class="toc-text">ACL管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NAT%E7%AE%A1%E7%90%86"><span class="toc-text">NAT管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86"><span class="toc-text">用户管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%91%E5%AE%9AIP%E4%B8%8EMAC"><span class="toc-text">绑定IP与MAC</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E4%B8%8E%E7%BB%9F%E8%AE%A1"><span class="toc-text">日志与统计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B6%E5%AE%83%E5%91%BD%E4%BB%A4"><span class="toc-text">其它命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E5%AE%9E%E6%88%98"><span class="toc-text">操作实战</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#VLAN%E6%93%8D%E4%BD%9C"><span class="toc-text">VLAN操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AB%AF%E5%8F%A3%E7%BB%84%E6%93%8D%E4%BD%9C-1"><span class="toc-text">端口组操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#IP-POOL%E6%93%8D%E4%BD%9C"><span class="toc-text">IP POOL操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DHCP%E6%93%8D%E4%BD%9C"><span class="toc-text">DHCP操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1"><span class="toc-text">静态添加路由</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RIP%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86"><span class="toc-text">RIP路由管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OSPF%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86"><span class="toc-text">OSPF路由管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#ACL%E7%AE%A1%E7%90%86-1"><span class="toc-text">ACL管理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86-1"><span class="toc-text">用户管理</span></a></li></ol></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -747,6 +887,48 @@
       <!-- hash算法 -->
       
       <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/10/26/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%AD%A6%E4%B9%A0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-26</span>
+                
+              </div>
+              <a class="post-title" href="/2024/10/26/%E5%8D%8E%E4%B8%BA%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%AD%A6%E4%B9%A0/">华为交换机学习</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/2024/10/25/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%AD%A6%E4%B9%A0/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">10-25</span>
+                
+              </div>
+              <a class="post-title" href="/2024/10/25/%E8%B7%AF%E7%94%B1%E5%99%A8%E4%B8%8E%E4%BA%A4%E6%8D%A2%E6%9C%BA%E5%AD%A6%E4%B9%A0/">路由器与交换机学习</a>
+            </div>
+          </div>
         
           <div class="aside-list-item">
             
@@ -808,48 +990,6 @@
                 
               </div>
               <a class="post-title" href="/2024/10/24/%E4%B8%93%E9%A2%9801-%E5%AE%B9%E5%99%A8%E3%80%81%E5%8F%AF%E8%BF%AD%E4%BB%A3%E5%AF%B9%E8%B1%A1%E3%80%81%E8%BF%AD%E4%BB%A3%E5%99%A8%E3%80%81%E7%94%9F%E6%88%90%E5%99%A8/">no title</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/10/24/%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">10-24</span>
-                
-              </div>
-              <a class="post-title" href="/2024/10/24/%E5%9B%9E%E9%A1%BE%E6%80%BB%E7%BB%93/">no title</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/2024/10/24/vue-day5/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">10-24</span>
-                
-              </div>
-              <a class="post-title" href="/2024/10/24/vue-day5/">no title</a>
             </div>
           </div>
         
